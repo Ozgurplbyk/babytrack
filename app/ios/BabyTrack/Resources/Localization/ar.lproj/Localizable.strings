@@ -780,3 +780,16 @@
 "forum_scope_saved" = "المحفوظة";
 "forum_error_bookmark" = "تعذر حفظ المنشور.";
 "forum_post_edited" = "تم التعديل";
+"forum_empty_mine" = "لم تنشر اي منشور بعد.";
+"forum_empty_saved" = "لا توجد منشورات محفوظة بعد.";
+"forum_filter_summary_search" = "بحث: %@";
+"forum_filter_summary_tag" = "وسم: %@";
+"forum_filter_summary_scope" = "النطاق: %@";
+"forum_admin_status_pending" = "قيد الانتظار";
+"forum_admin_status_resolved" = "تم الحل";
+"forum_admin_status_rejected" = "مرفوض";
+"forum_admin_post_snapshot_title" = "ملخص المنشور";
+"forum_admin_post_author" = "الكاتب: %@";
+"forum_admin_report_created" = "تم الابلاغ: %@";
+"forum_admin_report_resolved" = "تمت المعالجة: %@";
+"forum_admin_report_resolved_by" = "راجعها: %@";

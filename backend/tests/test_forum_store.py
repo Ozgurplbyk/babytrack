@@ -122,6 +122,9 @@ class ForumStoreTests(unittest.TestCase):
         pending = self.store.list_reports(status="pending", limit=10)
         self.assertEqual(len(pending), 1)
         self.assertEqual(pending[0]["id"], report["id"])
+        self.assertEqual(pending[0]["postTitle"], "Question")
+        self.assertEqual(pending[0]["postAuthorName"], "Parent A")
+        self.assertIn("mild fever", pending[0]["postBody"])
 
         resolved = self.store.resolve_report(
             report_id=report["id"],
@@ -132,6 +135,9 @@ class ForumStoreTests(unittest.TestCase):
         assert resolved is not None
         self.assertEqual(resolved["status"], "resolved")
         self.assertEqual(resolved["resolvedByUserId"], "admin-1")
+
+        all_reports = self.store.list_reports(status="", limit=10)
+        self.assertEqual(all_reports[0]["resolvedByUserId"], "admin-1")
 
     def test_mute_and_block_filter_feed(self) -> None:
         post_a = self.store.create_post(

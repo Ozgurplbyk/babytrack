@@ -199,6 +199,11 @@ class ForumStore:
             "createdAt": row["created_at"],
             "resolvedAt": row["resolved_at"],
             "resolvedByUserId": row["resolved_by_user_id"],
+            "postTitle": row["post_title"] if "post_title" in row.keys() else None,
+            "postBody": row["post_body"] if "post_body" in row.keys() else None,
+            "postAuthorName": row["post_author_name"] if "post_author_name" in row.keys() else None,
+            "postCreatedAt": row["post_created_at"] if "post_created_at" in row.keys() else None,
+            "postUpdatedAt": row["post_updated_at"] if "post_updated_at" in row.keys() else None,
         }
 
     def _contains_blocked_terms(self, text: str) -> bool:
@@ -601,9 +606,17 @@ class ForumStore:
             if normalized_status:
                 rows = conn.execute(
                     """
-                    SELECT * FROM forum_reports
+                    SELECT
+                        r.*,
+                        p.title AS post_title,
+                        p.body AS post_body,
+                        p.author_name AS post_author_name,
+                        p.created_at AS post_created_at,
+                        p.updated_at AS post_updated_at
+                    FROM forum_reports r
+                    LEFT JOIN forum_posts p ON p.id = r.post_id
                     WHERE status = ?
-                    ORDER BY created_at DESC
+                    ORDER BY r.created_at DESC
                     LIMIT ?;
                     """,
                     (normalized_status, scoped_limit),
@@ -611,8 +624,16 @@ class ForumStore:
             else:
                 rows = conn.execute(
                     """
-                    SELECT * FROM forum_reports
-                    ORDER BY created_at DESC
+                    SELECT
+                        r.*,
+                        p.title AS post_title,
+                        p.body AS post_body,
+                        p.author_name AS post_author_name,
+                        p.created_at AS post_created_at,
+                        p.updated_at AS post_updated_at
+                    FROM forum_reports r
+                    LEFT JOIN forum_posts p ON p.id = r.post_id
+                    ORDER BY r.created_at DESC
                     LIMIT ?;
                     """,
                     (scoped_limit,),

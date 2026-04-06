@@ -41,11 +41,7 @@ struct CommunityForumView: View {
                     }
 
                     if filteredPosts.isEmpty, !loading {
-                        Text(hasActiveFilters ? L10n.tr("forum_empty_filtered") : L10n.tr("forum_empty"))
-                            .font(.subheadline)
-                            .foregroundStyle(.secondary)
-                            .frame(maxWidth: .infinity, alignment: .center)
-                            .padding(.vertical, 16)
+                        emptyStateCard
                     }
 
                     ForEach(filteredPosts) { post in
@@ -399,6 +395,46 @@ struct CommunityForumView: View {
         posts
     }
 
+    private var emptyStateMessage: String {
+        if hasActiveFilters {
+            return L10n.tr("forum_empty_filtered")
+        }
+        switch scope {
+        case .all:
+            return L10n.tr("forum_empty")
+        case .mine:
+            return L10n.tr("forum_empty_mine")
+        case .saved:
+            return L10n.tr("forum_empty_saved")
+        }
+    }
+
+    private var emptyStateCard: some View {
+        VStack(spacing: 10) {
+            Image(systemName: scope == .saved ? "bookmark" : "text.bubble")
+                .font(.title2.weight(.semibold))
+                .foregroundStyle(Color.accentColor)
+            Text(emptyStateMessage)
+                .font(.subheadline)
+                .foregroundStyle(.secondary)
+                .multilineTextAlignment(.center)
+            if hasActiveFilters {
+                Text(filterSummaryText)
+                    .font(.caption)
+                    .foregroundStyle(.secondary)
+                    .multilineTextAlignment(.center)
+            }
+        }
+        .frame(maxWidth: .infinity)
+        .padding(.vertical, 18)
+        .padding(.horizontal, 12)
+        .background(.ultraThinMaterial, in: RoundedRectangle(cornerRadius: 18, style: .continuous))
+        .overlay(
+            RoundedRectangle(cornerRadius: 18, style: .continuous)
+                .strokeBorder(.white.opacity(0.3), lineWidth: 1)
+        )
+    }
+
     private var availableTags: [String] {
         var seen = Set<String>()
         var ordered: [String] = []
@@ -412,6 +448,21 @@ struct CommunityForumView: View {
 
     private var hasActiveFilters: Bool {
         !searchText.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty || !selectedTag.isEmpty || scope != .all
+    }
+
+    private var filterSummaryText: String {
+        var parts: [String] = []
+        let trimmedSearch = searchText.trimmingCharacters(in: .whitespacesAndNewlines)
+        if !trimmedSearch.isEmpty {
+            parts.append(String(format: L10n.tr("forum_filter_summary_search"), trimmedSearch))
+        }
+        if !selectedTag.isEmpty {
+            parts.append(String(format: L10n.tr("forum_filter_summary_tag"), selectedTag))
+        }
+        if scope != .all {
+            parts.append(String(format: L10n.tr("forum_filter_summary_scope"), scope.title))
+        }
+        return parts.joined(separator: " • ")
     }
 
     private func refresh() async {
@@ -871,15 +922,38 @@ private struct ForumAdminModerationSheet: View {
                     .font(.caption.weight(.semibold))
                     .foregroundStyle(.secondary)
                 Spacer()
-                Text(report.status.uppercased())
+                Text(adminStatusTitle(report.status))
                     .font(.caption2.weight(.bold))
                     .padding(.horizontal, 8)
                     .padding(.vertical, 4)
-                    .background(Color.accentColor.opacity(0.15), in: Capsule())
+                    .background(adminStatusColor(report.status).opacity(0.15), in: Capsule())
+                    .foregroundStyle(adminStatusColor(report.status))
             }
 
             Text(String(format: L10n.tr("forum_admin_report_reason"), report.reason))
                 .font(.subheadline.weight(.semibold))
+
+            if let title = report.postTitle, !title.isEmpty {
+                VStack(alignment: .leading, spacing: 4) {
+                    Text(L10n.tr("forum_admin_post_snapshot_title"))
+                        .font(.caption.weight(.semibold))
+                        .foregroundStyle(.secondary)
+                    Text(title)
+                        .font(.subheadline.weight(.bold))
+                    if let authorName = report.postAuthorName, !authorName.isEmpty {
+                        Text(String(format: L10n.tr("forum_admin_post_author"), authorName))
+                            .font(.caption)
+                            .foregroundStyle(.secondary)
+                    }
+                    if let body = report.postBody, !body.isEmpty {
+                        Text(body)
+                            .font(.subheadline)
+                            .lineLimit(4)
+                    }
+                }
+                .padding(10)
+                .background(Color.secondary.opacity(0.08), in: RoundedRectangle(cornerRadius: 12, style: .continuous))
+            }
 
             if !report.note.isEmpty {
                 Text(String(format: L10n.tr("forum_admin_report_note"), report.note))
@@ -890,9 +964,21 @@ private struct ForumAdminModerationSheet: View {
                 .font(.caption)
                 .foregroundStyle(.secondary)
 
-            Text(formatIsoDate(report.createdAt))
-                .font(.caption2)
-                .foregroundStyle(.secondary)
+            VStack(alignment: .leading, spacing: 2) {
+                Text(String(format: L10n.tr("forum_admin_report_created"), formatIsoDate(report.createdAt)))
+                    .font(.caption2)
+                    .foregroundStyle(.secondary)
+                if let resolvedAt = report.resolvedAt, !resolvedAt.isEmpty {
+                    Text(String(format: L10n.tr("forum_admin_report_resolved"), formatIsoDate(resolvedAt)))
+                        .font(.caption2)
+                        .foregroundStyle(.secondary)
+                }
+                if let resolvedBy = report.resolvedByUserId, !resolvedBy.isEmpty {
+                    Text(String(format: L10n.tr("forum_admin_report_resolved_by"), resolvedBy))
+                        .font(.caption2)
+                        .foregroundStyle(.secondary)
+                }
+            }
 
             if report.status == "pending" {
                 HStack(spacing: 8) {
@@ -954,6 +1040,30 @@ private struct ForumAdminModerationSheet: View {
     private func formatIsoDate(_ value: String) -> String {
         guard let parsed = ForumDateParser.parse(value) else { return value }
         return parsed.formatted(date: .abbreviated, time: .shortened)
+    }
+
+    private func adminStatusTitle(_ status: String) -> String {
+        switch status {
+        case "pending":
+            return L10n.tr("forum_admin_status_pending")
+        case "resolved":
+            return L10n.tr("forum_admin_status_resolved")
+        case "rejected":
+            return L10n.tr("forum_admin_status_rejected")
+        default:
+            return status.uppercased()
+        }
+    }
+
+    private func adminStatusColor(_ status: String) -> Color {
+        switch status {
+        case "resolved":
+            return .green
+        case "rejected":
+            return .red
+        default:
+            return .accentColor
+        }
     }
 }
 

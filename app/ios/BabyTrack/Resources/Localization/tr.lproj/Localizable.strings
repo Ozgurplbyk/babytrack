@@ -783,3 +783,16 @@
 "forum_scope_saved" = "Kaydedilenler";
 "forum_error_bookmark" = "Gonderi kaydedilemedi.";
 "forum_post_edited" = "Duzenlendi";
+"forum_empty_mine" = "Henuz bir gonderi paylasmadin.";
+"forum_empty_saved" = "Henuz kaydedilen gonderi yok.";
+"forum_filter_summary_search" = "Arama: %@";
+"forum_filter_summary_tag" = "Etiket: %@";
+"forum_filter_summary_scope" = "Alan: %@";
+"forum_admin_status_pending" = "Beklemede";
+"forum_admin_status_resolved" = "Cozuldu";
+"forum_admin_status_rejected" = "Reddedildi";
+"forum_admin_post_snapshot_title" = "Gonderi ozeti";
+"forum_admin_post_author" = "Yazar: %@";
+"forum_admin_report_created" = "Bildirim: %@";
+"forum_admin_report_resolved" = "Sonuclandi: %@";
+"forum_admin_report_resolved_by" = "Inceleyen: %@";

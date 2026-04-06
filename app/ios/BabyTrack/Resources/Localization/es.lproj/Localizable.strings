@@ -780,3 +780,16 @@
 "forum_scope_saved" = "Guardados";
 "forum_error_bookmark" = "No se pudo guardar la publicacion.";
 "forum_post_edited" = "Editado";
+"forum_empty_mine" = "Aun no has publicado nada.";
+"forum_empty_saved" = "Aun no hay publicaciones guardadas.";
+"forum_filter_summary_search" = "Busqueda: %@";
+"forum_filter_summary_tag" = "Etiqueta: %@";
+"forum_filter_summary_scope" = "Vista: %@";
+"forum_admin_status_pending" = "Pendiente";
+"forum_admin_status_resolved" = "Resuelto";
+"forum_admin_status_rejected" = "Rechazado";
+"forum_admin_post_snapshot_title" = "Resumen de la publicacion";
+"forum_admin_post_author" = "Autor: %@";
+"forum_admin_report_created" = "Reportado: %@";
+"forum_admin_report_resolved" = "Resuelto: %@";
+"forum_admin_report_resolved_by" = "Revisado por: %@";

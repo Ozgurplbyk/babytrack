@@ -634,6 +634,11 @@ struct ForumReportPayload: Codable, Identifiable {
     let createdAt: String
     let resolvedAt: String?
     let resolvedByUserId: String?
+    let postTitle: String?
+    let postBody: String?
+    let postAuthorName: String?
+    let postCreatedAt: String?
+    let postUpdatedAt: String?
 }
 
 struct ForumReportEnvelope: Codable {

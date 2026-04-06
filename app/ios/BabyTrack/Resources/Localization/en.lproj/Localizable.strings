@@ -783,3 +783,16 @@
 "forum_scope_saved" = "Saved";
 "forum_error_bookmark" = "Post could not be saved.";
 "forum_post_edited" = "Edited";
+"forum_empty_mine" = "You have not posted anything yet.";
+"forum_empty_saved" = "No saved posts yet.";
+"forum_filter_summary_search" = "Search: %@";
+"forum_filter_summary_tag" = "Tag: %@";
+"forum_filter_summary_scope" = "Scope: %@";
+"forum_admin_status_pending" = "Pending";
+"forum_admin_status_resolved" = "Resolved";
+"forum_admin_status_rejected" = "Rejected";
+"forum_admin_post_snapshot_title" = "Post snapshot";
+"forum_admin_post_author" = "Author: %@";
+"forum_admin_report_created" = "Reported: %@";
+"forum_admin_report_resolved" = "Resolved: %@";
+"forum_admin_report_resolved_by" = "Reviewed by: %@";

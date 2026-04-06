@@ -780,3 +780,16 @@
 "forum_scope_saved" = "Enregistrees";
 "forum_error_bookmark" = "La publication n a pas pu etre enregistree.";
 "forum_post_edited" = "Modifiee";
+"forum_empty_mine" = "Vous n avez encore rien publie.";
+"forum_empty_saved" = "Aucune publication enregistree pour le moment.";
+"forum_filter_summary_search" = "Recherche : %@";
+"forum_filter_summary_tag" = "Tag : %@";
+"forum_filter_summary_scope" = "Vue : %@";
+"forum_admin_status_pending" = "En attente";
+"forum_admin_status_resolved" = "Resolue";
+"forum_admin_status_rejected" = "Rejetee";
+"forum_admin_post_snapshot_title" = "Apercu de la publication";
+"forum_admin_post_author" = "Auteur : %@";
+"forum_admin_report_created" = "Signale : %@";
+"forum_admin_report_resolved" = "Traite : %@";
+"forum_admin_report_resolved_by" = "Examine par : %@";
