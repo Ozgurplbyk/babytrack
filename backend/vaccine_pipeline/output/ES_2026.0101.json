@@ -3,8 +3,8 @@
     "country": "ES",
     "version": "2026.0101",
     "approved_by": "medical_editor_required",
-    "published_at": "2026-03-05T13:20:47.101243+00:00",
-    "signature": "d872770def4af4b3ca66a402a87ee47c7638d3baccfa7e964e9bdacbbaece9b9"
+    "published_at": "2026-04-06T13:24:54.925957+00:00",
+    "signature": "7510d0949f94a638deb4a944f8749d785ef322d1b75a19a5ad3889afcff6dce5"
   },
   "diff": {
     "added": [],
@@ -17,9 +17,9 @@
     "version": "2026.0101",
     "source": {
       "name": "Ministerio de Sanidad Vacunaciones",
-      "url": "https://www.sanidad.gob.es/en/profesionales/saludPublica/prevPromocion/vacunaciones/home.htm",
+      "url": "https://www.sanidad.gob.es/areas/promocionPrevencion/vacunaciones/calendario/calendario/Calendario_Todalavida_2025.htm",
       "source_updated_at": "2026-01-01",
-      "retrieved_at": "2026-03-05T13:20:46.758595+00:00"
+      "retrieved_at": "2026-04-06T13:24:16.723996+00:00"
     },
     "records": [
       {

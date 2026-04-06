@@ -17,6 +17,8 @@ class SourceSnapshot:
     fetch_mode: str = ""
     fallback_reason: str = ""
     live_record_count: int = 0
+    attempted_urls: list[str] | None = None
+    attempt_errors: dict[str, str] | None = None
 
 
 class BaseAdapter:

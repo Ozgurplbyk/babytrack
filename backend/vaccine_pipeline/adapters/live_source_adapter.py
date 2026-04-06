@@ -144,10 +144,14 @@ class LiveSourceAdapter(BaseAdapter):
         self.schedule_feed_fallback_urls = [str(url).strip() for url in (schedule_feed_fallback_urls or []) if str(url).strip()]
         self.source_fallback_urls = [str(url).strip() for url in (source_fallback_urls or []) if str(url).strip()]
         self.timeout_sec = max(int(timeout_sec), 3)
+        self._attempted_urls: list[str] = []
+        self._attempt_errors: dict[str, str] = {}
 
     def fetch_snapshot(self) -> SourceSnapshot:
         retrieved_at = datetime.now(timezone.utc).isoformat()
         fixture = self._load_fixture()
+        self._attempted_urls = []
+        self._attempt_errors = {}
 
         live_schedule, live_version, live_source_updated, fallback_reason, live_evidence = self._try_fetch_live_schedule()
         _, page_source_updated = self._fetch_page_metadata(self.source_url, self.source_fallback_urls)
@@ -183,6 +187,8 @@ class LiveSourceAdapter(BaseAdapter):
             fetch_mode=fetch_mode,
             fallback_reason="" if fetch_mode == "live" else fallback_reason,
             live_record_count=len(live_schedule),
+            attempted_urls=list(self._attempted_urls),
+            attempt_errors=dict(self._attempt_errors),
         )
 
     def _load_fixture(self) -> dict[str, Any]:
@@ -413,10 +419,12 @@ class LiveSourceAdapter(BaseAdapter):
         last_error = ""
         for candidate in candidates:
             raw, body, headers, error = self._fetch_url(candidate)
+            self._attempted_urls.append(candidate)
             if raw or body:
                 return raw, body, headers, ""
             if error:
                 last_error = error
+                self._attempt_errors[candidate] = error
         return b"", "", {}, last_error
 
     def _fetch_url(self, url: str) -> tuple[bytes, str, dict[str, str], str]:

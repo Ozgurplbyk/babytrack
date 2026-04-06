@@ -66,6 +66,14 @@ def load_source_registry() -> list[dict[str, Any]]:
                 "scheduleFeedFormat": str(row.get("scheduleFeedFormat", "auto")).strip(),
                 "scheduleFeedPath": str(row.get("scheduleFeedPath", "")).strip(),
                 "scheduleFieldMap": row.get("scheduleFieldMap", {}) if isinstance(row.get("scheduleFieldMap"), dict) else {},
+                "scheduleFeedFallbackUrls": row.get("scheduleFeedFallbackUrls", [])
+                if isinstance(row.get("scheduleFeedFallbackUrls"), list)
+                else [],
+                "sourceFallbackUrls": row.get("sourceFallbackUrls", [])
+                if isinstance(row.get("sourceFallbackUrls"), list)
+                else [],
+                "timeoutSec": int(row.get("timeoutSec", 12) or 12),
+                "warnSourceAgeDays": int(row.get("warnSourceAgeDays", 180) or 180),
             }
         )
 
@@ -178,6 +186,8 @@ def main() -> int:
                 "fetchMode": snap.fetch_mode,
                 "fallbackReason": snap.fallback_reason,
                 "liveRecordCount": snap.live_record_count,
+                "attemptedUrls": snap.attempted_urls or [],
+                "attemptErrors": snap.attempt_errors or {},
                 "recordCount": len(canonical.get("records", [])),
             }
             print(f"[{cc}] no schedule change (signature unchanged)")
@@ -200,6 +210,8 @@ def main() -> int:
             "fetchMode": snap.fetch_mode,
             "fallbackReason": snap.fallback_reason,
             "liveRecordCount": snap.live_record_count,
+            "attemptedUrls": snap.attempted_urls or [],
+            "attemptErrors": snap.attempt_errors or {},
             "recordCount": len(canonical.get("records", [])),
         }
 
