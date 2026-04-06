@@ -561,19 +561,13 @@ private struct HealthModuleWorkspaceView: View {
     }
 
     private var visibleScopedEvents: [AppEvent] {
-        switch historyMode {
-        case .recent:
-            return Array(scopedEvents.prefix(10))
-        case .date:
-            let calendar = Calendar.current
-            return scopedEvents.filter { calendar.isDate($0.timestamp, inSameDayAs: historyDate) }
-        case .babyMonth:
-            guard let birthDate = selectedProfile?.birthDate else { return Array(scopedEvents.prefix(10)) }
-            return scopedEvents.filter {
-                let month = max(Calendar.current.dateComponents([.month], from: birthDate, to: $0.timestamp).month ?? 0, 0)
-                return month == historyBabyMonth
-            }
-        }
+        HealthHistoryLogic.filterEvents(
+            from: scopedEvents,
+            mode: historyMode,
+            historyDate: historyDate,
+            historyBabyMonth: historyBabyMonth,
+            birthDate: selectedProfile?.birthDate
+        )
     }
 
     private var selectedProfile: BabyProfile? {
@@ -581,8 +575,7 @@ private struct HealthModuleWorkspaceView: View {
     }
 
     private var availableMonthCount: Int {
-        guard let birthDate = selectedProfile?.birthDate else { return 36 }
-        return max(Calendar.current.dateComponents([.month], from: birthDate, to: Date()).month ?? 0, 0)
+        HealthHistoryLogic.availableMonthCount(birthDate: selectedProfile?.birthDate)
     }
 
     private var todayCount: Int {
@@ -2829,7 +2822,7 @@ private struct MedicationPlansView: View {
     @State private var addSheetPresented = false
     @State private var editingPlan: MedicationPlan?
     @State private var pendingDeletePlan: MedicationPlan?
-    @State private var historyMode: MedicationHistoryMode = .recent
+    @State private var historyMode: HealthHistoryMode = .recent
     @State private var historyDate = Date()
     @State private var historyBabyMonth = 0
 
@@ -2977,7 +2970,7 @@ private struct MedicationPlansView: View {
             }
 
             Picker("", selection: $historyMode) {
-                ForEach(MedicationHistoryMode.allCases) { mode in
+                ForEach(HealthHistoryMode.allCases) { mode in
                     Text(mode.title).tag(mode)
                 }
             }
@@ -3039,19 +3032,13 @@ private struct MedicationPlansView: View {
 
     private var historyEvents: [AppEvent] {
         let scoped = eventStore.recent(limit: 2_000, childId: childId).filter { $0.type == .medication }
-        switch historyMode {
-        case .recent:
-            return Array(scoped.prefix(10))
-        case .date:
-            let calendar = Calendar.current
-            return scoped.filter { calendar.isDate($0.timestamp, inSameDayAs: historyDate) }
-        case .babyMonth:
-            guard let birthDate = selectedProfile?.birthDate else { return Array(scoped.prefix(10)) }
-            return scoped.filter {
-                let month = max(Calendar.current.dateComponents([.month], from: birthDate, to: $0.timestamp).month ?? 0, 0)
-                return month == historyBabyMonth
-            }
-        }
+        HealthHistoryLogic.filterEvents(
+            from: scoped,
+            mode: historyMode,
+            historyDate: historyDate,
+            historyBabyMonth: historyBabyMonth,
+            birthDate: selectedProfile?.birthDate
+        )
     }
 
     private var selectedProfile: BabyProfile? {
@@ -3059,8 +3046,7 @@ private struct MedicationPlansView: View {
     }
 
     private var availableMonthCount: Int {
-        guard let birthDate = selectedProfile?.birthDate else { return 36 }
-        return max(Calendar.current.dateComponents([.month], from: birthDate, to: Date()).month ?? 0, 0)
+        HealthHistoryLogic.availableMonthCount(birthDate: selectedProfile?.birthDate)
     }
 
     private func reminderText(for plan: MedicationPlan) -> String {
@@ -3139,25 +3125,6 @@ private struct MedicationPlanEditorSheet: View {
                     .disabled(name.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty)
                 }
             }
-        }
-    }
-}
-
-private enum MedicationHistoryMode: String, CaseIterable, Identifiable {
-    case recent
-    case date
-    case babyMonth
-
-    var id: String { rawValue }
-
-    var title: String {
-        switch self {
-        case .recent:
-            return L10n.tr("timeline_history_recent")
-        case .date:
-            return L10n.tr("timeline_history_date_short")
-        case .babyMonth:
-            return L10n.tr("timeline_history_baby_month_short")
         }
     }
 }

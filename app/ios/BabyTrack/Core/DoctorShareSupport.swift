@@ -32,18 +32,15 @@ enum DoctorShareComposer {
         calendar: Calendar = .current,
         recentLimit: Int = 10
     ) -> [AppEvent] {
-        switch mode {
-        case .recent:
-            return Array(events.prefix(recentLimit))
-        case .date:
-            return events.filter { calendar.isDate($0.timestamp, inSameDayAs: historyDate) }
-        case .babyMonth:
-            guard let birthDate else { return Array(events.prefix(recentLimit)) }
-            return events.filter {
-                let month = max(calendar.dateComponents([.month], from: birthDate, to: $0.timestamp).month ?? 0, 0)
-                return month == historyBabyMonth
-            }
-        }
+        HealthHistoryLogic.filterEvents(
+            from: events,
+            mode: mode,
+            historyDate: historyDate,
+            historyBabyMonth: historyBabyMonth,
+            birthDate: birthDate,
+            calendar: calendar,
+            recentLimit: recentLimit
+        )
     }
 
     static func medicationSubtitle(_ plan: MedicationPlan, calendar: Calendar = .current) -> String {

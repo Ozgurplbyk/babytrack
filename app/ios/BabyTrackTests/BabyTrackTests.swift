@@ -227,6 +227,72 @@ final class BabyTrackTests: XCTestCase {
         )
     }
 
+    func testHealthHistoryLogicFiltersEventsAndComputesAvailableMonths() {
+        let calendar = Calendar(identifier: .gregorian)
+        let birthDate = calendar.date(from: DateComponents(year: 2026, month: 1, day: 1))!
+        let currentDate = calendar.date(from: DateComponents(year: 2026, month: 4, day: 15))!
+        let month0Event = AppEvent(childId: "child", type: .sleep, timestamp: birthDate)
+        let month1Event = AppEvent(childId: "child", type: .bottle, timestamp: calendar.date(byAdding: .day, value: 36, to: birthDate)!)
+        let month2Event = AppEvent(childId: "child", type: .medication, timestamp: calendar.date(byAdding: .day, value: 72, to: birthDate)!)
+        let events = [month2Event, month1Event, month0Event]
+
+        XCTAssertEqual(
+            HealthHistoryLogic.filterEvents(
+                from: events,
+                mode: .recent,
+                historyDate: currentDate,
+                historyBabyMonth: 0,
+                birthDate: birthDate,
+                calendar: calendar,
+                recentLimit: 2
+            ).map(\.id),
+            [month2Event.id, month1Event.id]
+        )
+
+        XCTAssertEqual(
+            HealthHistoryLogic.filterEvents(
+                from: events,
+                mode: .date,
+                historyDate: month1Event.timestamp,
+                historyBabyMonth: 0,
+                birthDate: birthDate,
+                calendar: calendar
+            ).map(\.id),
+            [month1Event.id]
+        )
+
+        XCTAssertEqual(
+            HealthHistoryLogic.filterEvents(
+                from: events,
+                mode: .babyMonth,
+                historyDate: currentDate,
+                historyBabyMonth: 2,
+                birthDate: birthDate,
+                calendar: calendar
+            ).map(\.id),
+            [month2Event.id]
+        )
+
+        XCTAssertEqual(
+            HealthHistoryLogic.availableMonthCount(
+                birthDate: birthDate,
+                now: currentDate,
+                calendar: calendar,
+                fallback: 12
+            ),
+            3
+        )
+        XCTAssertEqual(
+            HealthHistoryLogic.availableMonthCount(
+                birthDate: nil,
+                now: currentDate,
+                calendar: calendar,
+                fallback: 12
+            ),
+            12
+        )
+    }
+
     func testDoctorShareFullReportIncludesBirthMedicationAndRecentEvents() {
         let child = BabyProfile(
             name: "Ada",

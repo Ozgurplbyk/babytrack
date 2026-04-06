@@ -161,6 +161,41 @@ enum HealthHistoryMode: String, CaseIterable, Identifiable {
     }
 }
 
+enum HealthHistoryLogic {
+    static func filterEvents(
+        from events: [AppEvent],
+        mode: HealthHistoryMode,
+        historyDate: Date,
+        historyBabyMonth: Int,
+        birthDate: Date?,
+        calendar: Calendar = .current,
+        recentLimit: Int = 10
+    ) -> [AppEvent] {
+        switch mode {
+        case .recent:
+            return Array(events.prefix(recentLimit))
+        case .date:
+            return events.filter { calendar.isDate($0.timestamp, inSameDayAs: historyDate) }
+        case .babyMonth:
+            guard let birthDate else { return Array(events.prefix(recentLimit)) }
+            return events.filter {
+                let month = max(calendar.dateComponents([.month], from: birthDate, to: $0.timestamp).month ?? 0, 0)
+                return month == historyBabyMonth
+            }
+        }
+    }
+
+    static func availableMonthCount(
+        birthDate: Date?,
+        now: Date = Date(),
+        calendar: Calendar = .current,
+        fallback: Int = 36
+    ) -> Int {
+        guard let birthDate else { return fallback }
+        return max(calendar.dateComponents([.month], from: birthDate, to: now).month ?? 0, 0)
+    }
+}
+
 struct RecommendedVaccine: Identifiable {
     let id: String
     let name: String
