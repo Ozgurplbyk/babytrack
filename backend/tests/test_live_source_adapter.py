@@ -7,6 +7,7 @@ import threading
 import unittest
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
+from unittest.mock import patch
 
 from backend.vaccine_pipeline.adapters.live_source_adapter import LiveSourceAdapter
 
@@ -338,6 +339,63 @@ class LiveSourceAdapterTests(unittest.TestCase):
         )
 
         self.assertEqual([row["vaccine_code"] for row in schedule[:4]], ["HepB", "BCG", "DTaP", "Hib"])
+
+    def test_parses_france_public_service_news_signals(self) -> None:
+        adapter = LiveSourceAdapter(
+            "FR",
+            "Service Public",
+            self.fixture,
+            source_name="Service Public",
+            source_url=f"{self.base}/source",
+            source_updated_at="2026-01-01",
+        )
+
+        schedule = adapter._parse_france_service_public_news(
+            """
+            Nouvelles obligations vaccinales pour les nourrissons
+            La vaccination contre les méningocoques ACWY comprend une dose à 6 mois suivie d'un rappel à 12 mois.
+            Pour le méningocoque B, le schéma inclut des doses à 3, 5 et 12 mois.
+            """
+        )
+
+        self.assertEqual([row["vaccine_code"] for row in schedule], ["MenACWY", "MenACWY", "MenB", "MenB", "MenB"])
+
+    def test_builds_france_overlay_snapshot_when_public_sources_are_accessible(self) -> None:
+        adapter = LiveSourceAdapter(
+            "FR",
+            "Service Public",
+            self.fixture,
+            source_name="Service Public",
+            source_url="https://www.service-public.gouv.fr/particuliers/vosdroits/F724",
+            source_updated_at="2026-01-01",
+            schedule_feed_url="https://www.service-public.gouv.fr/particuliers/actualites/A16520",
+            schedule_feed_format="html",
+        )
+
+        with patch.object(
+            LiveSourceAdapter,
+            "_fetch_page_metadata",
+            side_effect=[
+                ("Calendrier des vaccinations", "2025-05-28"),
+                (
+                    "Diphtérie Tétanos Poliomyélite 1re injection à 2 mois 2e injection à 4 mois À 11 mois",
+                    "2025-05-28",
+                ),
+                (
+                    "La vaccination contre les méningocoques ACWY comprend une dose à 6 mois suivie d'un rappel à 12 mois. "
+                    "Pour le méningocoque B, le schéma inclut des doses à 3, 5 et 12 mois.",
+                    "2025-05-05",
+                ),
+                ("Calendrier des vaccinations", "2025-05-28"),
+            ],
+        ):
+            snapshot = adapter.fetch_snapshot()
+
+        self.assertEqual(snapshot.fetch_mode, "live_overlay")
+        self.assertEqual(snapshot.fallback_reason, "fixture_supplemented")
+        self.assertGreaterEqual(len(snapshot.payload["schedule"]), 5)
+        self.assertIn("MenACWY", [row["vaccine_code"] for row in snapshot.payload["schedule"]])
+        self.assertEqual(snapshot.source_updated_at, "2025-05-28")
 
 
 if __name__ == "__main__":

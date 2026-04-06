@@ -3,46 +3,84 @@
     "country": "FR",
     "version": "2026.01",
     "approved_by": "medical_editor_required",
-    "published_at": "2026-03-04T21:56:02.816611+00:00",
-    "signature": "f2842a9356a2e6d860d23e6b63d31e27d66a8c1760424e559b1af2e037bff9d6"
+    "published_at": "2026-04-06T11:23:39.146460+00:00",
+    "signature": "495beb609c2f934f1430de58a6cc19940052f1c44658926cca5a3cc02ccb3916"
   },
   "diff": {
-    "added": [],
+    "added": [
+      {
+        "country": "FR",
+        "authority": "Service Public / Ministere de la Sante",
+        "version": "2026.01",
+        "effective_from": null,
+        "effective_to": null,
+        "vaccine_code": "MenB",
+        "dose_no": 3,
+        "min_age_days": 365,
+        "max_age_days": 730,
+        "min_interval_days": 180,
+        "catch_up_rule": ""
+      },
+      {
+        "country": "FR",
+        "authority": "Service Public / Ministere de la Sante",
+        "version": "2026.01",
+        "effective_from": null,
+        "effective_to": null,
+        "vaccine_code": "MenB",
+        "dose_no": 1,
+        "min_age_days": 90,
+        "max_age_days": 150,
+        "min_interval_days": 0,
+        "catch_up_rule": ""
+      },
+      {
+        "country": "FR",
+        "authority": "Service Public / Ministere de la Sante",
+        "version": "2026.01",
+        "effective_from": null,
+        "effective_to": null,
+        "vaccine_code": "MenACWY",
+        "dose_no": 1,
+        "min_age_days": 180,
+        "max_age_days": 240,
+        "min_interval_days": 0,
+        "catch_up_rule": ""
+      },
+      {
+        "country": "FR",
+        "authority": "Service Public / Ministere de la Sante",
+        "version": "2026.01",
+        "effective_from": null,
+        "effective_to": null,
+        "vaccine_code": "MenACWY",
+        "dose_no": 2,
+        "min_age_days": 365,
+        "max_age_days": 730,
+        "min_interval_days": 120,
+        "catch_up_rule": ""
+      },
+      {
+        "country": "FR",
+        "authority": "Service Public / Ministere de la Sante",
+        "version": "2026.01",
+        "effective_from": null,
+        "effective_to": null,
+        "vaccine_code": "MenB",
+        "dose_no": 2,
+        "min_age_days": 150,
+        "max_age_days": 240,
+        "min_interval_days": 60,
+        "catch_up_rule": ""
+      }
+    ],
     "removed": [],
     "changed": [
       {
         "before": {
           "country": "FR",
-          "authority": "Santé Publique France",
-          "version": "2026.01",
-          "effective_from": "2026-01-01",
-          "effective_to": null,
-          "vaccine_code": "PCV",
-          "dose_no": 1,
-          "min_age_days": 60,
-          "max_age_days": 150,
-          "min_interval_days": 28,
-          "catch_up_rule": ""
-        },
-        "after": {
-          "country": "FR",
           "authority": "Sante Publique France",
-          "version": "2026.01",
-          "effective_from": "2026-01-01",
-          "effective_to": null,
-          "vaccine_code": "PCV",
-          "dose_no": 1,
-          "min_age_days": 60,
-          "max_age_days": 150,
-          "min_interval_days": 28,
-          "catch_up_rule": ""
-        }
-      },
-      {
-        "before": {
-          "country": "FR",
-          "authority": "Santé Publique France",
-          "version": "2026.01",
+          "version": "2026.0305",
           "effective_from": "2026-01-01",
           "effective_to": null,
           "vaccine_code": "Hexavalent",
@@ -54,7 +92,7 @@
         },
         "after": {
           "country": "FR",
-          "authority": "Sante Publique France",
+          "authority": "Service Public / Ministere de la Sante",
           "version": "2026.01",
           "effective_from": "2026-01-01",
           "effective_to": null,
@@ -69,8 +107,8 @@
       {
         "before": {
           "country": "FR",
-          "authority": "Santé Publique France",
-          "version": "2026.01",
+          "authority": "Sante Publique France",
+          "version": "2026.0305",
           "effective_from": "2026-01-01",
           "effective_to": null,
           "vaccine_code": "MMR",
@@ -82,7 +120,7 @@
         },
         "after": {
           "country": "FR",
-          "authority": "Sante Publique France",
+          "authority": "Service Public / Ministere de la Sante",
           "version": "2026.01",
           "effective_from": "2026-01-01",
           "effective_to": null,
@@ -91,6 +129,34 @@
           "min_age_days": 365,
           "max_age_days": 730,
           "min_interval_days": 0,
+          "catch_up_rule": ""
+        }
+      },
+      {
+        "before": {
+          "country": "FR",
+          "authority": "Sante Publique France",
+          "version": "2026.0305",
+          "effective_from": "2026-01-01",
+          "effective_to": null,
+          "vaccine_code": "PCV",
+          "dose_no": 1,
+          "min_age_days": 60,
+          "max_age_days": 150,
+          "min_interval_days": 28,
+          "catch_up_rule": ""
+        },
+        "after": {
+          "country": "FR",
+          "authority": "Service Public / Ministere de la Sante",
+          "version": "2026.01",
+          "effective_from": "2026-01-01",
+          "effective_to": null,
+          "vaccine_code": "PCV",
+          "dose_no": 1,
+          "min_age_days": 60,
+          "max_age_days": 150,
+          "min_interval_days": 28,
           "catch_up_rule": ""
         }
       }
@@ -98,18 +164,18 @@
   },
   "payload": {
     "country": "FR",
-    "authority": "Sante Publique France",
+    "authority": "Service Public / Ministere de la Sante",
     "version": "2026.01",
     "source": {
-      "name": "Ministere de la Sante Vaccination",
-      "url": "https://sante.gouv.fr/prevention-en-sante/preserver-sa-sante/vaccination",
-      "source_updated_at": "2026-01-01",
-      "retrieved_at": "2026-03-04T21:56:02.816085+00:00"
+      "name": "Service Public Vaccination",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F724",
+      "source_updated_at": "2025-05-28",
+      "retrieved_at": "2026-04-06T11:23:37.068504+00:00"
     },
     "records": [
       {
         "country": "FR",
-        "authority": "Sante Publique France",
+        "authority": "Service Public / Ministere de la Sante",
         "version": "2026.01",
         "effective_from": "2026-01-01",
         "effective_to": null,
@@ -122,7 +188,7 @@
       },
       {
         "country": "FR",
-        "authority": "Sante Publique France",
+        "authority": "Service Public / Ministere de la Sante",
         "version": "2026.01",
         "effective_from": "2026-01-01",
         "effective_to": null,
@@ -135,7 +201,7 @@
       },
       {
         "country": "FR",
-        "authority": "Sante Publique France",
+        "authority": "Service Public / Ministere de la Sante",
         "version": "2026.01",
         "effective_from": "2026-01-01",
         "effective_to": null,
@@ -144,6 +210,71 @@
         "min_age_days": 365,
         "max_age_days": 730,
         "min_interval_days": 0,
+        "catch_up_rule": ""
+      },
+      {
+        "country": "FR",
+        "authority": "Service Public / Ministere de la Sante",
+        "version": "2026.01",
+        "effective_from": null,
+        "effective_to": null,
+        "vaccine_code": "MenACWY",
+        "dose_no": 1,
+        "min_age_days": 180,
+        "max_age_days": 240,
+        "min_interval_days": 0,
+        "catch_up_rule": ""
+      },
+      {
+        "country": "FR",
+        "authority": "Service Public / Ministere de la Sante",
+        "version": "2026.01",
+        "effective_from": null,
+        "effective_to": null,
+        "vaccine_code": "MenACWY",
+        "dose_no": 2,
+        "min_age_days": 365,
+        "max_age_days": 730,
+        "min_interval_days": 120,
+        "catch_up_rule": ""
+      },
+      {
+        "country": "FR",
+        "authority": "Service Public / Ministere de la Sante",
+        "version": "2026.01",
+        "effective_from": null,
+        "effective_to": null,
+        "vaccine_code": "MenB",
+        "dose_no": 1,
+        "min_age_days": 90,
+        "max_age_days": 150,
+        "min_interval_days": 0,
+        "catch_up_rule": ""
+      },
+      {
+        "country": "FR",
+        "authority": "Service Public / Ministere de la Sante",
+        "version": "2026.01",
+        "effective_from": null,
+        "effective_to": null,
+        "vaccine_code": "MenB",
+        "dose_no": 2,
+        "min_age_days": 150,
+        "max_age_days": 240,
+        "min_interval_days": 60,
+        "catch_up_rule": ""
+      },
+      {
+        "country": "FR",
+        "authority": "Service Public / Ministere de la Sante",
+        "version": "2026.01",
+        "effective_from": null,
+        "effective_to": null,
+        "vaccine_code": "MenB",
+        "dose_no": 3,
+        "min_age_days": 365,
+        "max_age_days": 730,
+        "min_interval_days": 180,
         "catch_up_rule": ""
       }
     ]

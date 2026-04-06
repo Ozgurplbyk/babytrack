@@ -47,8 +47,8 @@
     },
     {
       "countryCode": "FR",
-      "authority": "Ministere de la Sante",
-      "officialSourceUrl": "https://sante.gouv.fr/prevention-en-sante/preserver-sa-sante/vaccination/calendrier-vaccinal",
+      "authority": "Service Public / Ministere de la Sante",
+      "officialSourceUrl": "https://www.service-public.gouv.fr/particuliers/vosdroits/F724",
       "deliveryMode": "pipeline_package",
       "status": "active",
       "lastVerifiedAt": "2026-03-01",

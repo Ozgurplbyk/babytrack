@@ -175,6 +175,40 @@ class VaccinePipelineHealthTests(unittest.TestCase):
         self.assertEqual(errors, [])
         self.assertTrue(any("official source metadata was refreshed" in item for item in warnings))
 
+    def test_accepts_live_overlay_mode(self) -> None:
+        now = datetime.now(timezone.utc)
+        self.state.write_text(
+            json.dumps(
+                {
+                    "TR": {
+                        "fetchMode": "live_overlay",
+                        "fallbackReason": "fixture_supplemented",
+                        "liveRecordCount": 6,
+                        "recordCount": 6,
+                        "retrievedAt": (now - timedelta(hours=1)).isoformat(),
+                        "sourceUpdatedAt": (now - timedelta(days=2)).date().isoformat(),
+                        "publishedFile": "TR_2026.0404.json",
+                    }
+                }
+            ),
+            encoding="utf-8",
+        )
+        (self.out_dir / "TR_2026.0404.json").write_text(
+            json.dumps({"payload": {"records": [{"id": 1}]}}),
+            encoding="utf-8",
+        )
+
+        errors, warnings = validate_health(
+            registry_path=self.registry,
+            state_path=self.state,
+            out_dir=self.out_dir,
+            max_retrieved_age_hours=48,
+            warn_source_age_days=180,
+        )
+
+        self.assertEqual(errors, [])
+        self.assertEqual(warnings, [])
+
     def test_warn_only_override_downgrades_live_failure(self) -> None:
         now = datetime.now(timezone.utc)
         self.registry.write_text(

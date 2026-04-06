@@ -146,7 +146,9 @@ class LiveSourceAdapter(BaseAdapter):
 
         live_schedule, live_version, live_source_updated, fallback_reason, live_evidence = self._try_fetch_live_schedule()
         _, page_source_updated = self._fetch_page_metadata(self.source_url)
-        if live_schedule:
+        if live_schedule and fallback_reason == "fixture_supplemented":
+            fetch_mode = "live_overlay"
+        elif live_schedule:
             fetch_mode = "live"
         elif live_evidence:
             fetch_mode = "live_metadata"
@@ -181,6 +183,11 @@ class LiveSourceAdapter(BaseAdapter):
         return json.loads(self.fixture_path.read_text(encoding="utf-8"))
 
     def _try_fetch_live_schedule(self) -> tuple[list[dict[str, Any]], str, str, str, bool]:
+        if self.country_code == "FR":
+            schedule, version, source_updated, fallback_reason, live_evidence = self._build_france_overlay_schedule()
+            if schedule or live_evidence:
+                return schedule, version, source_updated, fallback_reason, live_evidence
+
         target_url = self.schedule_feed_url.strip() or self.source_url.strip()
         if not target_url:
             return [], "", "", "missing_feed_url", False
@@ -219,6 +226,37 @@ class LiveSourceAdapter(BaseAdapter):
             return [], version, source_updated, "schedule_parse_failed", True
 
         return schedule, version, source_updated, "", True
+
+    def _build_france_overlay_schedule(self) -> tuple[list[dict[str, Any]], str, str, str, bool]:
+        fixture_payload = self._load_fixture()
+        base_schedule = list(fixture_payload.get("schedule", []))
+        summary_body, summary_updated = self._fetch_page_metadata(self.source_url)
+
+        dtp_url = "https://www.service-public.gouv.fr/particuliers/vosdroits/F704"
+        dtp_body, dtp_updated = self._fetch_page_metadata(dtp_url)
+
+        news_url = self.schedule_feed_url.strip() or self.source_url.strip()
+        news_body, news_updated = self._fetch_page_metadata(news_url)
+
+        dtp_supported = self._france_supports_core_schedule(dtp_body)
+        meningococcal_rows = self._parse_france_service_public_news(news_body)
+
+        updated_candidates = [value for value in (summary_updated, dtp_updated, news_updated) if value]
+        source_updated = sorted(updated_candidates)[-1] if updated_candidates else ""
+
+        if not summary_body and not dtp_body and not news_body:
+            return [], "", source_updated, "fetch_failed", False
+
+        if dtp_supported and meningococcal_rows:
+            merged_schedule = self._merge_schedule_rows(base_schedule, meningococcal_rows)
+            version = self._resolve_version("", str(fixture_payload.get("version", "unknown")), source_updated)
+            return merged_schedule, version, source_updated, "fixture_supplemented", True
+
+        if summary_body or dtp_body or news_body:
+            version = self._resolve_version("", str(fixture_payload.get("version", "unknown")), source_updated)
+            return [], version, source_updated, "schedule_parse_failed", True
+
+        return [], "", source_updated, "fetch_failed", False
 
     def _parse_schedule_from_json(self, payload: Any) -> tuple[list[dict[str, Any]], str, str]:
         rows = self._extract_rows(payload)
@@ -575,6 +613,69 @@ class LiveSourceAdapter(BaseAdapter):
             self._build_schedule_row("RV", 1, 60, 120, 28),
             self._build_schedule_row("MMR", 1, 365, 730, 0),
         ]
+
+    def _france_supports_core_schedule(self, body: str) -> bool:
+        clean = self._clean_html(body)
+        low = clean.lower()
+        required = (
+            "diphtérie",
+            "tétanos",
+            "poliomyélite",
+            "injection à 2 mois",
+            "injection à 4 mois",
+            "à 11 mois",
+        )
+        return all(token in low for token in required)
+
+    def _parse_france_service_public_news(self, body: str) -> list[dict[str, Any]]:
+        clean = self._clean_html(body)
+        low = clean.lower().replace("\xa0", " ")
+        required = (
+            "méningocoques acwy",
+            "méningocoque b",
+            "dose à 6 mois",
+            "rappel à 12 mois",
+            "doses à 3, 5 et 12 mois",
+        )
+        if not all(token in low for token in required):
+            return []
+
+        return [
+            self._build_schedule_row("MenACWY", 1, 180, 240, 0),
+            self._build_schedule_row("MenACWY", 2, 365, 730, 120),
+            self._build_schedule_row("MenB", 1, 90, 150, 0),
+            self._build_schedule_row("MenB", 2, 150, 240, 60),
+            self._build_schedule_row("MenB", 3, 365, 730, 180),
+        ]
+
+    def _merge_schedule_rows(
+        self,
+        base_schedule: list[dict[str, Any]],
+        additions: list[dict[str, Any]],
+    ) -> list[dict[str, Any]]:
+        merged = [dict(row) for row in base_schedule]
+        seen = {
+            (
+                str(row.get("vaccine_code", "")).strip(),
+                int(row.get("dose_no", 0) or 0),
+                row.get("min_age_days"),
+            )
+            for row in merged
+            if str(row.get("vaccine_code", "")).strip()
+        }
+
+        for row in additions:
+            key = (
+                str(row.get("vaccine_code", "")).strip(),
+                int(row.get("dose_no", 0) or 0),
+                row.get("min_age_days"),
+            )
+            if key in seen:
+                continue
+            seen.add(key)
+            merged.append(dict(row))
+
+        return merged
 
     def _build_schedule_row(
         self,

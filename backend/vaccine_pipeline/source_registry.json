@@ -54,17 +54,16 @@
     },
     {
       "countryCode": "FR",
-      "authority": "Sante Publique France",
+      "authority": "Service Public / Ministere de la Sante",
       "fixture": "fr_schedule.json",
-      "sourceName": "Ministere de la Sante Vaccination",
-      "sourceUrl": "https://sante.gouv.fr/prevention-en-sante/preserver-sa-sante/vaccination",
+      "sourceName": "Service Public Vaccination",
+      "sourceUrl": "https://www.service-public.gouv.fr/particuliers/vosdroits/F724",
       "sourceUpdatedAt": "2026-01-01",
       "adapter": "live_source",
-      "scheduleFeedUrl": "https://sante.gouv.fr/prevention-en-sante/preserver-sa-sante/vaccination/calendrier-vaccinal",
-      "scheduleFeedFormat": "html_table",
+      "scheduleFeedUrl": "https://www.service-public.gouv.fr/particuliers/actualites/A16520",
+      "scheduleFeedFormat": "html",
       "scheduleFeedPath": "",
-      "scheduleFieldMap": {},
-      "strictLiveRequired": false
+      "scheduleFieldMap": {}
     },
     {
       "countryCode": "ES",

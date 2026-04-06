@@ -78,7 +78,7 @@ def validate_health(
 
         fetch_mode = str(state_row.get("fetchMode", "")).strip().lower()
         fallback_reason = str(state_row.get("fallbackReason", "")).strip()
-        if fetch_mode not in {"live", "live_metadata"}:
+        if fetch_mode not in {"live", "live_metadata", "live_overlay"}:
             reason = fallback_reason or "unknown_fallback"
             issue = f"[{country_code}] live ingest unhealthy: fetchMode={fetch_mode or 'missing'} fallbackReason={reason}"
             if strict_live_required:
