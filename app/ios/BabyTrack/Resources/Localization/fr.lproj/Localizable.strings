@@ -749,3 +749,10 @@
 "vaccine_data_source_alert_review_body" = "Ce paquet vaccinal semble plus ancien que prévu. Comparez-le à la source officielle avant toute décision de santé importante.";
 "vaccine_data_source_alert_offline_title" = "Mode de secours hors ligne actif";
 "vaccine_data_source_alert_offline_body" = "Le dernier paquet du pays n’a pas pu être chargé, l’application affiche donc le calendrier local de secours.";
+
+"vaccine_data_source_health_title" = "Santé de la source";
+"vaccine_data_source_health_subtitle" = "Voyez quand la source officielle, le paquet et la dernière synchronisation ont été mis à jour.";
+"vaccine_data_source_health_source_title" = "Source officielle";
+"vaccine_data_source_health_package_title" = "Version du paquet";
+"vaccine_data_source_health_sync_title" = "Dernière synchronisation";
+"vaccine_data_source_health_missing" = "Indisponible";

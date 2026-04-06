@@ -5,6 +5,11 @@ on:
   schedule:
     - cron: "17 */6 * * *"
 
+permissions:
+  contents: write
+  pull-requests: write
+  issues: write
+
 jobs:
   refresh-packages:
     name: Refresh Live Vaccine Packages
@@ -32,7 +37,105 @@ jobs:
         run: |
           python3 tools/content/validate_vaccine_source_registry.py
           python3 tools/content/validate_locale_vaccine_requirements.py
-          python3 tools/content/validate_vaccine_pipeline_health.py --strict-live
+
+      - name: Validate Vaccine Pipeline Health
+        id: vaccine_health
+        continue-on-error: true
+        run: python3 tools/content/validate_vaccine_pipeline_health.py --strict-live
+
+      - name: Build Vaccine Health Report
+        if: always()
+        run: |
+          python3 tools/content/build_vaccine_pipeline_health_report.py \
+            --report-out /tmp/vaccine_health_report.md \
+            --metadata-out /tmp/vaccine_health_metadata.json
+
+      - name: Publish Vaccine Health Summary
+        if: always()
+        run: cat /tmp/vaccine_health_report.md >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Sync Vaccine Alert Issue
+        if: always()
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+
+            const metadata = JSON.parse(fs.readFileSync('/tmp/vaccine_health_metadata.json', 'utf8'));
+            const report = fs.readFileSync('/tmp/vaccine_health_report.md', 'utf8');
+            const owner = context.repo.owner;
+            const repo = context.repo.repo;
+            const label = metadata.label || 'vaccine-pipeline-alert';
+            const title = metadata.issueTitle || 'Vaccine Pipeline Alert';
+            const alertBody = [
+              'Automated vaccine pipeline monitor.',
+              '',
+              report,
+            ].join('\n');
+
+            try {
+              await github.rest.issues.getLabel({ owner, repo, name: label });
+            } catch (error) {
+              if (error.status === 404) {
+                await github.rest.issues.createLabel({
+                  owner,
+                  repo,
+                  name: label,
+                  color: 'D97706',
+                  description: 'Automated vaccine source freshness and ingest alerts',
+                });
+              } else {
+                throw error;
+              }
+            }
+
+            const openIssues = await github.paginate(github.rest.issues.listForRepo, {
+              owner,
+              repo,
+              state: 'open',
+              labels: label,
+              per_page: 100,
+            });
+
+            const matchingIssues = openIssues.filter((issue) => issue.title === title);
+
+            if (metadata.hasAlerts) {
+              if (matchingIssues.length > 0) {
+                for (const issue of matchingIssues) {
+                  await github.rest.issues.update({
+                    owner,
+                    repo,
+                    issue_number: issue.number,
+                    title,
+                    body: alertBody,
+                  });
+                }
+              } else {
+                await github.rest.issues.create({
+                  owner,
+                  repo,
+                  title,
+                  body: alertBody,
+                  labels: [label],
+                });
+              }
+              return;
+            }
+
+            for (const issue of matchingIssues) {
+              await github.rest.issues.createComment({
+                owner,
+                repo,
+                issue_number: issue.number,
+                body: 'Automated monitor: vaccine pipeline is healthy again. Closing this alert.',
+              });
+              await github.rest.issues.update({
+                owner,
+                repo,
+                issue_number: issue.number,
+                state: 'closed',
+              });
+            }
 
       - name: Validate Pipeline Python Files
         run: |
@@ -45,6 +148,7 @@ jobs:
             backend/vaccine_pipeline/adapters/base.py \
             backend/vaccine_pipeline/adapters/live_source_adapter.py \
             backend/vaccine_pipeline/adapters/local_fixture_adapter.py \
+            tools/content/build_vaccine_pipeline_health_report.py \
             tools/content/validate_locale_vaccine_requirements.py \
             tools/content/validate_vaccine_pipeline_health.py \
             tools/content/validate_vaccine_source_registry.py
@@ -86,6 +190,10 @@ jobs:
               assert item.get('sourceUrl'), item
               assert item.get('sourceUpdatedAt'), item
           PY
+
+      - name: Fail Workflow On Live Health Errors
+        if: steps.vaccine_health.outcome == 'failure'
+        run: exit 1
 
       - name: Create Pull Request (if changed)
         uses: peter-evans/create-pull-request@v6

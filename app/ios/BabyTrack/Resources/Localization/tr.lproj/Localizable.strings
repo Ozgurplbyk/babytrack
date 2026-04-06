@@ -752,3 +752,10 @@
 "vaccine_data_source_alert_review_body" = "Bu aşı paketi beklenenden daha eski görünüyor. Önemli sağlık kararları vermeden önce resmi kaynakla karşılaştırın.";
 "vaccine_data_source_alert_offline_title" = "Çevrimdışı yedek plan kullanılıyor";
 "vaccine_data_source_alert_offline_body" = "En güncel ülke paketi yüklenemediği için uygulama yerel yedek aşı planını gösteriyor.";
+
+"vaccine_data_source_health_title" = "Kaynak Sağlığı";
+"vaccine_data_source_health_subtitle" = "Resmi kaynak, paket üretimi ve son senkron zamanını tek yerde görün.";
+"vaccine_data_source_health_source_title" = "Resmi kaynak";
+"vaccine_data_source_health_package_title" = "Paket üretimi";
+"vaccine_data_source_health_sync_title" = "Son senkron";
+"vaccine_data_source_health_missing" = "Henüz yok";

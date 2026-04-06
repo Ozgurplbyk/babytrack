@@ -752,3 +752,10 @@
 "vaccine_data_source_alert_review_body" = "This vaccine package looks older than expected. Compare it with the official source before making important health decisions.";
 "vaccine_data_source_alert_offline_title" = "Offline fallback in use";
 "vaccine_data_source_alert_offline_body" = "The latest country package could not be loaded, so the app is showing the local fallback schedule.";
+
+"vaccine_data_source_health_title" = "Source Health";
+"vaccine_data_source_health_subtitle" = "See when the official source, package build, and latest sync were refreshed.";
+"vaccine_data_source_health_source_title" = "Official source";
+"vaccine_data_source_health_package_title" = "Package build";
+"vaccine_data_source_health_sync_title" = "Last sync";
+"vaccine_data_source_health_missing" = "Not available";

@@ -1544,6 +1544,7 @@ private struct VaccineScheduleView: View {
         ScrollView(showsIndicators: false) {
             VStack(spacing: 14) {
                 headerCard
+                sourceFreshnessCard
                 sourceAlertCard
 
                 if recommendedSchedule.isEmpty {
@@ -1629,24 +1630,6 @@ private struct VaccineScheduleView: View {
                 .tint(Color.accentColor)
             }
 
-            if let updated = formattedSourceDate(remoteSourceRegistryUpdatedAt) {
-                Label(String(format: L10n.tr("vaccine_data_source_updated_format"), updated), systemImage: "calendar.badge.clock")
-                    .font(.caption2)
-                    .foregroundStyle(.secondary)
-            }
-
-            if let published = formattedSourceDate(remoteSourcePublishedAt) {
-                Label(String(format: L10n.tr("vaccine_data_source_published_format"), published), systemImage: "shippingbox")
-                    .font(.caption2)
-                    .foregroundStyle(.secondary)
-            }
-
-            if let fetchedAt = formattedDate(remoteSourceFetchedAt) {
-                Label(String(format: L10n.tr("vaccine_data_source_last_sync_format"), fetchedAt), systemImage: "arrow.trianglehead.clockwise")
-                    .font(.caption2)
-                    .foregroundStyle(.secondary)
-            }
-
             if let ageMonth = babyAgeMonths {
                 Text(String(format: L10n.tr("vaccine_age_month_format"), ageMonth))
                     .font(.caption.weight(.semibold))
@@ -1660,6 +1643,74 @@ private struct VaccineScheduleView: View {
             RoundedRectangle(cornerRadius: 18, style: .continuous)
                 .strokeBorder(.white.opacity(0.28), lineWidth: 1)
         )
+    }
+
+    private var sourceFreshnessCard: some View {
+        VStack(alignment: .leading, spacing: 12) {
+            Text(L10n.tr("vaccine_data_source_health_title"))
+                .font(.subheadline.weight(.bold))
+
+            Text(L10n.tr("vaccine_data_source_health_subtitle"))
+                .font(.caption)
+                .foregroundStyle(.secondary)
+
+            LazyVGrid(columns: [GridItem(.adaptive(minimum: 138), spacing: 10)], spacing: 10) {
+                sourceMetricCard(
+                    title: L10n.tr("vaccine_data_source_health_source_title"),
+                    value: formattedSourceDate(remoteSourceRegistryUpdatedAt) ?? L10n.tr("vaccine_data_source_health_missing"),
+                    relativeValue: relativeSourceDate(remoteSourceRegistryUpdatedAt),
+                    systemImage: "calendar.badge.clock",
+                    tint: sourceStatus.tint
+                )
+                sourceMetricCard(
+                    title: L10n.tr("vaccine_data_source_health_package_title"),
+                    value: formattedSourceDate(remoteSourcePublishedAt) ?? L10n.tr("vaccine_data_source_health_missing"),
+                    relativeValue: relativeSourceDate(remoteSourcePublishedAt),
+                    systemImage: "shippingbox.fill",
+                    tint: Color.blue
+                )
+                sourceMetricCard(
+                    title: L10n.tr("vaccine_data_source_health_sync_title"),
+                    value: formattedDate(remoteSourceFetchedAt) ?? L10n.tr("vaccine_data_source_health_missing"),
+                    relativeValue: relativeDate(remoteSourceFetchedAt),
+                    systemImage: "arrow.trianglehead.clockwise",
+                    tint: Color.green
+                )
+            }
+        }
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .padding(14)
+        .background(Color(.secondarySystemBackground), in: RoundedRectangle(cornerRadius: 18, style: .continuous))
+        .overlay(
+            RoundedRectangle(cornerRadius: 18, style: .continuous)
+                .strokeBorder(sourceStatus.tint.opacity(0.16), lineWidth: 1)
+        )
+    }
+
+    private func sourceMetricCard(title: String, value: String, relativeValue: String?, systemImage: String, tint: Color) -> some View {
+        VStack(alignment: .leading, spacing: 8) {
+            Label(title, systemImage: systemImage)
+                .font(.caption.weight(.semibold))
+                .foregroundStyle(tint)
+
+            Text(value)
+                .font(.subheadline.weight(.bold))
+                .foregroundStyle(.primary)
+                .lineLimit(2)
+                .minimumScaleFactor(0.85)
+
+            if let relativeValue, !relativeValue.isEmpty {
+                Text(relativeValue)
+                    .font(.caption2)
+                    .foregroundStyle(.secondary)
+            } else {
+                Text(" ")
+                    .font(.caption2)
+            }
+        }
+        .frame(maxWidth: .infinity, minHeight: 96, alignment: .topLeading)
+        .padding(12)
+        .background(tint.opacity(0.08), in: RoundedRectangle(cornerRadius: 16, style: .continuous))
     }
 
     private var sourceStatus: VaccineSourceStatus {
@@ -1994,6 +2045,18 @@ private struct VaccineScheduleView: View {
     private func formattedDate(_ value: Date?) -> String? {
         guard let value else { return nil }
         return value.formatted(date: .abbreviated, time: .shortened)
+    }
+
+    private func relativeSourceDate(_ raw: String?) -> String? {
+        guard let date = parsedSourceDate(raw) else { return nil }
+        return relativeDate(date)
+    }
+
+    private func relativeDate(_ value: Date?) -> String? {
+        guard let value else { return nil }
+        let formatter = RelativeDateTimeFormatter()
+        formatter.unitsStyle = .full
+        return formatter.localizedString(for: value, relativeTo: Date())
     }
 
     private func parsedSourceDate(_ raw: String?) -> Date? {

@@ -749,3 +749,10 @@
 "vaccine_data_source_alert_review_body" = "Este paquete de vacunas parece más antiguo de lo esperado. Compáralo con la fuente oficial antes de tomar decisiones importantes de salud.";
 "vaccine_data_source_alert_offline_title" = "Se usa respaldo sin conexión";
 "vaccine_data_source_alert_offline_body" = "No se pudo cargar el paquete más reciente del país, por lo que la app muestra el calendario local de respaldo.";
+
+"vaccine_data_source_health_title" = "Estado de la fuente";
+"vaccine_data_source_health_subtitle" = "Mira cuándo se actualizaron la fuente oficial, el paquete y la última sincronización.";
+"vaccine_data_source_health_source_title" = "Fuente oficial";
+"vaccine_data_source_health_package_title" = "Versión del paquete";
+"vaccine_data_source_health_sync_title" = "Última sincronización";
+"vaccine_data_source_health_missing" = "No disponible";

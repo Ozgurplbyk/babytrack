@@ -749,3 +749,10 @@
 "vaccine_data_source_alert_review_body" = "Dieses Impfpaket wirkt älter als erwartet. Vergleichen Sie es vor wichtigen Gesundheitsentscheidungen mit der offiziellen Quelle.";
 "vaccine_data_source_alert_offline_title" = "Offline-Fallback aktiv";
 "vaccine_data_source_alert_offline_body" = "Das neueste Länderpaket konnte nicht geladen werden, daher zeigt die App den lokalen Ersatzplan an.";
+
+"vaccine_data_source_health_title" = "Quellenstatus";
+"vaccine_data_source_health_subtitle" = "Sehen Sie, wann die offizielle Quelle, das Paket und die letzte Synchronisierung aktualisiert wurden.";
+"vaccine_data_source_health_source_title" = "Offizielle Quelle";
+"vaccine_data_source_health_package_title" = "Paketstand";
+"vaccine_data_source_health_sync_title" = "Letzte Synchronisierung";
+"vaccine_data_source_health_missing" = "Nicht verfügbar";

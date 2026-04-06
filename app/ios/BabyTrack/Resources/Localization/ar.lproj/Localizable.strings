@@ -749,3 +749,10 @@
 "vaccine_data_source_alert_review_body" = "تبدو حزمة اللقاحات هذه أقدم من المتوقع. قارنها بالمصدر الرسمي قبل اتخاذ قرارات صحية مهمة.";
 "vaccine_data_source_alert_offline_title" = "يتم استخدام نسخة احتياطية دون اتصال";
 "vaccine_data_source_alert_offline_body" = "تعذر تحميل أحدث حزمة للدولة، لذلك يعرض التطبيق جدول اللقاحات المحلي الاحتياطي.";
+
+"vaccine_data_source_health_title" = "حالة المصدر";
+"vaccine_data_source_health_subtitle" = "اعرف متى تم تحديث المصدر الرسمي وبناء الحزمة وآخر مزامنة.";
+"vaccine_data_source_health_source_title" = "المصدر الرسمي";
+"vaccine_data_source_health_package_title" = "بناء الحزمة";
+"vaccine_data_source_health_sync_title" = "آخر مزامنة";
+"vaccine_data_source_health_missing" = "غير متوفر";
