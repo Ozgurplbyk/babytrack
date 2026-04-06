@@ -359,19 +359,20 @@ class LiveSourceAdapterTests(unittest.TestCase):
 
         schedule = adapter._parse_saudi_pdf_schedule(
             """
-            Birth 2 months 4 months 6 months 12 months
-            BCG
-            HepB
-            RV
-            DTaP
-            Hib
-            PCV
-            IPV
-            MMR
+            Basic Vaccination Schedule
+            At Birth Hepatitis B
+            2 months IPV DTaP Hepatitis B Hib PCV Rota Virus
+            4 months IPV DTaP Hepatitis B Hib PCV Rota Virus
+            6 months IPV DTaP Hepatitis B Hib PCV OPV Rota Virus BCG
+            months 9 Measles MCV4
+            12 months OPV MMR PCV MCV4
             """
         )
 
-        self.assertEqual([row["vaccine_code"] for row in schedule[:4]], ["HepB", "BCG", "DTaP", "Hib"])
+        self.assertEqual(
+            [row["vaccine_code"] for row in schedule],
+            ["HepB", "BCG", "DTaP", "Hib", "PCV", "IPV", "RV", "Measles", "MMR", "MCV4"],
+        )
 
     def test_parses_france_public_service_news_signals(self) -> None:
         adapter = LiveSourceAdapter(

@@ -649,8 +649,9 @@ class LiveSourceAdapter(BaseAdapter):
 
     def _parse_saudi_pdf_schedule(self, text: str) -> list[dict[str, Any]]:
         low = text.lower()
-        required = ("birth", "2 months", "4 months", "hepb", "bcg", "dtap", "hib", "pcv", "ipv")
-        if not all(token in low for token in required):
+        sfda_required = ("at birth", "2 months", "4 months", "6 months", "hepatitis b", "dtap", "hib", "pcv")
+        moh_required = ("birth", "2 months", "4 months", "hepb", "bcg", "dtap", "hib", "pcv", "ipv")
+        if not (all(token in low for token in sfda_required) or all(token in low for token in moh_required)):
             return []
 
         return [
@@ -661,7 +662,9 @@ class LiveSourceAdapter(BaseAdapter):
             self._build_schedule_row("PCV", 1, 60, 120, 28),
             self._build_schedule_row("IPV", 1, 60, 120, 28),
             self._build_schedule_row("RV", 1, 60, 120, 28),
+            self._build_schedule_row("Measles", 1, 270, 365, 0),
             self._build_schedule_row("MMR", 1, 365, 730, 0),
+            self._build_schedule_row("MCV4", 1, 270, 365, 0),
         ]
 
     def _france_supports_core_schedule(self, body: str) -> bool:

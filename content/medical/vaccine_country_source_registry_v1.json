@@ -91,8 +91,8 @@
     },
     {
       "countryCode": "SA",
-      "authority": "Saudi MOH",
-      "officialSourceUrl": "https://www.moh.gov.sa/en/HealthAwareness/EducationalContent/vaccination/Pages/default.aspx",
+      "authority": "Saudi FDA / MOH EPI",
+      "officialSourceUrl": "https://www.sfda.gov.sa/sites/default/files/2022-08/012-000.pdf",
       "deliveryMode": "pipeline_package",
       "status": "active",
       "lastVerifiedAt": "2026-03-01",

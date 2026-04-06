@@ -1,0 +1,333 @@
+{
+  "meta": {
+    "country": "SA",
+    "version": "2022",
+    "approved_by": "medical_editor_required",
+    "published_at": "2026-04-06T13:55:48.115456+00:00",
+    "signature": "13b987a6bc5b64a5fea1fc65cf2a90b450c78025e60820af7818a5e920015df1"
+  },
+  "diff": {
+    "added": [
+      {
+        "country": "SA",
+        "authority": "Saudi FDA / MOH EPI",
+        "version": "2022",
+        "effective_from": null,
+        "effective_to": null,
+        "vaccine_code": "BCG",
+        "dose_no": 1,
+        "min_age_days": 0,
+        "max_age_days": 30,
+        "min_interval_days": 0,
+        "catch_up_rule": ""
+      },
+      {
+        "country": "SA",
+        "authority": "Saudi FDA / MOH EPI",
+        "version": "2022",
+        "effective_from": null,
+        "effective_to": null,
+        "vaccine_code": "RV",
+        "dose_no": 1,
+        "min_age_days": 60,
+        "max_age_days": 120,
+        "min_interval_days": 28,
+        "catch_up_rule": ""
+      },
+      {
+        "country": "SA",
+        "authority": "Saudi FDA / MOH EPI",
+        "version": "2022",
+        "effective_from": null,
+        "effective_to": null,
+        "vaccine_code": "MCV4",
+        "dose_no": 1,
+        "min_age_days": 270,
+        "max_age_days": 365,
+        "min_interval_days": 0,
+        "catch_up_rule": ""
+      },
+      {
+        "country": "SA",
+        "authority": "Saudi FDA / MOH EPI",
+        "version": "2022",
+        "effective_from": null,
+        "effective_to": null,
+        "vaccine_code": "Hib",
+        "dose_no": 1,
+        "min_age_days": 60,
+        "max_age_days": 120,
+        "min_interval_days": 28,
+        "catch_up_rule": ""
+      },
+      {
+        "country": "SA",
+        "authority": "Saudi FDA / MOH EPI",
+        "version": "2022",
+        "effective_from": null,
+        "effective_to": null,
+        "vaccine_code": "Measles",
+        "dose_no": 1,
+        "min_age_days": 270,
+        "max_age_days": 365,
+        "min_interval_days": 0,
+        "catch_up_rule": ""
+      },
+      {
+        "country": "SA",
+        "authority": "Saudi FDA / MOH EPI",
+        "version": "2022",
+        "effective_from": null,
+        "effective_to": null,
+        "vaccine_code": "IPV",
+        "dose_no": 1,
+        "min_age_days": 60,
+        "max_age_days": 120,
+        "min_interval_days": 28,
+        "catch_up_rule": ""
+      },
+      {
+        "country": "SA",
+        "authority": "Saudi FDA / MOH EPI",
+        "version": "2022",
+        "effective_from": null,
+        "effective_to": null,
+        "vaccine_code": "PCV",
+        "dose_no": 1,
+        "min_age_days": 60,
+        "max_age_days": 120,
+        "min_interval_days": 28,
+        "catch_up_rule": ""
+      },
+      {
+        "country": "SA",
+        "authority": "Saudi FDA / MOH EPI",
+        "version": "2022",
+        "effective_from": null,
+        "effective_to": null,
+        "vaccine_code": "DTaP",
+        "dose_no": 1,
+        "min_age_days": 60,
+        "max_age_days": 120,
+        "min_interval_days": 28,
+        "catch_up_rule": ""
+      }
+    ],
+    "removed": [
+      {
+        "country": "SA",
+        "authority": "Saudi Ministry of Health",
+        "version": "2026.0101",
+        "effective_from": "2026-01-01",
+        "effective_to": null,
+        "vaccine_code": "Hexavalent",
+        "dose_no": 1,
+        "min_age_days": 60,
+        "max_age_days": 120,
+        "min_interval_days": 28,
+        "catch_up_rule": ""
+      }
+    ],
+    "changed": [
+      {
+        "before": {
+          "country": "SA",
+          "authority": "Saudi Ministry of Health",
+          "version": "2026.0101",
+          "effective_from": "2026-01-01",
+          "effective_to": null,
+          "vaccine_code": "MMR",
+          "dose_no": 1,
+          "min_age_days": 365,
+          "max_age_days": 730,
+          "min_interval_days": 0,
+          "catch_up_rule": ""
+        },
+        "after": {
+          "country": "SA",
+          "authority": "Saudi FDA / MOH EPI",
+          "version": "2022",
+          "effective_from": null,
+          "effective_to": null,
+          "vaccine_code": "MMR",
+          "dose_no": 1,
+          "min_age_days": 365,
+          "max_age_days": 730,
+          "min_interval_days": 0,
+          "catch_up_rule": ""
+        }
+      },
+      {
+        "before": {
+          "country": "SA",
+          "authority": "Saudi Ministry of Health",
+          "version": "2026.0101",
+          "effective_from": "2026-01-01",
+          "effective_to": null,
+          "vaccine_code": "HepB",
+          "dose_no": 1,
+          "min_age_days": 0,
+          "max_age_days": 30,
+          "min_interval_days": 0,
+          "catch_up_rule": ""
+        },
+        "after": {
+          "country": "SA",
+          "authority": "Saudi FDA / MOH EPI",
+          "version": "2022",
+          "effective_from": null,
+          "effective_to": null,
+          "vaccine_code": "HepB",
+          "dose_no": 1,
+          "min_age_days": 0,
+          "max_age_days": 30,
+          "min_interval_days": 0,
+          "catch_up_rule": ""
+        }
+      }
+    ]
+  },
+  "payload": {
+    "country": "SA",
+    "authority": "Saudi FDA / MOH EPI",
+    "version": "2022",
+    "source": {
+      "name": "SFDA Basic Vaccination Schedule",
+      "url": "https://www.sfda.gov.sa/sites/default/files/2022-08/012-000.pdf",
+      "source_updated_at": "2022-08-16",
+      "retrieved_at": "2026-04-06T13:55:37.547622+00:00"
+    },
+    "records": [
+      {
+        "country": "SA",
+        "authority": "Saudi FDA / MOH EPI",
+        "version": "2022",
+        "effective_from": null,
+        "effective_to": null,
+        "vaccine_code": "HepB",
+        "dose_no": 1,
+        "min_age_days": 0,
+        "max_age_days": 30,
+        "min_interval_days": 0,
+        "catch_up_rule": ""
+      },
+      {
+        "country": "SA",
+        "authority": "Saudi FDA / MOH EPI",
+        "version": "2022",
+        "effective_from": null,
+        "effective_to": null,
+        "vaccine_code": "BCG",
+        "dose_no": 1,
+        "min_age_days": 0,
+        "max_age_days": 30,
+        "min_interval_days": 0,
+        "catch_up_rule": ""
+      },
+      {
+        "country": "SA",
+        "authority": "Saudi FDA / MOH EPI",
+        "version": "2022",
+        "effective_from": null,
+        "effective_to": null,
+        "vaccine_code": "DTaP",
+        "dose_no": 1,
+        "min_age_days": 60,
+        "max_age_days": 120,
+        "min_interval_days": 28,
+        "catch_up_rule": ""
+      },
+      {
+        "country": "SA",
+        "authority": "Saudi FDA / MOH EPI",
+        "version": "2022",
+        "effective_from": null,
+        "effective_to": null,
+        "vaccine_code": "Hib",
+        "dose_no": 1,
+        "min_age_days": 60,
+        "max_age_days": 120,
+        "min_interval_days": 28,
+        "catch_up_rule": ""
+      },
+      {
+        "country": "SA",
+        "authority": "Saudi FDA / MOH EPI",
+        "version": "2022",
+        "effective_from": null,
+        "effective_to": null,
+        "vaccine_code": "PCV",
+        "dose_no": 1,
+        "min_age_days": 60,
+        "max_age_days": 120,
+        "min_interval_days": 28,
+        "catch_up_rule": ""
+      },
+      {
+        "country": "SA",
+        "authority": "Saudi FDA / MOH EPI",
+        "version": "2022",
+        "effective_from": null,
+        "effective_to": null,
+        "vaccine_code": "IPV",
+        "dose_no": 1,
+        "min_age_days": 60,
+        "max_age_days": 120,
+        "min_interval_days": 28,
+        "catch_up_rule": ""
+      },
+      {
+        "country": "SA",
+        "authority": "Saudi FDA / MOH EPI",
+        "version": "2022",
+        "effective_from": null,
+        "effective_to": null,
+        "vaccine_code": "RV",
+        "dose_no": 1,
+        "min_age_days": 60,
+        "max_age_days": 120,
+        "min_interval_days": 28,
+        "catch_up_rule": ""
+      },
+      {
+        "country": "SA",
+        "authority": "Saudi FDA / MOH EPI",
+        "version": "2022",
+        "effective_from": null,
+        "effective_to": null,
+        "vaccine_code": "Measles",
+        "dose_no": 1,
+        "min_age_days": 270,
+        "max_age_days": 365,
+        "min_interval_days": 0,
+        "catch_up_rule": ""
+      },
+      {
+        "country": "SA",
+        "authority": "Saudi FDA / MOH EPI",
+        "version": "2022",
+        "effective_from": null,
+        "effective_to": null,
+        "vaccine_code": "MMR",
+        "dose_no": 1,
+        "min_age_days": 365,
+        "max_age_days": 730,
+        "min_interval_days": 0,
+        "catch_up_rule": ""
+      },
+      {
+        "country": "SA",
+        "authority": "Saudi FDA / MOH EPI",
+        "version": "2022",
+        "effective_from": null,
+        "effective_to": null,
+        "vaccine_code": "MCV4",
+        "dose_no": 1,
+        "min_age_days": 270,
+        "max_age_days": 365,
+        "min_interval_days": 0,
+        "catch_up_rule": ""
+      }
+    ]
+  }
+}
