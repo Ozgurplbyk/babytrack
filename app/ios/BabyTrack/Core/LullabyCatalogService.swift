@@ -22,7 +22,7 @@ final class LullabyCatalogService {
     func topTen(for countryCode: String) -> [LullabyTrack] {
         let catalog = loadCatalog()
         let normalized = normalizeCountryCode(countryCode)
-        let fallbackLocale = normalizeCountryCode(Locale.current.regionCode ?? "TR")
+        let fallbackLocale = normalizeCountryCode(Locale.current.region?.identifier ?? "TR")
         let candidates = [normalized, fallbackLocale, "TR"]
             .reduce(into: [String]()) { partial, code in
                 if !partial.contains(code) {

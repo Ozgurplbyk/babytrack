@@ -2982,7 +2982,7 @@ private struct MedicationPlansView: View {
 
     private var historyEvents: [AppEvent] {
         let scoped = eventStore.recent(limit: 2_000, childId: childId).filter { $0.type == .medication }
-        HealthHistoryLogic.filterEvents(
+        return HealthHistoryLogic.filterEvents(
             from: scoped,
             mode: historyMode,
             historyDate: historyDate,

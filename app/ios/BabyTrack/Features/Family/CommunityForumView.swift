@@ -84,11 +84,11 @@ struct CommunityForumView: View {
             .onAppear {
                 Task { await refresh() }
             }
-            .sheet(item: $selectedPost) { post in
+            .sheet(item: $selectedPost, onDismiss: {
+                Task { await refresh() }
+            }) { post in
                 ForumCommentsSheet(post: post)
                     .environmentObject(authManager)
-            } onDismiss: {
-                Task { await refresh() }
             }
             .sheet(item: $historyPost) { post in
                 if let token = authManager.sessionToken {
