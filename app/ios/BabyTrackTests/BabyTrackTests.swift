@@ -160,6 +160,118 @@ final class BabyTrackTests: XCTestCase {
         }
     }
 
+    func testDoctorShareSnapshotCountsRelevantEventTypes() {
+        let calendar = Calendar(identifier: .gregorian)
+        let now = Date(timeIntervalSince1970: 1_700_000_000)
+        let yesterday = calendar.date(byAdding: .day, value: -1, to: now)!
+        let events: [AppEvent] = [
+            AppEvent(childId: "child", type: .breastfeeding, timestamp: now),
+            AppEvent(childId: "child", type: .sleep, timestamp: now),
+            AppEvent(childId: "child", type: .diaperChange, timestamp: now),
+            AppEvent(childId: "child", type: .medication, timestamp: now),
+            AppEvent(childId: "child", type: .fever, timestamp: now),
+            AppEvent(childId: "child", type: .memory, timestamp: yesterday)
+        ]
+
+        let snapshot = DoctorShareComposer.snapshot(events: events, now: now, calendar: calendar)
+        XCTAssertEqual(snapshot.todayCount, 5)
+        XCTAssertEqual(snapshot.feedingCount, 1)
+        XCTAssertEqual(snapshot.sleepCount, 1)
+        XCTAssertEqual(snapshot.diaperCount, 1)
+        XCTAssertEqual(snapshot.medicationCount, 1)
+        XCTAssertEqual(snapshot.feverCount, 1)
+    }
+
+    func testDoctorShareFilteringSupportsRecentDateAndBabyMonthModes() {
+        let calendar = Calendar(identifier: .gregorian)
+        let birthDate = calendar.date(from: DateComponents(year: 2026, month: 1, day: 1))!
+        let januaryEvent = AppEvent(childId: "child", type: .sleep, timestamp: birthDate)
+        let februaryEvent = AppEvent(childId: "child", type: .bottle, timestamp: calendar.date(byAdding: .day, value: 35, to: birthDate)!)
+        let marchEvent = AppEvent(childId: "child", type: .medication, timestamp: calendar.date(byAdding: .day, value: 70, to: birthDate)!)
+        let events = [marchEvent, februaryEvent, januaryEvent]
+
+        XCTAssertEqual(
+            DoctorShareComposer.filteredEvents(
+                from: events,
+                mode: .recent,
+                historyDate: marchEvent.timestamp,
+                historyBabyMonth: 0,
+                birthDate: birthDate,
+                calendar: calendar
+            ).map(\.id),
+            events.map(\.id)
+        )
+
+        XCTAssertEqual(
+            DoctorShareComposer.filteredEvents(
+                from: events,
+                mode: .date,
+                historyDate: februaryEvent.timestamp,
+                historyBabyMonth: 0,
+                birthDate: birthDate,
+                calendar: calendar
+            ).map(\.id),
+            [februaryEvent.id]
+        )
+
+        XCTAssertEqual(
+            DoctorShareComposer.filteredEvents(
+                from: events,
+                mode: .babyMonth,
+                historyDate: marchEvent.timestamp,
+                historyBabyMonth: 1,
+                birthDate: birthDate,
+                calendar: calendar
+            ).map(\.id),
+            [februaryEvent.id]
+        )
+    }
+
+    func testDoctorShareFullReportIncludesBirthMedicationAndRecentEvents() {
+        let child = BabyProfile(
+            name: "Ada",
+            birthDate: Date(timeIntervalSince1970: 1_700_000_000),
+            gestationalWeeks: 39,
+            birthWeightKg: 3.4,
+            birthLengthCm: 50,
+            birthHeadCircumferenceCm: 35,
+            birthPlace: "Istanbul",
+            birthHospital: "City Hospital",
+            apgar1Min: 8,
+            apgar5Min: 9,
+            nicuDays: 2,
+            birthNotes: "Observation only"
+        )
+        let plan = MedicationPlan(
+            childId: child.id.uuidString,
+            name: "Vitamin D",
+            dosage: "1 drop",
+            reminderHour: 9,
+            reminderMinute: 30
+        )
+        let event = AppEvent(
+            childId: child.id.uuidString,
+            type: .fever,
+            timestamp: Date(timeIntervalSince1970: 1_700_100_000),
+            note: "38.2C"
+        )
+        let report = DoctorShareComposer.buildFullReport(
+            childName: child.name,
+            ageMonths: 2,
+            birthLines: DoctorShareComposer.birthMetaLines(for: child),
+            snapshot: DoctorShareSnapshot(todayCount: 3, feedingCount: 1, sleepCount: 1, diaperCount: 0, medicationCount: 1, feverCount: 1),
+            activeMedications: [plan],
+            filteredEvents: [event],
+            generatedAt: Date(timeIntervalSince1970: 1_700_200_000)
+        )
+
+        XCTAssertTrue(report.contains("Ada"))
+        XCTAssertTrue(report.contains("Vitamin D"))
+        XCTAssertTrue(report.contains("Observation only"))
+        XCTAssertTrue(report.contains("City Hospital"))
+        XCTAssertTrue(report.contains("38.2C"))
+    }
+
     @MainActor
     func testSyncConflictStorePersistsPendingConflicts() {
         let eventId = UUID().uuidString

@@ -644,52 +644,20 @@ private struct HealthModuleWorkspaceView: View {
     private var doctorShareSummary: String {
         let calendar = Calendar.current
         let now = Date()
-        let dayStart = calendar.startOfDay(for: now)
-        let todayEvents = scopedEvents.filter { $0.timestamp >= dayStart }
+        let snapshot = DoctorShareComposer.snapshot(events: scopedEvents, now: now, calendar: calendar)
         let recent = Array(scopedEvents.prefix(10))
 
         let baby = appState.babyProfiles.first(where: { $0.id.uuidString == childId })
         let babyName = baby?.name ?? L10n.tr("family_baby_fallback_name")
         let ageMonths = baby.map { max(calendar.dateComponents([.month], from: $0.birthDate, to: now).month ?? 0, 0) }
 
-        var lines: [String] = []
-        lines.append(L10n.tr("doctor_share_report_title"))
-        lines.append(String(format: L10n.tr("doctor_share_report_generated_format"), now.formatted(date: .abbreviated, time: .shortened)))
-        lines.append(String(format: L10n.tr("doctor_share_report_child_format"), babyName))
-        if let ageMonths {
-            lines.append(String(format: L10n.tr("doctor_share_report_age_format"), ageMonths))
-        }
-        lines.append("")
-        lines.append(L10n.tr("doctor_share_report_summary_title"))
-        lines.append(
-            String(
-                format: L10n.tr("doctor_share_report_summary_format"),
-                todayEvents.count,
-                todayEvents.filter { $0.type.isFeedingRelated }.count,
-                todayEvents.filter { $0.type == .sleep }.count,
-                todayEvents.filter { $0.type.isDiaperRelated }.count,
-                todayEvents.filter { $0.type == .medication }.count,
-                todayEvents.filter { $0.type == .fever }.count
-            )
+        return DoctorShareComposer.buildCompactSummary(
+            childName: babyName,
+            ageMonths: ageMonths,
+            snapshot: snapshot,
+            recentEvents: recent,
+            generatedAt: now
         )
-        lines.append("")
-        lines.append(L10n.tr("doctor_share_report_recent_title"))
-        if recent.isEmpty {
-            lines.append(L10n.tr("doctor_share_report_no_events"))
-        } else {
-            lines.append(contentsOf: recent.map(reportLine))
-        }
-        return lines.joined(separator: "\n")
-    }
-
-    private func reportLine(for event: AppEvent) -> String {
-        let base = String(
-            format: L10n.tr("doctor_share_report_event_line_format"),
-            event.type.title,
-            event.timestamp.formatted(date: .abbreviated, time: .shortened)
-        )
-        guard !event.note.isEmpty else { return base }
-        return "\(base) • \(event.note)"
     }
 }
 
@@ -941,44 +909,15 @@ private struct DoctorShareReportView: View {
     }
 
     private var reportText: String {
-        var lines: [String] = []
-        lines.append(L10n.tr("doctor_share_report_title"))
-        lines.append(String(format: L10n.tr("doctor_share_report_generated_format"), Date().formatted(date: .abbreviated, time: .shortened)))
-        lines.append(String(format: L10n.tr("doctor_share_report_child_format"), selectedBaby?.name ?? L10n.tr("family_baby_fallback_name")))
-        if let ageMonths {
-            lines.append(String(format: L10n.tr("doctor_share_report_age_format"), ageMonths))
-        }
-        if let selectedBaby {
-            lines.append(contentsOf: birthMetaLines(for: selectedBaby))
-        }
-        lines.append("")
-        lines.append(L10n.tr("doctor_share_report_summary_title"))
-        lines.append(
-            String(
-                format: L10n.tr("doctor_share_report_summary_format"),
-                todayEvents.count,
-                todayEvents.filter { $0.type.isFeedingRelated }.count,
-                todayEvents.filter { $0.type == .sleep }.count,
-                todayEvents.filter { $0.type.isDiaperRelated }.count,
-                todayEvents.filter { $0.type == .medication }.count,
-                todayEvents.filter { $0.type == .fever }.count
-            )
+        DoctorShareComposer.buildFullReport(
+            childName: selectedBaby?.name ?? L10n.tr("family_baby_fallback_name"),
+            ageMonths: ageMonths,
+            birthLines: selectedBaby.map { DoctorShareComposer.birthMetaLines(for: $0) } ?? [],
+            snapshot: DoctorShareComposer.snapshot(events: allEvents),
+            activeMedications: medicationStore.activePlans,
+            filteredEvents: filteredEvents,
+            generatedAt: Date()
         )
-        lines.append("")
-        lines.append(L10n.tr("doctor_share_active_medications_title"))
-        if medicationStore.activePlans.isEmpty {
-            lines.append(L10n.tr("doctor_share_active_medications_empty"))
-        } else {
-            lines.append(contentsOf: medicationStore.activePlans.map(medicationLine))
-        }
-        lines.append("")
-        lines.append(L10n.tr("doctor_share_report_recent_title"))
-        if filteredEvents.isEmpty {
-            lines.append(L10n.tr("doctor_share_report_no_events"))
-        } else {
-            lines.append(contentsOf: filteredEvents.prefix(10).map(reportLine))
-        }
-        return lines.joined(separator: "\n")
     }
 
     private var selectedBaby: BabyProfile? {
@@ -995,19 +934,13 @@ private struct DoctorShareReportView: View {
     }
 
     private var filteredEvents: [AppEvent] {
-        switch historyMode {
-        case .recent:
-            return Array(allEvents.prefix(10))
-        case .date:
-            let calendar = Calendar.current
-            return allEvents.filter { calendar.isDate($0.timestamp, inSameDayAs: historyDate) }
-        case .babyMonth:
-            guard let birthDate else { return Array(allEvents.prefix(10)) }
-            return allEvents.filter {
-                let month = max(Calendar.current.dateComponents([.month], from: birthDate, to: $0.timestamp).month ?? 0, 0)
-                return month == historyBabyMonth
-            }
-        }
+        DoctorShareComposer.filteredEvents(
+            from: allEvents,
+            mode: historyMode,
+            historyDate: historyDate,
+            historyBabyMonth: historyBabyMonth,
+            birthDate: birthDate
+        )
     }
 
     private var todayEvents: [AppEvent] {
@@ -1028,63 +961,19 @@ private struct DoctorShareReportView: View {
     }
 
     private func medicationSubtitle(_ plan: MedicationPlan) -> String {
-        let time = DateComponents(calendar: .current, hour: plan.reminderHour, minute: plan.reminderMinute).date?.formatted(date: .omitted, time: .shortened)
-        if plan.dosage.isEmpty, let time {
-            return String(format: L10n.tr("doctor_share_medication_time_format"), time)
-        }
-        if let time {
-            return "\(plan.dosage) • \(String(format: L10n.tr("doctor_share_medication_time_format"), time))"
-        }
-        return plan.dosage.isEmpty ? L10n.tr("medication_reminder_no_dose") : plan.dosage
+        DoctorShareComposer.medicationSubtitle(plan)
     }
 
     private func medicationLine(_ plan: MedicationPlan) -> String {
-        let subtitle = medicationSubtitle(plan)
-        return subtitle.isEmpty
-            ? String(format: L10n.tr("doctor_share_medication_line_name_only_format"), plan.name)
-            : String(format: L10n.tr("doctor_share_medication_line_format"), plan.name, subtitle)
+        DoctorShareComposer.medicationLine(plan)
     }
 
     private func reportLine(_ event: AppEvent) -> String {
-        let base = String(
-            format: L10n.tr("doctor_share_report_event_line_format"),
-            event.type.title,
-            event.timestamp.formatted(date: .abbreviated, time: .shortened)
-        )
-        guard !event.note.isEmpty else { return base }
-        return "\(base) • \(event.note)"
+        DoctorShareComposer.reportLine(event)
     }
 
     private func birthMetaLines(for profile: BabyProfile) -> [String] {
-        var lines: [String] = []
-        if let weeks = profile.gestationalWeeks {
-            lines.append(String(format: L10n.tr("doctor_share_birth_weeks_format"), weeks))
-        }
-        if let weight = profile.birthWeightKg {
-            lines.append(String(format: L10n.tr("doctor_share_birth_weight_format"), weight))
-        }
-        if let length = profile.birthLengthCm {
-            lines.append(String(format: L10n.tr("doctor_share_birth_length_format"), length))
-        }
-        if let head = profile.birthHeadCircumferenceCm {
-            lines.append(String(format: L10n.tr("doctor_share_birth_head_format"), head))
-        }
-        if let apgar1 = profile.apgar1Min, let apgar5 = profile.apgar5Min {
-            lines.append(String(format: L10n.tr("doctor_share_birth_apgar_format"), apgar1, apgar5))
-        }
-        if let nicuDays = profile.nicuDays {
-            lines.append(String(format: L10n.tr("doctor_share_birth_nicu_format"), nicuDays))
-        }
-        if !profile.birthPlace.isEmpty {
-            lines.append(String(format: L10n.tr("doctor_share_birth_place_format"), profile.birthPlace))
-        }
-        if !profile.birthHospital.isEmpty {
-            lines.append(String(format: L10n.tr("doctor_share_birth_hospital_format"), profile.birthHospital))
-        }
-        if !profile.birthNotes.isEmpty {
-            lines.append(String(format: L10n.tr("doctor_share_birth_note_format"), profile.birthNotes))
-        }
-        return lines
+        DoctorShareComposer.birthMetaLines(for: profile)
     }
 }
 
