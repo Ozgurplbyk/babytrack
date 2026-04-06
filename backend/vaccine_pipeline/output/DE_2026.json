@@ -1,0 +1,151 @@
+{
+  "meta": {
+    "country": "DE",
+    "version": "2026",
+    "approved_by": "medical_editor_required",
+    "published_at": "2026-04-06T10:38:34.099633+00:00",
+    "signature": "9c6a7e51e59cb1c3f3bc0187d51b70aab20971cb6b749b71dad275204dc3883c"
+  },
+  "diff": {
+    "added": [],
+    "removed": [],
+    "changed": [
+      {
+        "before": {
+          "country": "DE",
+          "authority": "RKI/STIKO",
+          "version": "2026.0305",
+          "effective_from": "2026-01-01",
+          "effective_to": null,
+          "vaccine_code": "Pneumokokken",
+          "dose_no": 1,
+          "min_age_days": 56,
+          "max_age_days": 120,
+          "min_interval_days": 0,
+          "catch_up_rule": ""
+        },
+        "after": {
+          "country": "DE",
+          "authority": "RKI/STIKO",
+          "version": "2026",
+          "effective_from": null,
+          "effective_to": null,
+          "vaccine_code": "Pneumokokken",
+          "dose_no": 1,
+          "min_age_days": 56,
+          "max_age_days": 120,
+          "min_interval_days": 0,
+          "catch_up_rule": ""
+        }
+      },
+      {
+        "before": {
+          "country": "DE",
+          "authority": "RKI/STIKO",
+          "version": "2026.0305",
+          "effective_from": "2026-01-01",
+          "effective_to": null,
+          "vaccine_code": "6-fach",
+          "dose_no": 1,
+          "min_age_days": 56,
+          "max_age_days": 120,
+          "min_interval_days": 28,
+          "catch_up_rule": ""
+        },
+        "after": {
+          "country": "DE",
+          "authority": "RKI/STIKO",
+          "version": "2026",
+          "effective_from": null,
+          "effective_to": null,
+          "vaccine_code": "6-fach",
+          "dose_no": 1,
+          "min_age_days": 56,
+          "max_age_days": 120,
+          "min_interval_days": 28,
+          "catch_up_rule": ""
+        }
+      },
+      {
+        "before": {
+          "country": "DE",
+          "authority": "RKI/STIKO",
+          "version": "2026.0305",
+          "effective_from": "2026-01-01",
+          "effective_to": null,
+          "vaccine_code": "MMR",
+          "dose_no": 1,
+          "min_age_days": 335,
+          "max_age_days": 730,
+          "min_interval_days": 0,
+          "catch_up_rule": ""
+        },
+        "after": {
+          "country": "DE",
+          "authority": "RKI/STIKO",
+          "version": "2026",
+          "effective_from": null,
+          "effective_to": null,
+          "vaccine_code": "MMR",
+          "dose_no": 1,
+          "min_age_days": 335,
+          "max_age_days": 730,
+          "min_interval_days": 0,
+          "catch_up_rule": ""
+        }
+      }
+    ]
+  },
+  "payload": {
+    "country": "DE",
+    "authority": "RKI/STIKO",
+    "version": "2026",
+    "source": {
+      "name": "RKI STIKO Recommendations",
+      "url": "https://www.rki.de/DE/Themen/Infektionskrankheiten/Impfen/Impfkalender/impfkalender-node.html",
+      "source_updated_at": "2026-01-22",
+      "retrieved_at": "2026-04-06T10:38:32.205648+00:00"
+    },
+    "records": [
+      {
+        "country": "DE",
+        "authority": "RKI/STIKO",
+        "version": "2026",
+        "effective_from": null,
+        "effective_to": null,
+        "vaccine_code": "6-fach",
+        "dose_no": 1,
+        "min_age_days": 56,
+        "max_age_days": 120,
+        "min_interval_days": 28,
+        "catch_up_rule": ""
+      },
+      {
+        "country": "DE",
+        "authority": "RKI/STIKO",
+        "version": "2026",
+        "effective_from": null,
+        "effective_to": null,
+        "vaccine_code": "Pneumokokken",
+        "dose_no": 1,
+        "min_age_days": 56,
+        "max_age_days": 120,
+        "min_interval_days": 0,
+        "catch_up_rule": ""
+      },
+      {
+        "country": "DE",
+        "authority": "RKI/STIKO",
+        "version": "2026",
+        "effective_from": null,
+        "effective_to": null,
+        "vaccine_code": "MMR",
+        "dose_no": 1,
+        "min_age_days": 335,
+        "max_age_days": 730,
+        "min_interval_days": 0,
+        "catch_up_rule": ""
+      }
+    ]
+  }
+}

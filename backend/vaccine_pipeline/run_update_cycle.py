@@ -171,6 +171,11 @@ def main() -> int:
                 "sourceName": snap.source_name,
                 "publishedFile": previous.get("publishedFile", ""),
                 "changed": False,
+                "adapter": row["adapter"],
+                "fetchMode": snap.fetch_mode,
+                "fallbackReason": snap.fallback_reason,
+                "liveRecordCount": snap.live_record_count,
+                "recordCount": len(canonical.get("records", [])),
             }
             print(f"[{cc}] no schedule change (signature unchanged)")
             continue
@@ -188,6 +193,11 @@ def main() -> int:
             "sourceName": snap.source_name,
             "publishedFile": out_file.name,
             "changed": True,
+            "adapter": row["adapter"],
+            "fetchMode": snap.fetch_mode,
+            "fallbackReason": snap.fallback_reason,
+            "liveRecordCount": snap.live_record_count,
+            "recordCount": len(canonical.get("records", [])),
         }
 
     save_state(state)

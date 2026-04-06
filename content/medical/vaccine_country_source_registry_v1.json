@@ -37,7 +37,7 @@
     {
       "countryCode": "DE",
       "authority": "RKI/STIKO",
-      "officialSourceUrl": "https://www.rki.de/EN/Content/infections/Vaccination/recommandations/STIKO_recommendations.html",
+      "officialSourceUrl": "https://www.rki.de/DE/Themen/Infektionskrankheiten/Impfen/Impfkalender/impfkalender-node.html",
       "deliveryMode": "pipeline_package",
       "status": "active",
       "lastVerifiedAt": "2026-03-01",
@@ -59,7 +59,7 @@
     {
       "countryCode": "ES",
       "authority": "Ministerio de Sanidad",
-      "officialSourceUrl": "https://www.sanidad.gob.es/areas/promocionPrevencion/vacunaciones/home.htm",
+      "officialSourceUrl": "https://www.sanidad.gob.es/areas/promocionPrevencion/vacunaciones/calendario/calendario/Calendario_Todalavida_2025.htm",
       "deliveryMode": "pipeline_package",
       "status": "active",
       "lastVerifiedAt": "2026-03-01",
@@ -70,7 +70,7 @@
     {
       "countryCode": "IT",
       "authority": "Ministero della Salute",
-      "officialSourceUrl": "https://www.salute.gov.it/portale/vaccinazioni/homeVaccinazioni.jsp",
+      "officialSourceUrl": "https://www.epicentro.iss.it/vaccini/bambini",
       "deliveryMode": "pipeline_package",
       "status": "active",
       "lastVerifiedAt": "2026-03-01",
@@ -81,7 +81,7 @@
     {
       "countryCode": "BR",
       "authority": "Ministerio da Saude",
-      "officialSourceUrl": "https://www.gov.br/saude/pt-br/assuntos/saude-de-a-a-z/c/calendario-de-vacinacao",
+      "officialSourceUrl": "https://www.gov.br/saude/pt-br/vacinacao/calendario",
       "deliveryMode": "pipeline_package",
       "status": "active",
       "lastVerifiedAt": "2026-03-01",

@@ -14,6 +14,9 @@ class SourceSnapshot:
     source_url: str = ""
     source_updated_at: str = ""
     retrieved_at: str = ""
+    fetch_mode: str = ""
+    fallback_reason: str = ""
+    live_record_count: int = 0
 
 
 class BaseAdapter:

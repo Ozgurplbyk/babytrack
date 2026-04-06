@@ -3,38 +3,52 @@
     "country": "IT",
     "version": "2026.0101",
     "approved_by": "medical_editor_required",
-    "published_at": "2026-03-05T13:20:47.325834+00:00",
-    "signature": "6d8a86a7ba36a8ce493e31d1e9eac7a9823246d137b49b4e2e66c4d75ccd97bc"
+    "published_at": "2026-04-06T10:57:05.089465+00:00",
+    "signature": "a28c7536db787077c9d62b5c155ab5be03a925eda562480bf75c246a51eda6a2"
   },
   "diff": {
-    "added": [],
-    "removed": [],
-    "changed": []
-  },
-  "payload": {
-    "country": "IT",
-    "authority": "Ministero della Salute",
-    "version": "2026.0101",
-    "source": {
-      "name": "Ministero della Salute Vaccinazioni",
-      "url": "https://www.salute.gov.it/portale/vaccinazioni/homeVaccinazioni.jsp",
-      "source_updated_at": "2026-01-01",
-      "retrieved_at": "2026-03-05T13:20:47.101888+00:00"
-    },
-    "records": [
+    "added": [
       {
         "country": "IT",
         "authority": "Ministero della Salute",
         "version": "2026.0101",
-        "effective_from": "2026-01-01",
+        "effective_from": null,
         "effective_to": null,
-        "vaccine_code": "Esavalente",
+        "vaccine_code": "Hexavalente",
         "dose_no": 1,
-        "min_age_days": 60,
+        "min_age_days": 61,
         "max_age_days": 120,
         "min_interval_days": 28,
         "catch_up_rule": ""
       },
+      {
+        "country": "IT",
+        "authority": "Ministero della Salute",
+        "version": "2026.0101",
+        "effective_from": null,
+        "effective_to": null,
+        "vaccine_code": "MMR",
+        "dose_no": 1,
+        "min_age_days": 365,
+        "max_age_days": 730,
+        "min_interval_days": 0,
+        "catch_up_rule": ""
+      },
+      {
+        "country": "IT",
+        "authority": "Ministero della Salute",
+        "version": "2026.0101",
+        "effective_from": null,
+        "effective_to": null,
+        "vaccine_code": "Rotavirus",
+        "dose_no": 1,
+        "min_age_days": 61,
+        "max_age_days": 150,
+        "min_interval_days": 28,
+        "catch_up_rule": ""
+      }
+    ],
+    "removed": [
       {
         "country": "IT",
         "authority": "Ministero della Salute",
@@ -55,6 +69,72 @@
         "effective_from": "2026-01-01",
         "effective_to": null,
         "vaccine_code": "MPR",
+        "dose_no": 1,
+        "min_age_days": 365,
+        "max_age_days": 730,
+        "min_interval_days": 0,
+        "catch_up_rule": ""
+      },
+      {
+        "country": "IT",
+        "authority": "Ministero della Salute",
+        "version": "2026.0101",
+        "effective_from": "2026-01-01",
+        "effective_to": null,
+        "vaccine_code": "Esavalente",
+        "dose_no": 1,
+        "min_age_days": 60,
+        "max_age_days": 120,
+        "min_interval_days": 28,
+        "catch_up_rule": ""
+      }
+    ],
+    "changed": []
+  },
+  "payload": {
+    "country": "IT",
+    "authority": "Ministero della Salute",
+    "version": "2026.0101",
+    "source": {
+      "name": "ISS Epicentro Vaccini bambini",
+      "url": "https://www.epicentro.iss.it/vaccini/bambini",
+      "source_updated_at": "2026-01-01",
+      "retrieved_at": "2026-04-06T10:57:03.804348+00:00"
+    },
+    "records": [
+      {
+        "country": "IT",
+        "authority": "Ministero della Salute",
+        "version": "2026.0101",
+        "effective_from": null,
+        "effective_to": null,
+        "vaccine_code": "Hexavalente",
+        "dose_no": 1,
+        "min_age_days": 61,
+        "max_age_days": 120,
+        "min_interval_days": 28,
+        "catch_up_rule": ""
+      },
+      {
+        "country": "IT",
+        "authority": "Ministero della Salute",
+        "version": "2026.0101",
+        "effective_from": null,
+        "effective_to": null,
+        "vaccine_code": "Rotavirus",
+        "dose_no": 1,
+        "min_age_days": 61,
+        "max_age_days": 150,
+        "min_interval_days": 28,
+        "catch_up_rule": ""
+      },
+      {
+        "country": "IT",
+        "authority": "Ministero della Salute",
+        "version": "2026.0101",
+        "effective_from": null,
+        "effective_to": null,
+        "vaccine_code": "MMR",
         "dose_no": 1,
         "min_age_days": 365,
         "max_age_days": 730,

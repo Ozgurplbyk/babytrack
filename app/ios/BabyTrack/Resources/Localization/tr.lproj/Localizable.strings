@@ -240,6 +240,14 @@
 "health_triage_guidance_red" = "Acil durum: profesyonel sağlık desteği için gecikmeden başvur.";
 "vaccine_data_source_format" = "Veri kaynağı: %@";
 "vaccine_data_source_offline" = "Çevrimdışı paket: yerel takvim";
+"vaccine_data_source_badge_live" = "Canlı";
+"vaccine_data_source_badge_cached" = "Önbellek";
+"vaccine_data_source_badge_review" = "Kontrol Et";
+"vaccine_data_source_badge_offline" = "Çevrimdışı";
+"vaccine_data_source_status_live" = "Otomatik güncellemeler aktif.";
+"vaccine_data_source_status_cached" = "En güncel önbellek paketi gösteriliyor.";
+"vaccine_data_source_status_review" = "Kaynak beklenenden eski görünüyor. Resmi takvimi kontrol et.";
+"vaccine_data_source_status_offline" = "Yerel yedek takvim gösteriliyor.";
 "vaccine_due_birth" = "Doğum";
 "vaccine_due_month_format" = "%d ay";
 "vaccine_due_month_range_format" = "%d-%d ay";
@@ -647,6 +655,7 @@
 "vaccine_data_source_open_link" = "Kaynağı aç";
 "vaccine_data_source_updated_format" = "Kaynak güncellemesi: %@";
 "vaccine_data_source_published_format" = "Paket yayınlanma: %@";
+"vaccine_data_source_last_sync_format" = "Son senkron: %@";
 
 "development_title" = "Atak Haftalari ve Aylik Gelisim";
 "development_subtitle_format" = "%d hafta • %d ay";
@@ -739,3 +748,7 @@
 "forum_admin_report_reason" = "Neden: %@";
 "forum_admin_report_note" = "Not: %@";
 "forum_admin_report_reporter" = "Bildirimi yapan: %@";
+"vaccine_data_source_alert_review_title" = "Kaynak güncelliğini kontrol edin";
+"vaccine_data_source_alert_review_body" = "Bu aşı paketi beklenenden daha eski görünüyor. Önemli sağlık kararları vermeden önce resmi kaynakla karşılaştırın.";
+"vaccine_data_source_alert_offline_title" = "Çevrimdışı yedek plan kullanılıyor";
+"vaccine_data_source_alert_offline_body" = "En güncel ülke paketi yüklenemediği için uygulama yerel yedek aşı planını gösteriyor.";

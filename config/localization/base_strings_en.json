@@ -4,7 +4,6 @@
   "app_add": "Add",
   "app_health": "Health",
   "app_family": "Family",
-
   "onboarding_title_1": "Welcome",
   "onboarding_subtitle_1": "Track health and memories from birth to age 18 in one app.",
   "onboarding_title_2": "Quick Logging",
@@ -21,7 +20,6 @@
   "common_save": "Save",
   "common_ok": "OK",
   "common_irreversible_action": "This action cannot be undone.",
-
   "today_title": "Today",
   "today_daily_program": "Daily Plan",
   "today_vaccine_reminder_sample": "Vaccine reminder: in 2 days",
@@ -32,7 +30,6 @@
   "today_sync_action": "Sync",
   "today_sync_ok_format": "OK: %d records",
   "today_sync_offline": "No connection (offline)",
-
   "audio_hub_title": "Audio Hub",
   "audio_hub_subtitle": "Comfort sounds",
   "audio_noise_white": "White Noise",
@@ -42,11 +39,9 @@
   "audio_stop": "Stop",
   "audio_top_10_lullabies_format": "Top 10 Lullabies by Country (%@)",
   "audio_lullaby_rank_title_format": "#%@ %@",
-
   "timeline_title": "Timeline",
   "timeline_all": "All",
   "event_delete_confirm_title": "Delete this record?",
-
   "quick_add_title": "Quick Add",
   "quick_add_section": "Quick Log",
   "quick_add_recent": "Recent Logs",
@@ -62,7 +57,6 @@
   "quick_action_symptom": "Symptom",
   "quick_action_medication": "Medication",
   "quick_action_memory": "Memory",
-
   "health_title": "Health",
   "health_item_vaccine": "Vaccine Schedule",
   "health_item_checkup": "Checkups",
@@ -72,7 +66,6 @@
   "health_item_triage": "Symptom Triage",
   "health_item_doctor_share": "Doctor Sharing",
   "health_item_school_travel": "School/Travel Health Pack",
-
   "family_title": "Family",
   "family_section_account": "Account",
   "family_item_multi_profile": "Multiple Profiles",
@@ -133,7 +126,6 @@
   "widget_logs_today_format": "Today's logs: %@",
   "widget_display_name": "BabyTrack Summary",
   "widget_description": "Daily child tracking summary",
-
   "paywall_title": "Go Premium",
   "paywall_feature_1": "AI summaries and action plans",
   "paywall_feature_2": "Secure doctor sharing",
@@ -142,9 +134,21 @@
   "paywall_restore": "Restore",
   "paywall_skip": "Not now",
   "paywall_plan_price_format": "%@ %@",
-
   "whats_new_title": "What's New",
   "whats_new_header": "What's New in This Version",
   "whats_new_continue": "Continue",
-  "whats_new_version_line_format": "v%@ - %@"
+  "whats_new_version_line_format": "v%@ - %@",
+  "vaccine_data_source_badge_live": "Live",
+  "vaccine_data_source_badge_cached": "Cached",
+  "vaccine_data_source_badge_review": "Review",
+  "vaccine_data_source_badge_offline": "Offline",
+  "vaccine_data_source_status_live": "Automatic updates are active.",
+  "vaccine_data_source_status_cached": "Showing the latest cached package.",
+  "vaccine_data_source_status_review": "Source looks older than expected. Review official guidance.",
+  "vaccine_data_source_status_offline": "Showing the local fallback schedule.",
+  "vaccine_data_source_last_sync_format": "Last sync: %@",
+  "vaccine_data_source_alert_review_title": "Review source freshness",
+  "vaccine_data_source_alert_review_body": "This vaccine package looks older than expected. Compare it with the official source before making important health decisions.",
+  "vaccine_data_source_alert_offline_title": "Offline fallback in use",
+  "vaccine_data_source_alert_offline_body": "The latest country package could not be loaded, so the app is showing the local fallback schedule."
 }

@@ -1,0 +1,151 @@
+{
+  "meta": {
+    "country": "ES",
+    "version": "2025",
+    "approved_by": "medical_editor_required",
+    "published_at": "2026-04-06T10:38:37.943520+00:00",
+    "signature": "7bd5a6c478987d442a55b188bbed9c13d0ab9a1c33403e48aa8b53e87647d3c2"
+  },
+  "diff": {
+    "added": [],
+    "removed": [],
+    "changed": [
+      {
+        "before": {
+          "country": "ES",
+          "authority": "Ministerio de Sanidad",
+          "version": "2026.0101",
+          "effective_from": "2026-01-01",
+          "effective_to": null,
+          "vaccine_code": "Hexavalente",
+          "dose_no": 1,
+          "min_age_days": 60,
+          "max_age_days": 120,
+          "min_interval_days": 28,
+          "catch_up_rule": ""
+        },
+        "after": {
+          "country": "ES",
+          "authority": "Ministerio de Sanidad",
+          "version": "2025",
+          "effective_from": null,
+          "effective_to": null,
+          "vaccine_code": "Hexavalente",
+          "dose_no": 1,
+          "min_age_days": 60,
+          "max_age_days": 120,
+          "min_interval_days": 28,
+          "catch_up_rule": ""
+        }
+      },
+      {
+        "before": {
+          "country": "ES",
+          "authority": "Ministerio de Sanidad",
+          "version": "2026.0101",
+          "effective_from": "2026-01-01",
+          "effective_to": null,
+          "vaccine_code": "Neumococo",
+          "dose_no": 1,
+          "min_age_days": 60,
+          "max_age_days": 150,
+          "min_interval_days": 28,
+          "catch_up_rule": ""
+        },
+        "after": {
+          "country": "ES",
+          "authority": "Ministerio de Sanidad",
+          "version": "2025",
+          "effective_from": null,
+          "effective_to": null,
+          "vaccine_code": "Neumococo",
+          "dose_no": 1,
+          "min_age_days": 60,
+          "max_age_days": 150,
+          "min_interval_days": 28,
+          "catch_up_rule": ""
+        }
+      },
+      {
+        "before": {
+          "country": "ES",
+          "authority": "Ministerio de Sanidad",
+          "version": "2026.0101",
+          "effective_from": "2026-01-01",
+          "effective_to": null,
+          "vaccine_code": "MMR",
+          "dose_no": 1,
+          "min_age_days": 365,
+          "max_age_days": 730,
+          "min_interval_days": 0,
+          "catch_up_rule": ""
+        },
+        "after": {
+          "country": "ES",
+          "authority": "Ministerio de Sanidad",
+          "version": "2025",
+          "effective_from": null,
+          "effective_to": null,
+          "vaccine_code": "MMR",
+          "dose_no": 1,
+          "min_age_days": 365,
+          "max_age_days": 730,
+          "min_interval_days": 0,
+          "catch_up_rule": ""
+        }
+      }
+    ]
+  },
+  "payload": {
+    "country": "ES",
+    "authority": "Ministerio de Sanidad",
+    "version": "2025",
+    "source": {
+      "name": "Ministerio de Sanidad Vacunaciones",
+      "url": "https://www.sanidad.gob.es/areas/promocionPrevencion/vacunaciones/calendario/calendario/Calendario_Todalavida_2025.htm",
+      "source_updated_at": "2026-01-01",
+      "retrieved_at": "2026-04-06T10:38:34.784483+00:00"
+    },
+    "records": [
+      {
+        "country": "ES",
+        "authority": "Ministerio de Sanidad",
+        "version": "2025",
+        "effective_from": null,
+        "effective_to": null,
+        "vaccine_code": "Hexavalente",
+        "dose_no": 1,
+        "min_age_days": 60,
+        "max_age_days": 120,
+        "min_interval_days": 28,
+        "catch_up_rule": ""
+      },
+      {
+        "country": "ES",
+        "authority": "Ministerio de Sanidad",
+        "version": "2025",
+        "effective_from": null,
+        "effective_to": null,
+        "vaccine_code": "Neumococo",
+        "dose_no": 1,
+        "min_age_days": 60,
+        "max_age_days": 150,
+        "min_interval_days": 28,
+        "catch_up_rule": ""
+      },
+      {
+        "country": "ES",
+        "authority": "Ministerio de Sanidad",
+        "version": "2025",
+        "effective_from": null,
+        "effective_to": null,
+        "vaccine_code": "MMR",
+        "dose_no": 1,
+        "min_age_days": 365,
+        "max_age_days": 730,
+        "min_interval_days": 0,
+        "catch_up_rule": ""
+      }
+    ]
+  }
+}

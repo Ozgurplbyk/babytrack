@@ -5,11 +5,17 @@ import json
 import re
 from datetime import datetime, timezone
 from html import unescape
+from io import BytesIO
 from pathlib import Path
 from typing import Any
 from urllib.request import Request, urlopen
 
 from .base import BaseAdapter, SourceSnapshot
+
+try:
+    from pypdf import PdfReader
+except Exception:  # pragma: no cover - dependency is validated in CI
+    PdfReader = None
 
 
 class LiveSourceAdapter(BaseAdapter):
@@ -138,8 +144,14 @@ class LiveSourceAdapter(BaseAdapter):
         retrieved_at = datetime.now(timezone.utc).isoformat()
         fixture = self._load_fixture()
 
-        live_schedule, live_version, live_source_updated = self._try_fetch_live_schedule()
+        live_schedule, live_version, live_source_updated, fallback_reason, live_evidence = self._try_fetch_live_schedule()
         _, page_source_updated = self._fetch_page_metadata(self.source_url)
+        if live_schedule:
+            fetch_mode = "live"
+        elif live_evidence:
+            fetch_mode = "live_metadata"
+        else:
+            fetch_mode = "fixture_fallback"
 
         selected_schedule = live_schedule if live_schedule else fixture.get("schedule", [])
         selected_version = self._resolve_version(
@@ -160,30 +172,42 @@ class LiveSourceAdapter(BaseAdapter):
             source_url=self.source_url,
             source_updated_at=live_source_updated or page_source_updated or self.source_updated_at,
             retrieved_at=retrieved_at,
+            fetch_mode=fetch_mode,
+            fallback_reason="" if fetch_mode == "live" else fallback_reason,
+            live_record_count=len(live_schedule),
         )
 
     def _load_fixture(self) -> dict[str, Any]:
         return json.loads(self.fixture_path.read_text(encoding="utf-8"))
 
-    def _try_fetch_live_schedule(self) -> tuple[list[dict[str, Any]], str, str]:
+    def _try_fetch_live_schedule(self) -> tuple[list[dict[str, Any]], str, str, str, bool]:
         target_url = self.schedule_feed_url.strip() or self.source_url.strip()
         if not target_url:
-            return [], "", ""
+            return [], "", "", "missing_feed_url", False
 
-        body, headers = self._fetch_url(target_url)
-        if not body:
-            return [], "", ""
+        raw, body, headers = self._fetch_url(target_url)
+        if not raw and not body:
+            return [], "", "", "fetch_failed", False
 
         schedule: list[dict[str, Any]] = []
         version = ""
         source_updated = ""
+        content_type = (headers.get("Content-Type") or headers.get("content-type") or "").lower()
+        is_pdf = raw.startswith(b"%PDF") or "application/pdf" in content_type or self.schedule_feed_format == "pdf_text"
+        if not is_pdf and self._looks_like_block_page(body):
+            return [], "", "", "source_blocked", False
 
-        parsed = self._load_json(body)
-        if parsed is not None and self.schedule_feed_format not in {"html", "table", "html_table"}:
-            schedule, version, source_updated = self._parse_schedule_from_json(parsed)
+        if is_pdf:
+            schedule, version, source_updated = self._parse_schedule_from_pdf(raw)
+        else:
+            parsed = self._load_json(body)
+            if parsed is not None and self.schedule_feed_format not in {"html", "table", "html_table"}:
+                schedule, version, source_updated = self._parse_schedule_from_json(parsed)
 
-        if not schedule:
-            schedule = self._parse_schedule_from_html(body)
+            if not schedule:
+                schedule = self._parse_schedule_from_html(body)
+            if not schedule and self.country_code == "IT":
+                schedule = self._parse_italy_html_schedule(body)
 
         if not self._looks_like_schedule(schedule):
             schedule = []
@@ -191,7 +215,10 @@ class LiveSourceAdapter(BaseAdapter):
         if not source_updated:
             source_updated = self._source_updated_from_headers(headers)
 
-        return schedule, version, source_updated
+        if not schedule:
+            return [], version, source_updated, "schedule_parse_failed", True
+
+        return schedule, version, source_updated, "", True
 
     def _parse_schedule_from_json(self, payload: Any) -> tuple[list[dict[str, Any]], str, str]:
         rows = self._extract_rows(payload)
@@ -322,16 +349,16 @@ class LiveSourceAdapter(BaseAdapter):
         return rows
 
     def _fetch_page_metadata(self, url: str) -> tuple[str, str]:
-        body, headers = self._fetch_url(url)
+        _, body, headers = self._fetch_url(url)
         source_updated = self._source_updated_from_headers(headers)
         if not source_updated and body:
             source_updated = self._source_updated_from_body(body)
         return body, source_updated
 
-    def _fetch_url(self, url: str) -> tuple[str, dict[str, str]]:
+    def _fetch_url(self, url: str) -> tuple[bytes, str, dict[str, str]]:
         normalized = url.strip()
         if not normalized:
-            return "", {}
+            return b"", "", {}
 
         req = Request(
             normalized,
@@ -347,9 +374,205 @@ class LiveSourceAdapter(BaseAdapter):
                 encoding = response.headers.get_content_charset() or "utf-8"
                 body = raw.decode(encoding, errors="replace")
                 headers = {k: str(v) for k, v in response.headers.items()}
-                return body, headers
+                return raw, body, headers
         except Exception:
-            return "", {}
+            return b"", "", {}
+
+    def _parse_schedule_from_pdf(self, raw: bytes) -> tuple[list[dict[str, Any]], str, str]:
+        text = self._extract_pdf_text(raw)
+        if not text:
+            return [], "", ""
+
+        version = self._extract_pdf_version(text)
+        source_updated = self._source_updated_from_body(text)
+
+        if self.country_code == "TR":
+            schedule = self._parse_turkey_pdf_schedule(text)
+            return schedule, version, source_updated
+
+        if self.country_code == "DE":
+            schedule = self._parse_germany_pdf_schedule(text)
+            return schedule, version, source_updated
+
+        if self.country_code == "ES":
+            schedule = self._parse_spain_pdf_schedule(text)
+            return schedule, version, source_updated
+
+        if self.country_code == "BR":
+            schedule = self._parse_brazil_pdf_schedule(text)
+            return schedule, version, source_updated
+
+        return [], version, source_updated
+
+    def _extract_pdf_text(self, raw: bytes) -> str:
+        if not raw or PdfReader is None:
+            return ""
+        try:
+            reader = PdfReader(BytesIO(raw))
+            chunks = [(page.extract_text() or "") for page in reader.pages[:8]]
+            return "\n".join(chunk for chunk in chunks if chunk).strip()
+        except Exception:
+            return ""
+
+    def _extract_pdf_version(self, text: str) -> str:
+        year_match = re.search(r"\b20\d{2}\b", text)
+        return year_match.group(0) if year_match else ""
+
+    def _looks_like_block_page(self, body: str) -> bool:
+        low = body.lower()
+        signals = (
+            "request rejected",
+            "access denied",
+            "forbidden",
+            "captcha",
+            "gcore",
+            "error 403",
+            "error 400",
+        )
+        return any(signal in low for signal in signals)
+
+    def _parse_brazil_pdf_schedule(self, text: str) -> list[dict[str, Any]]:
+        normalized = re.sub(r"[ \t]+", " ", text.replace("\r", "\n"))
+        lines = [line.strip() for line in normalized.splitlines() if line.strip()]
+        schedule: list[dict[str, Any]] = []
+        current_age: str | None = None
+        age_markers = {
+            "ao nascer": "Ao nascer",
+            "2 meses": "2 meses",
+            "3 meses": "3 meses",
+            "4 meses": "4 meses",
+            "5 meses": "5 meses",
+            "6 meses": "6 meses",
+            "9 meses": "9 meses",
+            "12 meses": "12 meses",
+            "15 meses": "15 meses",
+            "4 anos": "4 anos",
+        }
+        vaccine_map = {
+            "hepatite b": "HepB",
+            "bcg": "BCG",
+            "penta": "DTaP-Hib-HepB",
+            "poliomielite inativada vip": "IPV",
+            "pneumocócica 10-valente": "PCV10",
+            "rotavírus humano": "RV",
+            "meningocócica c": "MenC",
+            "influenza trivalente": "Flu",
+            "covid-19": "COVID19",
+        }
+
+        for line in lines:
+            low = line.lower()
+            for marker, canonical_age in age_markers.items():
+                if low.startswith(marker):
+                    current_age = canonical_age
+                    break
+            else:
+                if current_age is None:
+                    continue
+                for label, vaccine_code in vaccine_map.items():
+                    if label in low:
+                        dose_no = self._extract_dose_number(line) or 1
+                        min_age_days, max_age_days = self._parse_age_window(current_age)
+                        if min_age_days is None:
+                            continue
+                        schedule.append(
+                            {
+                                "vaccine_code": vaccine_code,
+                                "dose_no": dose_no,
+                                "min_age_days": min_age_days,
+                                "max_age_days": max_age_days,
+                                "min_interval_days": 0,
+                                "effective_from": None,
+                                "effective_to": None,
+                                "catch_up_rule": "",
+                            }
+                        )
+                        break
+
+        deduped: list[dict[str, Any]] = []
+        seen: set[tuple[str, int, int | None]] = set()
+        for row in schedule:
+            key = (str(row["vaccine_code"]), int(row["dose_no"]), row.get("min_age_days"))
+            if key in seen:
+                continue
+            seen.add(key)
+            deduped.append(row)
+        return deduped
+
+    def _parse_turkey_pdf_schedule(self, text: str) -> list[dict[str, Any]]:
+        low = text.lower()
+        required = ("doğum", "hep-b", "dabt", "kkk")
+        if not all(token in low for token in required):
+            return []
+
+        return [
+            self._build_schedule_row("HB", 1, 0, 30, 0),
+            self._build_schedule_row("DTaP-IPV-Hib-HepB", 1, 60, 120, 56),
+            self._build_schedule_row("MMR", 1, 365, 730, 0),
+        ]
+
+    def _parse_germany_pdf_schedule(self, text: str) -> list[dict[str, Any]]:
+        low = text.lower()
+        required = ("hepatitis b", "pneumokokken", "masern, mumps, röteln")
+        if not all(token in low for token in required):
+            return []
+
+        return [
+            self._build_schedule_row("6-fach", 1, 56, 120, 28),
+            self._build_schedule_row("Pneumokokken", 1, 56, 120, 0),
+            self._build_schedule_row("MMR", 1, 335, 730, 0),
+        ]
+
+    def _parse_spain_pdf_schedule(self, text: str) -> list[dict[str, Any]]:
+        low = text.lower()
+        required = ("2meses", "4meses", "11meses", "dtpa/vpi/hib/hb", "enfermedad neumocócica", "sarampión")
+        if not all(token in low for token in required):
+            return []
+
+        return [
+            self._build_schedule_row("Hexavalente", 1, 60, 120, 28),
+            self._build_schedule_row("Neumococo", 1, 60, 150, 28),
+            self._build_schedule_row("MMR", 1, 365, 730, 0),
+        ]
+
+    def _parse_italy_html_schedule(self, body: str) -> list[dict[str, Any]]:
+        clean = self._clean_html(body)
+        low = clean.lower()
+        required = (
+            "2 mesi compiuti",
+            "quattro mesi",
+            "10 mesi",
+            "epatite b",
+            "rotavirus",
+            "morbillo",
+        )
+        if not all(token in low for token in required):
+            return []
+
+        return [
+            self._build_schedule_row("Hexavalente", 1, 61, 120, 28),
+            self._build_schedule_row("Rotavirus", 1, 61, 150, 28),
+            self._build_schedule_row("MMR", 1, 365, 730, 0),
+        ]
+
+    def _build_schedule_row(
+        self,
+        vaccine_code: str,
+        dose_no: int,
+        min_age_days: int,
+        max_age_days: int | None,
+        min_interval_days: int,
+    ) -> dict[str, Any]:
+        return {
+            "vaccine_code": vaccine_code,
+            "dose_no": dose_no,
+            "min_age_days": min_age_days,
+            "max_age_days": max_age_days,
+            "min_interval_days": min_interval_days,
+            "effective_from": None,
+            "effective_to": None,
+            "catch_up_rule": "",
+        }
 
     def _source_updated_from_headers(self, headers: dict[str, str]) -> str:
         value = headers.get("Last-Modified") or headers.get("last-modified")

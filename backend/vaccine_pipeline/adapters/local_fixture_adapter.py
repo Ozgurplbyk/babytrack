@@ -36,4 +36,7 @@ class LocalFixtureAdapter(BaseAdapter):
             source_url=self.source_url,
             source_updated_at=self.source_updated_at,
             retrieved_at=datetime.now(timezone.utc).isoformat(),
+            fetch_mode="fixture_local",
+            fallback_reason="local_fixture_adapter",
+            live_record_count=0,
         )

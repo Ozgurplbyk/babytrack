@@ -240,6 +240,14 @@
 "health_triage_guidance_red" = "Urgente: busque asistencia médica profesional sin demora.";
 "vaccine_data_source_format" = "Fuente de datos: %@";
 "vaccine_data_source_offline" = "Paquete sin conexión: horario local";
+"vaccine_data_source_badge_live" = "Actual";
+"vaccine_data_source_badge_cached" = "Caché";
+"vaccine_data_source_badge_review" = "Revisar";
+"vaccine_data_source_badge_offline" = "Sin conexión";
+"vaccine_data_source_status_live" = "Las actualizaciones automáticas están activas.";
+"vaccine_data_source_status_cached" = "Se muestra el paquete en caché más reciente.";
+"vaccine_data_source_status_review" = "La fuente parece más antigua de lo esperado. Revise la guía oficial.";
+"vaccine_data_source_status_offline" = "Se muestra el calendario local de respaldo.";
 "vaccine_due_birth" = "Birth";
 "vaccine_due_month_format" = "%d mes";
 "vaccine_due_month_range_format" = "%d-%d mes";
@@ -644,6 +652,7 @@
 "vaccine_data_source_open_link" = "Abrir fuente";
 "vaccine_data_source_updated_format" = "Actualización de fuente: %@";
 "vaccine_data_source_published_format" = "Paquete publicado: %@";
+"vaccine_data_source_last_sync_format" = "Última sincronización: %@";
 
 "development_title" = "Semanas de salto y desarrollo mensual";
 "development_subtitle_format" = "%d semanas • %d meses";
@@ -736,3 +745,7 @@
 "forum_admin_report_reason" = "Motivo: %@";
 "forum_admin_report_note" = "Nota: %@";
 "forum_admin_report_reporter" = "Reportado por: %@";
+"vaccine_data_source_alert_review_title" = "Revisa la vigencia de la fuente";
+"vaccine_data_source_alert_review_body" = "Este paquete de vacunas parece más antiguo de lo esperado. Compáralo con la fuente oficial antes de tomar decisiones importantes de salud.";
+"vaccine_data_source_alert_offline_title" = "Se usa respaldo sin conexión";
+"vaccine_data_source_alert_offline_body" = "No se pudo cargar el paquete más reciente del país, por lo que la app muestra el calendario local de respaldo.";

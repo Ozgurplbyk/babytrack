@@ -240,6 +240,14 @@
 "health_triage_guidance_red" = "عاجل: اطلب الدعم الطبي المتخصص دون تأخير.";
 "vaccine_data_source_format" = "مصدر البيانات: %@";
 "vaccine_data_source_offline" = "الحزمة دون اتصال: الجدول الزمني المحلي";
+"vaccine_data_source_badge_live" = "مباشر";
+"vaccine_data_source_badge_cached" = "مخزن";
+"vaccine_data_source_badge_review" = "تحقق";
+"vaccine_data_source_badge_offline" = "دون اتصال";
+"vaccine_data_source_status_live" = "التحديثات التلقائية مفعلة.";
+"vaccine_data_source_status_cached" = "يتم عرض أحدث حزمة مخزنة.";
+"vaccine_data_source_status_review" = "يبدو أن المصدر أقدم من المتوقع. راجع الإرشادات الرسمية.";
+"vaccine_data_source_status_offline" = "يتم عرض الجدول المحلي الاحتياطي.";
 "vaccine_due_birth" = "Birth";
 "vaccine_due_month_format" = "%d مو";
 "vaccine_due_month_range_format" = "%d-%d شهر";
@@ -644,6 +652,7 @@
 "vaccine_data_source_open_link" = "فتح المصدر";
 "vaccine_data_source_updated_format" = "تحديث المصدر: %@";
 "vaccine_data_source_published_format" = "نشر الحزمة: %@";
+"vaccine_data_source_last_sync_format" = "آخر مزامنة: %@";
 
 "development_title" = "أسابيع القفز والنمو الشهري";
 "development_subtitle_format" = "%d أسابيع • %d أشهر";
@@ -736,3 +745,7 @@
 "forum_admin_report_reason" = "السبب: %@";
 "forum_admin_report_note" = "ملاحظة: %@";
 "forum_admin_report_reporter" = "المبلّغ: %@";
+"vaccine_data_source_alert_review_title" = "تحقق من حداثة المصدر";
+"vaccine_data_source_alert_review_body" = "تبدو حزمة اللقاحات هذه أقدم من المتوقع. قارنها بالمصدر الرسمي قبل اتخاذ قرارات صحية مهمة.";
+"vaccine_data_source_alert_offline_title" = "يتم استخدام نسخة احتياطية دون اتصال";
+"vaccine_data_source_alert_offline_body" = "تعذر تحميل أحدث حزمة للدولة، لذلك يعرض التطبيق جدول اللقاحات المحلي الاحتياطي.";

@@ -86,6 +86,9 @@ jobs:
       - name: Build Vaccine Packages
         run: python3 backend/vaccine_pipeline/run_update_cycle.py
 
+      - name: Validate Vaccine Pipeline Health
+        run: python3 tools/content/validate_vaccine_pipeline_health.py
+
       - name: Upload Backend RC Bundle
         uses: actions/upload-artifact@v4
         with:

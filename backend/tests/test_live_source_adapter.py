@@ -224,6 +224,95 @@ class LiveSourceAdapterTests(unittest.TestCase):
         self.assertEqual(snapshot.payload["schedule"][0]["dose_no"], 1)
         self.assertEqual(snapshot.payload["schedule"][0]["min_age_days"], 360)
 
+    def test_parses_turkey_pdf_text_signals(self) -> None:
+        adapter = LiveSourceAdapter(
+            "TR",
+            "MOH",
+            self.fixture,
+            source_name="MOH",
+            source_url=f"{self.base}/source",
+            source_updated_at="2026-01-01",
+        )
+
+        schedule = adapter._parse_turkey_pdf_schedule(
+            """
+            Ulusal Çocukluk Dönemi Aşılama Takvimi
+            Hep-B
+            DaBT - İPA- Hib - HepB
+            KKK
+            DOĞUM 2. AY SONU 4. AY SONU 6. AY SONU 12. AY SONU
+            """
+        )
+
+        self.assertEqual([row["vaccine_code"] for row in schedule], ["HB", "DTaP-IPV-Hib-HepB", "MMR"])
+
+    def test_parses_germany_pdf_text_signals(self) -> None:
+        adapter = LiveSourceAdapter(
+            "DE",
+            "RKI",
+            self.fixture,
+            source_name="RKI",
+            source_url=f"{self.base}/source",
+            source_updated_at="2026-01-01",
+        )
+
+        schedule = adapter._parse_germany_pdf_schedule(
+            """
+            Tabelle 1 | Impfkalender 2026
+            Hepatitis Bc  G1  G2  G3f
+            Pneumokokkenc,d  G1  G2  G3f
+            Masern, Mumps, Röteln  G1  G2
+            """
+        )
+
+        self.assertEqual([row["vaccine_code"] for row in schedule], ["6-fach", "Pneumokokken", "MMR"])
+
+    def test_parses_spain_pdf_text_signals(self) -> None:
+        adapter = LiveSourceAdapter(
+            "ES",
+            "Sanidad",
+            self.fixture,
+            source_name="Sanidad",
+            source_url=f"{self.base}/source",
+            source_updated_at="2026-01-01",
+        )
+
+        schedule = adapter._parse_spain_pdf_schedule(
+            """
+            Calendario común de vacunación
+            0meses 2meses 4meses 6meses 11meses 12meses
+            Vacunación a los 2, 4, 11 meses (DTPa/VPI/Hib/HB)
+            Enfermedad neumocócica
+            Sarampión, rubeola, parotiditis
+            """
+        )
+
+        self.assertEqual([row["vaccine_code"] for row in schedule], ["Hexavalente", "Neumococo", "MMR"])
+
+    def test_parses_italy_html_text_signals(self) -> None:
+        adapter = LiveSourceAdapter(
+            "IT",
+            "ISS",
+            self.fixture,
+            source_name="ISS",
+            source_url=f"{self.base}/source",
+            source_updated_at="2026-01-01",
+        )
+
+        schedule = adapter._parse_italy_html_schedule(
+            """
+            Calendario vaccinale del Piano nazionale
+            2 mesi compiuti
+            4 mesi compiuti
+            10 mesi
+            epatite B
+            rotavirus
+            morbillo
+            """
+        )
+
+        self.assertEqual([row["vaccine_code"] for row in schedule], ["Hexavalente", "Rotavirus", "MMR"])
+
 
 if __name__ == "__main__":
     unittest.main()

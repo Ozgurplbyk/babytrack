@@ -240,6 +240,14 @@
 "health_triage_guidance_red" = "Urgent: seek professional medical support without delay.";
 "vaccine_data_source_format" = "Data source: %@";
 "vaccine_data_source_offline" = "Offline package: local schedule";
+"vaccine_data_source_badge_live" = "Live";
+"vaccine_data_source_badge_cached" = "Cached";
+"vaccine_data_source_badge_review" = "Review";
+"vaccine_data_source_badge_offline" = "Offline";
+"vaccine_data_source_status_live" = "Automatic updates are active.";
+"vaccine_data_source_status_cached" = "Showing the latest cached package.";
+"vaccine_data_source_status_review" = "Source looks older than expected. Review official guidance.";
+"vaccine_data_source_status_offline" = "Showing the local fallback schedule.";
 "vaccine_due_birth" = "Birth";
 "vaccine_due_month_format" = "%d mo";
 "vaccine_due_month_range_format" = "%d-%d mo";
@@ -647,6 +655,7 @@
 "vaccine_data_source_open_link" = "Open source link";
 "vaccine_data_source_updated_format" = "Source updated: %@";
 "vaccine_data_source_published_format" = "Package published: %@";
+"vaccine_data_source_last_sync_format" = "Last sync: %@";
 
 "development_title" = "Leap Weeks and Monthly Development";
 "development_subtitle_format" = "%d weeks • %d months";
@@ -739,3 +748,7 @@
 "forum_admin_report_reason" = "Reason: %@";
 "forum_admin_report_note" = "Note: %@";
 "forum_admin_report_reporter" = "Reporter: %@";
+"vaccine_data_source_alert_review_title" = "Review source freshness";
+"vaccine_data_source_alert_review_body" = "This vaccine package looks older than expected. Compare it with the official source before making important health decisions.";
+"vaccine_data_source_alert_offline_title" = "Offline fallback in use";
+"vaccine_data_source_alert_offline_body" = "The latest country package could not be loaded, so the app is showing the local fallback schedule.";

@@ -45,6 +45,7 @@ jobs:
             tools/compliance/generate_action_board.py \
             tools/content/validate_medical_registry.py \
             tools/content/validate_locale_vaccine_requirements.py \
+            tools/content/validate_vaccine_pipeline_health.py \
             tools/content/validate_vaccine_source_registry.py \
             tools/content/set_medical_review_status.py \
             tools/paywall/validate_paywall_products.py \
@@ -78,6 +79,12 @@ jobs:
 
       - name: Validate Locale Vaccine Coverage
         run: python3 tools/content/validate_locale_vaccine_requirements.py
+
+      - name: Build Vaccine Packages
+        run: python3 backend/vaccine_pipeline/run_update_cycle.py
+
+      - name: Validate Vaccine Pipeline Health
+        run: python3 tools/content/validate_vaccine_pipeline_health.py
 
       - name: Validate Lullaby Rights Registry
         run: python3 tools/audio/validate_rights_registry.py

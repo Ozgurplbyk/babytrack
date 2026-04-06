@@ -1,0 +1,151 @@
+{
+  "meta": {
+    "country": "TR",
+    "version": "2025",
+    "approved_by": "medical_editor_required",
+    "published_at": "2026-04-06T10:38:30.602845+00:00",
+    "signature": "6847bea80f84c3c622bd6852cb5762ea787d93c11b7ad80d1168c1b44ab141ba"
+  },
+  "diff": {
+    "added": [],
+    "removed": [],
+    "changed": [
+      {
+        "before": {
+          "country": "TR",
+          "authority": "T.C. Saglik Bakanligi",
+          "version": "2026.0101",
+          "effective_from": "2026-01-01",
+          "effective_to": null,
+          "vaccine_code": "MMR",
+          "dose_no": 1,
+          "min_age_days": 365,
+          "max_age_days": 730,
+          "min_interval_days": 0,
+          "catch_up_rule": ""
+        },
+        "after": {
+          "country": "TR",
+          "authority": "T.C. Saglik Bakanligi",
+          "version": "2025",
+          "effective_from": null,
+          "effective_to": null,
+          "vaccine_code": "MMR",
+          "dose_no": 1,
+          "min_age_days": 365,
+          "max_age_days": 730,
+          "min_interval_days": 0,
+          "catch_up_rule": ""
+        }
+      },
+      {
+        "before": {
+          "country": "TR",
+          "authority": "T.C. Saglik Bakanligi",
+          "version": "2026.0101",
+          "effective_from": "2026-01-01",
+          "effective_to": null,
+          "vaccine_code": "HB",
+          "dose_no": 1,
+          "min_age_days": 0,
+          "max_age_days": 30,
+          "min_interval_days": 0,
+          "catch_up_rule": ""
+        },
+        "after": {
+          "country": "TR",
+          "authority": "T.C. Saglik Bakanligi",
+          "version": "2025",
+          "effective_from": null,
+          "effective_to": null,
+          "vaccine_code": "HB",
+          "dose_no": 1,
+          "min_age_days": 0,
+          "max_age_days": 30,
+          "min_interval_days": 0,
+          "catch_up_rule": ""
+        }
+      },
+      {
+        "before": {
+          "country": "TR",
+          "authority": "T.C. Saglik Bakanligi",
+          "version": "2026.0101",
+          "effective_from": "2026-01-01",
+          "effective_to": null,
+          "vaccine_code": "DTaP-IPV-Hib-HepB",
+          "dose_no": 1,
+          "min_age_days": 60,
+          "max_age_days": 120,
+          "min_interval_days": 56,
+          "catch_up_rule": ""
+        },
+        "after": {
+          "country": "TR",
+          "authority": "T.C. Saglik Bakanligi",
+          "version": "2025",
+          "effective_from": null,
+          "effective_to": null,
+          "vaccine_code": "DTaP-IPV-Hib-HepB",
+          "dose_no": 1,
+          "min_age_days": 60,
+          "max_age_days": 120,
+          "min_interval_days": 56,
+          "catch_up_rule": ""
+        }
+      }
+    ]
+  },
+  "payload": {
+    "country": "TR",
+    "authority": "T.C. Saglik Bakanligi",
+    "version": "2025",
+    "source": {
+      "name": "T.C. Saglik Bakanligi Asi Takvimi",
+      "url": "https://hsgm.saglik.gov.tr/tr/asi-takvimi",
+      "source_updated_at": "2025-04-02",
+      "retrieved_at": "2026-04-06T10:38:29.981709+00:00"
+    },
+    "records": [
+      {
+        "country": "TR",
+        "authority": "T.C. Saglik Bakanligi",
+        "version": "2025",
+        "effective_from": null,
+        "effective_to": null,
+        "vaccine_code": "HB",
+        "dose_no": 1,
+        "min_age_days": 0,
+        "max_age_days": 30,
+        "min_interval_days": 0,
+        "catch_up_rule": ""
+      },
+      {
+        "country": "TR",
+        "authority": "T.C. Saglik Bakanligi",
+        "version": "2025",
+        "effective_from": null,
+        "effective_to": null,
+        "vaccine_code": "DTaP-IPV-Hib-HepB",
+        "dose_no": 1,
+        "min_age_days": 60,
+        "max_age_days": 120,
+        "min_interval_days": 56,
+        "catch_up_rule": ""
+      },
+      {
+        "country": "TR",
+        "authority": "T.C. Saglik Bakanligi",
+        "version": "2025",
+        "effective_from": null,
+        "effective_to": null,
+        "vaccine_code": "MMR",
+        "dose_no": 1,
+        "min_age_days": 365,
+        "max_age_days": 730,
+        "min_interval_days": 0,
+        "catch_up_rule": ""
+      }
+    ]
+  }
+}

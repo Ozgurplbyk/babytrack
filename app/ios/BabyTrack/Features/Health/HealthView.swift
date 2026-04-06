@@ -1529,6 +1529,7 @@ private struct VaccineScheduleView: View {
     @State private var remoteSourceURL: URL?
     @State private var remoteSourceRegistryUpdatedAt: String?
     @State private var remoteSourcePublishedAt: String?
+    @State private var remoteSourceFetchedAt: Date?
     @State private var isLoadingRemote = false
 
     init(countryCode: String, childId: String, birthDate: Date?) {
@@ -1543,6 +1544,7 @@ private struct VaccineScheduleView: View {
         ScrollView(showsIndicators: false) {
             VStack(spacing: 14) {
                 headerCard
+                sourceAlertCard
 
                 if recommendedSchedule.isEmpty {
                     missingCountryCard
@@ -1581,20 +1583,19 @@ private struct VaccineScheduleView: View {
 
     private var headerCard: some View {
         VStack(alignment: .leading, spacing: 8) {
-            Text(L10n.tr("vaccine_country_schedule_title"))
-                .font(.headline.weight(.bold))
+            HStack(alignment: .top, spacing: 12) {
+                VStack(alignment: .leading, spacing: 4) {
+                    Text(L10n.tr("vaccine_country_schedule_title"))
+                        .font(.headline.weight(.bold))
 
-            Text(String(format: L10n.tr("vaccine_country_schedule_subtitle_format"), countryCode))
-                .font(.subheadline)
-                .foregroundStyle(.secondary)
-            if let remoteSourceLabel {
-                Text(String(format: L10n.tr("vaccine_data_source_format"), remoteSourceLabel))
-                    .font(.caption)
-                    .foregroundStyle(.secondary)
-            } else {
-                Text(L10n.tr("vaccine_data_source_offline"))
-                    .font(.caption)
-                    .foregroundStyle(.secondary)
+                    Text(String(format: L10n.tr("vaccine_country_schedule_subtitle_format"), countryCode))
+                        .font(.subheadline)
+                        .foregroundStyle(.secondary)
+                }
+
+                Spacer()
+
+                sourceStatusBadge
             }
 
             if isLoadingRemote {
@@ -1606,6 +1607,20 @@ private struct VaccineScheduleView: View {
                 }
             }
 
+            Text(sourceStatus.description)
+                .font(.caption)
+                .foregroundStyle(.secondary)
+
+            if let remoteSourceLabel {
+                Label(String(format: L10n.tr("vaccine_data_source_format"), remoteSourceLabel), systemImage: "checklist")
+                    .font(.caption.weight(.semibold))
+                    .foregroundStyle(.primary)
+            } else {
+                Label(L10n.tr("vaccine_data_source_offline"), systemImage: "tray")
+                    .font(.caption.weight(.semibold))
+                    .foregroundStyle(.primary)
+            }
+
             if let remoteSourceURL {
                 Link(destination: remoteSourceURL) {
                     Label(L10n.tr("vaccine_data_source_open_link"), systemImage: "link")
@@ -1615,13 +1630,19 @@ private struct VaccineScheduleView: View {
             }
 
             if let updated = formattedSourceDate(remoteSourceRegistryUpdatedAt) {
-                Text(String(format: L10n.tr("vaccine_data_source_updated_format"), updated))
+                Label(String(format: L10n.tr("vaccine_data_source_updated_format"), updated), systemImage: "calendar.badge.clock")
                     .font(.caption2)
                     .foregroundStyle(.secondary)
             }
 
             if let published = formattedSourceDate(remoteSourcePublishedAt) {
-                Text(String(format: L10n.tr("vaccine_data_source_published_format"), published))
+                Label(String(format: L10n.tr("vaccine_data_source_published_format"), published), systemImage: "shippingbox")
+                    .font(.caption2)
+                    .foregroundStyle(.secondary)
+            }
+
+            if let fetchedAt = formattedDate(remoteSourceFetchedAt) {
+                Label(String(format: L10n.tr("vaccine_data_source_last_sync_format"), fetchedAt), systemImage: "arrow.trianglehead.clockwise")
                     .font(.caption2)
                     .foregroundStyle(.secondary)
             }
@@ -1638,6 +1659,83 @@ private struct VaccineScheduleView: View {
         .overlay(
             RoundedRectangle(cornerRadius: 18, style: .continuous)
                 .strokeBorder(.white.opacity(0.28), lineWidth: 1)
+        )
+    }
+
+    private var sourceStatus: VaccineSourceStatus {
+        guard remoteSourceLabel != nil else { return .offline }
+        guard let referenceDate = parsedSourceDate(remoteSourceRegistryUpdatedAt)
+            ?? parsedSourceDate(remoteSourcePublishedAt)
+            ?? remoteSourceFetchedAt else {
+            return .cached
+        }
+
+        let ageDays = max(Calendar.current.dateComponents([.day], from: referenceDate, to: Date()).day ?? 0, 0)
+        if ageDays <= 14 {
+            return .live
+        }
+        if ageDays <= 60 {
+            return .cached
+        }
+        return .review
+    }
+
+    private var sourceStatusBadge: some View {
+        let status = sourceStatus
+        return Label(L10n.tr(status.badgeKey), systemImage: status.systemImage)
+            .font(.caption.weight(.bold))
+            .padding(.horizontal, 10)
+            .padding(.vertical, 6)
+            .background(status.tint.opacity(0.16), in: Capsule())
+            .foregroundStyle(status.tint)
+    }
+
+    @ViewBuilder
+    private var sourceAlertCard: some View {
+        switch sourceStatus {
+        case .review:
+            sourceMessageCard(
+                title: L10n.tr("vaccine_data_source_alert_review_title"),
+                message: L10n.tr("vaccine_data_source_alert_review_body"),
+                tint: .orange,
+                systemImage: "exclamationmark.triangle.fill"
+            )
+        case .offline:
+            sourceMessageCard(
+                title: L10n.tr("vaccine_data_source_alert_offline_title"),
+                message: L10n.tr("vaccine_data_source_alert_offline_body"),
+                tint: .secondary,
+                systemImage: "wifi.slash"
+            )
+        default:
+            EmptyView()
+        }
+    }
+
+    private func sourceMessageCard(title: String, message: String, tint: Color, systemImage: String) -> some View {
+        VStack(alignment: .leading, spacing: 8) {
+            Label(title, systemImage: systemImage)
+                .font(.subheadline.weight(.bold))
+                .foregroundStyle(tint)
+
+            Text(message)
+                .font(.caption)
+                .foregroundStyle(.secondary)
+
+            if let remoteSourceURL {
+                Link(destination: remoteSourceURL) {
+                    Label(L10n.tr("vaccine_data_source_open_link"), systemImage: "safari")
+                        .font(.caption.weight(.semibold))
+                }
+                .tint(tint)
+            }
+        }
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .padding(14)
+        .background(tint.opacity(0.08), in: RoundedRectangle(cornerRadius: 18, style: .continuous))
+        .overlay(
+            RoundedRectangle(cornerRadius: 18, style: .continuous)
+                .strokeBorder(tint.opacity(0.22), lineWidth: 1)
         )
     }
 
@@ -1814,7 +1912,8 @@ private struct VaccineScheduleView: View {
                         label: "\(cached.authority) v\(cached.version)",
                         sourceURLString: cached.sourceURL ?? latest.sourceUrl,
                         registryUpdatedAt: cached.sourceUpdatedAt ?? latest.sourceUpdatedAt,
-                        publishedAt: cached.publishedAt ?? latest.publishedAt
+                        publishedAt: cached.publishedAt ?? latest.publishedAt,
+                        fetchedAt: cached.fetchedAt
                     )
                     return
                 }
@@ -1832,7 +1931,8 @@ private struct VaccineScheduleView: View {
                     label: "\(payload.authority) v\(payload.version)",
                     sourceURLString: payload.source?.url ?? latestIndexItem?.sourceUrl,
                     registryUpdatedAt: payload.source?.sourceUpdatedAt ?? latestIndexItem?.sourceUpdatedAt,
-                    publishedAt: latestIndexItem?.publishedAt
+                    publishedAt: latestIndexItem?.publishedAt,
+                    fetchedAt: parsedSourceDate(payload.source?.retrievedAt) ?? Date()
                 )
                 VaccinePackageCache.save(
                     countryCode: cc,
@@ -1854,7 +1954,8 @@ private struct VaccineScheduleView: View {
                         label: "\(cached.authority) v\(cached.version)",
                         sourceURLString: cached.sourceURL ?? latestIndexItem?.sourceUrl,
                         registryUpdatedAt: cached.sourceUpdatedAt ?? latestIndexItem?.sourceUpdatedAt,
-                        publishedAt: cached.publishedAt ?? latestIndexItem?.publishedAt
+                        publishedAt: cached.publishedAt ?? latestIndexItem?.publishedAt,
+                        fetchedAt: cached.fetchedAt
                     )
                     return
                 }
@@ -1862,14 +1963,15 @@ private struct VaccineScheduleView: View {
         }
 
         remoteSchedule = []
-        applyRemoteSourceMetadata(label: nil, sourceURLString: nil, registryUpdatedAt: nil, publishedAt: nil)
+        applyRemoteSourceMetadata(label: nil, sourceURLString: nil, registryUpdatedAt: nil, publishedAt: nil, fetchedAt: nil)
     }
 
     private func applyRemoteSourceMetadata(
         label: String?,
         sourceURLString: String?,
         registryUpdatedAt: String?,
-        publishedAt: String?
+        publishedAt: String?,
+        fetchedAt: Date?
     ) {
         remoteSourceLabel = label
         if let sourceURLString,
@@ -1881,16 +1983,27 @@ private struct VaccineScheduleView: View {
         }
         remoteSourceRegistryUpdatedAt = registryUpdatedAt
         remoteSourcePublishedAt = publishedAt
+        remoteSourceFetchedAt = fetchedAt
     }
 
     private func formattedSourceDate(_ raw: String?) -> String? {
+        guard let date = parsedSourceDate(raw) else { return sanitizedSourceDateString(raw) }
+        return date.formatted(date: .abbreviated, time: .shortened)
+    }
+
+    private func formattedDate(_ value: Date?) -> String? {
+        guard let value else { return nil }
+        return value.formatted(date: .abbreviated, time: .shortened)
+    }
+
+    private func parsedSourceDate(_ raw: String?) -> Date? {
         guard let raw else { return nil }
         let trimmed = raw.trimmingCharacters(in: .whitespacesAndNewlines)
         guard !trimmed.isEmpty else { return nil }
 
         let iso = ISO8601DateFormatter()
         if let date = iso.date(from: trimmed) {
-            return date.formatted(date: .abbreviated, time: .shortened)
+            return date
         }
 
         let day = DateFormatter()
@@ -1898,9 +2011,16 @@ private struct VaccineScheduleView: View {
         day.calendar = Calendar(identifier: .gregorian)
         day.dateFormat = "yyyy-MM-dd"
         if let date = day.date(from: trimmed) {
-            return date.formatted(date: .abbreviated, time: .omitted)
+            return date
         }
 
+        return nil
+    }
+
+    private func sanitizedSourceDateString(_ raw: String?) -> String? {
+        guard let raw else { return nil }
+        let trimmed = raw.trimmingCharacters(in: .whitespacesAndNewlines)
+        guard !trimmed.isEmpty else { return nil }
         return trimmed
     }
 
@@ -4028,6 +4148,65 @@ private enum VaccinePackageCache {
 
     private static func storageKey(countryCode: String) -> String {
         "vaccine.remote.cache.\(countryCode.uppercased())"
+    }
+}
+
+private enum VaccineSourceStatus {
+    case live
+    case cached
+    case review
+    case offline
+
+    var badgeKey: String {
+        switch self {
+        case .live:
+            return "vaccine_data_source_badge_live"
+        case .cached:
+            return "vaccine_data_source_badge_cached"
+        case .review:
+            return "vaccine_data_source_badge_review"
+        case .offline:
+            return "vaccine_data_source_badge_offline"
+        }
+    }
+
+    var description: String {
+        switch self {
+        case .live:
+            return L10n.tr("vaccine_data_source_status_live")
+        case .cached:
+            return L10n.tr("vaccine_data_source_status_cached")
+        case .review:
+            return L10n.tr("vaccine_data_source_status_review")
+        case .offline:
+            return L10n.tr("vaccine_data_source_status_offline")
+        }
+    }
+
+    var systemImage: String {
+        switch self {
+        case .live:
+            return "waveform.path.ecg"
+        case .cached:
+            return "clock.badge.checkmark"
+        case .review:
+            return "exclamationmark.triangle"
+        case .offline:
+            return "wifi.slash"
+        }
+    }
+
+    var tint: Color {
+        switch self {
+        case .live:
+            return .green
+        case .cached:
+            return .blue
+        case .review:
+            return .orange
+        case .offline:
+            return .secondary
+        }
     }
 }
 
