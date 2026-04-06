@@ -5,6 +5,7 @@ final class BabyTrackTests: XCTestCase {
     override func tearDown() {
         UserDefaults.standard.removeObject(forKey: "sync_conflicts.pending.v1")
         UserDefaults.standard.removeObject(forKey: "sync_conflicts.backup_events.v1")
+        UserDefaults.standard.removeObject(forKey: VaccinePackageCache.storageKey(countryCode: "tr"))
         super.tearDown()
     }
 
@@ -67,6 +68,95 @@ final class BabyTrackTests: XCTestCase {
             XCTAssertFalse(vaccineCountries.isEmpty, "Expected vaccine coverage for \(language)")
             XCTAssertTrue(vaccineCountries.contains(defaultCountry), "Default country must be covered for \(language)")
             XCTAssertTrue(Set(vaccineCountries).isSubset(of: supportedCountries), "Unexpected country in \(language) coverage")
+        }
+    }
+
+    func testSchoolTravelModeTemplatesStayDistinctAndComplete() {
+        let school = SchoolTravelMode.templateItems(for: .school)
+        let travel = SchoolTravelMode.templateItems(for: .travel)
+
+        XCTAssertEqual(school.count, 4)
+        XCTAssertEqual(travel.count, 4)
+        XCTAssertEqual(Set(school).count, 4)
+        XCTAssertEqual(Set(travel).count, 4)
+        XCTAssertTrue(Set(school).isDisjoint(with: Set(travel)))
+    }
+
+    func testGrowthMetricUnitLabelsRespectUnitProfile() {
+        let metricProfile = UnitProfile(length: .cm, weight: .kg, temperature: .celsius, volume: .ml)
+        let imperialProfile = UnitProfile(length: .inch, weight: .lb, temperature: .fahrenheit, volume: .oz)
+
+        XCTAssertEqual(GrowthMetric.weight.unitLabel(unitProfile: metricProfile), "kg")
+        XCTAssertEqual(GrowthMetric.weight.unitLabel(unitProfile: imperialProfile), "lb")
+        XCTAssertEqual(GrowthMetric.length.unitLabel(unitProfile: metricProfile), "cm")
+        XCTAssertEqual(GrowthMetric.head.unitLabel(unitProfile: imperialProfile), "in")
+    }
+
+    func testHealthGrowthLogicConvertsReferenceRangesForImperialUnits() {
+        let metricProfile = UnitProfile(length: .cm, weight: .kg, temperature: .celsius, volume: .ml)
+        let imperialProfile = UnitProfile(length: .inch, weight: .lb, temperature: .fahrenheit, volume: .oz)
+
+        let metricWeightRange = HealthGrowthLogic.referenceRange(metric: .weight, ageMonth: 2, unitProfile: metricProfile)
+        let imperialWeightRange = HealthGrowthLogic.referenceRange(metric: .weight, ageMonth: 2, unitProfile: imperialProfile)
+        let metricLengthRange = HealthGrowthLogic.referenceRange(metric: .length, ageMonth: 2, unitProfile: metricProfile)
+        let imperialLengthRange = HealthGrowthLogic.referenceRange(metric: .length, ageMonth: 2, unitProfile: imperialProfile)
+
+        XCTAssertEqual(imperialWeightRange.lowerBound, metricWeightRange.lowerBound * 2.20462, accuracy: 0.001)
+        XCTAssertEqual(imperialWeightRange.upperBound, metricWeightRange.upperBound * 2.20462, accuracy: 0.001)
+        XCTAssertEqual(imperialLengthRange.lowerBound, metricLengthRange.lowerBound / 2.54, accuracy: 0.001)
+        XCTAssertEqual(imperialLengthRange.upperBound, metricLengthRange.upperBound / 2.54, accuracy: 0.001)
+    }
+
+    func testHealthGrowthLogicFlagsValuesOutsideReferenceRange() {
+        let profile = UnitProfile(length: .cm, weight: .kg, temperature: .celsius, volume: .ml)
+
+        XCTAssertFalse(HealthGrowthLogic.isOutsideReference(metric: .weight, value: 4.6, ageMonth: 2, unitProfile: profile))
+        XCTAssertTrue(HealthGrowthLogic.isOutsideReference(metric: .weight, value: 7.5, ageMonth: 2, unitProfile: profile))
+        XCTAssertTrue(HealthGrowthLogic.isOutsideReference(metric: .head, value: 50, ageMonth: 1, unitProfile: profile))
+    }
+
+    func testHealthEnumsExposeExpectedStableMetadata() {
+        XCTAssertEqual(HealthTriageLevel.green.icon, "checkmark.shield.fill")
+        XCTAssertEqual(HealthTriageLevel.yellow.titleKey, "health_triage_level_yellow")
+        XCTAssertEqual(HealthTriageLevel.red.guidanceKey, "health_triage_guidance_red")
+        XCTAssertEqual(HealthHistoryMode.recent.rawValue, "recent")
+        XCTAssertEqual(HealthHistoryMode.date.rawValue, "date")
+        XCTAssertEqual(HealthHistoryMode.babyMonth.rawValue, "babyMonth")
+    }
+
+    func testVaccinePackageCacheRoundTripsSavedPayload() {
+        let record = VaccinePackageRecord(
+            vaccineCode: "MMR",
+            doseNo: 1,
+            minAgeDays: 360,
+            maxAgeDays: nil,
+            minIntervalDays: 0,
+            catchUpRule: "standard"
+        )
+
+        VaccinePackageCache.save(
+            countryCode: "tr",
+            authority: "Ministry of Health",
+            version: "2026.04",
+            records: [record],
+            sourceURL: "https://example.gov.tr/vaccine.pdf",
+            sourceUpdatedAt: "2026-04-06",
+            publishedAt: "2026-04-06T10:00:00Z"
+        )
+
+        let cached = VaccinePackageCache.load(countryCode: "TR")
+        XCTAssertNotNil(cached)
+        XCTAssertEqual(cached?.countryCode, "TR")
+        XCTAssertEqual(cached?.authority, "Ministry of Health")
+        XCTAssertEqual(cached?.records.first?.vaccineCode, "MMR")
+        XCTAssertTrue(cached?.isFresh ?? false)
+    }
+
+    func testVaccineScheduleCatalogHasFallbackCoverageForSupportedCountries() {
+        for country in LocaleCountryCatalog.supportedCountryCodes {
+            let schedule = VaccineScheduleCatalog.schedule(for: country)
+            XCTAssertFalse(schedule.isEmpty, "Expected fallback vaccine schedule for \(country)")
+            XCTAssertFalse(schedule.contains(where: { $0.name.isEmpty }))
         }
     }
 

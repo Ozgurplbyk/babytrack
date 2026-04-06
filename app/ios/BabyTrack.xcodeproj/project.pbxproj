@@ -19,6 +19,7 @@
 		1AB6978B79E0854BCBEEB486 /* StoreKitManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4D495DAE7611A97E34BB85B /* StoreKitManager.swift */; };
 		1D5FD7272ABB872CE8442D02 /* CareSessionLiveActivityWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FDAA9EECCB34C0D2DB0C4E1 /* CareSessionLiveActivityWidget.swift */; };
 		215925C5320869E87A5FC9AD /* BackendClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79A441B337A76F194CBE979F /* BackendClient.swift */; };
+		26DFFAADEE5ED7939344948A /* HealthSupport.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66512D3B20C04360D02CAD60 /* HealthSupport.swift */; };
 		287315D9A32FCEE352B3270B /* PaywallModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2F0A8C7C182D536D9FE16FF /* PaywallModels.swift */; };
 		2B3131AF5DC5CA898200D840 /* LullabyModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E671C6AB5B7B7FD3918FCB1 /* LullabyModels.swift */; };
 		2D13966D55C18AB83AA4BC8F /* paywall_offers.json in Resources */ = {isa = PBXBuildFile; fileRef = C3BEB7FB5825D87C14D2B636 /* paywall_offers.json */; };
@@ -172,6 +173,7 @@
 		6045422D31625E2FD56202F4 /* tr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = tr; path = tr.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		62242070BC9A25472DE2A638 /* CountryResolver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountryResolver.swift; sourceTree = "<group>"; };
 		6550481316C96593CDA8C397 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		66512D3B20C04360D02CAD60 /* HealthSupport.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthSupport.swift; sourceTree = "<group>"; };
 		6AA0C9729EA2F8F52FA0D78B /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Localizable.strings; sourceTree = "<group>"; };
 		6CC259A75AD3836521996CA4 /* FirebaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseManager.swift; sourceTree = "<group>"; };
 		6CDFE92BD00CBEE555105A7F /* ar */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ar; path = ar.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -532,6 +534,7 @@
 				D3888D0BA3565AB8819CD3EE /* EventStore.swift */,
 				5D295C46A1550C5A37525AE8 /* ForumModeration.swift */,
 				6D369D4368B9CFC5335FAB64 /* GeneratedImageView.swift */,
+				66512D3B20C04360D02CAD60 /* HealthSupport.swift */,
 				74B6461A689EE292C1A1AD53 /* LiveActivityAttributes.swift */,
 				1C9A911B8080BD3CAFE51DC5 /* LiveActivityManager.swift */,
 				0A200F4C6108F974A4B61226 /* LullabyCatalogService.swift */,
@@ -772,6 +775,7 @@
 				FAC1519281E57E6B77ED40C3 /* FirebaseManager.swift in Sources */,
 				F7A68B99FE2BAE1DD98AFC46 /* ForumModeration.swift in Sources */,
 				A7638CED7FA780B3E9C8D666 /* GeneratedImageView.swift in Sources */,
+				26DFFAADEE5ED7939344948A /* HealthSupport.swift in Sources */,
 				876EA6CEEC217B8AC9F45FD3 /* HealthView.swift in Sources */,
 				6708671FF57F2B3C7FD641E7 /* L10n.swift in Sources */,
 				61005CDF23E113A916475B63 /* LiveActivityAttributes.swift in Sources */,
