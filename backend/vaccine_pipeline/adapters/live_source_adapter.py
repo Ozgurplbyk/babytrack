@@ -398,6 +398,10 @@ class LiveSourceAdapter(BaseAdapter):
             schedule = self._parse_spain_pdf_schedule(text)
             return schedule, version, source_updated
 
+        if self.country_code == "SA":
+            schedule = self._parse_saudi_pdf_schedule(text)
+            return schedule, version, source_updated
+
         if self.country_code == "BR":
             schedule = self._parse_brazil_pdf_schedule(text)
             return schedule, version, source_updated
@@ -552,6 +556,23 @@ class LiveSourceAdapter(BaseAdapter):
         return [
             self._build_schedule_row("Hexavalente", 1, 61, 120, 28),
             self._build_schedule_row("Rotavirus", 1, 61, 150, 28),
+            self._build_schedule_row("MMR", 1, 365, 730, 0),
+        ]
+
+    def _parse_saudi_pdf_schedule(self, text: str) -> list[dict[str, Any]]:
+        low = text.lower()
+        required = ("birth", "2 months", "4 months", "hepb", "bcg", "dtap", "hib", "pcv", "ipv")
+        if not all(token in low for token in required):
+            return []
+
+        return [
+            self._build_schedule_row("HepB", 1, 0, 30, 0),
+            self._build_schedule_row("BCG", 1, 0, 30, 0),
+            self._build_schedule_row("DTaP", 1, 60, 120, 28),
+            self._build_schedule_row("Hib", 1, 60, 120, 28),
+            self._build_schedule_row("PCV", 1, 60, 120, 28),
+            self._build_schedule_row("IPV", 1, 60, 120, 28),
+            self._build_schedule_row("RV", 1, 60, 120, 28),
             self._build_schedule_row("MMR", 1, 365, 730, 0),
         ]
 

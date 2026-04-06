@@ -303,7 +303,7 @@ class LiveSourceAdapterTests(unittest.TestCase):
             """
             Calendario vaccinale del Piano nazionale
             2 mesi compiuti
-            4 mesi compiuti
+            quattro mesi
             10 mesi
             epatite B
             rotavirus
@@ -312,6 +312,32 @@ class LiveSourceAdapterTests(unittest.TestCase):
         )
 
         self.assertEqual([row["vaccine_code"] for row in schedule], ["Hexavalente", "Rotavirus", "MMR"])
+
+    def test_parses_saudi_pdf_text_signals(self) -> None:
+        adapter = LiveSourceAdapter(
+            "SA",
+            "MOH",
+            self.fixture,
+            source_name="MOH",
+            source_url=f"{self.base}/source",
+            source_updated_at="2026-01-01",
+        )
+
+        schedule = adapter._parse_saudi_pdf_schedule(
+            """
+            Birth 2 months 4 months 6 months 12 months
+            BCG
+            HepB
+            RV
+            DTaP
+            Hib
+            PCV
+            IPV
+            MMR
+            """
+        )
+
+        self.assertEqual([row["vaccine_code"] for row in schedule[:4]], ["HepB", "BCG", "DTaP", "Hib"])
 
 
 if __name__ == "__main__":

@@ -113,8 +113,8 @@
       "sourceUrl": "https://www.moh.gov.sa/en/HealthAwareness/EducationalContent/vaccination/Pages/default.aspx",
       "sourceUpdatedAt": "2026-01-01",
       "adapter": "live_source",
-      "scheduleFeedUrl": "https://www.moh.gov.sa/en/HealthAwareness/EducationalContent/vaccination/Pages/default.aspx",
-      "scheduleFeedFormat": "html_table",
+      "scheduleFeedUrl": "https://www.moh.gov.sa/en/healthawareness/educationalcontent/healthtips/documents/immunization-schedule.pdf",
+      "scheduleFeedFormat": "pdf_text",
       "scheduleFeedPath": "",
       "scheduleFieldMap": {},
       "strictLiveRequired": false
