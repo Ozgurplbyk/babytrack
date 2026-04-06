@@ -8,6 +8,7 @@ from html import unescape
 from io import BytesIO
 from pathlib import Path
 from typing import Any
+from urllib.error import HTTPError, URLError
 from urllib.request import Request, urlopen
 
 from .base import BaseAdapter, SourceSnapshot
@@ -122,6 +123,8 @@ class LiveSourceAdapter(BaseAdapter):
         schedule_feed_format: str = "auto",
         schedule_feed_path: str = "",
         schedule_field_map: dict[str, str] | None = None,
+        schedule_feed_fallback_urls: list[str] | None = None,
+        source_fallback_urls: list[str] | None = None,
         timeout_sec: int = 12,
     ):
         self.country_code = country_code
@@ -138,6 +141,8 @@ class LiveSourceAdapter(BaseAdapter):
             for k, v in (schedule_field_map or {}).items()
             if str(k).strip() and str(v).strip()
         }
+        self.schedule_feed_fallback_urls = [str(url).strip() for url in (schedule_feed_fallback_urls or []) if str(url).strip()]
+        self.source_fallback_urls = [str(url).strip() for url in (source_fallback_urls or []) if str(url).strip()]
         self.timeout_sec = max(int(timeout_sec), 3)
 
     def fetch_snapshot(self) -> SourceSnapshot:
@@ -145,7 +150,7 @@ class LiveSourceAdapter(BaseAdapter):
         fixture = self._load_fixture()
 
         live_schedule, live_version, live_source_updated, fallback_reason, live_evidence = self._try_fetch_live_schedule()
-        _, page_source_updated = self._fetch_page_metadata(self.source_url)
+        _, page_source_updated = self._fetch_page_metadata(self.source_url, self.source_fallback_urls)
         if live_schedule and fallback_reason == "fixture_supplemented":
             fetch_mode = "live_overlay"
         elif live_schedule:
@@ -192,9 +197,9 @@ class LiveSourceAdapter(BaseAdapter):
         if not target_url:
             return [], "", "", "missing_feed_url", False
 
-        raw, body, headers = self._fetch_url(target_url)
+        raw, body, headers, fetch_error = self._fetch_first_available_url(target_url, self.schedule_feed_fallback_urls)
         if not raw and not body:
-            return [], "", "", "fetch_failed", False
+            return [], "", "", fetch_error or "fetch_failed", False
 
         schedule: list[dict[str, Any]] = []
         version = ""
@@ -386,17 +391,37 @@ class LiveSourceAdapter(BaseAdapter):
 
         return rows
 
-    def _fetch_page_metadata(self, url: str) -> tuple[str, str]:
-        _, body, headers = self._fetch_url(url)
+    def _fetch_page_metadata(self, url: str, fallback_urls: list[str] | None = None) -> tuple[str, str]:
+        _, body, headers, _ = self._fetch_first_available_url(url, fallback_urls or [])
         source_updated = self._source_updated_from_headers(headers)
         if not source_updated and body:
             source_updated = self._source_updated_from_body(body)
         return body, source_updated
 
-    def _fetch_url(self, url: str) -> tuple[bytes, str, dict[str, str]]:
+    def _fetch_first_available_url(
+        self,
+        primary_url: str,
+        fallback_urls: list[str] | None = None,
+    ) -> tuple[bytes, str, dict[str, str], str]:
+        candidates: list[str] = []
+        for candidate in [primary_url, *(fallback_urls or [])]:
+            normalized = str(candidate).strip()
+            if normalized and normalized not in candidates:
+                candidates.append(normalized)
+
+        last_error = ""
+        for candidate in candidates:
+            raw, body, headers, error = self._fetch_url(candidate)
+            if raw or body:
+                return raw, body, headers, ""
+            if error:
+                last_error = error
+        return b"", "", {}, last_error
+
+    def _fetch_url(self, url: str) -> tuple[bytes, str, dict[str, str], str]:
         normalized = url.strip()
         if not normalized:
-            return b"", "", {}
+            return b"", "", {}, "missing_url"
 
         req = Request(
             normalized,
@@ -412,9 +437,13 @@ class LiveSourceAdapter(BaseAdapter):
                 encoding = response.headers.get_content_charset() or "utf-8"
                 body = raw.decode(encoding, errors="replace")
                 headers = {k: str(v) for k, v in response.headers.items()}
-                return raw, body, headers
-        except Exception:
-            return b"", "", {}
+                return raw, body, headers, ""
+        except HTTPError as exc:
+            return b"", "", {}, f"http_{exc.code}"
+        except URLError as exc:
+            return b"", "", {}, self._classify_fetch_error(exc)
+        except Exception as exc:
+            return b"", "", {}, self._classify_fetch_error(exc)
 
     def _parse_schedule_from_pdf(self, raw: bytes) -> tuple[list[dict[str, Any]], str, str]:
         text = self._extract_pdf_text(raw)
@@ -472,6 +501,18 @@ class LiveSourceAdapter(BaseAdapter):
             "error 400",
         )
         return any(signal in low for signal in signals)
+
+    def _classify_fetch_error(self, exc: Exception) -> str:
+        raw = str(exc).lower()
+        if "timed out" in raw or "timeout" in raw:
+            return "timeout"
+        if "reset by peer" in raw or "errno 54" in raw or "connection reset" in raw:
+            return "connection_reset"
+        if "forbidden" in raw or "http error 403" in raw:
+            return "http_403"
+        if "not found" in raw or "http error 404" in raw:
+            return "http_404"
+        return "fetch_failed"
 
     def _parse_brazil_pdf_schedule(self, text: str) -> list[dict[str, Any]]:
         normalized = re.sub(r"[ \t]+", " ", text.replace("\r", "\n"))

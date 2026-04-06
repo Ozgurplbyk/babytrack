@@ -110,12 +110,23 @@
       "fixture": "sa_schedule.json",
       "sourceName": "MOH Saudi Vaccination Guidance",
       "sourceUrl": "https://www.moh.gov.sa/en/HealthAwareness/EducationalContent/vaccination/Pages/default.aspx",
+      "sourceFallbackUrls": [
+        "https://www.moh.gov.sa/en/HealthAwareness/EducationalContent/Diseases/Infectious/Pages/Immunization.aspx",
+        "https://www.moh.gov.sa/en/healthawareness/educationalcontent/vaccination/pages/vaccination1.aspx",
+        "https://www.moh.gov.sa/en/HealthAwareness/EducationalContent/BabyHealth/Pages/Child-Vaccinations.aspx"
+      ],
       "sourceUpdatedAt": "2026-01-01",
       "adapter": "live_source",
       "scheduleFeedUrl": "https://www.moh.gov.sa/en/healthawareness/educationalcontent/healthtips/documents/immunization-schedule.pdf",
+      "scheduleFeedFallbackUrls": [
+        "https://www.moh.gov.sa/en/AwarenessPlateform/VariousTopics/Documents/Immunization%20%28Vaccines%29%20.pdf",
+        "https://www.moh.gov.sa/en/AwarenessPlateform/ChildsHealth/Documents/Immunization%20%28Vaccines%29%20.pdf",
+        "https://www.moh.gov.sa/en/AwarenessPlateform/ChildsHealth/Vaccination/Documents/Immunization%20%28Vaccines%29%20.pdf"
+      ],
       "scheduleFeedFormat": "pdf_text",
       "scheduleFeedPath": "",
       "scheduleFieldMap": {},
+      "timeoutSec": 8,
       "strictLiveRequired": false
     }
   ]

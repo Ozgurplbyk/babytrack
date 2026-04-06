@@ -115,6 +115,9 @@ def main() -> int:
                 schedule_feed_format=row["scheduleFeedFormat"],
                 schedule_feed_path=row["scheduleFeedPath"],
                 schedule_field_map=row["scheduleFieldMap"],
+                schedule_feed_fallback_urls=row.get("scheduleFeedFallbackUrls", []),
+                source_fallback_urls=row.get("sourceFallbackUrls", []),
+                timeout_sec=int(row.get("timeoutSec", 12) or 12),
             )
         else:
             adapter = LocalFixtureAdapter(

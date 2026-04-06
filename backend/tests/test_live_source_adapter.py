@@ -225,6 +225,39 @@ class LiveSourceAdapterTests(unittest.TestCase):
         self.assertEqual(snapshot.payload["schedule"][0]["dose_no"], 1)
         self.assertEqual(snapshot.payload["schedule"][0]["min_age_days"], 360)
 
+    def test_uses_fallback_feed_url_when_primary_unavailable(self) -> None:
+        _Handler.responses = {
+            "/source": (200, "<html>Updated 2026-03-08</html>", {}),
+            "/fallback.html": (
+                200,
+                """
+                <html><body>
+                  <table>
+                    <tr><th>Vaccine</th><th>Dose</th><th>Age</th></tr>
+                    <tr><td>MMR</td><td>Dose 1</td><td>12 months</td></tr>
+                  </table>
+                </body></html>
+                """,
+                {},
+            ),
+        }
+
+        adapter = LiveSourceAdapter(
+            "GB",
+            "NHS",
+            self.fixture,
+            source_name="NHS",
+            source_url=f"{self.base}/source",
+            source_updated_at="",
+            schedule_feed_url=f"{self.base}/missing.html",
+            schedule_feed_fallback_urls=[f"{self.base}/fallback.html"],
+            schedule_feed_format="html",
+        )
+        snapshot = adapter.fetch_snapshot()
+
+        self.assertEqual(snapshot.fetch_mode, "live")
+        self.assertEqual(snapshot.payload["schedule"][0]["vaccine_code"], "MMR")
+
     def test_parses_turkey_pdf_text_signals(self) -> None:
         adapter = LiveSourceAdapter(
             "TR",
@@ -396,6 +429,19 @@ class LiveSourceAdapterTests(unittest.TestCase):
         self.assertGreaterEqual(len(snapshot.payload["schedule"]), 5)
         self.assertIn("MenACWY", [row["vaccine_code"] for row in snapshot.payload["schedule"]])
         self.assertEqual(snapshot.source_updated_at, "2025-05-28")
+
+    def test_classifies_connection_reset_fetch_error(self) -> None:
+        adapter = LiveSourceAdapter(
+            "SA",
+            "MOH",
+            self.fixture,
+            source_name="MOH",
+            source_url=f"{self.base}/source",
+            source_updated_at="2026-01-01",
+        )
+
+        classified = adapter._classify_fetch_error(OSError(54, "Connection reset by peer"))
+        self.assertEqual(classified, "connection_reset")
 
 
 if __name__ == "__main__":
