@@ -796,3 +796,10 @@
 "forum_admin_report_created" = "Bildirim: %@";
 "forum_admin_report_resolved" = "Sonuclandi: %@";
 "forum_admin_report_resolved_by" = "Inceleyen: %@";
+"forum_action_history" = "Gecmisi gor";
+"forum_history_title" = "Gonderi gecmisi";
+"forum_history_current" = "Guncel";
+"forum_history_previous" = "Onceki";
+"forum_history_posted" = "Paylasim: %@";
+"forum_history_empty" = "Bu gonderi icin henuz gecmis yok.";
+"forum_error_history" = "Gonderi gecmisi yuklenemedi.";

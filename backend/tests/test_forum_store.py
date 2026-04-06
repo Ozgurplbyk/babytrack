@@ -342,6 +342,63 @@ class ForumStoreTests(unittest.TestCase):
         )
         self.assertEqual(saved_after, [])
 
+    def test_post_history_includes_current_and_previous_versions(self) -> None:
+        post = self.store.create_post(
+            user_id="u1",
+            author_name="Parent A",
+            title="Original title",
+            body="Original body for revision history.",
+            country_code="TR",
+            child_id="child-a",
+            tags=["sleep"],
+        )
+
+        self.store.update_post(
+            post_id=post["id"],
+            user_id="u1",
+            title="Updated title",
+            body="First revision body.",
+            tags=["sleep", "routine"],
+        )
+        self.store.update_post(
+            post_id=post["id"],
+            user_id="u1",
+            title="Updated title 2",
+            body="Second revision body.",
+            tags=["routine"],
+        )
+
+        history = self.store.list_post_history(post_id=post["id"], user_id="u1")
+        self.assertEqual(len(history), 3)
+        self.assertTrue(history[0]["isCurrent"])
+        self.assertEqual(history[0]["title"], "Updated title 2")
+        self.assertEqual(history[1]["title"], "Updated title")
+        self.assertFalse(history[1]["isCurrent"])
+        self.assertEqual(history[2]["title"], "Original title")
+        self.assertEqual(history[2]["body"], "Original body for revision history.")
+
+    def test_post_history_forbidden_for_non_owner(self) -> None:
+        post = self.store.create_post(
+            user_id="u1",
+            author_name="Parent A",
+            title="Original title",
+            body="Original body for revision history.",
+            country_code="TR",
+            child_id="child-a",
+            tags=["sleep"],
+        )
+        self.store.update_post(
+            post_id=post["id"],
+            user_id="u1",
+            title="Updated title",
+            body="Updated body.",
+            tags=["routine"],
+        )
+
+        with self.assertRaises(ValueError) as context:
+            self.store.list_post_history(post_id=post["id"], user_id="u2")
+        self.assertEqual(str(context.exception), "forbidden")
+
 
 if __name__ == "__main__":
     unittest.main()

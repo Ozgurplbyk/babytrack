@@ -431,6 +431,20 @@ def forum_post_update(
     return {"post": post}
 
 
+@app.get("/v1/forum/posts/{post_id}/history", dependencies=[Depends(_enforce_rate_limit)])
+def forum_post_history(post_id: str, user: dict[str, Any] = Depends(_require_user)) -> dict[str, Any]:
+    try:
+        history = FORUM_STORE.list_post_history(post_id=post_id, user_id=user["id"])
+    except ValueError as exc:
+        reason = str(exc)
+        if reason == "post_not_found":
+            raise HTTPException(status_code=404, detail=reason) from exc
+        if reason == "forbidden":
+            raise HTTPException(status_code=403, detail=reason) from exc
+        raise HTTPException(status_code=400, detail=reason) from exc
+    return {"history": history}
+
+
 @app.get("/v1/forum/posts/{post_id}/comments", dependencies=[Depends(_enforce_rate_limit)])
 def forum_comments(post_id: str, limit: int = 80, user: dict[str, Any] = Depends(_require_user)) -> dict[str, Any]:
     _ = user

@@ -793,3 +793,10 @@
 "forum_admin_report_created" = "Gemeldet: %@";
 "forum_admin_report_resolved" = "Bearbeitet: %@";
 "forum_admin_report_resolved_by" = "Gepruft von: %@";
+"forum_action_history" = "Verlauf ansehen";
+"forum_history_title" = "Beitragsverlauf";
+"forum_history_current" = "Aktuell";
+"forum_history_previous" = "Vorher";
+"forum_history_posted" = "Veröffentlicht: %@";
+"forum_history_empty" = "Fuer diesen Beitrag ist noch kein Verlauf verfuegbar.";
+"forum_error_history" = "Beitragsverlauf konnte nicht geladen werden.";

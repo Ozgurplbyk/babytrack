@@ -228,6 +228,25 @@ class Handler(BaseHTTPRequestHandler):
             comments = FORUM_STORE.list_comments(post_id=post_id, limit=limit)
             return self._send(200, {"comments": comments})
 
+        if path.startswith("/v1/forum/posts/") and path.endswith("/history"):
+            user = self._user_from_token()
+            if not user:
+                return self._send(401, {"error": "user_session_required"})
+            parts = path.strip("/").split("/")
+            if len(parts) < 5:
+                return self._send(404, {"error": "not_found"})
+            post_id = parts[3]
+            try:
+                history = FORUM_STORE.list_post_history(post_id=post_id, user_id=user["id"])
+            except ValueError as exc:
+                reason = str(exc)
+                if reason == "post_not_found":
+                    return self._send(404, {"error": reason})
+                if reason == "forbidden":
+                    return self._send(403, {"error": reason})
+                return self._send(400, {"error": reason})
+            return self._send(200, {"history": history})
+
         if path == "/v1/forum/admin/reports":
             user = self._user_from_token()
             if not user:

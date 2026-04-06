@@ -793,3 +793,10 @@
 "forum_admin_report_created" = "Segnalato: %@";
 "forum_admin_report_resolved" = "Risolto: %@";
 "forum_admin_report_resolved_by" = "Revisionato da: %@";
+"forum_action_history" = "Vedi cronologia";
+"forum_history_title" = "Cronologia del post";
+"forum_history_current" = "Attuale";
+"forum_history_previous" = "Precedente";
+"forum_history_posted" = "Pubblicato: %@";
+"forum_history_empty" = "Non c e ancora cronologia per questo post.";
+"forum_error_history" = "Impossibile caricare la cronologia del post.";

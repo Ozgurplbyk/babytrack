@@ -333,6 +333,14 @@ final class BackendClient {
         return try JSONDecoder().decode(ForumPostEnvelope.self, from: data)
     }
 
+    func fetchForumPostHistory(postId: String, userToken: String) async throws -> ForumPostHistoryEnvelope {
+        guard let url = baseURL?.appending(path: "/v1/forum/posts/\(postId)/history") else { throw BackendError.invalidURL }
+        let req = userAuthorizedRequest(url: url, userToken: userToken)
+        let (data, response) = try await URLSession.shared.data(for: req)
+        try validate(response)
+        return try JSONDecoder().decode(ForumPostHistoryEnvelope.self, from: data)
+    }
+
     func fetchForumComments(postId: String, userToken: String, limit: Int = 80) async throws -> ForumCommentsEnvelope {
         guard let url = baseURL?.appending(path: "/v1/forum/posts/\(postId)/comments"),
               var components = URLComponents(url: url, resolvingAgainstBaseURL: false) else {
@@ -589,6 +597,18 @@ struct ForumPostPayload: Codable, Identifiable {
     let viewerBookmarked: Bool
 }
 
+struct ForumPostHistoryItemPayload: Codable, Identifiable {
+    let id: String
+    let postId: String
+    let title: String
+    let body: String
+    let tags: [String]
+    let createdAt: String
+    let updatedAt: String
+    let recordedAt: String
+    let isCurrent: Bool
+}
+
 struct ForumCommentPayload: Codable, Identifiable {
     let id: String
     let postId: String
@@ -647,6 +667,10 @@ struct ForumReportEnvelope: Codable {
 
 struct ForumAdminReportsEnvelope: Codable {
     let reports: [ForumReportPayload]
+}
+
+struct ForumPostHistoryEnvelope: Codable {
+    let history: [ForumPostHistoryItemPayload]
 }
 
 private struct ForumPostCreatePayload: Encodable {

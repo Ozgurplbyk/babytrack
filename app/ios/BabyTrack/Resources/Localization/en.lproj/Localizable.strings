@@ -796,3 +796,10 @@
 "forum_admin_report_created" = "Reported: %@";
 "forum_admin_report_resolved" = "Resolved: %@";
 "forum_admin_report_resolved_by" = "Reviewed by: %@";
+"forum_action_history" = "View history";
+"forum_history_title" = "Post history";
+"forum_history_current" = "Current";
+"forum_history_previous" = "Previous";
+"forum_history_posted" = "Posted: %@";
+"forum_history_empty" = "No history available for this post yet.";
+"forum_error_history" = "Post history could not be loaded.";

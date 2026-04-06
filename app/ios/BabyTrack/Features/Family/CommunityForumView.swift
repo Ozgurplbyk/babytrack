@@ -14,6 +14,7 @@ struct CommunityForumView: View {
     @State private var tagsText = ""
     @State private var errorText = ""
     @State private var selectedPost: ForumPostPayload?
+    @State private var historyPost: ForumPostPayload?
     @State private var editingPost: ForumPostPayload?
     @State private var pendingDeletePost: ForumPostPayload?
     @State private var busyActionPostId: String?
@@ -88,6 +89,11 @@ struct CommunityForumView: View {
                     .environmentObject(authManager)
             } onDismiss: {
                 Task { await refresh() }
+            }
+            .sheet(item: $historyPost) { post in
+                if let token = authManager.sessionToken {
+                    ForumPostHistorySheet(post: post, userToken: token)
+                }
             }
             .sheet(isPresented: $showAdminPanel) {
                 if let token = authManager.sessionToken {
@@ -334,6 +340,14 @@ struct CommunityForumView: View {
 
                 Menu {
                     if authManager.user?.id == post.authorUserId {
+                        if post.updatedAt != post.createdAt {
+                            Button {
+                                historyPost = post
+                            } label: {
+                                Label(L10n.tr("forum_action_history"), systemImage: "clock.arrow.circlepath")
+                            }
+                        }
+
                         Button {
                             beginEditing(post)
                         } label: {
@@ -1064,6 +1078,120 @@ private struct ForumAdminModerationSheet: View {
         default:
             return .accentColor
         }
+    }
+}
+
+private struct ForumPostHistorySheet: View {
+    let post: ForumPostPayload
+    let userToken: String
+
+    @Environment(\.dismiss) private var dismiss
+
+    @State private var history: [ForumPostHistoryItemPayload] = []
+    @State private var loading = false
+    @State private var errorText = ""
+
+    var body: some View {
+        NavigationStack {
+            VStack(spacing: 12) {
+                if loading {
+                    ProgressView()
+                        .padding(.top, 12)
+                }
+
+                if history.isEmpty, !loading {
+                    Text(L10n.tr("forum_history_empty"))
+                        .font(.subheadline)
+                        .foregroundStyle(.secondary)
+                        .padding(.top, 24)
+                } else {
+                    List(history) { item in
+                        VStack(alignment: .leading, spacing: 8) {
+                            HStack {
+                                Text(item.isCurrent ? L10n.tr("forum_history_current") : L10n.tr("forum_history_previous"))
+                                    .font(.caption.weight(.bold))
+                                    .padding(.horizontal, 8)
+                                    .padding(.vertical, 4)
+                                    .background((item.isCurrent ? Color.accentColor : Color.secondary).opacity(0.15), in: Capsule())
+                                    .foregroundStyle(item.isCurrent ? Color.accentColor : Color.secondary)
+                                Spacer()
+                                Text(formatIsoDate(item.updatedAt))
+                                    .font(.caption2)
+                                    .foregroundStyle(.secondary)
+                            }
+
+                            Text(item.title)
+                                .font(.subheadline.weight(.bold))
+
+                            Text(item.body)
+                                .font(.subheadline)
+                                .lineLimit(nil)
+
+                            if !item.tags.isEmpty {
+                                HStack(spacing: 6) {
+                                    ForEach(item.tags, id: \.self) { tag in
+                                        Text("#\(tag)")
+                                            .font(.caption.weight(.semibold))
+                                            .padding(.horizontal, 8)
+                                            .padding(.vertical, 4)
+                                            .background(Color.accentColor.opacity(0.12), in: Capsule())
+                                            .foregroundStyle(Color.accentColor)
+                                    }
+                                }
+                            }
+
+                            Text(String(format: L10n.tr("forum_history_posted"), formatIsoDate(item.createdAt)))
+                                .font(.caption2)
+                                .foregroundStyle(.secondary)
+                        }
+                        .padding(.vertical, 6)
+                    }
+                    .listStyle(.plain)
+                }
+            }
+            .navigationTitle(L10n.tr("forum_history_title"))
+            .navigationBarTitleDisplayMode(.inline)
+            .toolbar {
+                ToolbarItem(placement: .topBarLeading) {
+                    Button(L10n.tr("common_done")) { dismiss() }
+                }
+                ToolbarItem(placement: .topBarTrailing) {
+                    Button {
+                        Task { await refresh() }
+                    } label: {
+                        Image(systemName: "arrow.clockwise")
+                    }
+                    .disabled(loading)
+                }
+            }
+            .onAppear {
+                Task { await refresh() }
+            }
+            .alert(L10n.tr("forum_error_title"), isPresented: Binding(
+                get: { !errorText.isEmpty },
+                set: { if !$0 { errorText = "" } }
+            )) {
+                Button(L10n.tr("common_ok"), role: .cancel) {}
+            } message: {
+                Text(errorText)
+            }
+        }
+    }
+
+    private func refresh() async {
+        loading = true
+        defer { loading = false }
+        do {
+            let envelope = try await BackendClient.shared.fetchForumPostHistory(postId: post.id, userToken: userToken)
+            history = envelope.history
+        } catch {
+            errorText = L10n.tr("forum_error_history")
+        }
+    }
+
+    private func formatIsoDate(_ value: String) -> String {
+        guard let parsed = ForumDateParser.parse(value) else { return value }
+        return parsed.formatted(date: .abbreviated, time: .shortened)
     }
 }
 

@@ -793,3 +793,10 @@
 "forum_admin_report_created" = "Reportado: %@";
 "forum_admin_report_resolved" = "Resuelto: %@";
 "forum_admin_report_resolved_by" = "Revisado por: %@";
+"forum_action_history" = "Ver historial";
+"forum_history_title" = "Historial de la publicacion";
+"forum_history_current" = "Actual";
+"forum_history_previous" = "Anterior";
+"forum_history_posted" = "Publicado: %@";
+"forum_history_empty" = "Aun no hay historial para esta publicacion.";
+"forum_error_history" = "No se pudo cargar el historial de la publicacion.";

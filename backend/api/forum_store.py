@@ -123,12 +123,27 @@ class ForumStore:
                 );
                 """
             )
+            conn.execute(
+                """
+                CREATE TABLE IF NOT EXISTS forum_post_revisions (
+                    id TEXT PRIMARY KEY,
+                    post_id TEXT NOT NULL,
+                    title TEXT NOT NULL,
+                    body TEXT NOT NULL,
+                    tags_json TEXT NOT NULL,
+                    post_created_at TEXT NOT NULL,
+                    post_updated_at TEXT NOT NULL,
+                    recorded_at TEXT NOT NULL
+                );
+                """
+            )
 
             conn.execute("CREATE INDEX IF NOT EXISTS idx_forum_posts_created ON forum_posts(created_at DESC);")
             conn.execute("CREATE INDEX IF NOT EXISTS idx_forum_posts_country ON forum_posts(country_code, created_at DESC);")
             conn.execute("CREATE INDEX IF NOT EXISTS idx_forum_comments_post ON forum_comments(post_id, created_at ASC);")
             conn.execute("CREATE INDEX IF NOT EXISTS idx_forum_reactions_post ON forum_reactions(post_id);")
             conn.execute("CREATE INDEX IF NOT EXISTS idx_forum_reports_status ON forum_reports(status, created_at DESC);")
+            conn.execute("CREATE INDEX IF NOT EXISTS idx_forum_revisions_post ON forum_post_revisions(post_id, post_updated_at DESC);")
 
     @staticmethod
     def _now_iso() -> str:
@@ -204,6 +219,27 @@ class ForumStore:
             "postAuthorName": row["post_author_name"] if "post_author_name" in row.keys() else None,
             "postCreatedAt": row["post_created_at"] if "post_created_at" in row.keys() else None,
             "postUpdatedAt": row["post_updated_at"] if "post_updated_at" in row.keys() else None,
+        }
+
+    @staticmethod
+    def _revision_payload(row: sqlite3.Row, *, is_current: bool) -> dict[str, Any]:
+        try:
+            tags = json.loads(str(row["tags_json"]))
+            if not isinstance(tags, list):
+                tags = []
+        except (TypeError, ValueError, json.JSONDecodeError):
+            tags = []
+
+        return {
+            "id": row["id"],
+            "postId": row["post_id"],
+            "title": row["title"],
+            "body": row["body"],
+            "tags": tags,
+            "createdAt": row["post_created_at"],
+            "updatedAt": row["post_updated_at"],
+            "recordedAt": row["recorded_at"],
+            "isCurrent": is_current,
         }
 
     def _contains_blocked_terms(self, text: str) -> bool:
@@ -393,16 +429,71 @@ class ForumStore:
 
         now = self._now_iso()
         tag_values = self._normalize_tags(tags)
+        tags_json = json.dumps(tag_values, ensure_ascii=False)
 
         with self._lock, self._connect() as conn:
             row = conn.execute(
-                "SELECT author_user_id FROM forum_posts WHERE id = ?;",
+                """
+                SELECT author_user_id, title, body, tags_json, created_at, updated_at
+                FROM forum_posts
+                WHERE id = ?;
+                """,
                 (scoped_post_id,),
             ).fetchone()
             if not row:
                 raise ValueError("post_not_found")
             if row["author_user_id"] != user_id:
                 raise ValueError("forbidden")
+
+            if (
+                row["title"] == normalized_title
+                and row["body"] == normalized_body
+                and str(row["tags_json"]) == tags_json
+            ):
+                payload = conn.execute(
+                    """
+                    SELECT
+                        p.*,
+                        (SELECT COUNT(*) FROM forum_comments c WHERE c.post_id = p.id) AS comment_count,
+                        (SELECT COUNT(*) FROM forum_reactions r WHERE r.post_id = p.id) AS reaction_count,
+                        (SELECT reaction FROM forum_reactions vr WHERE vr.post_id = p.id AND vr.user_id = ? LIMIT 1) AS viewer_reaction,
+                        EXISTS(
+                            SELECT 1 FROM forum_post_bookmarks fb
+                            WHERE fb.post_id = p.id AND fb.user_id = ?
+                        ) AS viewer_bookmarked
+                    FROM forum_posts p
+                    WHERE p.id = ?;
+                    """,
+                    (user_id, user_id, scoped_post_id),
+                ).fetchone()
+                assert payload is not None
+                return self._post_payload(payload)
+
+            conn.execute(
+                """
+                INSERT INTO forum_post_revisions (
+                    id,
+                    post_id,
+                    title,
+                    body,
+                    tags_json,
+                    post_created_at,
+                    post_updated_at,
+                    recorded_at
+                )
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?);
+                """,
+                (
+                    str(uuid.uuid4()),
+                    scoped_post_id,
+                    row["title"],
+                    row["body"],
+                    row["tags_json"],
+                    row["created_at"],
+                    row["updated_at"],
+                    now,
+                ),
+            )
 
             conn.execute(
                 """
@@ -413,7 +504,7 @@ class ForumStore:
                 (
                     normalized_title,
                     normalized_body,
-                    json.dumps(tag_values, ensure_ascii=False),
+                    tags_json,
                     now,
                     scoped_post_id,
                 ),
@@ -454,8 +545,56 @@ class ForumStore:
             conn.execute("DELETE FROM forum_reports WHERE post_id = ?;", (scoped_post_id,))
             conn.execute("DELETE FROM forum_post_mutes WHERE post_id = ?;", (scoped_post_id,))
             conn.execute("DELETE FROM forum_post_bookmarks WHERE post_id = ?;", (scoped_post_id,))
+            conn.execute("DELETE FROM forum_post_revisions WHERE post_id = ?;", (scoped_post_id,))
             conn.execute("DELETE FROM forum_posts WHERE id = ?;", (scoped_post_id,))
             return True
+
+    def list_post_history(self, *, post_id: str, user_id: str) -> list[dict[str, Any]]:
+        scoped_post_id = post_id.strip()
+        with self._lock, self._connect() as conn:
+            post = conn.execute(
+                """
+                SELECT
+                    id,
+                    id AS post_id,
+                    author_user_id,
+                    title,
+                    body,
+                    tags_json,
+                    created_at AS post_created_at,
+                    updated_at AS post_updated_at,
+                    updated_at AS recorded_at
+                FROM forum_posts
+                WHERE id = ?;
+                """,
+                (scoped_post_id,),
+            ).fetchone()
+            if not post:
+                raise ValueError("post_not_found")
+            if post["author_user_id"] != user_id:
+                raise ValueError("forbidden")
+
+            revisions = conn.execute(
+                """
+                SELECT
+                    id,
+                    post_id,
+                    title,
+                    body,
+                    tags_json,
+                    post_created_at,
+                    post_updated_at,
+                    recorded_at
+                FROM forum_post_revisions
+                WHERE post_id = ?
+                ORDER BY post_updated_at DESC, recorded_at DESC;
+                """,
+                (scoped_post_id,),
+            ).fetchall()
+
+            items = [self._revision_payload(post, is_current=True)]
+            items.extend(self._revision_payload(row, is_current=False) for row in revisions)
+            return items
 
     def list_comments(self, post_id: str, limit: int = 80) -> list[dict[str, Any]]:
         scoped_limit = min(max(int(limit), 1), 300)

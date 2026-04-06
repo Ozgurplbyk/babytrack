@@ -793,3 +793,10 @@
 "forum_admin_report_created" = "Signale : %@";
 "forum_admin_report_resolved" = "Traite : %@";
 "forum_admin_report_resolved_by" = "Examine par : %@";
+"forum_action_history" = "Voir l historique";
+"forum_history_title" = "Historique de la publication";
+"forum_history_current" = "Actuelle";
+"forum_history_previous" = "Precedente";
+"forum_history_posted" = "Publication : %@";
+"forum_history_empty" = "Aucun historique n est disponible pour cette publication.";
+"forum_error_history" = "Impossible de charger l historique de la publication.";

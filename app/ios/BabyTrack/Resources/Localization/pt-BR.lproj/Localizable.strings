@@ -793,3 +793,10 @@
 "forum_admin_report_created" = "Denunciado: %@";
 "forum_admin_report_resolved" = "Resolvido: %@";
 "forum_admin_report_resolved_by" = "Revisado por: %@";
+"forum_action_history" = "Ver historico";
+"forum_history_title" = "Historico da publicacao";
+"forum_history_current" = "Atual";
+"forum_history_previous" = "Anterior";
+"forum_history_posted" = "Publicado: %@";
+"forum_history_empty" = "Ainda nao ha historico para esta publicacao.";
+"forum_error_history" = "Nao foi possivel carregar o historico da publicacao.";
