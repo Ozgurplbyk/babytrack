@@ -443,6 +443,50 @@ class LiveSourceAdapterTests(unittest.TestCase):
         classified = adapter._classify_fetch_error(OSError(54, "Connection reset by peer"))
         self.assertEqual(classified, "connection_reset")
 
+    def test_prefers_newer_page_metadata_for_source_updated_at(self) -> None:
+        _Handler.responses = {
+            "/source": (
+                200,
+                "<html>Updated 2026-04-06</html>",
+                {"Last-Modified": "Mon, 06 Apr 2026 12:00:00 GMT"},
+            ),
+            "/feed.json": (
+                200,
+                json.dumps(
+                    {
+                        "version": "2025",
+                        "sourceUpdatedAt": "2025-04-02",
+                        "schedule": [
+                            {
+                                "vaccine_code": "DTaP",
+                                "dose_no": 1,
+                                "min_age_days": 42,
+                                "max_age_days": 120,
+                                "min_interval_days": 28,
+                                "effective_from": "2025-01-01",
+                                "effective_to": None,
+                            }
+                        ],
+                    }
+                ),
+                {},
+            ),
+        }
+
+        adapter = LiveSourceAdapter(
+            "TR",
+            "MOH",
+            self.fixture,
+            source_name="MOH",
+            source_url=f"{self.base}/source",
+            source_updated_at="2026-01-01",
+            schedule_feed_url=f"{self.base}/feed.json",
+        )
+        snapshot = adapter.fetch_snapshot()
+
+        self.assertEqual(snapshot.version, "2025")
+        self.assertEqual(snapshot.source_updated_at, "2026-04-06")
+
 
 if __name__ == "__main__":
     unittest.main()

@@ -257,6 +257,54 @@ class VaccinePipelineHealthTests(unittest.TestCase):
         self.assertEqual(errors, [])
         self.assertTrue(any("warn-only override" in item for item in warnings))
 
+    def test_uses_country_specific_warn_source_threshold(self) -> None:
+        now = datetime.now(timezone.utc)
+        self.registry.write_text(
+            json.dumps(
+                {
+                    "countries": [
+                        {
+                            "countryCode": "TR",
+                            "adapter": "live_source",
+                            "warnSourceAgeDays": 400,
+                        }
+                    ]
+                }
+            ),
+            encoding="utf-8",
+        )
+        self.state.write_text(
+            json.dumps(
+                {
+                    "TR": {
+                        "fetchMode": "live",
+                        "fallbackReason": "",
+                        "liveRecordCount": 2,
+                        "recordCount": 2,
+                        "retrievedAt": (now - timedelta(hours=1)).isoformat(),
+                        "sourceUpdatedAt": (now - timedelta(days=300)).date().isoformat(),
+                        "publishedFile": "TR_2026.0404.json",
+                    }
+                }
+            ),
+            encoding="utf-8",
+        )
+        (self.out_dir / "TR_2026.0404.json").write_text(
+            json.dumps({"payload": {"records": [{"id": 1}]}}),
+            encoding="utf-8",
+        )
+
+        errors, warnings = validate_health(
+            registry_path=self.registry,
+            state_path=self.state,
+            out_dir=self.out_dir,
+            max_retrieved_age_hours=48,
+            warn_source_age_days=180,
+        )
+
+        self.assertEqual(errors, [])
+        self.assertEqual(warnings, [])
+
 
 if __name__ == "__main__":
     unittest.main()

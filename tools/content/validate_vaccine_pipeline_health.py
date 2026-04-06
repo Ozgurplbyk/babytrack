@@ -102,14 +102,15 @@ def validate_health(
                     f"[{country_code}] source state is stale: retrieved {age_hours:.1f}h ago (limit {max_retrieved_age_hours}h)"
                 )
 
+        country_warn_source_age_days = int(row.get("warnSourceAgeDays", warn_source_age_days) or warn_source_age_days)
         source_updated_at = _parse_datetime(str(state_row.get("sourceUpdatedAt", "")))
         if source_updated_at is None:
             warnings.append(f"[{country_code}] sourceUpdatedAt missing or unparseable")
         else:
             age_days = (now - source_updated_at).total_seconds() / 86400
-            if age_days > warn_source_age_days:
+            if age_days > country_warn_source_age_days:
                 warnings.append(
-                    f"[{country_code}] official source metadata is {age_days:.0f} days old (warn threshold {warn_source_age_days})"
+                    f"[{country_code}] official source metadata is {age_days:.0f} days old (warn threshold {country_warn_source_age_days})"
                 )
 
         record_count = int(state_row.get("recordCount", 0) or 0)

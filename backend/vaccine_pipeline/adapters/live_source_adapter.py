@@ -151,6 +151,7 @@ class LiveSourceAdapter(BaseAdapter):
 
         live_schedule, live_version, live_source_updated, fallback_reason, live_evidence = self._try_fetch_live_schedule()
         _, page_source_updated = self._fetch_page_metadata(self.source_url, self.source_fallback_urls)
+        selected_source_updated = self._latest_source_updated(live_source_updated, page_source_updated) or self.source_updated_at
         if live_schedule and fallback_reason == "fixture_supplemented":
             fetch_mode = "live_overlay"
         elif live_schedule:
@@ -164,7 +165,7 @@ class LiveSourceAdapter(BaseAdapter):
         selected_version = self._resolve_version(
             live_version=live_version,
             fixture_version=str(fixture.get("version", "unknown")),
-            source_updated=live_source_updated or page_source_updated or self.source_updated_at,
+            source_updated=live_source_updated or self.source_updated_at,
         )
 
         return SourceSnapshot(
@@ -177,7 +178,7 @@ class LiveSourceAdapter(BaseAdapter):
             },
             source_name=self.source_name,
             source_url=self.source_url,
-            source_updated_at=live_source_updated or page_source_updated or self.source_updated_at,
+            source_updated_at=selected_source_updated,
             retrieved_at=retrieved_at,
             fetch_mode=fetch_mode,
             fallback_reason="" if fetch_mode == "live" else fallback_reason,
@@ -760,6 +761,22 @@ class LiveSourceAdapter(BaseAdapter):
 
         return sorted(normalized)[-1]
 
+    def _latest_source_updated(self, *values: str) -> str:
+        normalized = [str(value).strip() for value in values if str(value).strip()]
+        if not normalized:
+            return ""
+
+        dated: list[tuple[str, datetime]] = []
+        for value in normalized:
+            parsed = self._parse_iso_date(value)
+            if parsed is not None:
+                dated.append((value, parsed))
+
+        if not dated:
+            return normalized[0]
+
+        return max(dated, key=lambda item: item[1])[0]
+
     def _parse_age_window(self, raw: str) -> tuple[int | None, int | None]:
         text = self._normalize_age_text(raw)
         if not text:
@@ -902,6 +919,16 @@ class LiveSourceAdapter(BaseAdapter):
                     return candidate
 
         return fixture_version or "unknown"
+
+    @staticmethod
+    def _parse_iso_date(value: str) -> datetime | None:
+        raw = str(value or "").strip()
+        if not raw:
+            return None
+        try:
+            return datetime.fromisoformat(f"{raw}T00:00:00+00:00")
+        except ValueError:
+            return None
 
     @staticmethod
     def _version_rank(value: str) -> tuple[int, ...]:

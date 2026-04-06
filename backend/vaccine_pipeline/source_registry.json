@@ -63,7 +63,8 @@
       "scheduleFeedUrl": "https://www.service-public.gouv.fr/particuliers/actualites/A16520",
       "scheduleFeedFormat": "html",
       "scheduleFeedPath": "",
-      "scheduleFieldMap": {}
+      "scheduleFieldMap": {},
+      "warnSourceAgeDays": 400
     },
     {
       "countryCode": "ES",
