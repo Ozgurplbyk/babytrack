@@ -777,3 +777,6 @@
 "forum_error_update" = "Beitrag konnte nicht aktualisiert werden.";
 "forum_error_delete" = "Beitrag konnte nicht gelöscht werden.";
 "forum_delete_confirm_title" = "Diesen Beitrag löschen?";
+"forum_scope_saved" = "Gespeichert";
+"forum_error_bookmark" = "Beitrag konnte nicht gespeichert werden.";
+"forum_post_edited" = "Bearbeitet";

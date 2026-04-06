@@ -777,3 +777,6 @@
 "forum_error_update" = "Não foi possível atualizar a publicação.";
 "forum_error_delete" = "Não foi possível excluir a publicação.";
 "forum_delete_confirm_title" = "Excluir esta publicação?";
+"forum_scope_saved" = "Salvos";
+"forum_error_bookmark" = "Nao foi possivel salvar a publicacao.";
+"forum_post_edited" = "Editado";

@@ -516,6 +516,28 @@ class Handler(BaseHTTPRequestHandler):
                 return self._send(400, {"error": reason})
             return self._send(200, {"report": report})
 
+        if path.startswith("/v1/forum/posts/") and path.endswith("/bookmark"):
+            user = self._user_from_token()
+            if not user:
+                return self._send(401, {"error": "user_session_required"})
+            parts = path.strip("/").split("/")
+            if len(parts) < 5:
+                return self._send(404, {"error": "not_found"})
+            post_id = parts[3]
+            payload = self._json_body()
+            try:
+                post = FORUM_STORE.set_bookmark(
+                    post_id=post_id,
+                    user_id=user["id"],
+                    active=bool(payload.get("active", True)),
+                )
+            except ValueError as exc:
+                reason = str(exc)
+                if reason == "post_not_found":
+                    return self._send(404, {"error": reason})
+                return self._send(400, {"error": reason})
+            return self._send(200, {"post": post})
+
         if path.startswith("/v1/forum/posts/") and path.endswith("/mute"):
             user = self._user_from_token()
             if not user:

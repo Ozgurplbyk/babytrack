@@ -777,3 +777,6 @@
 "forum_error_update" = "No se pudo actualizar la publicación.";
 "forum_error_delete" = "No se pudo eliminar la publicación.";
 "forum_delete_confirm_title" = "¿Eliminar esta publicación?";
+"forum_scope_saved" = "Guardados";
+"forum_error_bookmark" = "No se pudo guardar la publicacion.";
+"forum_post_edited" = "Editado";

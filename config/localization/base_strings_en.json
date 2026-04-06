@@ -176,5 +176,8 @@
   "forum_edit_apply": "Save changes",
   "forum_error_update": "Post could not be updated.",
   "forum_error_delete": "Post could not be deleted.",
-  "forum_delete_confirm_title": "Delete this post?"
+  "forum_delete_confirm_title": "Delete this post?",
+  "forum_scope_saved": "Saved",
+  "forum_error_bookmark": "Post could not be saved.",
+  "forum_post_edited": "Edited"
 }

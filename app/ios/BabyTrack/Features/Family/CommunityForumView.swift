@@ -273,9 +273,16 @@ struct CommunityForumView: View {
                         .padding(.vertical, 4)
                         .background(Color.accentColor.opacity(0.15), in: Capsule())
                 }
-                Text(formatIsoDate(post.createdAt))
-                    .font(.caption2)
-                    .foregroundStyle(.secondary)
+                VStack(alignment: .trailing, spacing: 3) {
+                    Text(formatIsoDate(post.createdAt))
+                        .font(.caption2)
+                        .foregroundStyle(.secondary)
+                    if post.updatedAt != post.createdAt {
+                        Text(L10n.tr("forum_post_edited"))
+                            .font(.caption2.weight(.semibold))
+                            .foregroundStyle(.secondary)
+                    }
+                }
             }
 
             Text(post.body)
@@ -317,6 +324,13 @@ struct CommunityForumView: View {
                     selectedPost = post
                 } label: {
                     Label("\(post.commentCount)", systemImage: "text.bubble")
+                }
+                .buttonStyle(.bordered)
+
+                Button {
+                    Task { await toggleBookmark(post) }
+                } label: {
+                    Image(systemName: post.viewerBookmarked ? "bookmark.fill" : "bookmark")
                 }
                 .buttonStyle(.bordered)
 
@@ -560,26 +574,53 @@ struct CommunityForumView: View {
             )
             if let index = posts.firstIndex(where: { $0.id == post.id }) {
                 var updated = posts[index]
-                updated = ForumPostPayload(
-                    id: updated.id,
-                    authorUserId: updated.authorUserId,
-                    authorName: updated.authorName,
+                    updated = ForumPostPayload(
+                        id: updated.id,
+                        authorUserId: updated.authorUserId,
+                        authorName: updated.authorName,
                     title: updated.title,
                     body: updated.body,
                     tags: updated.tags,
                     countryCode: updated.countryCode,
                     childId: updated.childId,
                     createdAt: updated.createdAt,
-                    updatedAt: updated.updatedAt,
-                    commentCount: updated.commentCount,
-                    reactionCount: envelope.summary.reactionCount,
-                    viewerReaction: envelope.summary.viewerReaction
-                )
-            posts[index] = updated
+                        updatedAt: updated.updatedAt,
+                        commentCount: updated.commentCount,
+                        reactionCount: envelope.summary.reactionCount,
+                        viewerReaction: envelope.summary.viewerReaction,
+                        viewerBookmarked: updated.viewerBookmarked
+                    )
+                posts[index] = updated
+            }
+        } catch {
+            errorText = L10n.tr("forum_error_react")
         }
-    } catch {
-        errorText = L10n.tr("forum_error_react")
     }
+
+    private func toggleBookmark(_ post: ForumPostPayload) async {
+        guard let token = authManager.sessionToken else { return }
+        busyActionPostId = post.id
+        defer { busyActionPostId = nil }
+
+        do {
+            let envelope = try await BackendClient.shared.setForumBookmark(
+                postId: post.id,
+                active: !post.viewerBookmarked,
+                userToken: token
+            )
+            if let index = posts.firstIndex(where: { $0.id == post.id }) {
+                posts[index] = envelope.post
+            } else if scope == .saved, envelope.post.viewerBookmarked {
+                posts.append(envelope.post)
+            }
+            if scope == .saved && !envelope.post.viewerBookmarked {
+                posts.removeAll(where: { $0.id == post.id })
+            }
+            Haptics.success()
+        } catch {
+            errorText = L10n.tr("forum_error_bookmark")
+            Haptics.warning()
+        }
     }
 
     private func submitReport(_ post: ForumPostPayload, reason: ForumReportReason, note: String) async {
@@ -648,6 +689,7 @@ struct CommunityForumView: View {
 private enum ForumFeedScope: String, CaseIterable, Identifiable {
     case all
     case mine
+    case saved
 
     var id: String { rawValue }
 
@@ -657,6 +699,8 @@ private enum ForumFeedScope: String, CaseIterable, Identifiable {
             return L10n.tr("forum_scope_all")
         case .mine:
             return L10n.tr("forum_scope_mine")
+        case .saved:
+            return L10n.tr("forum_scope_saved")
         }
     }
 }

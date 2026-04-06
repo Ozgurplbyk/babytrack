@@ -777,3 +777,6 @@
 "forum_error_update" = "Impossibile aggiornare il post.";
 "forum_error_delete" = "Impossibile eliminare il post.";
 "forum_delete_confirm_title" = "Eliminare questo post?";
+"forum_scope_saved" = "Salvati";
+"forum_error_bookmark" = "Impossibile salvare il post.";
+"forum_post_edited" = "Modificato";

@@ -777,3 +777,6 @@
 "forum_error_update" = "La publication n’a pas pu être mise à jour.";
 "forum_error_delete" = "La publication n’a pas pu être supprimée.";
 "forum_delete_confirm_title" = "Supprimer cette publication ?";
+"forum_scope_saved" = "Enregistrees";
+"forum_error_bookmark" = "La publication n a pas pu etre enregistree.";
+"forum_post_edited" = "Modifiee";

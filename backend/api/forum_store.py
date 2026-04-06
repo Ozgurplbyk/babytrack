@@ -113,6 +113,16 @@ class ForumStore:
                 );
                 """
             )
+            conn.execute(
+                """
+                CREATE TABLE IF NOT EXISTS forum_post_bookmarks (
+                    user_id TEXT NOT NULL,
+                    post_id TEXT NOT NULL,
+                    created_at TEXT NOT NULL,
+                    PRIMARY KEY (user_id, post_id)
+                );
+                """
+            )
 
             conn.execute("CREATE INDEX IF NOT EXISTS idx_forum_posts_created ON forum_posts(created_at DESC);")
             conn.execute("CREATE INDEX IF NOT EXISTS idx_forum_posts_country ON forum_posts(country_code, created_at DESC);")
@@ -163,6 +173,7 @@ class ForumStore:
             "commentCount": int(row["comment_count"] or 0),
             "reactionCount": int(row["reaction_count"] or 0),
             "viewerReaction": row["viewer_reaction"] or "",
+            "viewerBookmarked": bool(row["viewer_bookmarked"] or 0),
         }
 
     @staticmethod
@@ -229,7 +240,11 @@ class ForumStore:
                     p.*,
                     (SELECT COUNT(*) FROM forum_comments c WHERE c.post_id = p.id) AS comment_count,
                     (SELECT COUNT(*) FROM forum_reactions r WHERE r.post_id = p.id) AS reaction_count,
-                    (SELECT reaction FROM forum_reactions vr WHERE vr.post_id = p.id AND vr.user_id = ? LIMIT 1) AS viewer_reaction
+                    (SELECT reaction FROM forum_reactions vr WHERE vr.post_id = p.id AND vr.user_id = ? LIMIT 1) AS viewer_reaction,
+                    EXISTS(
+                        SELECT 1 FROM forum_post_bookmarks fb
+                        WHERE fb.post_id = p.id AND fb.user_id = ?
+                    ) AS viewer_bookmarked
                 FROM forum_posts p
                 WHERE NOT EXISTS (
                     SELECT 1 FROM forum_post_mutes m
@@ -244,12 +259,20 @@ class ForumStore:
                     WHERE b2.user_id = p.author_user_id AND b2.target_user_id = ?
                 )
             """
-            params: list[Any] = [viewer_user_id, viewer_user_id, viewer_user_id, viewer_user_id]
+            params: list[Any] = [viewer_user_id, viewer_user_id, viewer_user_id, viewer_user_id, viewer_user_id]
             if scoped_country:
                 base_sql += " AND p.country_code = ?"
                 params.append(scoped_country)
             if normalized_scope == "mine":
                 base_sql += " AND p.author_user_id = ?"
+                params.append(viewer_user_id)
+            if normalized_scope == "saved":
+                base_sql += """
+                    AND EXISTS (
+                        SELECT 1 FROM forum_post_bookmarks fb
+                        WHERE fb.user_id = ? AND fb.post_id = p.id
+                    )
+                """
                 params.append(viewer_user_id)
             if normalized_query:
                 base_sql += " AND (LOWER(p.title) LIKE ? OR LOWER(p.body) LIKE ?)"
@@ -330,7 +353,8 @@ class ForumStore:
                     p.*,
                     0 AS comment_count,
                     0 AS reaction_count,
-                    '' AS viewer_reaction
+                    '' AS viewer_reaction,
+                    0 AS viewer_bookmarked
                 FROM forum_posts p
                 WHERE p.id = ?;
                 """,
@@ -395,11 +419,15 @@ class ForumStore:
                     p.*,
                     (SELECT COUNT(*) FROM forum_comments c WHERE c.post_id = p.id) AS comment_count,
                     (SELECT COUNT(*) FROM forum_reactions r WHERE r.post_id = p.id) AS reaction_count,
-                    (SELECT reaction FROM forum_reactions vr WHERE vr.post_id = p.id AND vr.user_id = ? LIMIT 1) AS viewer_reaction
+                    (SELECT reaction FROM forum_reactions vr WHERE vr.post_id = p.id AND vr.user_id = ? LIMIT 1) AS viewer_reaction,
+                    EXISTS(
+                        SELECT 1 FROM forum_post_bookmarks fb
+                        WHERE fb.post_id = p.id AND fb.user_id = ?
+                    ) AS viewer_bookmarked
                 FROM forum_posts p
                 WHERE p.id = ?;
                 """,
-                (user_id, scoped_post_id),
+                (user_id, user_id, scoped_post_id),
             ).fetchone()
             assert payload is not None
             return self._post_payload(payload)
@@ -420,6 +448,7 @@ class ForumStore:
             conn.execute("DELETE FROM forum_comments WHERE post_id = ?;", (scoped_post_id,))
             conn.execute("DELETE FROM forum_reports WHERE post_id = ?;", (scoped_post_id,))
             conn.execute("DELETE FROM forum_post_mutes WHERE post_id = ?;", (scoped_post_id,))
+            conn.execute("DELETE FROM forum_post_bookmarks WHERE post_id = ?;", (scoped_post_id,))
             conn.execute("DELETE FROM forum_posts WHERE id = ?;", (scoped_post_id,))
             return True
 
@@ -640,3 +669,49 @@ class ForumStore:
                 (user_id.strip(), post_id.strip(), self._now_iso()),
             )
         return True
+
+    def set_bookmark(self, *, user_id: str, post_id: str, active: bool) -> dict[str, Any]:
+        scoped_post_id = post_id.strip()
+        if not user_id.strip() or not scoped_post_id:
+            raise ValueError("post_not_found")
+
+        with self._lock, self._connect() as conn:
+            post_exists = conn.execute("SELECT id FROM forum_posts WHERE id = ?;", (scoped_post_id,)).fetchone()
+            if not post_exists:
+                raise ValueError("post_not_found")
+
+            if active:
+                conn.execute(
+                    """
+                    INSERT OR IGNORE INTO forum_post_bookmarks (user_id, post_id, created_at)
+                    VALUES (?, ?, ?);
+                    """,
+                    (user_id.strip(), scoped_post_id, self._now_iso()),
+                )
+            else:
+                conn.execute(
+                    """
+                    DELETE FROM forum_post_bookmarks
+                    WHERE user_id = ? AND post_id = ?;
+                    """,
+                    (user_id.strip(), scoped_post_id),
+                )
+
+            row = conn.execute(
+                """
+                SELECT
+                    p.*,
+                    (SELECT COUNT(*) FROM forum_comments c WHERE c.post_id = p.id) AS comment_count,
+                    (SELECT COUNT(*) FROM forum_reactions r WHERE r.post_id = p.id) AS reaction_count,
+                    (SELECT reaction FROM forum_reactions vr WHERE vr.post_id = p.id AND vr.user_id = ? LIMIT 1) AS viewer_reaction,
+                    EXISTS(
+                        SELECT 1 FROM forum_post_bookmarks fb
+                        WHERE fb.post_id = p.id AND fb.user_id = ?
+                    ) AS viewer_bookmarked
+                FROM forum_posts p
+                WHERE p.id = ?;
+                """,
+                (user_id.strip(), user_id.strip(), scoped_post_id),
+            ).fetchone()
+            assert row is not None
+            return self._post_payload(row)

@@ -134,6 +134,10 @@ class ForumReactionRequest(BaseModel):
     active: bool = True
 
 
+class ForumBookmarkRequest(BaseModel):
+    active: bool = True
+
+
 class ForumReportRequest(BaseModel):
     reason: str = "other"
     note: str = ""
@@ -495,6 +499,26 @@ def forum_report_post(
             raise HTTPException(status_code=404, detail=reason) from exc
         raise HTTPException(status_code=400, detail=reason) from exc
     return {"report": report}
+
+
+@app.post("/v1/forum/posts/{post_id}/bookmark", dependencies=[Depends(_enforce_rate_limit)])
+def forum_bookmark_post(
+    post_id: str,
+    payload: ForumBookmarkRequest,
+    user: dict[str, Any] = Depends(_require_user),
+) -> dict[str, Any]:
+    try:
+        post = FORUM_STORE.set_bookmark(
+            post_id=post_id,
+            user_id=user["id"],
+            active=payload.active,
+        )
+    except ValueError as exc:
+        reason = str(exc)
+        if reason == "post_not_found":
+            raise HTTPException(status_code=404, detail=reason) from exc
+        raise HTTPException(status_code=400, detail=reason) from exc
+    return {"post": post}
 
 
 @app.post("/v1/forum/posts/{post_id}/mute", dependencies=[Depends(_enforce_rate_limit)])

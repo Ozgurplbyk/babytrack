@@ -294,6 +294,48 @@ class ForumStoreTests(unittest.TestCase):
         deleted_again = self.store.delete_post(post_id=post["id"], user_id="u1")
         self.assertFalse(deleted_again)
 
+    def test_bookmark_flow_and_saved_scope(self) -> None:
+        mine = self.store.create_post(
+            user_id="u1",
+            author_name="Parent A",
+            title="Sleep tips",
+            body="Sharing a few routines that helped our evenings.",
+            country_code="TR",
+            child_id="child-a",
+            tags=["sleep"],
+        )
+        other = self.store.create_post(
+            user_id="u2",
+            author_name="Parent B",
+            title="Bottle tips",
+            body="Bottle feeding tips for the late evening stretch.",
+            country_code="TR",
+            child_id="child-a",
+            tags=["feeding"],
+        )
+
+        bookmarked = self.store.set_bookmark(user_id="u9", post_id=other["id"], active=True)
+        self.assertTrue(bookmarked["viewerBookmarked"])
+
+        saved = self.store.list_posts(
+            viewer_user_id="u9",
+            country_code="TR",
+            limit=20,
+            author_scope="saved",
+        )
+        self.assertEqual([row["id"] for row in saved], [other["id"]])
+
+        unbookmarked = self.store.set_bookmark(user_id="u9", post_id=other["id"], active=False)
+        self.assertFalse(unbookmarked["viewerBookmarked"])
+
+        saved_after = self.store.list_posts(
+            viewer_user_id="u9",
+            country_code="TR",
+            limit=20,
+            author_scope="saved",
+        )
+        self.assertEqual(saved_after, [])
+
 
 if __name__ == "__main__":
     unittest.main()

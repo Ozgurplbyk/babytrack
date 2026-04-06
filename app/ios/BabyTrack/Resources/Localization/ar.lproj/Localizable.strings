@@ -777,3 +777,6 @@
 "forum_error_update" = "تعذر تحديث المنشور.";
 "forum_error_delete" = "تعذر حذف المنشور.";
 "forum_delete_confirm_title" = "حذف هذا المنشور؟";
+"forum_scope_saved" = "المحفوظة";
+"forum_error_bookmark" = "تعذر حفظ المنشور.";
+"forum_post_edited" = "تم التعديل";

@@ -780,3 +780,6 @@
 "forum_error_update" = "Gönderi güncellenemedi.";
 "forum_error_delete" = "Gönderi silinemedi.";
 "forum_delete_confirm_title" = "Bu gönderi silinsin mi?";
+"forum_scope_saved" = "Kaydedilenler";
+"forum_error_bookmark" = "Gonderi kaydedilemedi.";
+"forum_post_edited" = "Duzenlendi";

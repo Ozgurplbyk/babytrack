@@ -323,6 +323,16 @@ final class BackendClient {
         try validate(response)
     }
 
+    func setForumBookmark(postId: String, active: Bool, userToken: String) async throws -> ForumPostEnvelope {
+        guard let url = baseURL?.appending(path: "/v1/forum/posts/\(postId)/bookmark") else { throw BackendError.invalidURL }
+        var req = userAuthorizedRequest(url: url, userToken: userToken, method: "POST")
+        req.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        req.httpBody = try JSONEncoder().encode(ForumBookmarkSetPayload(active: active))
+        let (data, response) = try await URLSession.shared.data(for: req)
+        try validate(response)
+        return try JSONDecoder().decode(ForumPostEnvelope.self, from: data)
+    }
+
     func fetchForumComments(postId: String, userToken: String, limit: Int = 80) async throws -> ForumCommentsEnvelope {
         guard let url = baseURL?.appending(path: "/v1/forum/posts/\(postId)/comments"),
               var components = URLComponents(url: url, resolvingAgainstBaseURL: false) else {
@@ -576,6 +586,7 @@ struct ForumPostPayload: Codable, Identifiable {
     let commentCount: Int
     let reactionCount: Int
     let viewerReaction: String
+    let viewerBookmarked: Bool
 }
 
 struct ForumCommentPayload: Codable, Identifiable {
@@ -653,6 +664,10 @@ private struct ForumCommentCreatePayload: Encodable {
 
 private struct ForumReactionSetPayload: Encodable {
     let reaction: String
+    let active: Bool
+}
+
+private struct ForumBookmarkSetPayload: Encodable {
     let active: Bool
 }
 
