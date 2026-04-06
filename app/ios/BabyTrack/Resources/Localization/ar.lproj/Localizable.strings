@@ -800,3 +800,5 @@
 "forum_history_posted" = "تم النشر: %@";
 "forum_history_empty" = "لا يوجد سجل لهذا المنشور بعد.";
 "forum_error_history" = "تعذر تحميل سجل المنشور.";
+"upcoming_reminders_empty_hint" = "ستظهر هنا اللقاحات والادوية والفحوصات المجدولة.";
+"health_empty_history_hint" = "غيّر عامل التصفية او اضف ادخالاً جديداً لملء هذا القسم.";

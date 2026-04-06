@@ -505,9 +505,10 @@ private struct HealthModuleWorkspaceView: View {
             }
 
             if visibleScopedEvents.isEmpty {
-                Text(L10n.tr("health_detail_no_logs"))
-                    .font(.subheadline)
-                    .foregroundStyle(.secondary)
+                healthEmptyState(
+                    icon: "clock.arrow.circlepath",
+                    title: L10n.tr("health_detail_no_logs")
+                )
             } else {
                 ForEach(Array(visibleScopedEvents.prefix(10).enumerated()), id: \.element.id) { _, event in
                     HStack(spacing: 10) {
@@ -836,9 +837,10 @@ private struct DoctorShareReportView: View {
                 .font(.headline.weight(.bold))
 
             if filteredEvents.isEmpty {
-                Text(L10n.tr("doctor_share_report_no_events"))
-                    .font(.subheadline)
-                    .foregroundStyle(.secondary)
+                healthEmptyState(
+                    icon: "doc.text.magnifyingglass",
+                    title: L10n.tr("doctor_share_report_no_events")
+                )
             } else {
                 ForEach(Array(filteredEvents.prefix(10))) { event in
                     HStack(alignment: .top, spacing: 10) {
@@ -1156,9 +1158,11 @@ private struct SchoolTravelPlannerView: View {
             }
 
             if filteredPlans.isEmpty {
-                Text(L10n.tr("school_travel_history_empty"))
-                    .font(.subheadline)
-                    .foregroundStyle(.secondary)
+                healthEmptyState(
+                    icon: "airplane.circle",
+                    title: L10n.tr("school_travel_history_empty"),
+                    subtitle: L10n.tr("health_empty_history_hint")
+                )
             } else {
                 ForEach(filteredPlans.prefix(10)) { plan in
                     VStack(alignment: .leading, spacing: 6) {
@@ -2943,9 +2947,10 @@ private struct MedicationPlansView: View {
             }
 
             if historyEvents.isEmpty {
-                Text(L10n.tr("health_detail_no_logs"))
-                    .font(.subheadline)
-                    .foregroundStyle(.secondary)
+                healthEmptyState(
+                    icon: "pills.circle",
+                    title: L10n.tr("health_detail_no_logs")
+                )
             } else {
                 ForEach(historyEvents) { event in
                     HStack(spacing: 10) {
@@ -3553,6 +3558,26 @@ private func metricChip(title: String, value: String) -> some View {
     .padding(.vertical, 8)
     .padding(.horizontal, 10)
     .background(Color.accentColor.opacity(0.12), in: RoundedRectangle(cornerRadius: 12, style: .continuous))
+}
+
+@ViewBuilder
+private func healthEmptyState(icon: String, title: String, subtitle: String = L10n.tr("health_empty_history_hint")) -> some View {
+    VStack(spacing: 8) {
+        Image(systemName: icon)
+            .font(.title3.weight(.semibold))
+            .foregroundStyle(Color.accentColor)
+        Text(title)
+            .font(.subheadline.weight(.semibold))
+            .multilineTextAlignment(.center)
+        Text(subtitle)
+            .font(.caption)
+            .foregroundStyle(.secondary)
+            .multilineTextAlignment(.center)
+    }
+    .frame(maxWidth: .infinity)
+    .padding(.vertical, 14)
+    .padding(.horizontal, 12)
+    .background(Color.accentColor.opacity(0.08), in: RoundedRectangle(cornerRadius: 16, style: .continuous))
 }
 
 private extension View {

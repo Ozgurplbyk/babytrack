@@ -800,3 +800,5 @@
 "forum_history_posted" = "Pubblicato: %@";
 "forum_history_empty" = "Non c e ancora cronologia per questo post.";
 "forum_error_history" = "Impossibile caricare la cronologia del post.";
+"upcoming_reminders_empty_hint" = "Vaccini, farmaci e controlli pianificati appariranno qui.";
+"health_empty_history_hint" = "Cambia il filtro o aggiungi una nuova voce per riempire questa sezione.";

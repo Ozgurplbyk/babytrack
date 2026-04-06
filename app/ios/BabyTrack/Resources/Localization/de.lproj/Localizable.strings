@@ -800,3 +800,5 @@
 "forum_history_posted" = "Veröffentlicht: %@";
 "forum_history_empty" = "Fuer diesen Beitrag ist noch kein Verlauf verfuegbar.";
 "forum_error_history" = "Beitragsverlauf konnte nicht geladen werden.";
+"upcoming_reminders_empty_hint" = "Geplante Impfungen, Medikamente und Kontrollen werden hier angezeigt.";
+"health_empty_history_hint" = "Aendern Sie den Filter oder fuegen Sie einen neuen Eintrag hinzu, um diesen Bereich zu fuellen.";

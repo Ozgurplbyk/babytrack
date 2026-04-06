@@ -800,3 +800,5 @@
 "forum_history_posted" = "Publicado: %@";
 "forum_history_empty" = "Aun no hay historial para esta publicacion.";
 "forum_error_history" = "No se pudo cargar el historial de la publicacion.";
+"upcoming_reminders_empty_hint" = "Las vacunas, medicamentos y controles programados apareceran aqui.";
+"health_empty_history_hint" = "Cambia el filtro o agrega un nuevo registro para completar esta seccion.";

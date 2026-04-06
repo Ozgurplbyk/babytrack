@@ -157,6 +157,8 @@
   "vaccine_data_source_health_package_title": "Package build",
   "vaccine_data_source_health_sync_title": "Last sync",
   "vaccine_data_source_health_missing": "Not available",
+  "upcoming_reminders_empty_hint": "Scheduled vaccines, medications, and checkups will appear here.",
+  "health_empty_history_hint": "Change the filter or add a new entry to fill this section.",
   "forum_filter_title": "Browse posts",
   "forum_scope_all": "All posts",
   "forum_scope_mine": "My posts",

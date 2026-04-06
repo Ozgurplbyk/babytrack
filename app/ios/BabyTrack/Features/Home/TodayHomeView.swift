@@ -415,9 +415,21 @@ struct TodayHomeView: View {
             }
 
             if items.isEmpty {
-                Text(L10n.tr("upcoming_reminders_empty"))
-                    .font(.subheadline)
-                    .foregroundStyle(.secondary)
+                VStack(spacing: 10) {
+                    Image(systemName: "calendar.badge.clock")
+                        .font(.title3.weight(.semibold))
+                        .foregroundStyle(Color.accentColor)
+                    Text(L10n.tr("upcoming_reminders_empty"))
+                        .font(.subheadline.weight(.semibold))
+                        .multilineTextAlignment(.center)
+                    Text(L10n.tr("upcoming_reminders_empty_hint"))
+                        .font(.caption)
+                        .foregroundStyle(.secondary)
+                        .multilineTextAlignment(.center)
+                }
+                .frame(maxWidth: .infinity)
+                .padding(.vertical, 16)
+                .background(Color.accentColor.opacity(0.08), in: RoundedRectangle(cornerRadius: 18, style: .continuous))
             } else {
                 ForEach(Array(items.prefix(6))) { item in
                     HStack(spacing: 10) {
