@@ -196,11 +196,21 @@ class Handler(BaseHTTPRequestHandler):
             if not user:
                 return self._send(401, {"error": "user_session_required"})
             country = str((query.get("countryCode") or [""])[0]).strip().upper()
+            search_query = str((query.get("query") or [""])[0]).strip()
+            tag = str((query.get("tag") or [""])[0]).strip()
+            scope = str((query.get("scope") or ["all"])[0]).strip()
             try:
                 limit = int((query.get("limit") or ["30"])[0])
             except ValueError:
                 limit = 30
-            posts = FORUM_STORE.list_posts(viewer_user_id=user["id"], country_code=country, limit=limit)
+            posts = FORUM_STORE.list_posts(
+                viewer_user_id=user["id"],
+                country_code=country,
+                limit=limit,
+                query=search_query,
+                tag=tag,
+                author_scope=scope,
+            )
             return self._send(200, {"posts": posts})
 
         if path.startswith("/v1/forum/posts/") and path.endswith("/comments"):

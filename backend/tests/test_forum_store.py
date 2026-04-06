@@ -164,6 +164,50 @@ class ForumStoreTests(unittest.TestCase):
         ids_after = [row["id"] for row in feed_after_block]
         self.assertNotIn(post_b["id"], ids_after)
 
+    def test_post_filters_support_query_tag_and_scope(self) -> None:
+        mine = self.store.create_post(
+            user_id="u1",
+            author_name="Parent A",
+            title="Sleep regression",
+            body="Looking for tips about four month sleep regression.",
+            country_code="TR",
+            child_id="child-a",
+            tags=["sleep", "month4"],
+        )
+        other = self.store.create_post(
+            user_id="u2",
+            author_name="Parent B",
+            title="Bottle refusal",
+            body="My baby refuses formula bottle in the evening.",
+            country_code="TR",
+            child_id="child-a",
+            tags=["feeding", "bottle"],
+        )
+
+        by_query = self.store.list_posts(
+            viewer_user_id="u1",
+            country_code="TR",
+            limit=20,
+            query="sleep regression",
+        )
+        self.assertEqual([row["id"] for row in by_query], [mine["id"]])
+
+        by_tag = self.store.list_posts(
+            viewer_user_id="u1",
+            country_code="TR",
+            limit=20,
+            tag="bottle",
+        )
+        self.assertEqual([row["id"] for row in by_tag], [other["id"]])
+
+        mine_only = self.store.list_posts(
+            viewer_user_id="u1",
+            country_code="TR",
+            limit=20,
+            author_scope="mine",
+        )
+        self.assertEqual([row["id"] for row in mine_only], [mine["id"]])
+
 
 if __name__ == "__main__":
     unittest.main()

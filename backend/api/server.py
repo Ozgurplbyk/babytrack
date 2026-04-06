@@ -361,12 +361,18 @@ def family_invite_delete(invite_id: str, user: dict[str, Any] = Depends(_require
 def forum_posts(
     countryCode: str = "",
     limit: int = 30,
+    query: str = "",
+    tag: str = "",
+    scope: str = "all",
     user: dict[str, Any] = Depends(_require_user),
 ) -> dict[str, Any]:
     posts = FORUM_STORE.list_posts(
         viewer_user_id=user["id"],
         country_code=countryCode,
         limit=limit,
+        query=query,
+        tag=tag,
+        author_scope=scope,
     )
     return {"posts": posts}
 

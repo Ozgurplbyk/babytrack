@@ -234,7 +234,14 @@ final class BackendClient {
         try validate(response)
     }
 
-    func fetchForumPosts(countryCode: String, userToken: String, limit: Int = 30) async throws -> ForumPostsEnvelope {
+    func fetchForumPosts(
+        countryCode: String,
+        userToken: String,
+        limit: Int = 30,
+        query: String = "",
+        tag: String = "",
+        scope: String = "all"
+    ) async throws -> ForumPostsEnvelope {
         guard let url = baseURL?.appending(path: "/v1/forum/posts"),
               var components = URLComponents(url: url, resolvingAgainstBaseURL: false) else {
             throw BackendError.invalidURL
@@ -243,6 +250,18 @@ final class BackendClient {
             URLQueryItem(name: "countryCode", value: countryCode.uppercased()),
             URLQueryItem(name: "limit", value: "\(max(1, min(limit, 100)))")
         ]
+        let normalizedQuery = query.trimmingCharacters(in: .whitespacesAndNewlines)
+        let normalizedTag = tag.trimmingCharacters(in: .whitespacesAndNewlines)
+        let normalizedScope = scope.trimmingCharacters(in: .whitespacesAndNewlines)
+        if !normalizedQuery.isEmpty {
+            components.queryItems?.append(URLQueryItem(name: "query", value: normalizedQuery))
+        }
+        if !normalizedTag.isEmpty {
+            components.queryItems?.append(URLQueryItem(name: "tag", value: normalizedTag))
+        }
+        if !normalizedScope.isEmpty, normalizedScope != "all" {
+            components.queryItems?.append(URLQueryItem(name: "scope", value: normalizedScope))
+        }
         guard let url = components.url else { throw BackendError.invalidURL }
         let req = userAuthorizedRequest(url: url, userToken: userToken)
         let (data, response) = try await URLSession.shared.data(for: req)

@@ -156,5 +156,20 @@
   "vaccine_data_source_health_source_title": "Official source",
   "vaccine_data_source_health_package_title": "Package build",
   "vaccine_data_source_health_sync_title": "Last sync",
-  "vaccine_data_source_health_missing": "Not available"
+  "vaccine_data_source_health_missing": "Not available",
+  "forum_filter_title": "Browse posts",
+  "forum_scope_all": "All posts",
+  "forum_scope_mine": "My posts",
+  "forum_search_placeholder": "Search posts",
+  "forum_filter_clear": "Clear filters",
+  "forum_empty_filtered": "No posts match these filters yet.",
+  "forum_report_title": "Report this post",
+  "forum_report_reason_title": "Reason",
+  "forum_report_note_title": "Note",
+  "forum_report_note_placeholder": "Add optional details for moderators",
+  "forum_report_submit": "Send report",
+  "forum_report_reason_safety": "Safety risk",
+  "forum_report_reason_misinformation": "Misinformation",
+  "forum_report_reason_harassment": "Harassment",
+  "forum_report_reason_spam": "Spam"
 }

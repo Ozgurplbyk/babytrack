@@ -756,3 +756,19 @@
 "vaccine_data_source_health_package_title" = "Version du paquet";
 "vaccine_data_source_health_sync_title" = "Dernière synchronisation";
 "vaccine_data_source_health_missing" = "Indisponible";
+
+"forum_filter_title" = "Parcourir les publications";
+"forum_scope_all" = "Toutes les publications";
+"forum_scope_mine" = "Mes publications";
+"forum_search_placeholder" = "Rechercher dans le forum";
+"forum_filter_clear" = "Effacer les filtres";
+"forum_empty_filtered" = "Aucune publication ne correspond a ces filtres.";
+"forum_report_title" = "Signaler cette publication";
+"forum_report_reason_title" = "Motif";
+"forum_report_note_title" = "Note";
+"forum_report_note_placeholder" = "Ajoutez des details facultatifs pour la moderation";
+"forum_report_submit" = "Envoyer le signalement";
+"forum_report_reason_safety" = "Risque de securite";
+"forum_report_reason_misinformation" = "Desinformation";
+"forum_report_reason_harassment" = "Harcèlement";
+"forum_report_reason_spam" = "Spam";

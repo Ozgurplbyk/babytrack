@@ -208,9 +208,20 @@ class ForumStore:
         if count >= self.post_rate_limit:
             raise ValueError("rate_limited")
 
-    def list_posts(self, viewer_user_id: str, country_code: str, limit: int = 30) -> list[dict[str, Any]]:
+    def list_posts(
+        self,
+        viewer_user_id: str,
+        country_code: str,
+        limit: int = 30,
+        query: str = "",
+        tag: str = "",
+        author_scope: str = "all",
+    ) -> list[dict[str, Any]]:
         scoped_country = country_code.strip().upper()
         scoped_limit = min(max(int(limit), 1), 100)
+        normalized_query = " ".join(query.strip().lower().split())
+        normalized_tag = tag.strip().lower()
+        normalized_scope = author_scope.strip().lower() or "all"
 
         with self._lock, self._connect() as conn:
             base_sql = """
@@ -237,6 +248,16 @@ class ForumStore:
             if scoped_country:
                 base_sql += " AND p.country_code = ?"
                 params.append(scoped_country)
+            if normalized_scope == "mine":
+                base_sql += " AND p.author_user_id = ?"
+                params.append(viewer_user_id)
+            if normalized_query:
+                base_sql += " AND (LOWER(p.title) LIKE ? OR LOWER(p.body) LIKE ?)"
+                wildcard = f"%{normalized_query}%"
+                params.extend([wildcard, wildcard])
+            if normalized_tag:
+                base_sql += " AND LOWER(p.tags_json) LIKE ?"
+                params.append(f'%"{normalized_tag}"%')
             base_sql += " ORDER BY p.created_at DESC LIMIT ?"
             params.append(scoped_limit)
 

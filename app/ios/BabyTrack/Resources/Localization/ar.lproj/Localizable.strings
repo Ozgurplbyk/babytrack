@@ -756,3 +756,19 @@
 "vaccine_data_source_health_package_title" = "بناء الحزمة";
 "vaccine_data_source_health_sync_title" = "آخر مزامنة";
 "vaccine_data_source_health_missing" = "غير متوفر";
+
+"forum_filter_title" = "تصفح المنشورات";
+"forum_scope_all" = "كل المنشورات";
+"forum_scope_mine" = "منشوراتي";
+"forum_search_placeholder" = "ابحث في المنشورات";
+"forum_filter_clear" = "مسح الفلاتر";
+"forum_empty_filtered" = "لا توجد منشورات تطابق هذه الفلاتر.";
+"forum_report_title" = "ابلاغ عن هذا المنشور";
+"forum_report_reason_title" = "السبب";
+"forum_report_note_title" = "ملاحظة";
+"forum_report_note_placeholder" = "اضف تفاصيل اختيارية لفريق الاشراف";
+"forum_report_submit" = "ارسال البلاغ";
+"forum_report_reason_safety" = "مخاطر سلامة";
+"forum_report_reason_misinformation" = "معلومات مضللة";
+"forum_report_reason_harassment" = "تحرش";
+"forum_report_reason_spam" = "رسائل مزعجة";
