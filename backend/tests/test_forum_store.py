@@ -208,6 +208,92 @@ class ForumStoreTests(unittest.TestCase):
         )
         self.assertEqual([row["id"] for row in mine_only], [mine["id"]])
 
+    def test_owner_can_update_post(self) -> None:
+        post = self.store.create_post(
+            user_id="u1",
+            author_name="Parent A",
+            title="Original title",
+            body="Original body for the community forum.",
+            country_code="TR",
+            child_id="child-a",
+            tags=["sleep"],
+        )
+
+        updated = self.store.update_post(
+            post_id=post["id"],
+            user_id="u1",
+            title="Updated title",
+            body="Updated body with clearer details for other parents.",
+            tags=["sleep", "routine"],
+        )
+
+        self.assertEqual(updated["id"], post["id"])
+        self.assertEqual(updated["title"], "Updated title")
+        self.assertEqual(updated["body"], "Updated body with clearer details for other parents.")
+        self.assertEqual(updated["tags"], ["sleep", "routine"])
+        self.assertGreaterEqual(updated["updatedAt"], post["updatedAt"])
+
+    def test_non_owner_cannot_update_post(self) -> None:
+        post = self.store.create_post(
+            user_id="u1",
+            author_name="Parent A",
+            title="Original title",
+            body="Original body for the community forum.",
+            country_code="TR",
+            child_id="child-a",
+            tags=["sleep"],
+        )
+
+        with self.assertRaises(ValueError) as context:
+            self.store.update_post(
+                post_id=post["id"],
+                user_id="u2",
+                title="Bad edit",
+                body="Trying to edit someone else's post.",
+                tags=["sleep"],
+            )
+        self.assertEqual(str(context.exception), "forbidden")
+
+    def test_owner_can_delete_post_and_related_content(self) -> None:
+        post = self.store.create_post(
+            user_id="u1",
+            author_name="Parent A",
+            title="Question",
+            body="How did your babies react to this vaccine?",
+            country_code="TR",
+            child_id="child-a",
+            tags=["vaccine"],
+        )
+
+        self.store.create_comment(
+            post_id=post["id"],
+            user_id="u2",
+            author_name="Parent B",
+            body="Mine had a mild fever for one evening.",
+        )
+        self.store.set_reaction(
+            post_id=post["id"],
+            user_id="u3",
+            reaction="support",
+            active=True,
+        )
+        self.store.report_post(
+            post_id=post["id"],
+            reporter_user_id="u4",
+            reason="safety",
+            note="Needs review",
+        )
+        self.store.mute_post(user_id="u5", post_id=post["id"])
+
+        deleted = self.store.delete_post(post_id=post["id"], user_id="u1")
+        self.assertTrue(deleted)
+        self.assertEqual(self.store.list_posts(viewer_user_id="u1", country_code="TR", limit=20), [])
+        self.assertEqual(self.store.list_comments(post["id"]), [])
+        self.assertEqual(self.store.list_reports(status="pending", limit=20), [])
+
+        deleted_again = self.store.delete_post(post_id=post["id"], user_id="u1")
+        self.assertFalse(deleted_again)
+
 
 if __name__ == "__main__":
     unittest.main()

@@ -14,6 +14,8 @@ struct CommunityForumView: View {
     @State private var tagsText = ""
     @State private var errorText = ""
     @State private var selectedPost: ForumPostPayload?
+    @State private var editingPost: ForumPostPayload?
+    @State private var pendingDeletePost: ForumPostPayload?
     @State private var busyActionPostId: String?
     @State private var searchText = ""
     @State private var selectedTag = ""
@@ -115,15 +117,35 @@ struct CommunityForumView: View {
             } message: {
                 Text(errorText)
             }
+            .alert(L10n.tr("forum_delete_confirm_title"), isPresented: Binding(
+                get: { pendingDeletePost != nil },
+                set: { if !$0 { pendingDeletePost = nil } }
+            )) {
+                Button(L10n.tr("common_cancel"), role: .cancel) {}
+                Button(L10n.tr("common_delete"), role: .destructive) {
+                    if let post = pendingDeletePost {
+                        Task { await delete(post) }
+                    }
+                    pendingDeletePost = nil
+                }
+            } message: {
+                Text(L10n.tr("common_irreversible_action"))
+            }
         }
     }
 
     private var composeCard: some View {
         VStack(alignment: .leading, spacing: 10) {
             HStack {
-                Text(L10n.tr("forum_compose_title"))
+                Text(editingPost == nil ? L10n.tr("forum_compose_title") : L10n.tr("forum_edit_title"))
                     .font(.headline.weight(.bold))
                 Spacer()
+                if editingPost != nil {
+                    Button(L10n.tr("common_cancel")) {
+                        resetComposer()
+                    }
+                    .font(.caption.weight(.semibold))
+                }
                 Text("\(bodyText.trimmingCharacters(in: .whitespacesAndNewlines).count)/1200")
                     .font(.caption.weight(.semibold))
                     .foregroundStyle(.secondary)
@@ -140,9 +162,9 @@ struct CommunityForumView: View {
                 .textFieldStyle(.roundedBorder)
 
             Button {
-                Task { await publishPost() }
+                Task { await submitComposer() }
             } label: {
-                Label(L10n.tr("forum_publish_action"), systemImage: "paperplane.fill")
+                Label(editingPost == nil ? L10n.tr("forum_publish_action") : L10n.tr("forum_edit_apply"), systemImage: editingPost == nil ? "paperplane.fill" : "square.and.pencil")
                     .font(.subheadline.weight(.bold))
                     .frame(maxWidth: .infinity)
             }
@@ -301,22 +323,36 @@ struct CommunityForumView: View {
                 Spacer()
 
                 Menu {
-                    Button {
-                        reportTargetPost = post
-                    } label: {
-                        Label(L10n.tr("forum_action_report"), systemImage: "flag.fill")
-                    }
+                    if authManager.user?.id == post.authorUserId {
+                        Button {
+                            beginEditing(post)
+                        } label: {
+                            Label(L10n.tr("common_edit"), systemImage: "square.and.pencil")
+                        }
 
-                    Button {
-                        Task { await mute(post) }
-                    } label: {
-                        Label(L10n.tr("forum_action_mute_post"), systemImage: "speaker.slash.fill")
-                    }
+                        Button(role: .destructive) {
+                            pendingDeletePost = post
+                        } label: {
+                            Label(L10n.tr("common_delete"), systemImage: "trash")
+                        }
+                    } else {
+                        Button {
+                            reportTargetPost = post
+                        } label: {
+                            Label(L10n.tr("forum_action_report"), systemImage: "flag.fill")
+                        }
 
-                    Button(role: .destructive) {
-                        Task { await block(post) }
-                    } label: {
-                        Label(L10n.tr("forum_action_block_user"), systemImage: "person.fill.xmark")
+                        Button {
+                            Task { await mute(post) }
+                        } label: {
+                            Label(L10n.tr("forum_action_mute_post"), systemImage: "speaker.slash.fill")
+                        }
+
+                        Button(role: .destructive) {
+                            Task { await block(post) }
+                        } label: {
+                            Label(L10n.tr("forum_action_block_user"), systemImage: "person.fill.xmark")
+                        }
                     }
                 } label: {
                     Image(systemName: "ellipsis.circle")
@@ -433,6 +469,80 @@ struct CommunityForumView: View {
             Haptics.success()
         } catch {
             errorText = L10n.tr("forum_error_publish")
+            Haptics.warning()
+        }
+    }
+
+    private func submitComposer() async {
+        if editingPost == nil {
+            await publishPost()
+        } else {
+            await savePostEdits()
+        }
+    }
+
+    private func beginEditing(_ post: ForumPostPayload) {
+        editingPost = post
+        titleText = post.title
+        bodyText = post.body
+        tagsText = post.tags.joined(separator: ", ")
+    }
+
+    private func resetComposer() {
+        editingPost = nil
+        titleText = ""
+        bodyText = ""
+        tagsText = ""
+    }
+
+    private func savePostEdits() async {
+        guard let token = authManager.sessionToken, let editingPost else { return }
+        let normalizedBody = bodyText.trimmingCharacters(in: .whitespacesAndNewlines)
+        guard !normalizedBody.isEmpty else { return }
+
+        switch ForumModeration.validatePost(title: titleText, body: normalizedBody) {
+        case .allow:
+            break
+        case let .reject(reasonKey):
+            errorText = L10n.tr(reasonKey)
+            Haptics.warning()
+            return
+        }
+
+        loading = true
+        defer { loading = false }
+
+        do {
+            _ = try await BackendClient.shared.updateForumPost(
+                postId: editingPost.id,
+                title: titleText,
+                body: normalizedBody,
+                tags: ForumModeration.parseTags(tagsText),
+                userToken: token
+            )
+            resetComposer()
+            await refresh()
+            Haptics.success()
+        } catch {
+            errorText = L10n.tr("forum_error_update")
+            Haptics.warning()
+        }
+    }
+
+    private func delete(_ post: ForumPostPayload) async {
+        guard let token = authManager.sessionToken else { return }
+        busyActionPostId = post.id
+        defer { busyActionPostId = nil }
+
+        do {
+            try await BackendClient.shared.deleteForumPost(postId: post.id, userToken: token)
+            if editingPost?.id == post.id {
+                resetComposer()
+            }
+            posts.removeAll(where: { $0.id == post.id })
+            Haptics.success()
+        } catch {
+            errorText = L10n.tr("forum_error_delete")
             Haptics.warning()
         }
     }

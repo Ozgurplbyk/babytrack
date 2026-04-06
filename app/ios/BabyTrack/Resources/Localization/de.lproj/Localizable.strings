@@ -772,3 +772,8 @@
 "forum_report_reason_misinformation" = "Fehlinformation";
 "forum_report_reason_harassment" = "Belaestigung";
 "forum_report_reason_spam" = "Spam";
+"forum_edit_title" = "Beitrag bearbeiten";
+"forum_edit_apply" = "Änderungen speichern";
+"forum_error_update" = "Beitrag konnte nicht aktualisiert werden.";
+"forum_error_delete" = "Beitrag konnte nicht gelöscht werden.";
+"forum_delete_confirm_title" = "Diesen Beitrag löschen?";

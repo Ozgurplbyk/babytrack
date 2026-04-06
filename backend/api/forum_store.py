@@ -339,6 +339,90 @@ class ForumStore:
             assert row is not None
             return self._post_payload(row)
 
+    def update_post(
+        self,
+        *,
+        post_id: str,
+        user_id: str,
+        title: str,
+        body: str,
+        tags: list[str] | None,
+    ) -> dict[str, Any]:
+        scoped_post_id = post_id.strip()
+        normalized_body = body.strip()
+        if len(normalized_body) < 3:
+            raise ValueError("body_too_short")
+        if len(normalized_body) > 1200:
+            raise ValueError("body_too_long")
+
+        normalized_title = title.strip()
+        if not normalized_title:
+            normalized_title = (normalized_body[:56] + "…") if len(normalized_body) > 56 else normalized_body
+
+        if self._contains_blocked_terms(f"{normalized_title} {normalized_body}"):
+            raise ValueError("blocked_terms")
+
+        now = self._now_iso()
+        tag_values = self._normalize_tags(tags)
+
+        with self._lock, self._connect() as conn:
+            row = conn.execute(
+                "SELECT author_user_id FROM forum_posts WHERE id = ?;",
+                (scoped_post_id,),
+            ).fetchone()
+            if not row:
+                raise ValueError("post_not_found")
+            if row["author_user_id"] != user_id:
+                raise ValueError("forbidden")
+
+            conn.execute(
+                """
+                UPDATE forum_posts
+                SET title = ?, body = ?, tags_json = ?, updated_at = ?
+                WHERE id = ?;
+                """,
+                (
+                    normalized_title,
+                    normalized_body,
+                    json.dumps(tag_values, ensure_ascii=False),
+                    now,
+                    scoped_post_id,
+                ),
+            )
+            payload = conn.execute(
+                """
+                SELECT
+                    p.*,
+                    (SELECT COUNT(*) FROM forum_comments c WHERE c.post_id = p.id) AS comment_count,
+                    (SELECT COUNT(*) FROM forum_reactions r WHERE r.post_id = p.id) AS reaction_count,
+                    (SELECT reaction FROM forum_reactions vr WHERE vr.post_id = p.id AND vr.user_id = ? LIMIT 1) AS viewer_reaction
+                FROM forum_posts p
+                WHERE p.id = ?;
+                """,
+                (user_id, scoped_post_id),
+            ).fetchone()
+            assert payload is not None
+            return self._post_payload(payload)
+
+    def delete_post(self, *, post_id: str, user_id: str) -> bool:
+        scoped_post_id = post_id.strip()
+        with self._lock, self._connect() as conn:
+            row = conn.execute(
+                "SELECT author_user_id FROM forum_posts WHERE id = ?;",
+                (scoped_post_id,),
+            ).fetchone()
+            if not row:
+                return False
+            if row["author_user_id"] != user_id:
+                raise ValueError("forbidden")
+
+            conn.execute("DELETE FROM forum_reactions WHERE post_id = ?;", (scoped_post_id,))
+            conn.execute("DELETE FROM forum_comments WHERE post_id = ?;", (scoped_post_id,))
+            conn.execute("DELETE FROM forum_reports WHERE post_id = ?;", (scoped_post_id,))
+            conn.execute("DELETE FROM forum_post_mutes WHERE post_id = ?;", (scoped_post_id,))
+            conn.execute("DELETE FROM forum_posts WHERE id = ?;", (scoped_post_id,))
+            return True
+
     def list_comments(self, post_id: str, limit: int = 80) -> list[dict[str, Any]]:
         scoped_limit = min(max(int(limit), 1), 300)
 

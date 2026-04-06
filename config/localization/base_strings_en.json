@@ -171,5 +171,10 @@
   "forum_report_reason_safety": "Safety risk",
   "forum_report_reason_misinformation": "Misinformation",
   "forum_report_reason_harassment": "Harassment",
-  "forum_report_reason_spam": "Spam"
+  "forum_report_reason_spam": "Spam",
+  "forum_edit_title": "Edit post",
+  "forum_edit_apply": "Save changes",
+  "forum_error_update": "Post could not be updated.",
+  "forum_error_delete": "Post could not be deleted.",
+  "forum_delete_confirm_title": "Delete this post?"
 }

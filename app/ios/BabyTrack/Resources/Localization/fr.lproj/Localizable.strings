@@ -772,3 +772,8 @@
 "forum_report_reason_misinformation" = "Desinformation";
 "forum_report_reason_harassment" = "Harcèlement";
 "forum_report_reason_spam" = "Spam";
+"forum_edit_title" = "Modifier la publication";
+"forum_edit_apply" = "Enregistrer les modifications";
+"forum_error_update" = "La publication n’a pas pu être mise à jour.";
+"forum_error_delete" = "La publication n’a pas pu être supprimée.";
+"forum_delete_confirm_title" = "Supprimer cette publication ?";

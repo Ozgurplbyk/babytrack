@@ -294,6 +294,35 @@ final class BackendClient {
         return try JSONDecoder().decode(ForumPostEnvelope.self, from: data)
     }
 
+    func updateForumPost(
+        postId: String,
+        title: String,
+        body: String,
+        tags: [String],
+        userToken: String
+    ) async throws -> ForumPostEnvelope {
+        guard let url = baseURL?.appending(path: "/v1/forum/posts/\(postId)/edit") else { throw BackendError.invalidURL }
+        var req = userAuthorizedRequest(url: url, userToken: userToken, method: "POST")
+        req.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        req.httpBody = try JSONEncoder().encode(
+            ForumPostUpdatePayload(
+                title: title,
+                body: body,
+                tags: tags
+            )
+        )
+        let (data, response) = try await URLSession.shared.data(for: req)
+        try validate(response)
+        return try JSONDecoder().decode(ForumPostEnvelope.self, from: data)
+    }
+
+    func deleteForumPost(postId: String, userToken: String) async throws {
+        guard let url = baseURL?.appending(path: "/v1/forum/posts/\(postId)") else { throw BackendError.invalidURL }
+        let req = userAuthorizedRequest(url: url, userToken: userToken, method: "DELETE")
+        let (_, response) = try await URLSession.shared.data(for: req)
+        try validate(response)
+    }
+
     func fetchForumComments(postId: String, userToken: String, limit: Int = 80) async throws -> ForumCommentsEnvelope {
         guard let url = baseURL?.appending(path: "/v1/forum/posts/\(postId)/comments"),
               var components = URLComponents(url: url, resolvingAgainstBaseURL: false) else {
@@ -610,6 +639,12 @@ private struct ForumPostCreatePayload: Encodable {
     let tags: [String]
     let countryCode: String
     let childId: String
+}
+
+private struct ForumPostUpdatePayload: Encodable {
+    let title: String
+    let body: String
+    let tags: [String]
 }
 
 private struct ForumCommentCreatePayload: Encodable {

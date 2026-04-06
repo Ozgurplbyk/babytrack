@@ -119,6 +119,12 @@ class ForumPostCreateRequest(BaseModel):
     childId: str = ""
 
 
+class ForumPostUpdateRequest(BaseModel):
+    title: str = ""
+    body: str
+    tags: list[str] = []
+
+
 class ForumCommentCreateRequest(BaseModel):
     body: str
 
@@ -397,6 +403,30 @@ def forum_post_create(
     return {"post": post}
 
 
+@app.post("/v1/forum/posts/{post_id}/edit", dependencies=[Depends(_enforce_rate_limit)])
+def forum_post_update(
+    post_id: str,
+    payload: ForumPostUpdateRequest,
+    user: dict[str, Any] = Depends(_require_user),
+) -> dict[str, Any]:
+    try:
+        post = FORUM_STORE.update_post(
+            post_id=post_id,
+            user_id=user["id"],
+            title=payload.title,
+            body=payload.body,
+            tags=payload.tags,
+        )
+    except ValueError as exc:
+        reason = str(exc)
+        if reason == "post_not_found":
+            raise HTTPException(status_code=404, detail=reason) from exc
+        if reason == "forbidden":
+            raise HTTPException(status_code=403, detail=reason) from exc
+        raise HTTPException(status_code=400, detail=reason) from exc
+    return {"post": post}
+
+
 @app.get("/v1/forum/posts/{post_id}/comments", dependencies=[Depends(_enforce_rate_limit)])
 def forum_comments(post_id: str, limit: int = 80, user: dict[str, Any] = Depends(_require_user)) -> dict[str, Any]:
     _ = user
@@ -471,6 +501,19 @@ def forum_report_post(
 def forum_mute_post(post_id: str, user: dict[str, Any] = Depends(_require_user)) -> dict[str, Any]:
     muted = FORUM_STORE.mute_post(user_id=user["id"], post_id=post_id)
     if not muted:
+        raise HTTPException(status_code=404, detail="post_not_found")
+    return {"ok": True}
+
+
+@app.delete("/v1/forum/posts/{post_id}", dependencies=[Depends(_enforce_rate_limit)])
+def forum_delete_post(post_id: str, user: dict[str, Any] = Depends(_require_user)) -> dict[str, Any]:
+    try:
+        deleted = FORUM_STORE.delete_post(post_id=post_id, user_id=user["id"])
+    except ValueError as exc:
+        if str(exc) == "forbidden":
+            raise HTTPException(status_code=403, detail="forbidden") from exc
+        raise HTTPException(status_code=400, detail=str(exc)) from exc
+    if not deleted:
         raise HTTPException(status_code=404, detail="post_not_found")
     return {"ok": True}
 

@@ -421,6 +421,32 @@ class Handler(BaseHTTPRequestHandler):
                 return self._send(400, {"error": str(exc)})
             return self._send(200, {"post": post})
 
+        if path.startswith("/v1/forum/posts/") and path.endswith("/edit"):
+            user = self._user_from_token()
+            if not user:
+                return self._send(401, {"error": "user_session_required"})
+            parts = path.strip("/").split("/")
+            if len(parts) < 5:
+                return self._send(404, {"error": "not_found"})
+            post_id = parts[3]
+            payload = self._json_body()
+            try:
+                post = FORUM_STORE.update_post(
+                    post_id=post_id,
+                    user_id=user["id"],
+                    title=str(payload.get("title", "")),
+                    body=str(payload.get("body", "")),
+                    tags=payload.get("tags") if isinstance(payload.get("tags"), list) else [],
+                )
+            except ValueError as exc:
+                reason = str(exc)
+                if reason == "post_not_found":
+                    return self._send(404, {"error": reason})
+                if reason == "forbidden":
+                    return self._send(403, {"error": reason})
+                return self._send(400, {"error": reason})
+            return self._send(200, {"post": post})
+
         if path.startswith("/v1/forum/posts/") and path.endswith("/comments"):
             user = self._user_from_token()
             if not user:
@@ -601,6 +627,21 @@ class Handler(BaseHTTPRequestHandler):
             deleted = FAMILY_STORE.delete_invite(invite_id=invite_id, user_id=user["id"])
             if not deleted:
                 return self._send(404, {"error": "invite_not_found_or_forbidden"})
+            return self._send(200, {"ok": True})
+
+        if path.startswith("/v1/forum/posts/"):
+            user = self._user_from_token()
+            if not user:
+                return self._send(401, {"error": "user_session_required"})
+            post_id = path.strip("/").split("/")[3]
+            try:
+                deleted = FORUM_STORE.delete_post(post_id=post_id, user_id=user["id"])
+            except ValueError as exc:
+                if str(exc) == "forbidden":
+                    return self._send(403, {"error": "forbidden"})
+                return self._send(400, {"error": str(exc)})
+            if not deleted:
+                return self._send(404, {"error": "post_not_found"})
             return self._send(200, {"ok": True})
 
         return self._send(404, {"error": "not found"})
