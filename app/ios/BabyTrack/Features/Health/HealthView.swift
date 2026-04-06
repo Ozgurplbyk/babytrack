@@ -1221,26 +1221,17 @@ private struct SchoolTravelPlannerView: View {
     }
 
     private var filteredPlans: [SchoolTravelPlan] {
-        switch historyMode {
-        case .recent:
-            return store.plans
-        case .date:
-            let calendar = Calendar.current
-            return store.plans.filter {
-                calendar.isDate($0.startDate, inSameDayAs: historyDate) || calendar.isDate($0.endDate, inSameDayAs: historyDate)
-            }
-        case .babyMonth:
-            guard let birthDate else { return store.plans }
-            return store.plans.filter {
-                let month = max(Calendar.current.dateComponents([.month], from: birthDate, to: $0.startDate).month ?? 0, 0)
-                return month == historyBabyMonth
-            }
-        }
+        HealthHistoryLogic.filterSchoolTravelPlans(
+            from: store.plans,
+            mode: historyMode,
+            historyDate: historyDate,
+            historyBabyMonth: historyBabyMonth,
+            birthDate: birthDate
+        )
     }
 
     private var availableMonthCount: Int {
-        guard let birthDate else { return 36 }
-        return max(Calendar.current.dateComponents([.month], from: birthDate, to: Date()).month ?? 0, 0)
+        HealthHistoryLogic.availableMonthCount(birthDate: birthDate)
     }
 
     private func applyTemplate() {
@@ -1273,52 +1264,6 @@ private struct SchoolTravelPlannerView: View {
         planTitle = ""
         draftChecklist.removeAll()
         Haptics.success()
-    }
-}
-
-private struct SchoolTravelChecklistItem: Identifiable, Codable {
-    let id: UUID
-    var title: String
-    var isDone: Bool
-
-    init(id: UUID = UUID(), title: String, isDone: Bool) {
-        self.id = id
-        self.title = title
-        self.isDone = isDone
-    }
-}
-
-private struct SchoolTravelPlan: Identifiable, Codable {
-    let id: UUID
-    let childId: String
-    var mode: SchoolTravelMode
-    var title: String
-    var startDate: Date
-    var endDate: Date
-    var notes: String
-    var checklist: [SchoolTravelChecklistItem]
-    let createdAt: Date
-
-    init(
-        id: UUID = UUID(),
-        childId: String,
-        mode: SchoolTravelMode,
-        title: String,
-        startDate: Date,
-        endDate: Date,
-        notes: String,
-        checklist: [SchoolTravelChecklistItem],
-        createdAt: Date
-    ) {
-        self.id = id
-        self.childId = childId
-        self.mode = mode
-        self.title = title
-        self.startDate = startDate
-        self.endDate = endDate
-        self.notes = notes
-        self.checklist = checklist
-        self.createdAt = createdAt
     }
 }
 

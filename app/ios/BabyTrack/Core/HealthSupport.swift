@@ -36,6 +36,52 @@ enum SchoolTravelMode: String, CaseIterable, Codable, Identifiable {
     }
 }
 
+struct SchoolTravelChecklistItem: Identifiable, Codable, Equatable {
+    let id: UUID
+    var title: String
+    var isDone: Bool
+
+    init(id: UUID = UUID(), title: String, isDone: Bool) {
+        self.id = id
+        self.title = title
+        self.isDone = isDone
+    }
+}
+
+struct SchoolTravelPlan: Identifiable, Codable, Equatable {
+    let id: UUID
+    let childId: String
+    var mode: SchoolTravelMode
+    var title: String
+    var startDate: Date
+    var endDate: Date
+    var notes: String
+    var checklist: [SchoolTravelChecklistItem]
+    let createdAt: Date
+
+    init(
+        id: UUID = UUID(),
+        childId: String,
+        mode: SchoolTravelMode,
+        title: String,
+        startDate: Date,
+        endDate: Date,
+        notes: String,
+        checklist: [SchoolTravelChecklistItem],
+        createdAt: Date
+    ) {
+        self.id = id
+        self.childId = childId
+        self.mode = mode
+        self.title = title
+        self.startDate = startDate
+        self.endDate = endDate
+        self.notes = notes
+        self.checklist = checklist
+        self.createdAt = createdAt
+    }
+}
+
 enum GrowthMetric: String, CaseIterable, Identifiable {
     case weight
     case length
@@ -193,6 +239,31 @@ enum HealthHistoryLogic {
     ) -> Int {
         guard let birthDate else { return fallback }
         return max(calendar.dateComponents([.month], from: birthDate, to: now).month ?? 0, 0)
+    }
+
+    static func filterSchoolTravelPlans(
+        from plans: [SchoolTravelPlan],
+        mode: HealthHistoryMode,
+        historyDate: Date,
+        historyBabyMonth: Int,
+        birthDate: Date?,
+        calendar: Calendar = .current,
+        recentLimit: Int = 10
+    ) -> [SchoolTravelPlan] {
+        switch mode {
+        case .recent:
+            return Array(plans.prefix(recentLimit))
+        case .date:
+            return plans.filter {
+                calendar.isDate($0.startDate, inSameDayAs: historyDate) || calendar.isDate($0.endDate, inSameDayAs: historyDate)
+            }
+        case .babyMonth:
+            guard let birthDate else { return Array(plans.prefix(recentLimit)) }
+            return plans.filter {
+                let month = max(calendar.dateComponents([.month], from: birthDate, to: $0.startDate).month ?? 0, 0)
+                return month == historyBabyMonth
+            }
+        }
     }
 }
 

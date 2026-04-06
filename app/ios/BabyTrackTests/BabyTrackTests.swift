@@ -82,6 +82,81 @@ final class BabyTrackTests: XCTestCase {
         XCTAssertTrue(Set(school).isDisjoint(with: Set(travel)))
     }
 
+    func testSchoolTravelHistoryFilteringSupportsRecentDateAndBabyMonthModes() {
+        let calendar = Calendar(identifier: .gregorian)
+        let birthDate = calendar.date(from: DateComponents(year: 2026, month: 1, day: 1))!
+        let plan0 = SchoolTravelPlan(
+            childId: "child",
+            mode: .school,
+            title: "School Form",
+            startDate: birthDate,
+            endDate: birthDate,
+            notes: "",
+            checklist: [],
+            createdAt: birthDate
+        )
+        let plan1Start = calendar.date(byAdding: .day, value: 36, to: birthDate)!
+        let plan1 = SchoolTravelPlan(
+            childId: "child",
+            mode: .travel,
+            title: "Travel Bag",
+            startDate: plan1Start,
+            endDate: calendar.date(byAdding: .day, value: 3, to: plan1Start)!,
+            notes: "",
+            checklist: [],
+            createdAt: plan1Start
+        )
+        let plan2Start = calendar.date(byAdding: .day, value: 72, to: birthDate)!
+        let plan2 = SchoolTravelPlan(
+            childId: "child",
+            mode: .school,
+            title: "School Refill",
+            startDate: plan2Start,
+            endDate: plan2Start,
+            notes: "",
+            checklist: [],
+            createdAt: plan2Start
+        )
+        let plans = [plan2, plan1, plan0]
+
+        XCTAssertEqual(
+            HealthHistoryLogic.filterSchoolTravelPlans(
+                from: plans,
+                mode: .recent,
+                historyDate: plan2Start,
+                historyBabyMonth: 0,
+                birthDate: birthDate,
+                calendar: calendar,
+                recentLimit: 2
+            ).map(\.id),
+            [plan2.id, plan1.id]
+        )
+
+        XCTAssertEqual(
+            HealthHistoryLogic.filterSchoolTravelPlans(
+                from: plans,
+                mode: .date,
+                historyDate: plan1.endDate,
+                historyBabyMonth: 0,
+                birthDate: birthDate,
+                calendar: calendar
+            ).map(\.id),
+            [plan1.id]
+        )
+
+        XCTAssertEqual(
+            HealthHistoryLogic.filterSchoolTravelPlans(
+                from: plans,
+                mode: .babyMonth,
+                historyDate: plan2Start,
+                historyBabyMonth: 1,
+                birthDate: birthDate,
+                calendar: calendar
+            ).map(\.id),
+            [plan1.id]
+        )
+    }
+
     func testGrowthMetricUnitLabelsRespectUnitProfile() {
         let metricProfile = UnitProfile(length: .cm, weight: .kg, temperature: .celsius, volume: .ml)
         let imperialProfile = UnitProfile(length: .inch, weight: .lb, temperature: .fahrenheit, volume: .oz)
