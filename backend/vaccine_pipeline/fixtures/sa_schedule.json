@@ -1,0 +1,8 @@
+{
+  "version": "2026.01",
+  "schedule": [
+    {"vaccine_code": "HepB", "dose_no": 1, "min_age_days": 0, "max_age_days": 30, "min_interval_days": 0, "effective_from": "2026-01-01", "effective_to": null},
+    {"vaccine_code": "Hexavalent", "dose_no": 1, "min_age_days": 60, "max_age_days": 120, "min_interval_days": 28, "effective_from": "2026-01-01", "effective_to": null},
+    {"vaccine_code": "MMR", "dose_no": 1, "min_age_days": 365, "max_age_days": 730, "min_interval_days": 0, "effective_from": "2026-01-01", "effective_to": null}
+  ]
+}

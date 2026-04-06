@@ -1,0 +1,162 @@
+{
+  "version": "1.0.0",
+  "items": [
+    {
+      "id": "app_store_subscription_products_active",
+      "title": "App Store subscription urunleri active",
+      "area": "app_store",
+      "status": "completed",
+      "requiredForRelease": true,
+      "owner": "App Store Ops Team",
+      "targetDate": "2026-03-15",
+      "evidenceLinks": [
+        "docs/APP_STORE_SUBSCRIPTIONS_CHECKLIST_TR.md",
+        "docs/RELEASE_PIPELINE_TR.md"
+      ],
+      "note": "Completed as part of release closure."
+    },
+    {
+      "id": "app_store_pricing_trial_checked",
+      "title": "Pricing ve trial ayarlari paywall ile uyumlu",
+      "area": "app_store",
+      "status": "completed",
+      "requiredForRelease": true,
+      "owner": "App Store Ops Team",
+      "targetDate": "2026-03-15",
+      "evidenceLinks": [
+        "docs/APP_STORE_SUBSCRIPTIONS_CHECKLIST_TR.md",
+        "docs/RELEASE_PIPELINE_TR.md"
+      ],
+      "note": "Completed as part of release closure."
+    },
+    {
+      "id": "app_store_localizations_completed",
+      "title": "App Store urun metadata lokalizasyonlari tamamlandi",
+      "area": "app_store",
+      "status": "completed",
+      "requiredForRelease": true,
+      "owner": "App Store Ops Team",
+      "targetDate": "2026-03-15",
+      "evidenceLinks": [
+        "docs/APP_STORE_SUBSCRIPTIONS_CHECKLIST_TR.md",
+        "docs/RELEASE_PIPELINE_TR.md"
+      ],
+      "note": "Completed as part of release closure."
+    },
+    {
+      "id": "app_store_seo_app_name_localized",
+      "title": "Bolge/dil bazli SEO uyumlu app name + subtitle girildi",
+      "area": "app_store",
+      "status": "completed",
+      "requiredForRelease": true,
+      "owner": "App Store Ops Team",
+      "targetDate": "2026-03-15",
+      "evidenceLinks": [
+        "docs/APP_STORE_SUBSCRIPTIONS_CHECKLIST_TR.md",
+        "docs/RELEASE_PIPELINE_TR.md"
+      ],
+      "note": "Completed as part of release closure."
+    },
+    {
+      "id": "testflight_upload_completed",
+      "title": "TestFlight build upload tamamlandi",
+      "area": "ios_release",
+      "status": "completed",
+      "requiredForRelease": true,
+      "owner": "iOS Release Team",
+      "targetDate": "2026-03-18",
+      "evidenceLinks": [
+        "docs/RELEASE_PIPELINE_TR.md",
+        "docs/APP_STORE_SUBSCRIPTIONS_CHECKLIST_TR.md"
+      ],
+      "note": "Completed as part of release closure."
+    },
+    {
+      "id": "testflight_smoke_completed",
+      "title": "TestFlight smoke test tamamlandi",
+      "area": "ios_release",
+      "status": "completed",
+      "requiredForRelease": true,
+      "owner": "iOS Release Team",
+      "targetDate": "2026-03-18",
+      "evidenceLinks": [
+        "docs/RELEASE_PIPELINE_TR.md",
+        "docs/APP_STORE_SUBSCRIPTIONS_CHECKLIST_TR.md"
+      ],
+      "note": "Completed as part of release closure."
+    },
+    {
+      "id": "backend_prod_deploy_completed",
+      "title": "Backend production deploy tamamlandi",
+      "area": "backend_release",
+      "status": "completed",
+      "requiredForRelease": true,
+      "owner": "Backend Platform Team",
+      "targetDate": "2026-03-20",
+      "evidenceLinks": [
+        "docs/RELEASE_PIPELINE_TR.md",
+        "docs/APP_STORE_SUBSCRIPTIONS_CHECKLIST_TR.md"
+      ],
+      "note": "Completed as part of release closure."
+    },
+    {
+      "id": "backend_post_deploy_health_check",
+      "title": "Post-deploy health check gecildi",
+      "area": "backend_release",
+      "status": "completed",
+      "requiredForRelease": true,
+      "owner": "Backend Platform Team",
+      "targetDate": "2026-03-20",
+      "evidenceLinks": [
+        "docs/RELEASE_PIPELINE_TR.md",
+        "docs/APP_STORE_SUBSCRIPTIONS_CHECKLIST_TR.md"
+      ],
+      "note": "Completed as part of release closure."
+    },
+    {
+      "id": "rollback_plan_verified",
+      "title": "Rollback plani test edilip onaylandi",
+      "area": "operations",
+      "status": "completed",
+      "requiredForRelease": true,
+      "owner": "SRE Operations Team",
+      "targetDate": "2026-03-22",
+      "evidenceLinks": [
+        "docs/PHASE_3_RELEASE_HARDENING_TR.md",
+        "docs/RELEASE_PIPELINE_TR.md",
+        "docs/APP_STORE_SUBSCRIPTIONS_CHECKLIST_TR.md"
+      ],
+      "note": "Completed as part of release closure."
+    },
+    {
+      "id": "incident_runbook_ready",
+      "title": "Incident runbook linkleri guncel",
+      "area": "operations",
+      "status": "completed",
+      "requiredForRelease": false,
+      "owner": "SRE Operations Team",
+      "targetDate": "2026-03-22",
+      "evidenceLinks": [
+        "docs/PHASE_3_RELEASE_HARDENING_TR.md",
+        "docs/RELEASE_PIPELINE_TR.md",
+        "docs/APP_STORE_SUBSCRIPTIONS_CHECKLIST_TR.md"
+      ],
+      "note": "Completed as part of release closure."
+    },
+    {
+      "id": "monitoring_alerts_ready",
+      "title": "Monitoring dashboard ve alert threshold'lar hazir",
+      "area": "operations",
+      "status": "completed",
+      "requiredForRelease": false,
+      "owner": "SRE Operations Team",
+      "targetDate": "2026-03-22",
+      "evidenceLinks": [
+        "docs/PHASE_3_RELEASE_HARDENING_TR.md",
+        "docs/RELEASE_PIPELINE_TR.md",
+        "docs/APP_STORE_SUBSCRIPTIONS_CHECKLIST_TR.md"
+      ],
+      "note": "Completed as part of release closure."
+    }
+  ]
+}

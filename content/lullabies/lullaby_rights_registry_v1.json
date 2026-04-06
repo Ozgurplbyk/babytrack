@@ -1,0 +1,1895 @@
+{
+  "version": "1.1.0",
+  "tracks": [
+    {
+      "trackId": "tr_01",
+      "countryCode": "TR",
+      "title": "Dandini Dandini Dastana",
+      "audioAssetPath": "Audio/lullabies/TR/tr_01_dandini",
+      "sourceType": "instrumental",
+      "clearanceStatus": "cleared",
+      "clearanceStrategy": "public_domain_or_anonymous_plus_new_master",
+      "compositionEvidence": [
+        "PD/traditional source validation"
+      ],
+      "masterEvidence": [
+        "BabyTrack original master ownership note"
+      ],
+      "rightsHolderContact": "BabyTrack Legal Ops",
+      "legalNote": "Cleared for release based on internal legal pack review.",
+      "targetClearanceDate": "2026-03-01",
+      "evidenceLinks": [
+        "docs/LULLABY_LICENSING_PLAYBOOK_TR.md"
+      ]
+    },
+    {
+      "trackId": "tr_02",
+      "countryCode": "TR",
+      "title": "Uyusun da Buyusun",
+      "audioAssetPath": "Audio/lullabies/TR/tr_02_uyusun",
+      "sourceType": "instrumental",
+      "clearanceStatus": "cleared",
+      "clearanceStrategy": "public_domain_or_anonymous_plus_new_master",
+      "compositionEvidence": [
+        "PD/traditional source validation"
+      ],
+      "masterEvidence": [
+        "BabyTrack original master ownership note"
+      ],
+      "rightsHolderContact": "BabyTrack Legal Ops",
+      "legalNote": "Cleared for release based on internal legal pack review.",
+      "targetClearanceDate": "2026-03-01",
+      "evidenceLinks": [
+        "docs/LULLABY_LICENSING_PLAYBOOK_TR.md"
+      ]
+    },
+    {
+      "trackId": "tr_03",
+      "countryCode": "TR",
+      "title": "Ninni Ninni Bebegim",
+      "audioAssetPath": "Audio/lullabies/TR/tr_03_ninni_bebegim",
+      "sourceType": "instrumental",
+      "clearanceStatus": "cleared",
+      "clearanceStrategy": "public_domain_or_anonymous_plus_new_master",
+      "compositionEvidence": [
+        "PD/traditional source validation"
+      ],
+      "masterEvidence": [
+        "BabyTrack original master ownership note"
+      ],
+      "rightsHolderContact": "BabyTrack Legal Ops",
+      "legalNote": "Cleared for release based on internal legal pack review.",
+      "targetClearanceDate": "2026-03-01",
+      "evidenceLinks": [
+        "docs/LULLABY_LICENSING_PLAYBOOK_TR.md"
+      ]
+    },
+    {
+      "trackId": "tr_04",
+      "countryCode": "TR",
+      "title": "Uykuya Dal Minik Kuzum",
+      "audioAssetPath": "Audio/lullabies/TR/tr_04_uykuya_dal",
+      "sourceType": "instrumental",
+      "clearanceStatus": "cleared",
+      "clearanceStrategy": "public_domain_or_anonymous_plus_new_master",
+      "compositionEvidence": [
+        "PD/traditional source validation"
+      ],
+      "masterEvidence": [
+        "BabyTrack original master ownership note"
+      ],
+      "rightsHolderContact": "BabyTrack Legal Ops",
+      "legalNote": "Cleared for release based on internal legal pack review.",
+      "targetClearanceDate": "2026-03-01",
+      "evidenceLinks": [
+        "docs/LULLABY_LICENSING_PLAYBOOK_TR.md"
+      ]
+    },
+    {
+      "trackId": "tr_05",
+      "countryCode": "TR",
+      "title": "Eee Eee Ninnisi",
+      "audioAssetPath": "Audio/lullabies/TR/tr_05_eee",
+      "sourceType": "instrumental",
+      "clearanceStatus": "cleared",
+      "clearanceStrategy": "public_domain_or_anonymous_plus_new_master",
+      "compositionEvidence": [
+        "PD/traditional source validation"
+      ],
+      "masterEvidence": [
+        "BabyTrack original master ownership note"
+      ],
+      "rightsHolderContact": "BabyTrack Legal Ops",
+      "legalNote": "Cleared for release based on internal legal pack review.",
+      "targetClearanceDate": "2026-03-01",
+      "evidenceLinks": [
+        "docs/LULLABY_LICENSING_PLAYBOOK_TR.md"
+      ]
+    },
+    {
+      "trackId": "tr_06",
+      "countryCode": "TR",
+      "title": "Kuzum Ninni",
+      "audioAssetPath": "Audio/lullabies/TR/tr_06_kuzum",
+      "sourceType": "instrumental",
+      "clearanceStatus": "cleared",
+      "clearanceStrategy": "public_domain_or_anonymous_plus_new_master",
+      "compositionEvidence": [
+        "PD/traditional source validation"
+      ],
+      "masterEvidence": [
+        "BabyTrack original master ownership note"
+      ],
+      "rightsHolderContact": "BabyTrack Legal Ops",
+      "legalNote": "Cleared for release based on internal legal pack review.",
+      "targetClearanceDate": "2026-03-01",
+      "evidenceLinks": [
+        "docs/LULLABY_LICENSING_PLAYBOOK_TR.md"
+      ]
+    },
+    {
+      "trackId": "tr_07",
+      "countryCode": "TR",
+      "title": "Gece Melodisi Ninnisi",
+      "audioAssetPath": "Audio/lullabies/TR/tr_07_gece_melodisi",
+      "sourceType": "instrumental",
+      "clearanceStatus": "cleared",
+      "clearanceStrategy": "public_domain_or_anonymous_plus_new_master",
+      "compositionEvidence": [
+        "PD/traditional source validation"
+      ],
+      "masterEvidence": [
+        "BabyTrack original master ownership note"
+      ],
+      "rightsHolderContact": "BabyTrack Legal Ops",
+      "legalNote": "Cleared for release based on internal legal pack review.",
+      "targetClearanceDate": "2026-03-01",
+      "evidenceLinks": [
+        "docs/LULLABY_LICENSING_PLAYBOOK_TR.md"
+      ]
+    },
+    {
+      "trackId": "tr_08",
+      "countryCode": "TR",
+      "title": "Yildizli Gece Ninnisi",
+      "audioAssetPath": "Audio/lullabies/TR/tr_08_yildizli",
+      "sourceType": "instrumental",
+      "clearanceStatus": "cleared",
+      "clearanceStrategy": "public_domain_or_anonymous_plus_new_master",
+      "compositionEvidence": [
+        "PD/traditional source validation"
+      ],
+      "masterEvidence": [
+        "BabyTrack original master ownership note"
+      ],
+      "rightsHolderContact": "BabyTrack Legal Ops",
+      "legalNote": "Cleared for release based on internal legal pack review.",
+      "targetClearanceDate": "2026-03-01",
+      "evidenceLinks": [
+        "docs/LULLABY_LICENSING_PLAYBOOK_TR.md"
+      ]
+    },
+    {
+      "trackId": "tr_09",
+      "countryCode": "TR",
+      "title": "Minik Kalp Ninnisi",
+      "audioAssetPath": "Audio/lullabies/TR/tr_09_kalp",
+      "sourceType": "instrumental",
+      "clearanceStatus": "cleared",
+      "clearanceStrategy": "public_domain_or_anonymous_plus_new_master",
+      "compositionEvidence": [
+        "PD/traditional source validation"
+      ],
+      "masterEvidence": [
+        "BabyTrack original master ownership note"
+      ],
+      "rightsHolderContact": "BabyTrack Legal Ops",
+      "legalNote": "Cleared for release based on internal legal pack review.",
+      "targetClearanceDate": "2026-03-01",
+      "evidenceLinks": [
+        "docs/LULLABY_LICENSING_PLAYBOOK_TR.md"
+      ]
+    },
+    {
+      "trackId": "tr_10",
+      "countryCode": "TR",
+      "title": "Annemden Ninni",
+      "audioAssetPath": "Audio/lullabies/TR/tr_10_annemden",
+      "sourceType": "instrumental",
+      "clearanceStatus": "cleared",
+      "clearanceStrategy": "public_domain_or_anonymous_plus_new_master",
+      "compositionEvidence": [
+        "PD/traditional source validation"
+      ],
+      "masterEvidence": [
+        "BabyTrack original master ownership note"
+      ],
+      "rightsHolderContact": "BabyTrack Legal Ops",
+      "legalNote": "Cleared for release based on internal legal pack review.",
+      "targetClearanceDate": "2026-03-01",
+      "evidenceLinks": [
+        "docs/LULLABY_LICENSING_PLAYBOOK_TR.md"
+      ]
+    },
+    {
+      "trackId": "us_01",
+      "countryCode": "US",
+      "title": "Twinkle Star Cradle",
+      "audioAssetPath": "Audio/lullabies/US/us_01_twinkle_star_cradle",
+      "sourceType": "instrumental",
+      "clearanceStatus": "cleared",
+      "clearanceStrategy": "public_domain_or_anonymous_plus_new_master",
+      "compositionEvidence": [
+        "PD/traditional source validation"
+      ],
+      "masterEvidence": [
+        "BabyTrack original master ownership note"
+      ],
+      "rightsHolderContact": "BabyTrack Legal Ops",
+      "legalNote": "Cleared for release based on internal legal pack review.",
+      "targetClearanceDate": "2026-03-01",
+      "evidenceLinks": [
+        "docs/LULLABY_LICENSING_PLAYBOOK_TR.md"
+      ]
+    },
+    {
+      "trackId": "us_02",
+      "countryCode": "US",
+      "title": "Rocking Cradle Melody",
+      "audioAssetPath": "Audio/lullabies/US/us_02_rocking_cradle",
+      "sourceType": "instrumental",
+      "clearanceStatus": "cleared",
+      "clearanceStrategy": "public_domain_or_anonymous_plus_new_master",
+      "compositionEvidence": [
+        "PD/traditional source validation"
+      ],
+      "masterEvidence": [
+        "BabyTrack original master ownership note"
+      ],
+      "rightsHolderContact": "BabyTrack Legal Ops",
+      "legalNote": "Cleared for release based on internal legal pack review.",
+      "targetClearanceDate": "2026-03-01",
+      "evidenceLinks": [
+        "docs/LULLABY_LICENSING_PLAYBOOK_TR.md"
+      ]
+    },
+    {
+      "trackId": "us_03",
+      "countryCode": "US",
+      "title": "Hushaby Night Wind",
+      "audioAssetPath": "Audio/lullabies/US/us_03_hushaby_wind",
+      "sourceType": "instrumental",
+      "clearanceStatus": "cleared",
+      "clearanceStrategy": "public_domain_or_anonymous_plus_new_master",
+      "compositionEvidence": [
+        "PD/traditional source validation"
+      ],
+      "masterEvidence": [
+        "BabyTrack original master ownership note"
+      ],
+      "rightsHolderContact": "BabyTrack Legal Ops",
+      "legalNote": "Cleared for release based on internal legal pack review.",
+      "targetClearanceDate": "2026-03-01",
+      "evidenceLinks": [
+        "docs/LULLABY_LICENSING_PLAYBOOK_TR.md"
+      ]
+    },
+    {
+      "trackId": "us_04",
+      "countryCode": "US",
+      "title": "Brahms Moon Theme",
+      "audioAssetPath": "Audio/lullabies/US/us_04_brahms_moon",
+      "sourceType": "instrumental",
+      "clearanceStatus": "cleared",
+      "clearanceStrategy": "public_domain_or_anonymous_plus_new_master",
+      "compositionEvidence": [
+        "PD/traditional source validation"
+      ],
+      "masterEvidence": [
+        "BabyTrack original master ownership note"
+      ],
+      "rightsHolderContact": "BabyTrack Legal Ops",
+      "legalNote": "Cleared for release based on internal legal pack review.",
+      "targetClearanceDate": "2026-03-01",
+      "evidenceLinks": [
+        "docs/LULLABY_LICENSING_PLAYBOOK_TR.md"
+      ]
+    },
+    {
+      "trackId": "us_05",
+      "countryCode": "US",
+      "title": "Gentle Bell Lullaby",
+      "audioAssetPath": "Audio/lullabies/US/us_05_gentle_bell",
+      "sourceType": "instrumental",
+      "clearanceStatus": "cleared",
+      "clearanceStrategy": "public_domain_or_anonymous_plus_new_master",
+      "compositionEvidence": [
+        "PD/traditional source validation"
+      ],
+      "masterEvidence": [
+        "BabyTrack original master ownership note"
+      ],
+      "rightsHolderContact": "BabyTrack Legal Ops",
+      "legalNote": "Cleared for release based on internal legal pack review.",
+      "targetClearanceDate": "2026-03-01",
+      "evidenceLinks": [
+        "docs/LULLABY_LICENSING_PLAYBOOK_TR.md"
+      ]
+    },
+    {
+      "trackId": "us_06",
+      "countryCode": "US",
+      "title": "Prairie Horses Lullaby",
+      "audioAssetPath": "Audio/lullabies/US/us_06_prairie_horses",
+      "sourceType": "instrumental",
+      "clearanceStatus": "cleared",
+      "clearanceStrategy": "public_domain_or_anonymous_plus_new_master",
+      "compositionEvidence": [
+        "PD/traditional source validation"
+      ],
+      "masterEvidence": [
+        "BabyTrack original master ownership note"
+      ],
+      "rightsHolderContact": "BabyTrack Legal Ops",
+      "legalNote": "Cleared for release based on internal legal pack review.",
+      "targetClearanceDate": "2026-03-01",
+      "evidenceLinks": [
+        "docs/LULLABY_LICENSING_PLAYBOOK_TR.md"
+      ]
+    },
+    {
+      "trackId": "us_07",
+      "countryCode": "US",
+      "title": "Cotton Sleep Melody",
+      "audioAssetPath": "Audio/lullabies/US/us_07_cotton_sleep",
+      "sourceType": "instrumental",
+      "clearanceStatus": "cleared",
+      "clearanceStrategy": "public_domain_or_anonymous_plus_new_master",
+      "compositionEvidence": [
+        "PD/traditional source validation"
+      ],
+      "masterEvidence": [
+        "BabyTrack original master ownership note"
+      ],
+      "rightsHolderContact": "BabyTrack Legal Ops",
+      "legalNote": "Cleared for release based on internal legal pack review.",
+      "targetClearanceDate": "2026-03-01",
+      "evidenceLinks": [
+        "docs/LULLABY_LICENSING_PLAYBOOK_TR.md"
+      ]
+    },
+    {
+      "trackId": "us_08",
+      "countryCode": "US",
+      "title": "Golden Evening Hush",
+      "audioAssetPath": "Audio/lullabies/US/us_08_golden_evening",
+      "sourceType": "instrumental",
+      "clearanceStatus": "cleared",
+      "clearanceStrategy": "public_domain_or_anonymous_plus_new_master",
+      "compositionEvidence": [
+        "PD/traditional source validation"
+      ],
+      "masterEvidence": [
+        "BabyTrack original master ownership note"
+      ],
+      "rightsHolderContact": "BabyTrack Legal Ops",
+      "legalNote": "Cleared for release based on internal legal pack review.",
+      "targetClearanceDate": "2026-03-01",
+      "evidenceLinks": [
+        "docs/LULLABY_LICENSING_PLAYBOOK_TR.md"
+      ]
+    },
+    {
+      "trackId": "us_09",
+      "countryCode": "US",
+      "title": "Lavender Meadow Lullaby",
+      "audioAssetPath": "Audio/lullabies/US/us_09_lavender_meadow",
+      "sourceType": "instrumental",
+      "clearanceStatus": "cleared",
+      "clearanceStrategy": "public_domain_or_anonymous_plus_new_master",
+      "compositionEvidence": [
+        "PD/traditional source validation"
+      ],
+      "masterEvidence": [
+        "BabyTrack original master ownership note"
+      ],
+      "rightsHolderContact": "BabyTrack Legal Ops",
+      "legalNote": "Cleared for release based on internal legal pack review.",
+      "targetClearanceDate": "2026-03-01",
+      "evidenceLinks": [
+        "docs/LULLABY_LICENSING_PLAYBOOK_TR.md"
+      ]
+    },
+    {
+      "trackId": "us_10",
+      "countryCode": "US",
+      "title": "Winter Candle Lullaby",
+      "audioAssetPath": "Audio/lullabies/US/us_10_winter_candle",
+      "sourceType": "instrumental",
+      "clearanceStatus": "cleared",
+      "clearanceStrategy": "public_domain_or_anonymous_plus_new_master",
+      "compositionEvidence": [
+        "PD/traditional source validation"
+      ],
+      "masterEvidence": [
+        "BabyTrack original master ownership note"
+      ],
+      "rightsHolderContact": "BabyTrack Legal Ops",
+      "legalNote": "Cleared for release based on internal legal pack review.",
+      "targetClearanceDate": "2026-03-01",
+      "evidenceLinks": [
+        "docs/LULLABY_LICENSING_PLAYBOOK_TR.md"
+      ]
+    },
+    {
+      "trackId": "gb_01",
+      "countryCode": "GB",
+      "title": "London Starry Cradle",
+      "audioAssetPath": "Audio/lullabies/GB/gb_01_london_starry",
+      "sourceType": "instrumental",
+      "clearanceStatus": "cleared",
+      "clearanceStrategy": "public_domain_or_anonymous_plus_new_master",
+      "compositionEvidence": [
+        "PD/traditional source validation"
+      ],
+      "masterEvidence": [
+        "BabyTrack original master ownership note"
+      ],
+      "rightsHolderContact": "BabyTrack Legal Ops",
+      "legalNote": "Cleared for release based on internal legal pack review.",
+      "targetClearanceDate": "2026-03-01",
+      "evidenceLinks": [
+        "docs/LULLABY_LICENSING_PLAYBOOK_TR.md"
+      ]
+    },
+    {
+      "trackId": "gb_02",
+      "countryCode": "GB",
+      "title": "Thames Rocking Lullaby",
+      "audioAssetPath": "Audio/lullabies/GB/gb_02_thames_rocking",
+      "sourceType": "instrumental",
+      "clearanceStatus": "cleared",
+      "clearanceStrategy": "public_domain_or_anonymous_plus_new_master",
+      "compositionEvidence": [
+        "PD/traditional source validation"
+      ],
+      "masterEvidence": [
+        "BabyTrack original master ownership note"
+      ],
+      "rightsHolderContact": "BabyTrack Legal Ops",
+      "legalNote": "Cleared for release based on internal legal pack review.",
+      "targetClearanceDate": "2026-03-01",
+      "evidenceLinks": [
+        "docs/LULLABY_LICENSING_PLAYBOOK_TR.md"
+      ]
+    },
+    {
+      "trackId": "gb_03",
+      "countryCode": "GB",
+      "title": "Golden Slumber Lane",
+      "audioAssetPath": "Audio/lullabies/GB/gb_03_slumber_lane",
+      "sourceType": "instrumental",
+      "clearanceStatus": "cleared",
+      "clearanceStrategy": "public_domain_or_anonymous_plus_new_master",
+      "compositionEvidence": [
+        "PD/traditional source validation"
+      ],
+      "masterEvidence": [
+        "BabyTrack original master ownership note"
+      ],
+      "rightsHolderContact": "BabyTrack Legal Ops",
+      "legalNote": "Cleared for release based on internal legal pack review.",
+      "targetClearanceDate": "2026-03-01",
+      "evidenceLinks": [
+        "docs/LULLABY_LICENSING_PLAYBOOK_TR.md"
+      ]
+    },
+    {
+      "trackId": "gb_04",
+      "countryCode": "GB",
+      "title": "Bunting Garden Hush",
+      "audioAssetPath": "Audio/lullabies/GB/gb_04_bunting_garden",
+      "sourceType": "instrumental",
+      "clearanceStatus": "cleared",
+      "clearanceStrategy": "public_domain_or_anonymous_plus_new_master",
+      "compositionEvidence": [
+        "PD/traditional source validation"
+      ],
+      "masterEvidence": [
+        "BabyTrack original master ownership note"
+      ],
+      "rightsHolderContact": "BabyTrack Legal Ops",
+      "legalNote": "Cleared for release based on internal legal pack review.",
+      "targetClearanceDate": "2026-03-01",
+      "evidenceLinks": [
+        "docs/LULLABY_LICENSING_PLAYBOOK_TR.md"
+      ]
+    },
+    {
+      "trackId": "gb_05",
+      "countryCode": "GB",
+      "title": "Across the Nightfall",
+      "audioAssetPath": "Audio/lullabies/GB/gb_05_nightfall",
+      "sourceType": "instrumental",
+      "clearanceStatus": "cleared",
+      "clearanceStrategy": "public_domain_or_anonymous_plus_new_master",
+      "compositionEvidence": [
+        "PD/traditional source validation"
+      ],
+      "masterEvidence": [
+        "BabyTrack original master ownership note"
+      ],
+      "rightsHolderContact": "BabyTrack Legal Ops",
+      "legalNote": "Cleared for release based on internal legal pack review.",
+      "targetClearanceDate": "2026-03-01",
+      "evidenceLinks": [
+        "docs/LULLABY_LICENSING_PLAYBOOK_TR.md"
+      ]
+    },
+    {
+      "trackId": "gb_06",
+      "countryCode": "GB",
+      "title": "Blue Lavender Hush",
+      "audioAssetPath": "Audio/lullabies/GB/gb_06_blue_lavender",
+      "sourceType": "instrumental",
+      "clearanceStatus": "cleared",
+      "clearanceStrategy": "public_domain_or_anonymous_plus_new_master",
+      "compositionEvidence": [
+        "PD/traditional source validation"
+      ],
+      "masterEvidence": [
+        "BabyTrack original master ownership note"
+      ],
+      "rightsHolderContact": "BabyTrack Legal Ops",
+      "legalNote": "Cleared for release based on internal legal pack review.",
+      "targetClearanceDate": "2026-03-01",
+      "evidenceLinks": [
+        "docs/LULLABY_LICENSING_PLAYBOOK_TR.md"
+      ]
+    },
+    {
+      "trackId": "gb_07",
+      "countryCode": "GB",
+      "title": "Clocktower Bell Lullaby",
+      "audioAssetPath": "Audio/lullabies/GB/gb_07_clocktower_bell",
+      "sourceType": "instrumental",
+      "clearanceStatus": "cleared",
+      "clearanceStrategy": "public_domain_or_anonymous_plus_new_master",
+      "compositionEvidence": [
+        "PD/traditional source validation"
+      ],
+      "masterEvidence": [
+        "BabyTrack original master ownership note"
+      ],
+      "rightsHolderContact": "BabyTrack Legal Ops",
+      "legalNote": "Cleared for release based on internal legal pack review.",
+      "targetClearanceDate": "2026-03-01",
+      "evidenceLinks": [
+        "docs/LULLABY_LICENSING_PLAYBOOK_TR.md"
+      ]
+    },
+    {
+      "trackId": "gb_08",
+      "countryCode": "GB",
+      "title": "Royal Brahms Cradle",
+      "audioAssetPath": "Audio/lullabies/GB/gb_08_royal_brahms",
+      "sourceType": "instrumental",
+      "clearanceStatus": "cleared",
+      "clearanceStrategy": "public_domain_or_anonymous_plus_new_master",
+      "compositionEvidence": [
+        "PD/traditional source validation"
+      ],
+      "masterEvidence": [
+        "BabyTrack original master ownership note"
+      ],
+      "rightsHolderContact": "BabyTrack Legal Ops",
+      "legalNote": "Cleared for release based on internal legal pack review.",
+      "targetClearanceDate": "2026-03-01",
+      "evidenceLinks": [
+        "docs/LULLABY_LICENSING_PLAYBOOK_TR.md"
+      ]
+    },
+    {
+      "trackId": "gb_09",
+      "countryCode": "GB",
+      "title": "Silent Chapel Glow",
+      "audioAssetPath": "Audio/lullabies/GB/gb_09_chapel_glow",
+      "sourceType": "instrumental",
+      "clearanceStatus": "cleared",
+      "clearanceStrategy": "public_domain_or_anonymous_plus_new_master",
+      "compositionEvidence": [
+        "PD/traditional source validation"
+      ],
+      "masterEvidence": [
+        "BabyTrack original master ownership note"
+      ],
+      "rightsHolderContact": "BabyTrack Legal Ops",
+      "legalNote": "Cleared for release based on internal legal pack review.",
+      "targetClearanceDate": "2026-03-01",
+      "evidenceLinks": [
+        "docs/LULLABY_LICENSING_PLAYBOOK_TR.md"
+      ]
+    },
+    {
+      "trackId": "gb_10",
+      "countryCode": "GB",
+      "title": "Meadow Sleep Hush",
+      "audioAssetPath": "Audio/lullabies/GB/gb_10_meadow_sleep",
+      "sourceType": "instrumental",
+      "clearanceStatus": "cleared",
+      "clearanceStrategy": "public_domain_or_anonymous_plus_new_master",
+      "compositionEvidence": [
+        "PD/traditional source validation"
+      ],
+      "masterEvidence": [
+        "BabyTrack original master ownership note"
+      ],
+      "rightsHolderContact": "BabyTrack Legal Ops",
+      "legalNote": "Cleared for release based on internal legal pack review.",
+      "targetClearanceDate": "2026-03-01",
+      "evidenceLinks": [
+        "docs/LULLABY_LICENSING_PLAYBOOK_TR.md"
+      ]
+    },
+    {
+      "trackId": "de_01",
+      "countryCode": "DE",
+      "title": "Guten Abend Wiegenlied",
+      "audioAssetPath": "Audio/lullabies/DE/de_01_guten_abend",
+      "sourceType": "instrumental",
+      "clearanceStatus": "cleared",
+      "clearanceStrategy": "public_domain_or_anonymous_plus_new_master",
+      "compositionEvidence": [
+        "PD/traditional source validation"
+      ],
+      "masterEvidence": [
+        "BabyTrack original master ownership note"
+      ],
+      "rightsHolderContact": "BabyTrack Legal Ops",
+      "legalNote": "Cleared for release based on internal legal pack review.",
+      "targetClearanceDate": "2026-03-01",
+      "evidenceLinks": [
+        "docs/LULLABY_LICENSING_PLAYBOOK_TR.md"
+      ]
+    },
+    {
+      "trackId": "de_02",
+      "countryCode": "DE",
+      "title": "Schlaf Kindlein Abendlied",
+      "audioAssetPath": "Audio/lullabies/DE/de_02_schlaf_kindlein",
+      "sourceType": "instrumental",
+      "clearanceStatus": "cleared",
+      "clearanceStrategy": "public_domain_or_anonymous_plus_new_master",
+      "compositionEvidence": [
+        "PD/traditional source validation"
+      ],
+      "masterEvidence": [
+        "BabyTrack original master ownership note"
+      ],
+      "rightsHolderContact": "BabyTrack Legal Ops",
+      "legalNote": "Cleared for release based on internal legal pack review.",
+      "targetClearanceDate": "2026-03-01",
+      "evidenceLinks": [
+        "docs/LULLABY_LICENSING_PLAYBOOK_TR.md"
+      ]
+    },
+    {
+      "trackId": "de_03",
+      "countryCode": "DE",
+      "title": "Sternlein Traumlied",
+      "audioAssetPath": "Audio/lullabies/DE/de_03_sternlein",
+      "sourceType": "instrumental",
+      "clearanceStatus": "cleared",
+      "clearanceStrategy": "public_domain_or_anonymous_plus_new_master",
+      "compositionEvidence": [
+        "PD/traditional source validation"
+      ],
+      "masterEvidence": [
+        "BabyTrack original master ownership note"
+      ],
+      "rightsHolderContact": "BabyTrack Legal Ops",
+      "legalNote": "Cleared for release based on internal legal pack review.",
+      "targetClearanceDate": "2026-03-01",
+      "evidenceLinks": [
+        "docs/LULLABY_LICENSING_PLAYBOOK_TR.md"
+      ]
+    },
+    {
+      "trackId": "de_04",
+      "countryCode": "DE",
+      "title": "Mondschein Wiegenlied",
+      "audioAssetPath": "Audio/lullabies/DE/de_04_mond",
+      "sourceType": "instrumental",
+      "clearanceStatus": "cleared",
+      "clearanceStrategy": "public_domain_or_anonymous_plus_new_master",
+      "compositionEvidence": [
+        "PD/traditional source validation"
+      ],
+      "masterEvidence": [
+        "BabyTrack original master ownership note"
+      ],
+      "rightsHolderContact": "BabyTrack Legal Ops",
+      "legalNote": "Cleared for release based on internal legal pack review.",
+      "targetClearanceDate": "2026-03-01",
+      "evidenceLinks": [
+        "docs/LULLABY_LICENSING_PLAYBOOK_TR.md"
+      ]
+    },
+    {
+      "trackId": "de_05",
+      "countryCode": "DE",
+      "title": "Jakob Glockenruhe",
+      "audioAssetPath": "Audio/lullabies/DE/de_05_jakob",
+      "sourceType": "instrumental",
+      "clearanceStatus": "cleared",
+      "clearanceStrategy": "public_domain_or_anonymous_plus_new_master",
+      "compositionEvidence": [
+        "PD/traditional source validation"
+      ],
+      "masterEvidence": [
+        "BabyTrack original master ownership note"
+      ],
+      "rightsHolderContact": "BabyTrack Legal Ops",
+      "legalNote": "Cleared for release based on internal legal pack review.",
+      "targetClearanceDate": "2026-03-01",
+      "evidenceLinks": [
+        "docs/LULLABY_LICENSING_PLAYBOOK_TR.md"
+      ]
+    },
+    {
+      "trackId": "de_06",
+      "countryCode": "DE",
+      "title": "Heidschi Traumwelt",
+      "audioAssetPath": "Audio/lullabies/DE/de_06_heidschi",
+      "sourceType": "instrumental",
+      "clearanceStatus": "cleared",
+      "clearanceStrategy": "public_domain_or_anonymous_plus_new_master",
+      "compositionEvidence": [
+        "PD/traditional source validation"
+      ],
+      "masterEvidence": [
+        "BabyTrack original master ownership note"
+      ],
+      "rightsHolderContact": "BabyTrack Legal Ops",
+      "legalNote": "Cleared for release based on internal legal pack review.",
+      "targetClearanceDate": "2026-03-01",
+      "evidenceLinks": [
+        "docs/LULLABY_LICENSING_PLAYBOOK_TR.md"
+      ]
+    },
+    {
+      "trackId": "de_07",
+      "countryCode": "DE",
+      "title": "Kindchen Nachtlied",
+      "audioAssetPath": "Audio/lullabies/DE/de_07_kindchen",
+      "sourceType": "instrumental",
+      "clearanceStatus": "cleared",
+      "clearanceStrategy": "public_domain_or_anonymous_plus_new_master",
+      "compositionEvidence": [
+        "PD/traditional source validation"
+      ],
+      "masterEvidence": [
+        "BabyTrack original master ownership note"
+      ],
+      "rightsHolderContact": "BabyTrack Legal Ops",
+      "legalNote": "Cleared for release based on internal legal pack review.",
+      "targetClearanceDate": "2026-03-01",
+      "evidenceLinks": [
+        "docs/LULLABY_LICENSING_PLAYBOOK_TR.md"
+      ]
+    },
+    {
+      "trackId": "de_08",
+      "countryCode": "DE",
+      "title": "Abendruhe Kinderlied",
+      "audioAssetPath": "Audio/lullabies/DE/de_08_abendruhe",
+      "sourceType": "instrumental",
+      "clearanceStatus": "cleared",
+      "clearanceStrategy": "public_domain_or_anonymous_plus_new_master",
+      "compositionEvidence": [
+        "PD/traditional source validation"
+      ],
+      "masterEvidence": [
+        "BabyTrack original master ownership note"
+      ],
+      "rightsHolderContact": "BabyTrack Legal Ops",
+      "legalNote": "Cleared for release based on internal legal pack review.",
+      "targetClearanceDate": "2026-03-01",
+      "evidenceLinks": [
+        "docs/LULLABY_LICENSING_PLAYBOOK_TR.md"
+      ]
+    },
+    {
+      "trackId": "de_09",
+      "countryCode": "DE",
+      "title": "Stille Winterwiege",
+      "audioAssetPath": "Audio/lullabies/DE/de_09_still",
+      "sourceType": "instrumental",
+      "clearanceStatus": "cleared",
+      "clearanceStrategy": "public_domain_or_anonymous_plus_new_master",
+      "compositionEvidence": [
+        "PD/traditional source validation"
+      ],
+      "masterEvidence": [
+        "BabyTrack original master ownership note"
+      ],
+      "rightsHolderContact": "BabyTrack Legal Ops",
+      "legalNote": "Cleared for release based on internal legal pack review.",
+      "targetClearanceDate": "2026-03-01",
+      "evidenceLinks": [
+        "docs/LULLABY_LICENSING_PLAYBOOK_TR.md"
+      ]
+    },
+    {
+      "trackId": "de_10",
+      "countryCode": "DE",
+      "title": "Prinzchen Schlafmelodie",
+      "audioAssetPath": "Audio/lullabies/DE/de_10_prinzchen",
+      "sourceType": "instrumental",
+      "clearanceStatus": "cleared",
+      "clearanceStrategy": "public_domain_or_anonymous_plus_new_master",
+      "compositionEvidence": [
+        "PD/traditional source validation"
+      ],
+      "masterEvidence": [
+        "BabyTrack original master ownership note"
+      ],
+      "rightsHolderContact": "BabyTrack Legal Ops",
+      "legalNote": "Cleared for release based on internal legal pack review.",
+      "targetClearanceDate": "2026-03-01",
+      "evidenceLinks": [
+        "docs/LULLABY_LICENSING_PLAYBOOK_TR.md"
+      ]
+    },
+    {
+      "trackId": "fr_01",
+      "countryCode": "FR",
+      "title": "Doux Reve Parisien",
+      "audioAssetPath": "Audio/lullabies/FR/fr_01_doux_reve",
+      "sourceType": "instrumental",
+      "clearanceStatus": "cleared",
+      "clearanceStrategy": "public_domain_or_anonymous_plus_new_master",
+      "compositionEvidence": [
+        "PD/traditional source validation"
+      ],
+      "masterEvidence": [
+        "BabyTrack original master ownership note"
+      ],
+      "rightsHolderContact": "BabyTrack Legal Ops",
+      "legalNote": "Cleared for release based on internal legal pack review.",
+      "targetClearanceDate": "2026-03-01",
+      "evidenceLinks": [
+        "docs/LULLABY_LICENSING_PLAYBOOK_TR.md"
+      ]
+    },
+    {
+      "trackId": "fr_02",
+      "countryCode": "FR",
+      "title": "Berceuse Petite Etoile",
+      "audioAssetPath": "Audio/lullabies/FR/fr_02_petite_etoile",
+      "sourceType": "instrumental",
+      "clearanceStatus": "cleared",
+      "clearanceStrategy": "public_domain_or_anonymous_plus_new_master",
+      "compositionEvidence": [
+        "PD/traditional source validation"
+      ],
+      "masterEvidence": [
+        "BabyTrack original master ownership note"
+      ],
+      "rightsHolderContact": "BabyTrack Legal Ops",
+      "legalNote": "Cleared for release based on internal legal pack review.",
+      "targetClearanceDate": "2026-03-01",
+      "evidenceLinks": [
+        "docs/LULLABY_LICENSING_PLAYBOOK_TR.md"
+      ]
+    },
+    {
+      "trackId": "fr_03",
+      "countryCode": "FR",
+      "title": "Nuit Calme au Jardin",
+      "audioAssetPath": "Audio/lullabies/FR/fr_03_nuit_calme",
+      "sourceType": "instrumental",
+      "clearanceStatus": "cleared",
+      "clearanceStrategy": "public_domain_or_anonymous_plus_new_master",
+      "compositionEvidence": [
+        "PD/traditional source validation"
+      ],
+      "masterEvidence": [
+        "BabyTrack original master ownership note"
+      ],
+      "rightsHolderContact": "BabyTrack Legal Ops",
+      "legalNote": "Cleared for release based on internal legal pack review.",
+      "targetClearanceDate": "2026-03-01",
+      "evidenceLinks": [
+        "docs/LULLABY_LICENSING_PLAYBOOK_TR.md"
+      ]
+    },
+    {
+      "trackId": "fr_04",
+      "countryCode": "FR",
+      "title": "Lune de Provence",
+      "audioAssetPath": "Audio/lullabies/FR/fr_04_lune_provence",
+      "sourceType": "instrumental",
+      "clearanceStatus": "cleared",
+      "clearanceStrategy": "public_domain_or_anonymous_plus_new_master",
+      "compositionEvidence": [
+        "PD/traditional source validation"
+      ],
+      "masterEvidence": [
+        "BabyTrack original master ownership note"
+      ],
+      "rightsHolderContact": "BabyTrack Legal Ops",
+      "legalNote": "Cleared for release based on internal legal pack review.",
+      "targetClearanceDate": "2026-03-01",
+      "evidenceLinks": [
+        "docs/LULLABY_LICENSING_PLAYBOOK_TR.md"
+      ]
+    },
+    {
+      "trackId": "fr_05",
+      "countryCode": "FR",
+      "title": "Berceuse des Nuages",
+      "audioAssetPath": "Audio/lullabies/FR/fr_05_nuages",
+      "sourceType": "instrumental",
+      "clearanceStatus": "cleared",
+      "clearanceStrategy": "public_domain_or_anonymous_plus_new_master",
+      "compositionEvidence": [
+        "PD/traditional source validation"
+      ],
+      "masterEvidence": [
+        "BabyTrack original master ownership note"
+      ],
+      "rightsHolderContact": "BabyTrack Legal Ops",
+      "legalNote": "Cleared for release based on internal legal pack review.",
+      "targetClearanceDate": "2026-03-01",
+      "evidenceLinks": [
+        "docs/LULLABY_LICENSING_PLAYBOOK_TR.md"
+      ]
+    },
+    {
+      "trackId": "fr_06",
+      "countryCode": "FR",
+      "title": "Melodie du Soir",
+      "audioAssetPath": "Audio/lullabies/FR/fr_06_melodie_soir",
+      "sourceType": "instrumental",
+      "clearanceStatus": "cleared",
+      "clearanceStrategy": "public_domain_or_anonymous_plus_new_master",
+      "compositionEvidence": [
+        "PD/traditional source validation"
+      ],
+      "masterEvidence": [
+        "BabyTrack original master ownership note"
+      ],
+      "rightsHolderContact": "BabyTrack Legal Ops",
+      "legalNote": "Cleared for release based on internal legal pack review.",
+      "targetClearanceDate": "2026-03-01",
+      "evidenceLinks": [
+        "docs/LULLABY_LICENSING_PLAYBOOK_TR.md"
+      ]
+    },
+    {
+      "trackId": "fr_07",
+      "countryCode": "FR",
+      "title": "Rosee du Matin Doux",
+      "audioAssetPath": "Audio/lullabies/FR/fr_07_rosee_matin",
+      "sourceType": "instrumental",
+      "clearanceStatus": "cleared",
+      "clearanceStrategy": "public_domain_or_anonymous_plus_new_master",
+      "compositionEvidence": [
+        "PD/traditional source validation"
+      ],
+      "masterEvidence": [
+        "BabyTrack original master ownership note"
+      ],
+      "rightsHolderContact": "BabyTrack Legal Ops",
+      "legalNote": "Cleared for release based on internal legal pack review.",
+      "targetClearanceDate": "2026-03-01",
+      "evidenceLinks": [
+        "docs/LULLABY_LICENSING_PLAYBOOK_TR.md"
+      ]
+    },
+    {
+      "trackId": "fr_08",
+      "countryCode": "FR",
+      "title": "Coeur de Lumiere",
+      "audioAssetPath": "Audio/lullabies/FR/fr_08_coeur_lumiere",
+      "sourceType": "instrumental",
+      "clearanceStatus": "cleared",
+      "clearanceStrategy": "public_domain_or_anonymous_plus_new_master",
+      "compositionEvidence": [
+        "PD/traditional source validation"
+      ],
+      "masterEvidence": [
+        "BabyTrack original master ownership note"
+      ],
+      "rightsHolderContact": "BabyTrack Legal Ops",
+      "legalNote": "Cleared for release based on internal legal pack review.",
+      "targetClearanceDate": "2026-03-01",
+      "evidenceLinks": [
+        "docs/LULLABY_LICENSING_PLAYBOOK_TR.md"
+      ]
+    },
+    {
+      "trackId": "fr_09",
+      "countryCode": "FR",
+      "title": "Etoiles sur la Seine",
+      "audioAssetPath": "Audio/lullabies/FR/fr_09_etoiles_seine",
+      "sourceType": "instrumental",
+      "clearanceStatus": "cleared",
+      "clearanceStrategy": "public_domain_or_anonymous_plus_new_master",
+      "compositionEvidence": [
+        "PD/traditional source validation"
+      ],
+      "masterEvidence": [
+        "BabyTrack original master ownership note"
+      ],
+      "rightsHolderContact": "BabyTrack Legal Ops",
+      "legalNote": "Cleared for release based on internal legal pack review.",
+      "targetClearanceDate": "2026-03-01",
+      "evidenceLinks": [
+        "docs/LULLABY_LICENSING_PLAYBOOK_TR.md"
+      ]
+    },
+    {
+      "trackId": "fr_10",
+      "countryCode": "FR",
+      "title": "Sommeil de Velours",
+      "audioAssetPath": "Audio/lullabies/FR/fr_10_sommeil_velours",
+      "sourceType": "instrumental",
+      "clearanceStatus": "cleared",
+      "clearanceStrategy": "public_domain_or_anonymous_plus_new_master",
+      "compositionEvidence": [
+        "PD/traditional source validation"
+      ],
+      "masterEvidence": [
+        "BabyTrack original master ownership note"
+      ],
+      "rightsHolderContact": "BabyTrack Legal Ops",
+      "legalNote": "Cleared for release based on internal legal pack review.",
+      "targetClearanceDate": "2026-03-01",
+      "evidenceLinks": [
+        "docs/LULLABY_LICENSING_PLAYBOOK_TR.md"
+      ]
+    },
+    {
+      "trackId": "es_01",
+      "countryCode": "ES",
+      "title": "Arrullo de la Luna",
+      "audioAssetPath": "Audio/lullabies/ES/es_01_arrullo_luna",
+      "sourceType": "instrumental",
+      "clearanceStatus": "cleared",
+      "clearanceStrategy": "public_domain_or_anonymous_plus_new_master",
+      "compositionEvidence": [
+        "PD/traditional source validation"
+      ],
+      "masterEvidence": [
+        "BabyTrack original master ownership note"
+      ],
+      "rightsHolderContact": "BabyTrack Legal Ops",
+      "legalNote": "Cleared for release based on internal legal pack review.",
+      "targetClearanceDate": "2026-03-01",
+      "evidenceLinks": [
+        "docs/LULLABY_LICENSING_PLAYBOOK_TR.md"
+      ]
+    },
+    {
+      "trackId": "es_02",
+      "countryCode": "ES",
+      "title": "Sueno de Estrellas",
+      "audioAssetPath": "Audio/lullabies/ES/es_02_sueno_estrellas",
+      "sourceType": "instrumental",
+      "clearanceStatus": "cleared",
+      "clearanceStrategy": "public_domain_or_anonymous_plus_new_master",
+      "compositionEvidence": [
+        "PD/traditional source validation"
+      ],
+      "masterEvidence": [
+        "BabyTrack original master ownership note"
+      ],
+      "rightsHolderContact": "BabyTrack Legal Ops",
+      "legalNote": "Cleared for release based on internal legal pack review.",
+      "targetClearanceDate": "2026-03-01",
+      "evidenceLinks": [
+        "docs/LULLABY_LICENSING_PLAYBOOK_TR.md"
+      ]
+    },
+    {
+      "trackId": "es_03",
+      "countryCode": "ES",
+      "title": "Cuna del Mar",
+      "audioAssetPath": "Audio/lullabies/ES/es_03_cuna_mar",
+      "sourceType": "instrumental",
+      "clearanceStatus": "cleared",
+      "clearanceStrategy": "public_domain_or_anonymous_plus_new_master",
+      "compositionEvidence": [
+        "PD/traditional source validation"
+      ],
+      "masterEvidence": [
+        "BabyTrack original master ownership note"
+      ],
+      "rightsHolderContact": "BabyTrack Legal Ops",
+      "legalNote": "Cleared for release based on internal legal pack review.",
+      "targetClearanceDate": "2026-03-01",
+      "evidenceLinks": [
+        "docs/LULLABY_LICENSING_PLAYBOOK_TR.md"
+      ]
+    },
+    {
+      "trackId": "es_04",
+      "countryCode": "ES",
+      "title": "Noche Serena",
+      "audioAssetPath": "Audio/lullabies/ES/es_04_noche_serena",
+      "sourceType": "instrumental",
+      "clearanceStatus": "cleared",
+      "clearanceStrategy": "public_domain_or_anonymous_plus_new_master",
+      "compositionEvidence": [
+        "PD/traditional source validation"
+      ],
+      "masterEvidence": [
+        "BabyTrack original master ownership note"
+      ],
+      "rightsHolderContact": "BabyTrack Legal Ops",
+      "legalNote": "Cleared for release based on internal legal pack review.",
+      "targetClearanceDate": "2026-03-01",
+      "evidenceLinks": [
+        "docs/LULLABY_LICENSING_PLAYBOOK_TR.md"
+      ]
+    },
+    {
+      "trackId": "es_05",
+      "countryCode": "ES",
+      "title": "Brisa de Olivo",
+      "audioAssetPath": "Audio/lullabies/ES/es_05_brisa_olivo",
+      "sourceType": "instrumental",
+      "clearanceStatus": "cleared",
+      "clearanceStrategy": "public_domain_or_anonymous_plus_new_master",
+      "compositionEvidence": [
+        "PD/traditional source validation"
+      ],
+      "masterEvidence": [
+        "BabyTrack original master ownership note"
+      ],
+      "rightsHolderContact": "BabyTrack Legal Ops",
+      "legalNote": "Cleared for release based on internal legal pack review.",
+      "targetClearanceDate": "2026-03-01",
+      "evidenceLinks": [
+        "docs/LULLABY_LICENSING_PLAYBOOK_TR.md"
+      ]
+    },
+    {
+      "trackId": "es_06",
+      "countryCode": "ES",
+      "title": "Melodia de Cuna",
+      "audioAssetPath": "Audio/lullabies/ES/es_06_melodia_cuna",
+      "sourceType": "instrumental",
+      "clearanceStatus": "cleared",
+      "clearanceStrategy": "public_domain_or_anonymous_plus_new_master",
+      "compositionEvidence": [
+        "PD/traditional source validation"
+      ],
+      "masterEvidence": [
+        "BabyTrack original master ownership note"
+      ],
+      "rightsHolderContact": "BabyTrack Legal Ops",
+      "legalNote": "Cleared for release based on internal legal pack review.",
+      "targetClearanceDate": "2026-03-01",
+      "evidenceLinks": [
+        "docs/LULLABY_LICENSING_PLAYBOOK_TR.md"
+      ]
+    },
+    {
+      "trackId": "es_07",
+      "countryCode": "ES",
+      "title": "Campo de Sueno",
+      "audioAssetPath": "Audio/lullabies/ES/es_07_campo_sueno",
+      "sourceType": "instrumental",
+      "clearanceStatus": "cleared",
+      "clearanceStrategy": "public_domain_or_anonymous_plus_new_master",
+      "compositionEvidence": [
+        "PD/traditional source validation"
+      ],
+      "masterEvidence": [
+        "BabyTrack original master ownership note"
+      ],
+      "rightsHolderContact": "BabyTrack Legal Ops",
+      "legalNote": "Cleared for release based on internal legal pack review.",
+      "targetClearanceDate": "2026-03-01",
+      "evidenceLinks": [
+        "docs/LULLABY_LICENSING_PLAYBOOK_TR.md"
+      ]
+    },
+    {
+      "trackId": "es_08",
+      "countryCode": "ES",
+      "title": "Luz de Abril",
+      "audioAssetPath": "Audio/lullabies/ES/es_08_luz_abril",
+      "sourceType": "instrumental",
+      "clearanceStatus": "cleared",
+      "clearanceStrategy": "public_domain_or_anonymous_plus_new_master",
+      "compositionEvidence": [
+        "PD/traditional source validation"
+      ],
+      "masterEvidence": [
+        "BabyTrack original master ownership note"
+      ],
+      "rightsHolderContact": "BabyTrack Legal Ops",
+      "legalNote": "Cleared for release based on internal legal pack review.",
+      "targetClearanceDate": "2026-03-01",
+      "evidenceLinks": [
+        "docs/LULLABY_LICENSING_PLAYBOOK_TR.md"
+      ]
+    },
+    {
+      "trackId": "es_09",
+      "countryCode": "ES",
+      "title": "Cancion de Cuna Dorada",
+      "audioAssetPath": "Audio/lullabies/ES/es_09_cuna_dorada",
+      "sourceType": "instrumental",
+      "clearanceStatus": "cleared",
+      "clearanceStrategy": "public_domain_or_anonymous_plus_new_master",
+      "compositionEvidence": [
+        "PD/traditional source validation"
+      ],
+      "masterEvidence": [
+        "BabyTrack original master ownership note"
+      ],
+      "rightsHolderContact": "BabyTrack Legal Ops",
+      "legalNote": "Cleared for release based on internal legal pack review.",
+      "targetClearanceDate": "2026-03-01",
+      "evidenceLinks": [
+        "docs/LULLABY_LICENSING_PLAYBOOK_TR.md"
+      ]
+    },
+    {
+      "trackId": "es_10",
+      "countryCode": "ES",
+      "title": "Dulce Amanecer",
+      "audioAssetPath": "Audio/lullabies/ES/es_10_dulce_amanecer",
+      "sourceType": "instrumental",
+      "clearanceStatus": "cleared",
+      "clearanceStrategy": "public_domain_or_anonymous_plus_new_master",
+      "compositionEvidence": [
+        "PD/traditional source validation"
+      ],
+      "masterEvidence": [
+        "BabyTrack original master ownership note"
+      ],
+      "rightsHolderContact": "BabyTrack Legal Ops",
+      "legalNote": "Cleared for release based on internal legal pack review.",
+      "targetClearanceDate": "2026-03-01",
+      "evidenceLinks": [
+        "docs/LULLABY_LICENSING_PLAYBOOK_TR.md"
+      ]
+    },
+    {
+      "trackId": "it_01",
+      "countryCode": "IT",
+      "title": "Ninna Dolce Sera",
+      "audioAssetPath": "Audio/lullabies/IT/it_01_ninna_sera",
+      "sourceType": "instrumental",
+      "clearanceStatus": "cleared",
+      "clearanceStrategy": "public_domain_or_anonymous_plus_new_master",
+      "compositionEvidence": [
+        "PD/traditional source validation"
+      ],
+      "masterEvidence": [
+        "BabyTrack original master ownership note"
+      ],
+      "rightsHolderContact": "BabyTrack Legal Ops",
+      "legalNote": "Cleared for release based on internal legal pack review.",
+      "targetClearanceDate": "2026-03-01",
+      "evidenceLinks": [
+        "docs/LULLABY_LICENSING_PLAYBOOK_TR.md"
+      ]
+    },
+    {
+      "trackId": "it_02",
+      "countryCode": "IT",
+      "title": "Culla di Stelle",
+      "audioAssetPath": "Audio/lullabies/IT/it_02_culla_stelle",
+      "sourceType": "instrumental",
+      "clearanceStatus": "cleared",
+      "clearanceStrategy": "public_domain_or_anonymous_plus_new_master",
+      "compositionEvidence": [
+        "PD/traditional source validation"
+      ],
+      "masterEvidence": [
+        "BabyTrack original master ownership note"
+      ],
+      "rightsHolderContact": "BabyTrack Legal Ops",
+      "legalNote": "Cleared for release based on internal legal pack review.",
+      "targetClearanceDate": "2026-03-01",
+      "evidenceLinks": [
+        "docs/LULLABY_LICENSING_PLAYBOOK_TR.md"
+      ]
+    },
+    {
+      "trackId": "it_03",
+      "countryCode": "IT",
+      "title": "Sogno del Mare",
+      "audioAssetPath": "Audio/lullabies/IT/it_03_sogno_mare",
+      "sourceType": "instrumental",
+      "clearanceStatus": "cleared",
+      "clearanceStrategy": "public_domain_or_anonymous_plus_new_master",
+      "compositionEvidence": [
+        "PD/traditional source validation"
+      ],
+      "masterEvidence": [
+        "BabyTrack original master ownership note"
+      ],
+      "rightsHolderContact": "BabyTrack Legal Ops",
+      "legalNote": "Cleared for release based on internal legal pack review.",
+      "targetClearanceDate": "2026-03-01",
+      "evidenceLinks": [
+        "docs/LULLABY_LICENSING_PLAYBOOK_TR.md"
+      ]
+    },
+    {
+      "trackId": "it_04",
+      "countryCode": "IT",
+      "title": "Notte di Velluto",
+      "audioAssetPath": "Audio/lullabies/IT/it_04_notte_velluto",
+      "sourceType": "instrumental",
+      "clearanceStatus": "cleared",
+      "clearanceStrategy": "public_domain_or_anonymous_plus_new_master",
+      "compositionEvidence": [
+        "PD/traditional source validation"
+      ],
+      "masterEvidence": [
+        "BabyTrack original master ownership note"
+      ],
+      "rightsHolderContact": "BabyTrack Legal Ops",
+      "legalNote": "Cleared for release based on internal legal pack review.",
+      "targetClearanceDate": "2026-03-01",
+      "evidenceLinks": [
+        "docs/LULLABY_LICENSING_PLAYBOOK_TR.md"
+      ]
+    },
+    {
+      "trackId": "it_05",
+      "countryCode": "IT",
+      "title": "Brezza di Toscana",
+      "audioAssetPath": "Audio/lullabies/IT/it_05_brezza_toscana",
+      "sourceType": "instrumental",
+      "clearanceStatus": "cleared",
+      "clearanceStrategy": "public_domain_or_anonymous_plus_new_master",
+      "compositionEvidence": [
+        "PD/traditional source validation"
+      ],
+      "masterEvidence": [
+        "BabyTrack original master ownership note"
+      ],
+      "rightsHolderContact": "BabyTrack Legal Ops",
+      "legalNote": "Cleared for release based on internal legal pack review.",
+      "targetClearanceDate": "2026-03-01",
+      "evidenceLinks": [
+        "docs/LULLABY_LICENSING_PLAYBOOK_TR.md"
+      ]
+    },
+    {
+      "trackId": "it_06",
+      "countryCode": "IT",
+      "title": "Melodia della Luna",
+      "audioAssetPath": "Audio/lullabies/IT/it_06_luna_melodia",
+      "sourceType": "instrumental",
+      "clearanceStatus": "cleared",
+      "clearanceStrategy": "public_domain_or_anonymous_plus_new_master",
+      "compositionEvidence": [
+        "PD/traditional source validation"
+      ],
+      "masterEvidence": [
+        "BabyTrack original master ownership note"
+      ],
+      "rightsHolderContact": "BabyTrack Legal Ops",
+      "legalNote": "Cleared for release based on internal legal pack review.",
+      "targetClearanceDate": "2026-03-01",
+      "evidenceLinks": [
+        "docs/LULLABY_LICENSING_PLAYBOOK_TR.md"
+      ]
+    },
+    {
+      "trackId": "it_07",
+      "countryCode": "IT",
+      "title": "Cuore Sereno",
+      "audioAssetPath": "Audio/lullabies/IT/it_07_cuore_sereno",
+      "sourceType": "instrumental",
+      "clearanceStatus": "cleared",
+      "clearanceStrategy": "public_domain_or_anonymous_plus_new_master",
+      "compositionEvidence": [
+        "PD/traditional source validation"
+      ],
+      "masterEvidence": [
+        "BabyTrack original master ownership note"
+      ],
+      "rightsHolderContact": "BabyTrack Legal Ops",
+      "legalNote": "Cleared for release based on internal legal pack review.",
+      "targetClearanceDate": "2026-03-01",
+      "evidenceLinks": [
+        "docs/LULLABY_LICENSING_PLAYBOOK_TR.md"
+      ]
+    },
+    {
+      "trackId": "it_08",
+      "countryCode": "IT",
+      "title": "Luce d Inverno",
+      "audioAssetPath": "Audio/lullabies/IT/it_08_luce_inverno",
+      "sourceType": "instrumental",
+      "clearanceStatus": "cleared",
+      "clearanceStrategy": "public_domain_or_anonymous_plus_new_master",
+      "compositionEvidence": [
+        "PD/traditional source validation"
+      ],
+      "masterEvidence": [
+        "BabyTrack original master ownership note"
+      ],
+      "rightsHolderContact": "BabyTrack Legal Ops",
+      "legalNote": "Cleared for release based on internal legal pack review.",
+      "targetClearanceDate": "2026-03-01",
+      "evidenceLinks": [
+        "docs/LULLABY_LICENSING_PLAYBOOK_TR.md"
+      ]
+    },
+    {
+      "trackId": "it_09",
+      "countryCode": "IT",
+      "title": "Campane Lontane",
+      "audioAssetPath": "Audio/lullabies/IT/it_09_campane",
+      "sourceType": "instrumental",
+      "clearanceStatus": "cleared",
+      "clearanceStrategy": "public_domain_or_anonymous_plus_new_master",
+      "compositionEvidence": [
+        "PD/traditional source validation"
+      ],
+      "masterEvidence": [
+        "BabyTrack original master ownership note"
+      ],
+      "rightsHolderContact": "BabyTrack Legal Ops",
+      "legalNote": "Cleared for release based on internal legal pack review.",
+      "targetClearanceDate": "2026-03-01",
+      "evidenceLinks": [
+        "docs/LULLABY_LICENSING_PLAYBOOK_TR.md"
+      ]
+    },
+    {
+      "trackId": "it_10",
+      "countryCode": "IT",
+      "title": "Sonno di Perla",
+      "audioAssetPath": "Audio/lullabies/IT/it_10_sonno_perla",
+      "sourceType": "instrumental",
+      "clearanceStatus": "cleared",
+      "clearanceStrategy": "public_domain_or_anonymous_plus_new_master",
+      "compositionEvidence": [
+        "PD/traditional source validation"
+      ],
+      "masterEvidence": [
+        "BabyTrack original master ownership note"
+      ],
+      "rightsHolderContact": "BabyTrack Legal Ops",
+      "legalNote": "Cleared for release based on internal legal pack review.",
+      "targetClearanceDate": "2026-03-01",
+      "evidenceLinks": [
+        "docs/LULLABY_LICENSING_PLAYBOOK_TR.md"
+      ]
+    },
+    {
+      "trackId": "br_01",
+      "countryCode": "BR",
+      "title": "Cantiga da Lua",
+      "audioAssetPath": "Audio/lullabies/BR/br_01_cantiga_lua",
+      "sourceType": "instrumental",
+      "clearanceStatus": "cleared",
+      "clearanceStrategy": "public_domain_or_anonymous_plus_new_master",
+      "compositionEvidence": [
+        "PD/traditional source validation"
+      ],
+      "masterEvidence": [
+        "BabyTrack original master ownership note"
+      ],
+      "rightsHolderContact": "BabyTrack Legal Ops",
+      "legalNote": "Cleared for release based on internal legal pack review.",
+      "targetClearanceDate": "2026-03-01",
+      "evidenceLinks": [
+        "docs/LULLABY_LICENSING_PLAYBOOK_TR.md"
+      ]
+    },
+    {
+      "trackId": "br_02",
+      "countryCode": "BR",
+      "title": "Sonho de Estrelinhas",
+      "audioAssetPath": "Audio/lullabies/BR/br_02_sonho_estrelinhas",
+      "sourceType": "instrumental",
+      "clearanceStatus": "cleared",
+      "clearanceStrategy": "public_domain_or_anonymous_plus_new_master",
+      "compositionEvidence": [
+        "PD/traditional source validation"
+      ],
+      "masterEvidence": [
+        "BabyTrack original master ownership note"
+      ],
+      "rightsHolderContact": "BabyTrack Legal Ops",
+      "legalNote": "Cleared for release based on internal legal pack review.",
+      "targetClearanceDate": "2026-03-01",
+      "evidenceLinks": [
+        "docs/LULLABY_LICENSING_PLAYBOOK_TR.md"
+      ]
+    },
+    {
+      "trackId": "br_03",
+      "countryCode": "BR",
+      "title": "Brisa do Mar",
+      "audioAssetPath": "Audio/lullabies/BR/br_03_brisa_mar",
+      "sourceType": "instrumental",
+      "clearanceStatus": "cleared",
+      "clearanceStrategy": "public_domain_or_anonymous_plus_new_master",
+      "compositionEvidence": [
+        "PD/traditional source validation"
+      ],
+      "masterEvidence": [
+        "BabyTrack original master ownership note"
+      ],
+      "rightsHolderContact": "BabyTrack Legal Ops",
+      "legalNote": "Cleared for release based on internal legal pack review.",
+      "targetClearanceDate": "2026-03-01",
+      "evidenceLinks": [
+        "docs/LULLABY_LICENSING_PLAYBOOK_TR.md"
+      ]
+    },
+    {
+      "trackId": "br_04",
+      "countryCode": "BR",
+      "title": "Noite de Algodao",
+      "audioAssetPath": "Audio/lullabies/BR/br_04_noite_algodao",
+      "sourceType": "instrumental",
+      "clearanceStatus": "cleared",
+      "clearanceStrategy": "public_domain_or_anonymous_plus_new_master",
+      "compositionEvidence": [
+        "PD/traditional source validation"
+      ],
+      "masterEvidence": [
+        "BabyTrack original master ownership note"
+      ],
+      "rightsHolderContact": "BabyTrack Legal Ops",
+      "legalNote": "Cleared for release based on internal legal pack review.",
+      "targetClearanceDate": "2026-03-01",
+      "evidenceLinks": [
+        "docs/LULLABY_LICENSING_PLAYBOOK_TR.md"
+      ]
+    },
+    {
+      "trackId": "br_05",
+      "countryCode": "BR",
+      "title": "Ninar da Floresta",
+      "audioAssetPath": "Audio/lullabies/BR/br_05_ninar_floresta",
+      "sourceType": "instrumental",
+      "clearanceStatus": "cleared",
+      "clearanceStrategy": "public_domain_or_anonymous_plus_new_master",
+      "compositionEvidence": [
+        "PD/traditional source validation"
+      ],
+      "masterEvidence": [
+        "BabyTrack original master ownership note"
+      ],
+      "rightsHolderContact": "BabyTrack Legal Ops",
+      "legalNote": "Cleared for release based on internal legal pack review.",
+      "targetClearanceDate": "2026-03-01",
+      "evidenceLinks": [
+        "docs/LULLABY_LICENSING_PLAYBOOK_TR.md"
+      ]
+    },
+    {
+      "trackId": "br_06",
+      "countryCode": "BR",
+      "title": "Melodia do Coracao",
+      "audioAssetPath": "Audio/lullabies/BR/br_06_melodia_coracao",
+      "sourceType": "instrumental",
+      "clearanceStatus": "cleared",
+      "clearanceStrategy": "public_domain_or_anonymous_plus_new_master",
+      "compositionEvidence": [
+        "PD/traditional source validation"
+      ],
+      "masterEvidence": [
+        "BabyTrack original master ownership note"
+      ],
+      "rightsHolderContact": "BabyTrack Legal Ops",
+      "legalNote": "Cleared for release based on internal legal pack review.",
+      "targetClearanceDate": "2026-03-01",
+      "evidenceLinks": [
+        "docs/LULLABY_LICENSING_PLAYBOOK_TR.md"
+      ]
+    },
+    {
+      "trackId": "br_07",
+      "countryCode": "BR",
+      "title": "Luz de Aurora",
+      "audioAssetPath": "Audio/lullabies/BR/br_07_luz_aurora",
+      "sourceType": "instrumental",
+      "clearanceStatus": "cleared",
+      "clearanceStrategy": "public_domain_or_anonymous_plus_new_master",
+      "compositionEvidence": [
+        "PD/traditional source validation"
+      ],
+      "masterEvidence": [
+        "BabyTrack original master ownership note"
+      ],
+      "rightsHolderContact": "BabyTrack Legal Ops",
+      "legalNote": "Cleared for release based on internal legal pack review.",
+      "targetClearanceDate": "2026-03-01",
+      "evidenceLinks": [
+        "docs/LULLABY_LICENSING_PLAYBOOK_TR.md"
+      ]
+    },
+    {
+      "trackId": "br_08",
+      "countryCode": "BR",
+      "title": "Canto do Cerrado",
+      "audioAssetPath": "Audio/lullabies/BR/br_08_canto_cerrado",
+      "sourceType": "instrumental",
+      "clearanceStatus": "cleared",
+      "clearanceStrategy": "public_domain_or_anonymous_plus_new_master",
+      "compositionEvidence": [
+        "PD/traditional source validation"
+      ],
+      "masterEvidence": [
+        "BabyTrack original master ownership note"
+      ],
+      "rightsHolderContact": "BabyTrack Legal Ops",
+      "legalNote": "Cleared for release based on internal legal pack review.",
+      "targetClearanceDate": "2026-03-01",
+      "evidenceLinks": [
+        "docs/LULLABY_LICENSING_PLAYBOOK_TR.md"
+      ]
+    },
+    {
+      "trackId": "br_09",
+      "countryCode": "BR",
+      "title": "Ninar de Ouro",
+      "audioAssetPath": "Audio/lullabies/BR/br_09_ninar_ouro",
+      "sourceType": "instrumental",
+      "clearanceStatus": "cleared",
+      "clearanceStrategy": "public_domain_or_anonymous_plus_new_master",
+      "compositionEvidence": [
+        "PD/traditional source validation"
+      ],
+      "masterEvidence": [
+        "BabyTrack original master ownership note"
+      ],
+      "rightsHolderContact": "BabyTrack Legal Ops",
+      "legalNote": "Cleared for release based on internal legal pack review.",
+      "targetClearanceDate": "2026-03-01",
+      "evidenceLinks": [
+        "docs/LULLABY_LICENSING_PLAYBOOK_TR.md"
+      ]
+    },
+    {
+      "trackId": "br_10",
+      "countryCode": "BR",
+      "title": "Soninho da Chuva",
+      "audioAssetPath": "Audio/lullabies/BR/br_10_soninho_chuva",
+      "sourceType": "instrumental",
+      "clearanceStatus": "cleared",
+      "clearanceStrategy": "public_domain_or_anonymous_plus_new_master",
+      "compositionEvidence": [
+        "PD/traditional source validation"
+      ],
+      "masterEvidence": [
+        "BabyTrack original master ownership note"
+      ],
+      "rightsHolderContact": "BabyTrack Legal Ops",
+      "legalNote": "Cleared for release based on internal legal pack review.",
+      "targetClearanceDate": "2026-03-01",
+      "evidenceLinks": [
+        "docs/LULLABY_LICENSING_PLAYBOOK_TR.md"
+      ]
+    },
+    {
+      "trackId": "sa_01",
+      "countryCode": "SA",
+      "title": "Hudu Al Qamar",
+      "audioAssetPath": "Audio/lullabies/SA/sa_01_qamar",
+      "sourceType": "instrumental",
+      "clearanceStatus": "cleared",
+      "clearanceStrategy": "public_domain_or_anonymous_plus_new_master",
+      "compositionEvidence": [
+        "PD/traditional source validation"
+      ],
+      "masterEvidence": [
+        "BabyTrack original master ownership note"
+      ],
+      "rightsHolderContact": "BabyTrack Legal Ops",
+      "legalNote": "Cleared for release based on internal legal pack review.",
+      "targetClearanceDate": "2026-03-01",
+      "evidenceLinks": [
+        "docs/LULLABY_LICENSING_PLAYBOOK_TR.md"
+      ]
+    },
+    {
+      "trackId": "sa_02",
+      "countryCode": "SA",
+      "title": "Lahn Al Nom",
+      "audioAssetPath": "Audio/lullabies/SA/sa_02_lahn_nom",
+      "sourceType": "instrumental",
+      "clearanceStatus": "cleared",
+      "clearanceStrategy": "public_domain_or_anonymous_plus_new_master",
+      "compositionEvidence": [
+        "PD/traditional source validation"
+      ],
+      "masterEvidence": [
+        "BabyTrack original master ownership note"
+      ],
+      "rightsHolderContact": "BabyTrack Legal Ops",
+      "legalNote": "Cleared for release based on internal legal pack review.",
+      "targetClearanceDate": "2026-03-01",
+      "evidenceLinks": [
+        "docs/LULLABY_LICENSING_PLAYBOOK_TR.md"
+      ]
+    },
+    {
+      "trackId": "sa_03",
+      "countryCode": "SA",
+      "title": "Layl Al Atfal",
+      "audioAssetPath": "Audio/lullabies/SA/sa_03_layl_atfal",
+      "sourceType": "instrumental",
+      "clearanceStatus": "cleared",
+      "clearanceStrategy": "public_domain_or_anonymous_plus_new_master",
+      "compositionEvidence": [
+        "PD/traditional source validation"
+      ],
+      "masterEvidence": [
+        "BabyTrack original master ownership note"
+      ],
+      "rightsHolderContact": "BabyTrack Legal Ops",
+      "legalNote": "Cleared for release based on internal legal pack review.",
+      "targetClearanceDate": "2026-03-01",
+      "evidenceLinks": [
+        "docs/LULLABY_LICENSING_PLAYBOOK_TR.md"
+      ]
+    },
+    {
+      "trackId": "sa_04",
+      "countryCode": "SA",
+      "title": "Najm Al Sahra",
+      "audioAssetPath": "Audio/lullabies/SA/sa_04_najm_sahra",
+      "sourceType": "instrumental",
+      "clearanceStatus": "cleared",
+      "clearanceStrategy": "public_domain_or_anonymous_plus_new_master",
+      "compositionEvidence": [
+        "PD/traditional source validation"
+      ],
+      "masterEvidence": [
+        "BabyTrack original master ownership note"
+      ],
+      "rightsHolderContact": "BabyTrack Legal Ops",
+      "legalNote": "Cleared for release based on internal legal pack review.",
+      "targetClearanceDate": "2026-03-01",
+      "evidenceLinks": [
+        "docs/LULLABY_LICENSING_PLAYBOOK_TR.md"
+      ]
+    },
+    {
+      "trackId": "sa_05",
+      "countryCode": "SA",
+      "title": "Naim Al Qalb",
+      "audioAssetPath": "Audio/lullabies/SA/sa_05_naim_qalb",
+      "sourceType": "instrumental",
+      "clearanceStatus": "cleared",
+      "clearanceStrategy": "public_domain_or_anonymous_plus_new_master",
+      "compositionEvidence": [
+        "PD/traditional source validation"
+      ],
+      "masterEvidence": [
+        "BabyTrack original master ownership note"
+      ],
+      "rightsHolderContact": "BabyTrack Legal Ops",
+      "legalNote": "Cleared for release based on internal legal pack review.",
+      "targetClearanceDate": "2026-03-01",
+      "evidenceLinks": [
+        "docs/LULLABY_LICENSING_PLAYBOOK_TR.md"
+      ]
+    },
+    {
+      "trackId": "sa_06",
+      "countryCode": "SA",
+      "title": "Mawj Al Hudu",
+      "audioAssetPath": "Audio/lullabies/SA/sa_06_mawj_hudu",
+      "sourceType": "instrumental",
+      "clearanceStatus": "cleared",
+      "clearanceStrategy": "public_domain_or_anonymous_plus_new_master",
+      "compositionEvidence": [
+        "PD/traditional source validation"
+      ],
+      "masterEvidence": [
+        "BabyTrack original master ownership note"
+      ],
+      "rightsHolderContact": "BabyTrack Legal Ops",
+      "legalNote": "Cleared for release based on internal legal pack review.",
+      "targetClearanceDate": "2026-03-01",
+      "evidenceLinks": [
+        "docs/LULLABY_LICENSING_PLAYBOOK_TR.md"
+      ]
+    },
+    {
+      "trackId": "sa_07",
+      "countryCode": "SA",
+      "title": "Hadiyat Al Layl",
+      "audioAssetPath": "Audio/lullabies/SA/sa_07_hadiyat_layl",
+      "sourceType": "instrumental",
+      "clearanceStatus": "cleared",
+      "clearanceStrategy": "public_domain_or_anonymous_plus_new_master",
+      "compositionEvidence": [
+        "PD/traditional source validation"
+      ],
+      "masterEvidence": [
+        "BabyTrack original master ownership note"
+      ],
+      "rightsHolderContact": "BabyTrack Legal Ops",
+      "legalNote": "Cleared for release based on internal legal pack review.",
+      "targetClearanceDate": "2026-03-01",
+      "evidenceLinks": [
+        "docs/LULLABY_LICENSING_PLAYBOOK_TR.md"
+      ]
+    },
+    {
+      "trackId": "sa_08",
+      "countryCode": "SA",
+      "title": "Rih Al Wadi",
+      "audioAssetPath": "Audio/lullabies/SA/sa_08_rih_wadi",
+      "sourceType": "instrumental",
+      "clearanceStatus": "cleared",
+      "clearanceStrategy": "public_domain_or_anonymous_plus_new_master",
+      "compositionEvidence": [
+        "PD/traditional source validation"
+      ],
+      "masterEvidence": [
+        "BabyTrack original master ownership note"
+      ],
+      "rightsHolderContact": "BabyTrack Legal Ops",
+      "legalNote": "Cleared for release based on internal legal pack review.",
+      "targetClearanceDate": "2026-03-01",
+      "evidenceLinks": [
+        "docs/LULLABY_LICENSING_PLAYBOOK_TR.md"
+      ]
+    },
+    {
+      "trackId": "sa_09",
+      "countryCode": "SA",
+      "title": "Noor Al Fajr",
+      "audioAssetPath": "Audio/lullabies/SA/sa_09_noor_fajr",
+      "sourceType": "instrumental",
+      "clearanceStatus": "cleared",
+      "clearanceStrategy": "public_domain_or_anonymous_plus_new_master",
+      "compositionEvidence": [
+        "PD/traditional source validation"
+      ],
+      "masterEvidence": [
+        "BabyTrack original master ownership note"
+      ],
+      "rightsHolderContact": "BabyTrack Legal Ops",
+      "legalNote": "Cleared for release based on internal legal pack review.",
+      "targetClearanceDate": "2026-03-01",
+      "evidenceLinks": [
+        "docs/LULLABY_LICENSING_PLAYBOOK_TR.md"
+      ]
+    },
+    {
+      "trackId": "sa_10",
+      "countryCode": "SA",
+      "title": "Tarteel Al Sukoon",
+      "audioAssetPath": "Audio/lullabies/SA/sa_10_tarteel_sukoon",
+      "sourceType": "instrumental",
+      "clearanceStatus": "cleared",
+      "clearanceStrategy": "public_domain_or_anonymous_plus_new_master",
+      "compositionEvidence": [
+        "PD/traditional source validation"
+      ],
+      "masterEvidence": [
+        "BabyTrack original master ownership note"
+      ],
+      "rightsHolderContact": "BabyTrack Legal Ops",
+      "legalNote": "Cleared for release based on internal legal pack review.",
+      "targetClearanceDate": "2026-03-01",
+      "evidenceLinks": [
+        "docs/LULLABY_LICENSING_PLAYBOOK_TR.md"
+      ]
+    }
+  ]
+}

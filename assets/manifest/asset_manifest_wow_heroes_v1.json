@@ -1,0 +1,30 @@
+{
+  "meta": {
+    "version": "1.0.0",
+    "app": "BabyTrack",
+    "scope": "wow_heroes_only"
+  },
+  "defaults": {
+    "image_model": "gemini-2.5-flash-image",
+    "text_model": "gemini-2.5-flash",
+    "aspect_ratio": "16:9"
+  },
+  "assets": [
+    {
+      "id": "whats_new_wow_hero",
+      "kind": "image",
+      "module": "whats_new",
+      "output_path": "whats_new/whats_new_hero",
+      "aspect_ratio": "16:9",
+      "prompt": "Cinematic celebratory update hero for a baby tracking app, glowing stars, soft confetti particles, premium soft-clay 3D objects for baby care (moon, bottle, shield, heart), elegant warm light, high polish, no text."
+    },
+    {
+      "id": "premium_paywall_wow_hero",
+      "kind": "image",
+      "module": "premium",
+      "output_path": "premium/paywall_wow_hero",
+      "aspect_ratio": "16:9",
+      "prompt": "High-impact premium hero scene in soft-clay 3D style: parent and baby, AI insight card, secure doctor share card, growth chart, subtle gold highlights, luxurious but friendly, no text."
+    }
+  ]
+}

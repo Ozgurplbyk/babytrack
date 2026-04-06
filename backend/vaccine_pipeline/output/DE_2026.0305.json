@@ -1,0 +1,66 @@
+{
+  "meta": {
+    "country": "DE",
+    "version": "2026.0305",
+    "approved_by": "medical_editor_required",
+    "published_at": "2026-03-05T13:19:32.228781+00:00",
+    "signature": "2c7e1d8c425cc0ca5c15ec16da9d5e77e27f80a49f218cdc5deb9f9bce90bc5a"
+  },
+  "diff": {
+    "added": [],
+    "removed": [],
+    "changed": []
+  },
+  "payload": {
+    "country": "DE",
+    "authority": "RKI/STIKO",
+    "version": "2026.0305",
+    "source": {
+      "name": "RKI STIKO Recommendations",
+      "url": "https://www.rki.de/EN/Content/infections/Vaccination/vaccination_node.html",
+      "source_updated_at": "2026-03-05",
+      "retrieved_at": "2026-03-05T13:19:29.824536+00:00"
+    },
+    "records": [
+      {
+        "country": "DE",
+        "authority": "RKI/STIKO",
+        "version": "2026.0305",
+        "effective_from": "2026-01-01",
+        "effective_to": null,
+        "vaccine_code": "6-fach",
+        "dose_no": 1,
+        "min_age_days": 56,
+        "max_age_days": 120,
+        "min_interval_days": 28,
+        "catch_up_rule": ""
+      },
+      {
+        "country": "DE",
+        "authority": "RKI/STIKO",
+        "version": "2026.0305",
+        "effective_from": "2026-01-01",
+        "effective_to": null,
+        "vaccine_code": "Pneumokokken",
+        "dose_no": 1,
+        "min_age_days": 56,
+        "max_age_days": 120,
+        "min_interval_days": 0,
+        "catch_up_rule": ""
+      },
+      {
+        "country": "DE",
+        "authority": "RKI/STIKO",
+        "version": "2026.0305",
+        "effective_from": "2026-01-01",
+        "effective_to": null,
+        "vaccine_code": "MMR",
+        "dose_no": 1,
+        "min_age_days": 335,
+        "max_age_days": 730,
+        "min_interval_days": 0,
+        "catch_up_rule": ""
+      }
+    ]
+  }
+}

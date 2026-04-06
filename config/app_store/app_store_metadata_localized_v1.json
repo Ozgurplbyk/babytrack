@@ -1,0 +1,132 @@
+{
+  "version": "1.0.0",
+  "defaultLocale": "en-US",
+  "entries": [
+    {
+      "locale": "en-US",
+      "countryCode": "US",
+      "languageCode": "en",
+      "appName": "BabyTrack: Baby Tracker",
+      "subtitle": "Sleep, Feeding, Diaper Log",
+      "keywords": [
+        "newborn routine",
+        "breastfeeding timer",
+        "milestone journal",
+        "growth log",
+        "family tracker"
+      ]
+    },
+    {
+      "locale": "en-GB",
+      "countryCode": "GB",
+      "languageCode": "en",
+      "appName": "BabyTrack: Baby Tracker",
+      "subtitle": "Sleep, Feeding, Nappy Log",
+      "keywords": [
+        "newborn routine",
+        "breastfeeding timer",
+        "milestone journal",
+        "growth log",
+        "family tracker"
+      ]
+    },
+    {
+      "locale": "tr-TR",
+      "countryCode": "TR",
+      "languageCode": "tr",
+      "appName": "BabyTrack: Bebek Takip",
+      "subtitle": "Uyku, Emzirme, Bez Takibi",
+      "keywords": [
+        "yenidoğan rutin",
+        "gelişim günlüğü",
+        "aşı hatırlatıcı",
+        "biberon kaydı",
+        "aile paylaşımı"
+      ]
+    },
+    {
+      "locale": "de-DE",
+      "countryCode": "DE",
+      "languageCode": "de",
+      "appName": "BabyTrack: Baby Tracker",
+      "subtitle": "Schlaf, Stillen, Windel",
+      "keywords": [
+        "baby tagebuch",
+        "neugeborenen routine",
+        "fieber protokoll",
+        "milchmenge",
+        "familien kalender"
+      ]
+    },
+    {
+      "locale": "es-ES",
+      "countryCode": "ES",
+      "languageCode": "es",
+      "appName": "BabyTrack: Seguimiento Bebé",
+      "subtitle": "Sueño, Lactancia, Pañal",
+      "keywords": [
+        "rutina recién nacido",
+        "sueño infantil",
+        "diario familiar",
+        "recordatorio vacuna",
+        "biberón"
+      ]
+    },
+    {
+      "locale": "fr-FR",
+      "countryCode": "FR",
+      "languageCode": "fr",
+      "appName": "BabyTrack: Suivi Bébé",
+      "subtitle": "Sommeil, Allaitement, Couches",
+      "keywords": [
+        "routine nouveau-né",
+        "sommeil enfant",
+        "journal famille",
+        "rappel vaccin",
+        "biberon"
+      ]
+    },
+    {
+      "locale": "it-IT",
+      "countryCode": "IT",
+      "languageCode": "it",
+      "appName": "BabyTrack: Diario Bebè",
+      "subtitle": "Sonno, Pappa e Pannolino",
+      "keywords": [
+        "routine neonato",
+        "allattamento timer",
+        "sonno bimbo",
+        "promemoria vaccini",
+        "diario famiglia"
+      ]
+    },
+    {
+      "locale": "pt-BR",
+      "countryCode": "BR",
+      "languageCode": "pt",
+      "appName": "BabyTrack: Diário do Bebê",
+      "subtitle": "Sono, Amamentação, Fralda",
+      "keywords": [
+        "rotina recém nascido",
+        "sono infantil",
+        "lembrete vacina",
+        "diário familiar",
+        "mamadeira"
+      ]
+    },
+    {
+      "locale": "ar-SA",
+      "countryCode": "SA",
+      "languageCode": "ar",
+      "appName": "BabyTrack: تتبع الطفل",
+      "subtitle": "النوم والرضاعة والحفاض",
+      "keywords": [
+        "روتين المولود",
+        "نوم الرضيع",
+        "تذكير اللقاح",
+        "مذكرات الطفل",
+        "متابعة النمو"
+      ]
+    }
+  ]
+}

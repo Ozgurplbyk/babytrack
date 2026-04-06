@@ -1,0 +1,70 @@
+{
+  "version": "1.0.0",
+  "default_display_name": "BabyTrack",
+  "entries": [
+    {
+      "locale": "ar",
+      "region": "MENA",
+      "default_country_code": "SA",
+      "vaccine_country_codes": ["SA"],
+      "language_native": "العربية",
+      "app_display_name": "متابعة الطفل"
+    },
+    {
+      "locale": "de",
+      "region": "DE",
+      "default_country_code": "DE",
+      "vaccine_country_codes": ["DE"],
+      "language_native": "Deutsch",
+      "app_display_name": "Baby Tracker"
+    },
+    {
+      "locale": "en",
+      "region": "US/GB",
+      "default_country_code": "US",
+      "vaccine_country_codes": ["US", "GB"],
+      "language_native": "English",
+      "app_display_name": "Baby Tracker"
+    },
+    {
+      "locale": "es",
+      "region": "ES",
+      "default_country_code": "ES",
+      "vaccine_country_codes": ["ES"],
+      "language_native": "Español",
+      "app_display_name": "Seguimiento Bebé"
+    },
+    {
+      "locale": "fr",
+      "region": "FR",
+      "default_country_code": "FR",
+      "vaccine_country_codes": ["FR"],
+      "language_native": "Français",
+      "app_display_name": "Suivi Bébé"
+    },
+    {
+      "locale": "it",
+      "region": "IT",
+      "default_country_code": "IT",
+      "vaccine_country_codes": ["IT"],
+      "language_native": "Italiano",
+      "app_display_name": "Traccia Bebè"
+    },
+    {
+      "locale": "pt-BR",
+      "region": "BR",
+      "default_country_code": "BR",
+      "vaccine_country_codes": ["BR"],
+      "language_native": "Português (Brasil)",
+      "app_display_name": "Rastreador Bebê"
+    },
+    {
+      "locale": "tr",
+      "region": "TR",
+      "default_country_code": "TR",
+      "vaccine_country_codes": ["TR"],
+      "language_native": "Türkçe",
+      "app_display_name": "Bebek İzleme"
+    }
+  ]
+}

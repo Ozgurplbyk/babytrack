@@ -1,0 +1,80 @@
+{
+  "version": "1.0.0",
+  "event_groups": [
+    {
+      "group": "activation",
+      "events": [
+        "app_open",
+        "profile_created",
+        "first_log_created",
+        "first_reminder_completed"
+      ]
+    },
+    {
+      "group": "daily_tracking",
+      "events": [
+        "breastfeed_logged",
+        "bottle_logged",
+        "diaper_logged",
+        "sleep_logged",
+        "symptom_logged",
+        "medication_logged"
+      ]
+    },
+    {
+      "group": "clinical",
+      "events": [
+        "vaccine_logged",
+        "checkup_logged",
+        "lab_logged",
+        "triage_run",
+        "triage_red_output",
+        "chronic_attack_logged"
+      ]
+    },
+    {
+      "group": "memory",
+      "events": [
+        "memory_photo_added",
+        "memory_video_added",
+        "memory_audio_added",
+        "firsts_template_used",
+        "monthly_story_generated"
+      ]
+    },
+    {
+      "group": "premium",
+      "events": [
+        "paywall_viewed",
+        "trial_started",
+        "purchase_completed",
+        "trial_converted",
+        "subscription_renewed",
+        "subscription_churned"
+      ]
+    },
+    {
+      "group": "sharing",
+      "events": [
+        "doctor_share_created",
+        "doctor_share_opened",
+        "doctor_share_revoked",
+        "pdf_export_completed",
+        "fhir_export_completed"
+      ]
+    }
+  ],
+  "dimensions": [
+    "country_code",
+    "locale",
+    "child_age_bucket",
+    "user_role",
+    "subscription_tier",
+    "app_version"
+  ],
+  "privacy": {
+    "no_raw_health_values_in_analytics": true,
+    "pseudonymous_user_id_required": true
+  }
+}
+

@@ -1,0 +1,151 @@
+{
+  "meta": {
+    "country": "BR",
+    "version": "2026.01",
+    "approved_by": "medical_editor_required",
+    "published_at": "2026-03-04T21:56:02.819800+00:00",
+    "signature": "dcd7775e71b732f9d99a2e376a0d1843af47a565942c1c3bfcd7df635fdba112"
+  },
+  "diff": {
+    "added": [],
+    "removed": [],
+    "changed": [
+      {
+        "before": {
+          "country": "BR",
+          "authority": "Ministério da Saúde",
+          "version": "2026.01",
+          "effective_from": "2026-01-01",
+          "effective_to": null,
+          "vaccine_code": "Pentavalente",
+          "dose_no": 1,
+          "min_age_days": 60,
+          "max_age_days": 120,
+          "min_interval_days": 28,
+          "catch_up_rule": ""
+        },
+        "after": {
+          "country": "BR",
+          "authority": "Ministerio da Saude",
+          "version": "2026.01",
+          "effective_from": "2026-01-01",
+          "effective_to": null,
+          "vaccine_code": "Pentavalente",
+          "dose_no": 1,
+          "min_age_days": 60,
+          "max_age_days": 120,
+          "min_interval_days": 28,
+          "catch_up_rule": ""
+        }
+      },
+      {
+        "before": {
+          "country": "BR",
+          "authority": "Ministério da Saúde",
+          "version": "2026.01",
+          "effective_from": "2026-01-01",
+          "effective_to": null,
+          "vaccine_code": "Hepatite B",
+          "dose_no": 1,
+          "min_age_days": 0,
+          "max_age_days": 30,
+          "min_interval_days": 0,
+          "catch_up_rule": ""
+        },
+        "after": {
+          "country": "BR",
+          "authority": "Ministerio da Saude",
+          "version": "2026.01",
+          "effective_from": "2026-01-01",
+          "effective_to": null,
+          "vaccine_code": "Hepatite B",
+          "dose_no": 1,
+          "min_age_days": 0,
+          "max_age_days": 30,
+          "min_interval_days": 0,
+          "catch_up_rule": ""
+        }
+      },
+      {
+        "before": {
+          "country": "BR",
+          "authority": "Ministério da Saúde",
+          "version": "2026.01",
+          "effective_from": "2026-01-01",
+          "effective_to": null,
+          "vaccine_code": "Tríplice viral",
+          "dose_no": 1,
+          "min_age_days": 365,
+          "max_age_days": 730,
+          "min_interval_days": 0,
+          "catch_up_rule": ""
+        },
+        "after": {
+          "country": "BR",
+          "authority": "Ministerio da Saude",
+          "version": "2026.01",
+          "effective_from": "2026-01-01",
+          "effective_to": null,
+          "vaccine_code": "Tríplice viral",
+          "dose_no": 1,
+          "min_age_days": 365,
+          "max_age_days": 730,
+          "min_interval_days": 0,
+          "catch_up_rule": ""
+        }
+      }
+    ]
+  },
+  "payload": {
+    "country": "BR",
+    "authority": "Ministerio da Saude",
+    "version": "2026.01",
+    "source": {
+      "name": "Calendario Nacional de Vacinacao",
+      "url": "https://www.gov.br/saude/pt-br/assuntos/saude-de-a-a-z/c/calendario-nacional-de-vacinacao",
+      "source_updated_at": "2026-01-01",
+      "retrieved_at": "2026-03-04T21:56:02.819359+00:00"
+    },
+    "records": [
+      {
+        "country": "BR",
+        "authority": "Ministerio da Saude",
+        "version": "2026.01",
+        "effective_from": "2026-01-01",
+        "effective_to": null,
+        "vaccine_code": "Hepatite B",
+        "dose_no": 1,
+        "min_age_days": 0,
+        "max_age_days": 30,
+        "min_interval_days": 0,
+        "catch_up_rule": ""
+      },
+      {
+        "country": "BR",
+        "authority": "Ministerio da Saude",
+        "version": "2026.01",
+        "effective_from": "2026-01-01",
+        "effective_to": null,
+        "vaccine_code": "Pentavalente",
+        "dose_no": 1,
+        "min_age_days": 60,
+        "max_age_days": 120,
+        "min_interval_days": 28,
+        "catch_up_rule": ""
+      },
+      {
+        "country": "BR",
+        "authority": "Ministerio da Saude",
+        "version": "2026.01",
+        "effective_from": "2026-01-01",
+        "effective_to": null,
+        "vaccine_code": "Tríplice viral",
+        "dose_no": 1,
+        "min_age_days": 365,
+        "max_age_days": 730,
+        "min_interval_days": 0,
+        "catch_up_rule": ""
+      }
+    ]
+  }
+}

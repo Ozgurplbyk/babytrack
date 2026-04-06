@@ -1,0 +1,97 @@
+name: Vaccine Live Update
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "17 */6 * * *"
+
+jobs:
+  refresh-packages:
+    name: Refresh Live Vaccine Packages
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Run Vaccine Update Cycle
+        run: python3 backend/vaccine_pipeline/run_update_cycle.py
+
+      - name: Validate Vaccine Registries
+        run: |
+          python3 tools/content/validate_vaccine_source_registry.py
+          python3 tools/content/validate_locale_vaccine_requirements.py
+
+      - name: Validate Pipeline Python Files
+        run: |
+          python3 -m py_compile \
+            backend/vaccine_pipeline/canonicalize.py \
+            backend/vaccine_pipeline/diffing.py \
+            backend/vaccine_pipeline/publish.py \
+            backend/vaccine_pipeline/run_update_cycle.py \
+            backend/vaccine_pipeline/validator.py \
+            backend/vaccine_pipeline/adapters/base.py \
+            backend/vaccine_pipeline/adapters/live_source_adapter.py \
+            backend/vaccine_pipeline/adapters/local_fixture_adapter.py \
+            tools/content/validate_locale_vaccine_requirements.py \
+            tools/content/validate_vaccine_source_registry.py
+
+      - name: Run Live Adapter Tests
+        run: python3 -m unittest backend.tests.test_live_source_adapter -v
+
+      - name: Verify Vaccine Package API End-to-End
+        run: |
+          BABYTRACK_API_TOKENS="ci-token" python3 backend/api/server_stdlib.py > /tmp/babytrack_vaccine_api.log 2>&1 &
+          PID=$!
+          trap 'kill $PID >/dev/null 2>&1 || true' EXIT
+
+          for i in {1..40}; do
+            if curl -sSf http://127.0.0.1:8787/health >/dev/null 2>&1; then
+              break
+            fi
+            sleep 0.2
+          done
+
+          curl -sS \
+            -H 'Authorization: Bearer ci-token' \
+            http://127.0.0.1:8787/v1/vaccines/packages/index \
+            > /tmp/vaccine_index.json
+
+          python - <<'PY'
+          import json
+
+          with open('/tmp/vaccine_index.json', 'r', encoding='utf-8') as handle:
+              payload = json.load(handle)
+
+          packages = payload.get('packages', [])
+          assert len(packages) >= 9, payload
+          countries = {item.get('country', '') for item in packages}
+          expected = {'TR', 'US', 'GB', 'DE', 'FR', 'ES', 'IT', 'BR', 'SA'}
+          assert expected.issubset(countries), countries
+
+          for item in packages:
+              assert item.get('sourceUrl'), item
+              assert item.get('sourceUpdatedAt'), item
+          PY
+
+      - name: Create Pull Request (if changed)
+        uses: peter-evans/create-pull-request@v6
+        with:
+          branch: codex/vaccine-live-refresh
+          delete-branch: true
+          commit-message: "chore(vaccine): refresh live packages"
+          title: "chore(vaccine): refresh live vaccine packages"
+          body: |
+            Automated vaccine package refresh.
+
+            - Runs live source adapters for configured countries.
+            - Publishes changed packages only.
+            - Updates source state metadata for change tracking.
+          add-paths: |
+            backend/vaccine_pipeline/output

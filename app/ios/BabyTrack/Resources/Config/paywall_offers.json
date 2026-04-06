@@ -1,0 +1,31 @@
+{
+  "version": "1.0.0",
+  "defaultPlan": "annual",
+  "plans": [
+    {
+      "id": "monthly",
+      "title": "Aylik",
+      "appStoreProductId": "com.babytrack.premium.monthly",
+      "price": "9.99",
+      "currency": "USD",
+      "trialDays": 3
+    },
+    {
+      "id": "annual",
+      "title": "Yillik",
+      "appStoreProductId": "com.babytrack.premium.annual",
+      "price": "69.99",
+      "currency": "USD",
+      "trialDays": 7,
+      "badge": "Onerilen"
+    },
+    {
+      "id": "family_annual",
+      "title": "Aile Yillik",
+      "appStoreProductId": "com.babytrack.premium.family.annual",
+      "price": "99.99",
+      "currency": "USD",
+      "trialDays": 7
+    }
+  ]
+}

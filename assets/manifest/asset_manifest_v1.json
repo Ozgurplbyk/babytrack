@@ -1,0 +1,699 @@
+{
+  "meta": {
+    "version": "1.0.0",
+    "app": "BabyTrack",
+    "scope": "all_modules_global_style",
+    "locales": ["tr-TR", "en-US", "en-GB", "de-DE"]
+  },
+  "defaults": {
+    "image_model": "gemini-2.5-flash-image",
+    "text_model": "gemini-2.5-flash",
+    "aspect_ratio": "1:1"
+  },
+  "assets": [
+    {
+      "id": "brand_mascot_core",
+      "kind": "image",
+      "module": "brand",
+      "output_path": "brand/mascot_core",
+      "aspect_ratio": "1:1",
+      "prompt": "Create a warm neutral baby mascot icon in soft clay style, minimal face, universal and culture-neutral."
+    },
+    {
+      "id": "app_icon_light",
+      "kind": "image",
+      "module": "branding",
+      "output_path": "branding/app_icon_light",
+      "aspect_ratio": "1:1",
+      "prompt": "Premium iOS app icon for a baby tracking app, soft clay 3D style, centered baby moon + heart pulse motif, clean bright background, high contrast, minimal detail, no text, no logo marks, icon-safe composition."
+    },
+    {
+      "id": "app_icon_dark",
+      "kind": "image",
+      "module": "branding",
+      "output_path": "branding/app_icon_dark",
+      "aspect_ratio": "1:1",
+      "prompt": "Dark-mode iOS app icon for a baby tracking app, same core motif as light version (baby moon + heart pulse), deep navy background with soft glow accents, premium soft clay 3D style, no text, no logo marks, icon-safe composition."
+    },
+    {
+      "id": "onboarding_welcome_hero",
+      "kind": "image",
+      "module": "onboarding",
+      "output_path": "onboarding/welcome_hero",
+      "aspect_ratio": "4:5",
+      "prompt": "Parent and baby in a clean bright room, warm and safe atmosphere, no text."
+    },
+    {
+      "id": "onboarding_health_tracking_hero",
+      "kind": "image",
+      "module": "onboarding",
+      "output_path": "onboarding/health_tracking_hero",
+      "aspect_ratio": "4:5",
+      "prompt": "Simple medical tracking scene with vaccine card, growth chart icon, and smiling baby."
+    },
+    {
+      "id": "onboarding_memory_journal_hero",
+      "kind": "image",
+      "module": "onboarding",
+      "output_path": "onboarding/memory_journal_hero",
+      "aspect_ratio": "4:5",
+      "prompt": "Memory journal scene with photo card, heart icon, and baby first smile moment."
+    },
+    {
+      "id": "onboarding_offline_sync_hero",
+      "kind": "image",
+      "module": "onboarding",
+      "output_path": "onboarding/offline_sync_hero",
+      "aspect_ratio": "4:5",
+      "prompt": "Offline-to-cloud sync concept with phone and gentle cloud arrows, no logos, no text."
+    },
+    {
+      "id": "home_daily_card_feeding",
+      "kind": "image",
+      "module": "home",
+      "output_path": "home/cards/daily_feeding",
+      "prompt": "Small icon style card art for feeding activity."
+    },
+    {
+      "id": "home_daily_card_sleep",
+      "kind": "image",
+      "module": "home",
+      "output_path": "home/cards/daily_sleep",
+      "prompt": "Small icon style card art for sleep tracking with moon and baby."
+    },
+    {
+      "id": "home_daily_card_diaper",
+      "kind": "image",
+      "module": "home",
+      "output_path": "home/cards/daily_diaper",
+      "prompt": "Small icon-style diaper tracking art with diaper and sparkle only. Absolutely no text, no numbers, no symbols, no pseudo-text, no UI labels, no hex codes."
+    },
+    {
+      "id": "home_daily_card_medication",
+      "kind": "image",
+      "module": "home",
+      "output_path": "home/cards/daily_medication",
+      "prompt": "Small icon style medicine bottle and dropper for child-safe medication tracking."
+    },
+    {
+      "id": "home_empty_state",
+      "kind": "image",
+      "module": "home",
+      "output_path": "home/empty/first_day",
+      "prompt": "Empty state: calm room and baby icon, inviting user to add first log."
+    },
+    {
+      "id": "quick_add_breast_left",
+      "kind": "image",
+      "module": "quick_add",
+      "output_path": "quick_add/breast_left",
+      "prompt": "Simple icon for breastfeeding left side, respectful and minimal."
+    },
+    {
+      "id": "quick_add_breast_right",
+      "kind": "image",
+      "module": "quick_add",
+      "output_path": "quick_add/breast_right",
+      "prompt": "Simple icon for breastfeeding right side, respectful and minimal."
+    },
+    {
+      "id": "quick_add_bottle",
+      "kind": "image",
+      "module": "quick_add",
+      "output_path": "quick_add/bottle",
+      "prompt": "Baby bottle icon in soft clay style."
+    },
+    {
+      "id": "quick_add_pumping",
+      "kind": "image",
+      "module": "quick_add",
+      "output_path": "quick_add/pumping",
+      "prompt": "Breast pump icon and bottle, minimal."
+    },
+    {
+      "id": "quick_add_diaper",
+      "kind": "image",
+      "module": "quick_add",
+      "output_path": "quick_add/diaper",
+      "prompt": "Diaper icon for quick add."
+    },
+    {
+      "id": "quick_add_sleep",
+      "kind": "image",
+      "module": "quick_add",
+      "output_path": "quick_add/sleep",
+      "prompt": "Sleeping baby on moon icon."
+    },
+    {
+      "id": "quick_add_fever",
+      "kind": "image",
+      "module": "quick_add",
+      "output_path": "quick_add/fever",
+      "prompt": "Thermometer icon with child-safe style."
+    },
+    {
+      "id": "quick_add_symptom",
+      "kind": "image",
+      "module": "quick_add",
+      "output_path": "quick_add/symptom",
+      "prompt": "Health symptom icon using simple body silhouette plus soft alert pulse shape. Do not use clipboard, checkboxes, or list lines. No text, no numbers, no pseudo-text, no hex codes."
+    },
+    {
+      "id": "quick_add_memory",
+      "kind": "image",
+      "module": "quick_add",
+      "output_path": "quick_add/memory",
+      "prompt": "Memory journal icon with heart and photo card."
+    },
+    {
+      "id": "feeding_empty_state",
+      "kind": "image",
+      "module": "feeding",
+      "output_path": "feeding/empty_state",
+      "aspect_ratio": "4:5",
+      "prompt": "No feeding logs yet scene with bottle and calm abstract shapes. Do not include cards, labels, or document-like elements. All surfaces must be blank: zero text, zero numbers, zero symbols, zero hex codes."
+    },
+    {
+      "id": "feeding_success_state",
+      "kind": "image",
+      "module": "feeding",
+      "output_path": "feeding/success_state",
+      "aspect_ratio": "4:5",
+      "prompt": "Successful feeding day summary with happy baby icon and gentle progress ring."
+    },
+    {
+      "id": "sleep_empty_state",
+      "kind": "image",
+      "module": "sleep",
+      "output_path": "sleep/empty_state",
+      "aspect_ratio": "4:5",
+      "prompt": "No sleep logs yet state with moon and stars."
+    },
+    {
+      "id": "sleep_day_night_filter_hero",
+      "kind": "image",
+      "module": "sleep",
+      "output_path": "sleep/day_night_filter_hero",
+      "prompt": "Split visual for day and night sleep segments."
+    },
+    {
+      "id": "diaper_empty_state",
+      "kind": "image",
+      "module": "diaper",
+      "output_path": "diaper/empty_state",
+      "aspect_ratio": "4:5",
+      "prompt": "No diaper logs yet state, clean and friendly. Use blank organic shapes only. No labels, no letters, no digits, no glyph-like marks, no hex-like strings."
+    },
+    {
+      "id": "pumping_empty_state",
+      "kind": "image",
+      "module": "pumping",
+      "output_path": "pumping/empty_state",
+      "aspect_ratio": "4:5",
+      "prompt": "Create an icon-style illustration only (not a UI screen) with one smooth breast pump silhouette and one plain baby bottle silhouette on a plain pastel background. Surfaces must be matte and featureless: no labels, no marks, no embossed details, no text, no numbers, no pseudo-text, no placeholder lines, no hex codes."
+    },
+    {
+      "id": "medication_empty_state",
+      "kind": "image",
+      "module": "medication",
+      "output_path": "medication/empty_state",
+      "aspect_ratio": "4:5",
+      "prompt": "Create an icon-style illustration only (not a UI screen) with one plain medicine bottle and one plain dropper silhouette on a plain pastel background. Bottle and dropper surfaces must be featureless with no labels, no marks, no embossed rings, no stickers, no papers, no cards, no text, no numbers, no pseudo-text, no placeholder lines, no hex codes."
+    },
+    {
+      "id": "medication_reminder_card",
+      "kind": "image",
+      "module": "medication",
+      "output_path": "medication/reminder_card",
+      "prompt": "Medication reminder icon, non-threatening medical style."
+    },
+    {
+      "id": "symptom_triage_green",
+      "kind": "image",
+      "module": "triage",
+      "output_path": "triage/green_state",
+      "prompt": "Green triage state icon: monitor at home guidance."
+    },
+    {
+      "id": "symptom_triage_yellow",
+      "kind": "image",
+      "module": "triage",
+      "output_path": "triage/yellow_state",
+      "prompt": "Yellow triage state icon: contact doctor soon."
+    },
+    {
+      "id": "symptom_triage_red",
+      "kind": "image",
+      "module": "triage",
+      "output_path": "triage/red_state",
+      "prompt": "Red triage state icon: urgent care, still calm and clear, no panic imagery."
+    },
+    {
+      "id": "vaccine_overview_hero",
+      "kind": "image",
+      "module": "vaccine",
+      "output_path": "vaccine/overview_hero",
+      "aspect_ratio": "4:5",
+      "prompt": "Vaccine schedule card with shield and child-safe symbol."
+    },
+    {
+      "id": "vaccine_due_badge",
+      "kind": "image",
+      "module": "vaccine",
+      "output_path": "vaccine/badges/due",
+      "prompt": "Badge icon for upcoming due vaccine."
+    },
+    {
+      "id": "vaccine_overdue_badge",
+      "kind": "image",
+      "module": "vaccine",
+      "output_path": "vaccine/badges/overdue",
+      "prompt": "Overdue vaccine badge icon using shield and soft warning glow only. No syringe measurement marks, no tiny lines, no ticks, no text, no numbers, no pseudo-text, no hex codes."
+    },
+    {
+      "id": "checkup_empty_state",
+      "kind": "image",
+      "module": "checkup",
+      "output_path": "checkup/empty_state",
+      "aspect_ratio": "4:5",
+      "prompt": "No checkup records yet scene with stethoscope and notebook."
+    },
+    {
+      "id": "growth_chart_hero",
+      "kind": "image",
+      "module": "growth",
+      "output_path": "growth/chart_hero",
+      "aspect_ratio": "4:5",
+      "prompt": "Growth chart and measuring scale in child-friendly style."
+    },
+    {
+      "id": "growth_percentile_alert",
+      "kind": "image",
+      "module": "growth",
+      "output_path": "growth/percentile_alert",
+      "prompt": "Soft warning icon for percentile trend review using abstract shape cues only. No punctuation symbols, no text, no numbers."
+    },
+    {
+      "id": "labs_empty_state",
+      "kind": "image",
+      "module": "labs",
+      "output_path": "labs/empty_state",
+      "aspect_ratio": "4:5",
+      "prompt": "No lab records yet with test tube and simple abstract wave shape only. No document cards, no axes, no labels, no ticks. No text, no numbers, no pseudo-text, no placeholder lines, no hex codes."
+    },
+    {
+      "id": "labs_trend_ferritin",
+      "kind": "image",
+      "module": "labs",
+      "output_path": "labs/trend/ferritin",
+      "prompt": "Icon for ferritin trend graph."
+    },
+    {
+      "id": "labs_trend_vitamin_d",
+      "kind": "image",
+      "module": "labs",
+      "output_path": "labs/trend/vitamin_d",
+      "prompt": "Icon for vitamin D trend graph with sun element."
+    },
+    {
+      "id": "labs_trend_lipid",
+      "kind": "image",
+      "module": "labs",
+      "output_path": "labs/trend/lipid",
+      "prompt": "Icon for lipid panel trend graph."
+    },
+    {
+      "id": "chronic_asthma_template",
+      "kind": "image",
+      "module": "chronic",
+      "output_path": "chronic/templates/asthma",
+      "prompt": "Asthma care template icon, calm and clear."
+    },
+    {
+      "id": "chronic_allergy_template",
+      "kind": "image",
+      "module": "chronic",
+      "output_path": "chronic/templates/allergy",
+      "prompt": "Allergy care template icon with shield."
+    },
+    {
+      "id": "chronic_epilepsy_template",
+      "kind": "image",
+      "module": "chronic",
+      "output_path": "chronic/templates/epilepsy",
+      "prompt": "Epilepsy care template icon in neutral safe style."
+    },
+    {
+      "id": "chronic_attack_log_hero",
+      "kind": "image",
+      "module": "chronic",
+      "output_path": "chronic/attack_log_hero",
+      "aspect_ratio": "4:5",
+      "prompt": "Attack journal concept with timeline markers and calm symbols."
+    },
+    {
+      "id": "appointment_empty_state",
+      "kind": "image",
+      "module": "appointments",
+      "output_path": "appointments/empty_state",
+      "aspect_ratio": "4:5",
+      "prompt": "No appointment record yet with abstract rounded calendar shape and stethoscope only. Calendar face must be plain (no grid, no marks, no date cells). No text, no numbers, no pseudo-text, no placeholder lines, no hex codes."
+    },
+    {
+      "id": "appointment_prep_card",
+      "kind": "image",
+      "module": "appointments",
+      "output_path": "appointments/prep_card",
+      "prompt": "Appointment preparation icon without checklist lines. Use abstract dots/shapes only; no text, no numbers, no pseudo-writing."
+    },
+    {
+      "id": "doctor_share_hero",
+      "kind": "image",
+      "module": "doctor_share",
+      "output_path": "doctor_share/hero",
+      "aspect_ratio": "4:5",
+      "prompt": "Secure report sharing concept between parent phone and doctor tablet."
+    },
+    {
+      "id": "doctor_share_pdf_icon",
+      "kind": "image",
+      "module": "doctor_share",
+      "output_path": "doctor_share/pdf_icon",
+      "prompt": "Medical share icon with shield and link motif in soft-clay style. Do not render document pages, letters, or file marks. No text, no numbers, no pseudo-text, no hex codes."
+    },
+    {
+      "id": "doctor_share_link_icon",
+      "kind": "image",
+      "module": "doctor_share",
+      "output_path": "doctor_share/link_icon",
+      "prompt": "Secure share link icon with chain motif and glow accents only. Do not include document sheets, line placeholders, or any text-like marks."
+    },
+    {
+      "id": "travel_health_pack_hero",
+      "kind": "image",
+      "module": "travel_school",
+      "output_path": "travel_school/travel_pack_hero",
+      "aspect_ratio": "4:5",
+      "prompt": "Travel health package concept with vaccine card and luggage."
+    },
+    {
+      "id": "school_health_pack_hero",
+      "kind": "image",
+      "module": "travel_school",
+      "output_path": "travel_school/school_pack_hero",
+      "aspect_ratio": "4:5",
+      "prompt": "School health package concept with checklist and child."
+    },
+    {
+      "id": "memory_empty_state",
+      "kind": "image",
+      "module": "memory",
+      "output_path": "memory/empty_state",
+      "aspect_ratio": "4:5",
+      "prompt": "No memory added yet with photo card and small heart."
+    },
+    {
+      "id": "memory_first_smile_card",
+      "kind": "image",
+      "module": "memory",
+      "output_path": "memory/firsts/first_smile",
+      "prompt": "Template art for first smile memory card. Card must be completely blank, no title text, no numbers, no marks resembling text."
+    },
+    {
+      "id": "memory_first_step_card",
+      "kind": "image",
+      "module": "memory",
+      "output_path": "memory/firsts/first_step",
+      "prompt": "Template art for first step memory card."
+    },
+    {
+      "id": "memory_first_word_card",
+      "kind": "image",
+      "module": "memory",
+      "output_path": "memory/firsts/first_word",
+      "prompt": "Template art for first word memory card with baby and speech bubble shape only. Do not include card lines, title strips, or placeholder text bars. No text, no numbers, no pseudo-text, no hex codes."
+    },
+    {
+      "id": "memory_same_day_last_year",
+      "kind": "image",
+      "module": "memory",
+      "output_path": "memory/reminders/same_day_last_year",
+      "prompt": "Nostalgic reminder card for same day last year."
+    },
+    {
+      "id": "memory_monthly_story_cover",
+      "kind": "image",
+      "module": "memory",
+      "output_path": "memory/monthly_story/cover",
+      "aspect_ratio": "3:4",
+      "prompt": "Monthly story cover template with clean space for title."
+    },
+    {
+      "id": "development_tasks_hero",
+      "kind": "image",
+      "module": "development",
+      "output_path": "development/tasks_hero",
+      "aspect_ratio": "4:5",
+      "prompt": "Development tasks card with puzzle and growth symbols."
+    },
+    {
+      "id": "development_motor_skill",
+      "kind": "image",
+      "module": "development",
+      "output_path": "development/task_icons/motor_skill",
+      "prompt": "Motor skill task icon."
+    },
+    {
+      "id": "development_language_skill",
+      "kind": "image",
+      "module": "development",
+      "output_path": "development/task_icons/language_skill",
+      "prompt": "Language skill task icon."
+    },
+    {
+      "id": "development_social_skill",
+      "kind": "image",
+      "module": "development",
+      "output_path": "development/task_icons/social_skill",
+      "prompt": "Social skill task icon."
+    },
+    {
+      "id": "family_roles_hero",
+      "kind": "image",
+      "module": "family",
+      "output_path": "family/roles_hero",
+      "aspect_ratio": "4:5",
+      "prompt": "Caregiver roles concept with parent and grandparent icons."
+    },
+    {
+      "id": "privacy_visibility_icon_family",
+      "kind": "image",
+      "module": "privacy",
+      "output_path": "privacy/visibility/family",
+      "prompt": "Visibility icon for family level."
+    },
+    {
+      "id": "privacy_visibility_icon_parents",
+      "kind": "image",
+      "module": "privacy",
+      "output_path": "privacy/visibility/parents_only",
+      "prompt": "Visibility icon for parents only."
+    },
+    {
+      "id": "privacy_visibility_icon_private",
+      "kind": "image",
+      "module": "privacy",
+      "output_path": "privacy/visibility/private",
+      "prompt": "Visibility icon for private notes."
+    },
+    {
+      "id": "emergency_card_hero",
+      "kind": "image",
+      "module": "emergency",
+      "output_path": "emergency/card_hero",
+      "aspect_ratio": "4:5",
+      "prompt": "Emergency card concept with allergy and contact symbols."
+    },
+    {
+      "id": "offline_mode_hero",
+      "kind": "image",
+      "module": "sync",
+      "output_path": "sync/offline_mode_hero",
+      "aspect_ratio": "4:5",
+      "prompt": "Offline mode concept with phone and local storage icon."
+    },
+    {
+      "id": "sync_success_hero",
+      "kind": "image",
+      "module": "sync",
+      "output_path": "sync/sync_success_hero",
+      "aspect_ratio": "4:5",
+      "prompt": "Sync success concept with cloud and checkmark."
+    },
+    {
+      "id": "premium_paywall_main_hero",
+      "kind": "image",
+      "module": "premium",
+      "output_path": "premium/paywall_main_hero",
+      "aspect_ratio": "4:5",
+      "prompt": "Premium value hero showing abstract insight, secure sharing, and family care symbols. Do not render UI cards with text lines. No text, no numbers, no pseudo-text."
+    },
+    {
+      "id": "whats_new_wow_hero",
+      "kind": "image",
+      "module": "whats_new",
+      "output_path": "whats_new/whats_new_hero",
+      "aspect_ratio": "16:9",
+      "prompt": "Cinematic celebratory update hero for a baby tracking app, glowing stars, soft confetti particles, premium soft-clay 3D objects for baby care (moon, bottle, shield, heart), elegant warm light, high polish, no text."
+    },
+    {
+      "id": "whats_new_wow_hero_a",
+      "kind": "image",
+      "module": "whats_new",
+      "output_path": "whats_new/whats_new_hero_a",
+      "aspect_ratio": "16:9",
+      "prompt": "Cinematic celebration scene for a baby tracking app release, soft-clay 3D, floating sparkles, confetti dust, moon and baby-care icons orbiting around a glowing center, premium polish, no text."
+    },
+    {
+      "id": "whats_new_wow_hero_b",
+      "kind": "image",
+      "module": "whats_new",
+      "output_path": "whats_new/whats_new_hero_b",
+      "aspect_ratio": "16:9",
+      "prompt": "Aurora-style pastel light ribbons over a clean dreamy background, soft-clay 3D baby symbols (bottle, shield, heart, calendar), dynamic depth, elegant and modern, no text, no logos."
+    },
+    {
+      "id": "whats_new_wow_hero_c",
+      "kind": "image",
+      "module": "whats_new",
+      "output_path": "whats_new/whats_new_hero_c",
+      "aspect_ratio": "16:9",
+      "prompt": "High-impact launch hero with radiant sunrise lighting and soft-clay 3D nursery objects only (moon, cloud, heart, toy block). Use smooth geometric forms with zero writing surfaces. No text, no numbers, no pseudo-text, no symbols, no hex codes."
+    },
+    {
+      "id": "premium_paywall_wow_hero",
+      "kind": "image",
+      "module": "premium",
+      "output_path": "premium/paywall_wow_hero",
+      "aspect_ratio": "16:9",
+      "prompt": "High-impact premium hero scene in soft-clay 3D style: parent and baby with abstract floating feature tiles, subtle gold highlights, luxurious but friendly. No words like AI, no percent signs, no numbers, no pseudo-writing."
+    },
+    {
+      "id": "premium_paywall_wow_hero_a",
+      "kind": "image",
+      "module": "premium",
+      "output_path": "premium/paywall_wow_hero_a",
+      "aspect_ratio": "16:9",
+      "prompt": "Premium membership hero in soft-clay 3D: confident parent and baby with abstract geometric shapes only, subtle gold accents, cinematic lighting. No panels, no cards, no documents, no charts with labels. No text, no numbers, no pseudo-writing, no hex codes."
+    },
+    {
+      "id": "premium_paywall_wow_hero_b",
+      "kind": "image",
+      "module": "premium",
+      "output_path": "premium/paywall_wow_hero_b",
+      "aspect_ratio": "16:9",
+      "prompt": "Futuristic yet warm premium hero with soft abstract baby wellness symbols and smooth geometric light shapes, soft violet-blue glow, depth and motion feel, trustworthy and elegant. Avoid card stacks and avoid repeated vertical bar details. No text, no numbers, no pseudo-text, no logos, no hex codes."
+    },
+    {
+      "id": "premium_paywall_wow_hero_c",
+      "kind": "image",
+      "module": "premium",
+      "output_path": "premium/paywall_wow_hero_c",
+      "aspect_ratio": "16:9",
+      "prompt": "Emotional premium family care composition with parent-baby bond and abstract trust cues (shield, heart, glow rings), rich but calm palette, high-detail soft-clay 3D. Do not use letters, especially no AI text, and no report cards with lines. No text, no numbers, no pseudo-text, no hex codes."
+    },
+    {
+      "id": "premium_feature_ai_insights",
+      "kind": "image",
+      "module": "premium",
+      "output_path": "premium/features/ai_insights",
+      "prompt": "Premium feature icon for AI insights."
+    },
+    {
+      "id": "premium_feature_doctor_share",
+      "kind": "image",
+      "module": "premium",
+      "output_path": "premium/features/doctor_share",
+      "prompt": "Premium feature icon for doctor sharing."
+    },
+    {
+      "id": "premium_feature_memory_book",
+      "kind": "image",
+      "module": "premium",
+      "output_path": "premium/features/memory_book",
+      "prompt": "Premium feature icon for yearly memory book. Book cover must be plain and text-free, no letters or digits."
+    },
+    {
+      "id": "notifications_empty_state",
+      "kind": "image",
+      "module": "notifications",
+      "output_path": "notifications/empty_state",
+      "aspect_ratio": "4:5",
+      "prompt": "No notifications yet scene."
+    },
+    {
+      "id": "search_empty_state",
+      "kind": "image",
+      "module": "search",
+      "output_path": "search/empty_state",
+      "aspect_ratio": "4:5",
+      "prompt": "No results state with soft magnifier icon."
+    },
+    {
+      "id": "error_general",
+      "kind": "image",
+      "module": "error",
+      "output_path": "error/general",
+      "aspect_ratio": "4:5",
+      "prompt": "Friendly generic error state, non-frustrating."
+    },
+    {
+      "id": "error_network",
+      "kind": "image",
+      "module": "error",
+      "output_path": "error/network",
+      "aspect_ratio": "4:5",
+      "prompt": "Network issue state for offline fallback."
+    },
+    {
+      "id": "video_story_onboarding",
+      "kind": "storyboard",
+      "module": "video",
+      "model": "gemini-2.5-flash",
+      "output_path": "video/storyboards/onboarding_story",
+      "prompt": "Create a 12-second storyboard for onboarding brand story. Include 6 shots with camera direction, on-screen caption placeholders, and transition cues."
+    },
+    {
+      "id": "video_story_quick_log",
+      "kind": "storyboard",
+      "module": "video",
+      "model": "gemini-2.5-flash",
+      "output_path": "video/storyboards/quick_log_flow",
+      "prompt": "Create a 10-second storyboard that shows fast logging: breastfeed left, diaper, sleep, medication."
+    },
+    {
+      "id": "video_story_doctor_share",
+      "kind": "storyboard",
+      "module": "video",
+      "model": "gemini-2.5-flash",
+      "output_path": "video/storyboards/doctor_share_flow",
+      "prompt": "Create a 12-second storyboard showing report generation and secure share link to doctor."
+    },
+    {
+      "id": "lottie_spec_breathing_loader",
+      "kind": "lottie_spec",
+      "module": "motion",
+      "model": "gemini-2.5-flash",
+      "output_path": "motion/lottie_specs/breathing_loader",
+      "prompt": "Write a Lottie animation specification for a calm breathing-style loader in the app brand style."
+    },
+    {
+      "id": "lottie_spec_sync_success",
+      "kind": "lottie_spec",
+      "module": "motion",
+      "model": "gemini-2.5-flash",
+      "output_path": "motion/lottie_specs/sync_success",
+      "prompt": "Write a Lottie animation specification for sync complete state with soft bounce."
+    }
+  ]
+}

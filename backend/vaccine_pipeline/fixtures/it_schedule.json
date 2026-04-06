@@ -1,0 +1,8 @@
+{
+  "version": "2026.01",
+  "schedule": [
+    {"vaccine_code": "Esavalente", "dose_no": 1, "min_age_days": 60, "max_age_days": 120, "min_interval_days": 28, "effective_from": "2026-01-01", "effective_to": null},
+    {"vaccine_code": "Pneumococco", "dose_no": 1, "min_age_days": 60, "max_age_days": 150, "min_interval_days": 28, "effective_from": "2026-01-01", "effective_to": null},
+    {"vaccine_code": "MPR", "dose_no": 1, "min_age_days": 365, "max_age_days": 730, "min_interval_days": 0, "effective_from": "2026-01-01", "effective_to": null}
+  ]
+}

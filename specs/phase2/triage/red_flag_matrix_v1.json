@@ -1,0 +1,114 @@
+{
+  "version": "1.0.0",
+  "purpose": "Informational triage routing for parent guidance. Not diagnosis.",
+  "last_updated_utc": "2026-02-26T00:00:00Z",
+  "age_groups": [
+    "0_28_days",
+    "1_3_months",
+    "3_12_months",
+    "1_5_years",
+    "6_18_years"
+  ],
+  "severity_levels": ["green", "yellow", "red"],
+  "rules": [
+    {
+      "id": "newborn_fever_red",
+      "age_group": "0_28_days",
+      "conditions": [
+        {"field": "fever_c", "op": ">=", "value": 38.0}
+      ],
+      "severity": "red",
+      "action": {
+        "primary": "urgent_care_now",
+        "message_key": "triage.red.newborn_fever"
+      }
+    },
+    {
+      "id": "infant_fever_red",
+      "age_group": "1_3_months",
+      "conditions": [
+        {"field": "fever_c", "op": ">=", "value": 38.0}
+      ],
+      "severity": "red",
+      "action": {
+        "primary": "urgent_care_now",
+        "message_key": "triage.red.infant_fever"
+      }
+    },
+    {
+      "id": "high_fever_yellow",
+      "age_group": "3_12_months",
+      "conditions": [
+        {"field": "fever_c", "op": ">=", "value": 38.5},
+        {"field": "duration_hours", "op": ">=", "value": 24}
+      ],
+      "severity": "yellow",
+      "action": {
+        "primary": "contact_doctor_today",
+        "message_key": "triage.yellow.fever_24h"
+      }
+    },
+    {
+      "id": "breathing_distress_red",
+      "age_group": "1_5_years",
+      "conditions": [
+        {"field": "symptom.breathing_difficulty", "op": "==", "value": true}
+      ],
+      "severity": "red",
+      "action": {
+        "primary": "urgent_care_now",
+        "message_key": "triage.red.breathing"
+      }
+    },
+    {
+      "id": "dehydration_yellow",
+      "age_group": "1_5_years",
+      "conditions": [
+        {"field": "symptom.low_urine", "op": "==", "value": true},
+        {"field": "symptom.dry_mouth", "op": "==", "value": true}
+      ],
+      "severity": "yellow",
+      "action": {
+        "primary": "contact_doctor_today",
+        "message_key": "triage.yellow.dehydration"
+      }
+    },
+    {
+      "id": "seizure_red",
+      "age_group": "6_18_years",
+      "conditions": [
+        {"field": "symptom.seizure", "op": "==", "value": true}
+      ],
+      "severity": "red",
+      "action": {
+        "primary": "urgent_care_now",
+        "message_key": "triage.red.seizure"
+      }
+    },
+    {
+      "id": "mild_cold_green",
+      "age_group": "1_5_years",
+      "conditions": [
+        {"field": "symptom.runny_nose", "op": "==", "value": true},
+        {"field": "fever_c", "op": "<", "value": 38.0},
+        {"field": "symptom.breathing_difficulty", "op": "==", "value": false}
+      ],
+      "severity": "green",
+      "action": {
+        "primary": "home_monitoring",
+        "message_key": "triage.green.mild_cold"
+      }
+    }
+  ],
+  "output_contract": {
+    "fields": [
+      "severity",
+      "matched_rule_ids",
+      "next_action",
+      "disclaimer",
+      "official_source_references"
+    ],
+    "disclaimer_required": true
+  }
+}
+

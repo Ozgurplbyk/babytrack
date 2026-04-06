@@ -1,0 +1,340 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  validate:
+    name: Backend + Content Validation
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install Backend Dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r backend/api/requirements.txt
+
+      - name: Python Syntax Check
+        run: |
+          python -m py_compile \
+            backend/api/event_sync_store.py \
+            backend/api/security_controls.py \
+            backend/api/server.py \
+            backend/api/server_stdlib.py \
+            backend/api/sync_db_backup.py \
+            backend/api/sync_db_retention.py \
+            backend/vaccine_pipeline/canonicalize.py \
+            backend/vaccine_pipeline/diffing.py \
+            backend/vaccine_pipeline/publish.py \
+            backend/vaccine_pipeline/run_update_cycle.py \
+            backend/vaccine_pipeline/validator.py \
+            tools/gemini/generate_assets.py \
+            tools/localization/translate_localization_with_gemini.py \
+            tools/audio/generate_audio_library.py \
+            tools/audio/validate_rights_registry.py \
+            tools/audio/set_rights_clearance.py \
+            tools/compliance/apply_registry_template.py \
+            tools/compliance/generate_action_board.py \
+            tools/content/validate_medical_registry.py \
+            tools/content/validate_locale_vaccine_requirements.py \
+            tools/content/validate_vaccine_source_registry.py \
+            tools/content/set_medical_review_status.py \
+            tools/paywall/validate_paywall_products.py \
+            tools/release/release_readiness_report.py \
+            tools/release/validate_release_ops_registry.py \
+            tools/release/validate_app_store_metadata.py \
+            tools/release/generate_app_store_localization_sheet.py \
+            tools/release/generate_closure_playbook.py \
+            tools/release/generate_release_ops_board.py \
+            tools/release/apply_release_ops_template.py \
+            scripts/validate_localizations.py
+
+      - name: Shell Script Syntax Check
+        run: |
+          bash -n scripts/run_phase_1.sh
+          bash -n scripts/catalog_generated_assets.sh
+          bash -n scripts/run_localization.sh
+          bash -n scripts/run_backend_api.sh
+          bash -n scripts/run_all_phases.sh
+          bash -n scripts/backup_sync_db.sh
+          bash -n scripts/prune_sync_db.sh
+
+      - name: Run Backend Unit Tests
+        run: python3 -m unittest discover -s backend/tests -v
+
+      - name: Validate Localization Bundles
+        run: python3 scripts/validate_localizations.py
+
+      - name: Validate Vaccine Source Registry
+        run: python3 tools/content/validate_vaccine_source_registry.py
+
+      - name: Validate Locale Vaccine Coverage
+        run: python3 tools/content/validate_locale_vaccine_requirements.py
+
+      - name: Validate Lullaby Rights Registry
+        run: python3 tools/audio/validate_rights_registry.py
+
+      - name: Validate Paywall App Store Mapping
+        run: python3 tools/paywall/validate_paywall_products.py
+
+      - name: Validate Medical Content Registry
+        run: python3 tools/content/validate_medical_registry.py
+
+      - name: Validate App Store Localized Metadata
+        run: python3 tools/release/validate_app_store_metadata.py
+
+      - name: Generate App Store Localization Upload Sheet
+        run: python3 tools/release/generate_app_store_localization_sheet.py
+
+      - name: Generate Closure Playbook
+        run: python3 tools/release/generate_closure_playbook.py
+
+      - name: Validate Release Ops Registry
+        run: python3 tools/release/validate_release_ops_registry.py
+
+      - name: Generate Release Readiness Report
+        run: python3 tools/release/release_readiness_report.py
+
+      - name: Generate Compliance Action Board
+        run: python3 tools/compliance/generate_action_board.py
+
+      - name: Generate Release Ops Action Board
+        run: python3 tools/release/generate_release_ops_board.py
+
+      - name: Auth Smoke Test (stdlib API)
+        run: |
+          BABYTRACK_API_TOKENS="ci-token,ci-old-token" BABYTRACK_RATE_LIMIT_PER_MIN="8" BABYTRACK_SYNC_REPLAY_WINDOW_SEC="300" BABYTRACK_SYNC_REQUIRE_DEVICE_BINDING="1" python3 backend/api/server_stdlib.py > /tmp/babytrack_api.log 2>&1 &
+          PID=$!
+          trap 'kill $PID >/dev/null 2>&1 || true' EXIT
+
+          for i in {1..40}; do
+            if curl -sSf http://127.0.0.1:8787/health >/dev/null 2>&1; then
+              break
+            fi
+            sleep 0.2
+          done
+
+          test "$(curl -s -o /dev/null -w '%{http_code}' http://127.0.0.1:8787/v1/config/paywall)" = "401"
+          test "$(curl -s -o /dev/null -w '%{http_code}' -H 'Authorization: Bearer ci-token' http://127.0.0.1:8787/v1/config/paywall)" = "200"
+          test "$(curl -s -o /dev/null -w '%{http_code}' -H 'Authorization: Bearer ci-old-token' http://127.0.0.1:8787/v1/config/paywall)" = "200"
+
+          test "$(curl -s -o /dev/null -w '%{http_code}' -H 'Authorization: Bearer ci-token' -H 'Content-Type: application/json' -X POST http://127.0.0.1:8787/v1/events/sync -d '{"countryCode":"TR","appVersion":"1.0.0","events":[]}' )" = "400"
+
+          curl -sS \
+            -H 'Authorization: Bearer ci-token' \
+            -H 'X-BabyTrack-Device-Id: ci-device-1' \
+            -H 'X-BabyTrack-Nonce: ci-nonce-1' \
+            -H 'Content-Type: application/json' \
+            -X POST http://127.0.0.1:8787/v1/events/sync \
+            -d '{"countryCode":"TR","appVersion":"1.0.0","events":[{"id":"ci-1","childId":"c1","type":"sleep","timestamp":"2026-02-27T12:00:00Z","note":"nap","payload":{"duration":"30"},"visibility":"family"},{"id":"ci-1","childId":"c1","type":"sleep","timestamp":"2026-02-27T12:00:00Z","note":"nap","payload":{"duration":"30"},"visibility":"family"},{"id":"","type":"sleep"}]}' \
+            > /tmp/sync_res.json
+
+          python - <<'PY'
+          import json
+          with open('/tmp/sync_res.json', 'r', encoding='utf-8') as f:
+              data = json.load(f)
+          assert data["acceptedCount"] == 2, data
+          assert data["rejectedCount"] == 1, data
+          PY
+
+          curl -sS -H 'Authorization: Bearer ci-token' http://127.0.0.1:8787/v1/events/stats > /tmp/stats_res.json
+          python - <<'PY'
+          import json
+          with open('/tmp/stats_res.json', 'r', encoding='utf-8') as f:
+              data = json.load(f)
+          assert data["storedEvents"] == 1, data
+          PY
+
+          test "$(curl -s -o /dev/null -w '%{http_code}' -H 'Authorization: Bearer ci-token' -H 'X-BabyTrack-Device-Id: ci-device-1' -H 'X-BabyTrack-Nonce: ci-nonce-1' -H 'Content-Type: application/json' -X POST http://127.0.0.1:8787/v1/events/sync -d '{"countryCode":"TR","appVersion":"1.0.0","events":[{"id":"ci-1","childId":"c1","type":"sleep","timestamp":"2026-02-27T12:00:00Z","note":"nap","payload":{"duration":"30"},"visibility":"family"},{"id":"ci-1","childId":"c1","type":"sleep","timestamp":"2026-02-27T12:00:00Z","note":"nap","payload":{"duration":"30"},"visibility":"family"},{"id":"","type":"sleep"}]}')" = "409"
+
+          test "$(curl -s -o /dev/null -w '%{http_code}' -H 'Authorization: Bearer ci-token' -H 'X-BabyTrack-Device-Id: ci-device-1' -H 'X-BabyTrack-Nonce: ci-nonce-2' -H 'Content-Type: application/json' -X POST http://127.0.0.1:8787/v1/events/sync -d '{"countryCode":"TR","appVersion":"1.0.0","events":[]}' )" = "200"
+
+          for i in {1..5}; do
+            code="$(curl -s -o /dev/null -w '%{http_code}' -H 'Authorization: Bearer ci-token' http://127.0.0.1:8787/v1/events/stats)"
+          done
+          test "$code" = "429"
+
+      - name: Forum Moderation Smoke Test (stdlib API)
+        run: |
+          BABYTRACK_API_TOKENS="ci-token,ci-old-token" BABYTRACK_RATE_LIMIT_PER_MIN="120" BABYTRACK_SYNC_REPLAY_WINDOW_SEC="300" BABYTRACK_SYNC_REQUIRE_DEVICE_BINDING="1" python3 backend/api/server_stdlib.py > /tmp/babytrack_forum_api.log 2>&1 &
+          PID=$!
+          trap 'kill $PID >/dev/null 2>&1 || true' EXIT
+
+          for i in {1..40}; do
+            if curl -sSf http://127.0.0.1:8787/health >/dev/null 2>&1; then
+              break
+            fi
+            sleep 0.2
+          done
+
+          curl -sS \
+            -H 'Authorization: Bearer ci-token' \
+            -H 'Content-Type: application/json' \
+            -X POST http://127.0.0.1:8787/v1/auth/register \
+            -d '{"email":"ci.parent.a@example.com","password":"Secret123!","displayName":"Parent A"}' \
+            > /tmp/forum_user_a.json
+
+          curl -sS \
+            -H 'Authorization: Bearer ci-token' \
+            -H 'Content-Type: application/json' \
+            -X POST http://127.0.0.1:8787/v1/auth/register \
+            -d '{"email":"ci.parent.b@example.com","password":"Secret123!","displayName":"Parent B"}' \
+            > /tmp/forum_user_b.json
+
+          USER_A_TOKEN="$(python - <<'PY'
+          import json
+          print(json.load(open('/tmp/forum_user_a.json', 'r', encoding='utf-8'))['token'])
+          PY
+          )"
+          USER_B_TOKEN="$(python - <<'PY'
+          import json
+          print(json.load(open('/tmp/forum_user_b.json', 'r', encoding='utf-8'))['token'])
+          PY
+          )"
+          USER_B_ID="$(python - <<'PY'
+          import json
+          print(json.load(open('/tmp/forum_user_b.json', 'r', encoding='utf-8'))['user']['id'])
+          PY
+          )"
+
+          curl -sS \
+            -H 'Authorization: Bearer ci-token' \
+            -H "X-BabyTrack-User-Token: ${USER_B_TOKEN}" \
+            -H 'Content-Type: application/json' \
+            -X POST http://127.0.0.1:8787/v1/forum/posts \
+            -d '{"title":"Question","body":"Baby has mild fever after vaccine.","countryCode":"TR","childId":"child-1","tags":["vaccine"]}' \
+            > /tmp/forum_post.json
+
+          POST_ID="$(python - <<'PY'
+          import json
+          print(json.load(open('/tmp/forum_post.json', 'r', encoding='utf-8'))['post']['id'])
+          PY
+          )"
+
+          curl -sS \
+            -H 'Authorization: Bearer ci-token' \
+            -H "X-BabyTrack-User-Token: ${USER_A_TOKEN}" \
+            -H 'Content-Type: application/json' \
+            -X POST "http://127.0.0.1:8787/v1/forum/posts/${POST_ID}/report" \
+            -d '{"reason":"safety","note":"ci check"}' \
+            > /tmp/forum_report.json
+
+          curl -sS \
+            -H 'Authorization: Bearer ci-token' \
+            -H "X-BabyTrack-User-Token: ${USER_A_TOKEN}" \
+            -X POST "http://127.0.0.1:8787/v1/forum/posts/${POST_ID}/mute" \
+            > /tmp/forum_mute.json
+
+          curl -sS \
+            -H 'Authorization: Bearer ci-token' \
+            -H "X-BabyTrack-User-Token: ${USER_A_TOKEN}" \
+            -X POST "http://127.0.0.1:8787/v1/forum/users/${USER_B_ID}/block" \
+            > /tmp/forum_block.json
+
+          curl -sS \
+            -H 'Authorization: Bearer ci-token' \
+            -H "X-BabyTrack-User-Token: ${USER_A_TOKEN}" \
+            "http://127.0.0.1:8787/v1/forum/admin/reports?status=pending&limit=20" \
+            > /tmp/forum_reports.json
+
+          REPORT_ID="$(python - <<'PY'
+          import json
+          data = json.load(open('/tmp/forum_reports.json', 'r', encoding='utf-8'))
+          assert data['reports'], data
+          print(data['reports'][0]['id'])
+          PY
+          )"
+
+          curl -sS \
+            -H 'Authorization: Bearer ci-token' \
+            -H "X-BabyTrack-User-Token: ${USER_A_TOKEN}" \
+            -H 'Content-Type: application/json' \
+            -X POST "http://127.0.0.1:8787/v1/forum/admin/reports/${REPORT_ID}/resolve" \
+            -d '{"status":"resolved"}' \
+            > /tmp/forum_report_resolve.json
+
+          curl -sS \
+            -H 'Authorization: Bearer ci-token' \
+            -H "X-BabyTrack-User-Token: ${USER_A_TOKEN}" \
+            'http://127.0.0.1:8787/v1/forum/posts?countryCode=TR&limit=10' \
+            > /tmp/forum_feed_a.json
+
+          python - <<'PY'
+          import json
+          report = json.load(open('/tmp/forum_report.json', 'r', encoding='utf-8'))['report']
+          assert report['status'] == 'pending', report
+          resolved = json.load(open('/tmp/forum_report_resolve.json', 'r', encoding='utf-8'))['report']
+          assert resolved['status'] == 'resolved', resolved
+          feed = json.load(open('/tmp/forum_feed_a.json', 'r', encoding='utf-8'))['posts']
+          assert len(feed) == 0, feed
+          PY
+
+  ios-build:
+    name: iOS Build Smoke
+    runs-on: macos-latest
+    timeout-minutes: 45
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install XcodeGen
+        run: brew install xcodegen
+
+      - name: Generate Xcode Project
+        run: |
+          cd app/ios
+          ./generate_xcodeproj.sh
+
+      - name: Build iOS App (No Codesign)
+        run: |
+          xcodebuild \
+            -project app/ios/BabyTrack.xcodeproj \
+            -scheme BabyTrack \
+            -destination 'generic/platform=iOS' \
+            -configuration Debug \
+            CODE_SIGNING_ALLOWED=NO \
+            build
+
+      - name: Run iOS Unit Tests
+        run: |
+          SIM_NAME="$(xcrun simctl list devices available | grep -Eo 'iPhone [0-9]+( Pro)?' | head -n 1)"
+          if [ -z "$SIM_NAME" ]; then
+            echo "No available iPhone simulator found"
+            xcrun simctl list devices available
+            exit 1
+          fi
+          echo "Using simulator: $SIM_NAME"
+          xcodebuild \
+            -project app/ios/BabyTrack.xcodeproj \
+            -scheme BabyTrack \
+            -destination "platform=iOS Simulator,name=${SIM_NAME}" \
+            -configuration Debug \
+            CODE_SIGNING_ALLOWED=NO \
+            test \
+            -only-testing:BabyTrackTests
+
+      - name: Run iOS UI Smoke Test
+        run: |
+          SIM_NAME="$(xcrun simctl list devices available | grep -Eo 'iPhone [0-9]+( Pro)?' | head -n 1)"
+          if [ -z "$SIM_NAME" ]; then
+            echo "No available iPhone simulator found"
+            xcrun simctl list devices available
+            exit 1
+          fi
+          echo "Using simulator: $SIM_NAME"
+          xcodebuild \
+            -project app/ios/BabyTrack.xcodeproj \
+            -scheme BabyTrack \
+            -destination "platform=iOS Simulator,name=${SIM_NAME}" \
+            -configuration Debug \
+            CODE_SIGNING_ALLOWED=NO \
+            test \
+            -only-testing:BabyTrackUITests/BabyTrackUITests/testAppLaunches

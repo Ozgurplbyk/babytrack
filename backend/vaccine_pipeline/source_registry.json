@@ -1,0 +1,121 @@
+{
+  "countries": [
+    {
+      "countryCode": "TR",
+      "authority": "T.C. Saglik Bakanligi",
+      "fixture": "tr_schedule.json",
+      "sourceName": "T.C. Saglik Bakanligi Asi Takvimi",
+      "sourceUrl": "https://hsgm.saglik.gov.tr/tr/bagisiklama-asi.html",
+      "sourceUpdatedAt": "2026-01-01",
+      "adapter": "live_source",
+      "scheduleFeedUrl": "https://hsgm.saglik.gov.tr/tr/bagisiklama-asi.html",
+      "scheduleFeedFormat": "html_table",
+      "scheduleFeedPath": "",
+      "scheduleFieldMap": {}
+    },
+    {
+      "countryCode": "US",
+      "authority": "CDC",
+      "fixture": "us_schedule.json",
+      "sourceName": "CDC Immunization Schedules",
+      "sourceUrl": "https://www.cdc.gov/vaccines/schedules/index.html",
+      "sourceUpdatedAt": "2026-01-01",
+      "adapter": "live_source",
+      "scheduleFeedUrl": "https://www.cdc.gov/vaccines/hcp/imz-schedules/child-adolescent-age.html",
+      "scheduleFeedFormat": "html_table",
+      "scheduleFeedPath": "",
+      "scheduleFieldMap": {}
+    },
+    {
+      "countryCode": "GB",
+      "authority": "UKHSA/NHS",
+      "fixture": "gb_schedule.json",
+      "sourceName": "NHS Vaccinations",
+      "sourceUrl": "https://www.nhs.uk/vaccinations/nhs-vaccinations-and-when-to-have-them/",
+      "sourceUpdatedAt": "2026-01-01",
+      "adapter": "live_source",
+      "scheduleFeedUrl": "https://www.nhs.uk/vaccinations/nhs-vaccinations-and-when-to-have-them/",
+      "scheduleFeedFormat": "html_table",
+      "scheduleFeedPath": "",
+      "scheduleFieldMap": {}
+    },
+    {
+      "countryCode": "DE",
+      "authority": "RKI/STIKO",
+      "fixture": "de_schedule.json",
+      "sourceName": "RKI STIKO Recommendations",
+      "sourceUrl": "https://www.rki.de/EN/Content/infections/Vaccination/vaccination_node.html",
+      "sourceUpdatedAt": "2026-01-01",
+      "adapter": "live_source",
+      "scheduleFeedUrl": "https://www.rki.de/EN/Content/infections/Vaccination/recommandations/STIKO_recommendations.html",
+      "scheduleFeedFormat": "html_table",
+      "scheduleFeedPath": "",
+      "scheduleFieldMap": {}
+    },
+    {
+      "countryCode": "FR",
+      "authority": "Sante Publique France",
+      "fixture": "fr_schedule.json",
+      "sourceName": "Ministere de la Sante Vaccination",
+      "sourceUrl": "https://sante.gouv.fr/prevention-en-sante/preserver-sa-sante/vaccination",
+      "sourceUpdatedAt": "2026-01-01",
+      "adapter": "live_source",
+      "scheduleFeedUrl": "https://sante.gouv.fr/prevention-en-sante/preserver-sa-sante/vaccination/calendrier-vaccinal",
+      "scheduleFeedFormat": "html_table",
+      "scheduleFeedPath": "",
+      "scheduleFieldMap": {}
+    },
+    {
+      "countryCode": "ES",
+      "authority": "Ministerio de Sanidad",
+      "fixture": "es_schedule.json",
+      "sourceName": "Ministerio de Sanidad Vacunaciones",
+      "sourceUrl": "https://www.sanidad.gob.es/en/profesionales/saludPublica/prevPromocion/vacunaciones/home.htm",
+      "sourceUpdatedAt": "2026-01-01",
+      "adapter": "live_source",
+      "scheduleFeedUrl": "https://www.sanidad.gob.es/areas/promocionPrevencion/vacunaciones/home.htm",
+      "scheduleFeedFormat": "html_table",
+      "scheduleFeedPath": "",
+      "scheduleFieldMap": {}
+    },
+    {
+      "countryCode": "IT",
+      "authority": "Ministero della Salute",
+      "fixture": "it_schedule.json",
+      "sourceName": "Ministero della Salute Vaccinazioni",
+      "sourceUrl": "https://www.salute.gov.it/portale/vaccinazioni/homeVaccinazioni.jsp",
+      "sourceUpdatedAt": "2026-01-01",
+      "adapter": "live_source",
+      "scheduleFeedUrl": "https://www.salute.gov.it/portale/vaccinazioni/homeVaccinazioni.jsp",
+      "scheduleFeedFormat": "html_table",
+      "scheduleFeedPath": "",
+      "scheduleFieldMap": {}
+    },
+    {
+      "countryCode": "BR",
+      "authority": "Ministerio da Saude",
+      "fixture": "br_schedule.json",
+      "sourceName": "Calendario Nacional de Vacinacao",
+      "sourceUrl": "https://www.gov.br/saude/pt-br/assuntos/saude-de-a-a-z/c/calendario-nacional-de-vacinacao",
+      "sourceUpdatedAt": "2026-01-01",
+      "adapter": "live_source",
+      "scheduleFeedUrl": "https://www.gov.br/saude/pt-br/assuntos/saude-de-a-a-z/c/calendario-nacional-de-vacinacao",
+      "scheduleFeedFormat": "html_table",
+      "scheduleFeedPath": "",
+      "scheduleFieldMap": {}
+    },
+    {
+      "countryCode": "SA",
+      "authority": "Saudi Ministry of Health",
+      "fixture": "sa_schedule.json",
+      "sourceName": "MOH Saudi Vaccination Guidance",
+      "sourceUrl": "https://www.moh.gov.sa/en/HealthAwareness/EducationalContent/vaccination/Pages/default.aspx",
+      "sourceUpdatedAt": "2026-01-01",
+      "adapter": "live_source",
+      "scheduleFeedUrl": "https://www.moh.gov.sa/en/HealthAwareness/EducationalContent/vaccination/Pages/default.aspx",
+      "scheduleFeedFormat": "html_table",
+      "scheduleFeedPath": "",
+      "scheduleFieldMap": {}
+    }
+  ]
+}

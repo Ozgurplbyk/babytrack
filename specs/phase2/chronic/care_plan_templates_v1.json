@@ -1,0 +1,129 @@
+{
+  "version": "1.0.0",
+  "templates": [
+    {
+      "template_id": "asthma_plan_v1",
+      "condition": "asthma",
+      "zones": [
+        {
+          "zone": "green",
+          "criteria": [
+            "no wheeze",
+            "normal activity",
+            "normal sleep"
+          ],
+          "actions": [
+            "continue maintenance meds",
+            "daily trigger tracking"
+          ]
+        },
+        {
+          "zone": "yellow",
+          "criteria": [
+            "mild wheeze",
+            "night cough",
+            "activity reduction"
+          ],
+          "actions": [
+            "use prescribed reliever",
+            "increase monitoring frequency",
+            "contact doctor if no improvement"
+          ]
+        },
+        {
+          "zone": "red",
+          "criteria": [
+            "severe breathing difficulty",
+            "unable to speak/eat normally",
+            "blue lips"
+          ],
+          "actions": [
+            "urgent care now",
+            "show emergency card"
+          ]
+        }
+      ],
+      "tracking_fields": [
+        "attack_time",
+        "trigger_tags",
+        "peak_flow_optional",
+        "rescue_medication_dose",
+        "response_after_15min"
+      ]
+    },
+    {
+      "template_id": "allergy_plan_v1",
+      "condition": "allergy",
+      "zones": [
+        {
+          "zone": "green",
+          "criteria": ["no active symptoms"],
+          "actions": ["avoid known allergens", "follow routine plan"]
+        },
+        {
+          "zone": "yellow",
+          "criteria": ["rash", "itching", "mild swelling"],
+          "actions": [
+            "use prescribed non-emergency medication",
+            "monitor symptom progression"
+          ]
+        },
+        {
+          "zone": "red",
+          "criteria": [
+            "breathing trouble",
+            "tongue/lip swelling",
+            "faintness"
+          ],
+          "actions": [
+            "use emergency medication if prescribed",
+            "urgent care now"
+          ]
+        }
+      ],
+      "tracking_fields": [
+        "allergen_source",
+        "reaction_time",
+        "medication_given",
+        "symptom_resolution_time"
+      ]
+    },
+    {
+      "template_id": "epilepsy_plan_v1",
+      "condition": "epilepsy",
+      "zones": [
+        {
+          "zone": "green",
+          "criteria": ["no seizure event"],
+          "actions": ["continue maintenance therapy", "routine sleep tracking"]
+        },
+        {
+          "zone": "yellow",
+          "criteria": ["brief seizure", "full recovery"],
+          "actions": ["record event details", "notify doctor if frequency rises"]
+        },
+        {
+          "zone": "red",
+          "criteria": [
+            "seizure >5 minutes",
+            "repeated seizure",
+            "post-event breathing concern"
+          ],
+          "actions": ["urgent care now"]
+        }
+      ],
+      "tracking_fields": [
+        "seizure_start_time",
+        "seizure_duration_sec",
+        "possible_trigger",
+        "recovery_duration_min",
+        "rescue_medication_used"
+      ]
+    }
+  ],
+  "safety": {
+    "doctor_customization_required": true,
+    "disclaimer_required": true
+  }
+}
+

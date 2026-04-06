@@ -1,0 +1,51 @@
+{
+  "version": "1.1.0",
+  "style_name": "soft_clinical_clay_v1",
+  "brand_principles": [
+    "warm",
+    "safe",
+    "clean",
+    "playful_but_medical_trustworthy"
+  ],
+  "visual_rules": {
+    "render_style": "3d soft clay illustration with subtle gradients",
+    "lighting": "soft diffuse studio light",
+    "camera": "front or slight isometric",
+    "background": "clean warm neutral with soft shapes, no clutter",
+    "line_detail": "minimal",
+    "texture": "matte soft plastic",
+    "ui_density": "airy and minimal; use generous white space and avoid crowded compositions",
+    "component_language": "rounded cards, segmented tabs, soft bordered pills, subtle dividers",
+    "accent_strategy": "primary accent is reserved for CTA buttons, selected tabs, and progress highlights",
+    "empty_state_pattern": "centered clay illustration + short title + compact helper text + one prominent primary CTA",
+    "navigation_pattern": "simple bottom nav with calm inactive icons and clear selected state",
+    "reference_direction": "inspired by modern baby-tracker UI patterns from provided competitor screenshots, without copying brand marks",
+    "do_not_use": [
+      "dark horror tones",
+      "highly realistic human faces",
+      "copyrighted characters",
+      "competitor brand marks"
+    ]
+  },
+  "palette": {
+    "primary": "#5B4BFF",
+    "primary_soft": "#E9E5FF",
+    "mint": "#BFE9D3",
+    "sky": "#CFE8FF",
+    "peach": "#FFDCC8",
+    "sun": "#F8E79A",
+    "text_dark": "#1E2430",
+    "text_muted": "#5F6773",
+    "surface": "#FFFFFF",
+    "surface_soft": "#F7F8FC"
+  },
+  "character_guidelines": {
+    "baby_style": "simplified, neutral, friendly, no detailed facial realism",
+    "parent_style": "diverse silhouettes, warm expressions, no logos",
+    "medical_style": "clean and reassuring, no fear-based imagery"
+  },
+  "output_defaults": {
+    "image_size": "1024x1024",
+    "file_format": "png"
+  }
+}

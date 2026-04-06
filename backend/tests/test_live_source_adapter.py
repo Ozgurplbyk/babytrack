@@ -1,0 +1,229 @@
+from __future__ import annotations
+
+import json
+import socket
+import tempfile
+import threading
+import unittest
+from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
+from pathlib import Path
+
+from backend.vaccine_pipeline.adapters.live_source_adapter import LiveSourceAdapter
+
+
+class _Handler(BaseHTTPRequestHandler):
+    responses: dict[str, tuple[int, str, dict[str, str]]] = {}
+
+    def do_GET(self):
+        code, body, headers = self.responses.get(self.path, (404, "", {}))
+        raw = body.encode("utf-8")
+        self.send_response(code)
+        for k, v in headers.items():
+            self.send_header(k, v)
+        self.send_header("Content-Type", "application/json" if self.path.endswith(".json") else "text/html")
+        self.send_header("Content-Length", str(len(raw)))
+        self.end_headers()
+        self.wfile.write(raw)
+
+    def log_message(self, format, *args):
+        return
+
+
+class LiveSourceAdapterTests(unittest.TestCase):
+    def setUp(self) -> None:
+        self.tmp = tempfile.TemporaryDirectory()
+        self.fixture = Path(self.tmp.name) / "fixture.json"
+        self.fixture.write_text(
+            json.dumps(
+                {
+                    "version": "2026.01",
+                    "schedule": [
+                        {
+                            "vaccine_code": "HepB",
+                            "dose_no": 1,
+                            "min_age_days": 0,
+                            "max_age_days": 30,
+                            "min_interval_days": 0,
+                            "effective_from": "2026-01-01",
+                            "effective_to": None,
+                        }
+                    ],
+                }
+            ),
+            encoding="utf-8",
+        )
+
+        sock = socket.socket()
+        sock.bind(("127.0.0.1", 0))
+        _, port = sock.getsockname()
+        sock.close()
+
+        self.server = ThreadingHTTPServer(("127.0.0.1", port), _Handler)
+        self.thread = threading.Thread(target=self.server.serve_forever, daemon=True)
+        self.thread.start()
+        self.base = f"http://127.0.0.1:{port}"
+
+    def tearDown(self) -> None:
+        self.server.shutdown()
+        self.server.server_close()
+        self.thread.join(timeout=2)
+        self.tmp.cleanup()
+
+    def test_uses_live_schedule_when_feed_available(self) -> None:
+        _Handler.responses = {
+            "/source": (
+                200,
+                "<html>Updated 2026-03-05</html>",
+                {"Last-Modified": "Thu, 05 Mar 2026 12:00:00 GMT"},
+            ),
+            "/feed.json": (
+                200,
+                json.dumps(
+                    {
+                        "version": "2026.02",
+                        "sourceUpdatedAt": "2026-03-05",
+                        "schedule": [
+                            {
+                                "vaccine_code": "DTaP",
+                                "dose_no": 1,
+                                "min_age_days": 42,
+                                "max_age_days": 120,
+                                "min_interval_days": 28,
+                                "effective_from": "2026-03-01",
+                                "effective_to": None,
+                            }
+                        ],
+                    }
+                ),
+                {},
+            ),
+        }
+
+        adapter = LiveSourceAdapter(
+            "US",
+            "CDC",
+            self.fixture,
+            source_name="CDC",
+            source_url=f"{self.base}/source",
+            source_updated_at="",
+            schedule_feed_url=f"{self.base}/feed.json",
+        )
+        snapshot = adapter.fetch_snapshot()
+
+        self.assertEqual(snapshot.version, "2026.02")
+        self.assertEqual(snapshot.payload["schedule"][0]["vaccine_code"], "DTaP")
+        self.assertEqual(snapshot.source_updated_at, "2026-03-05")
+
+    def test_falls_back_to_fixture_when_feed_missing(self) -> None:
+        _Handler.responses = {
+            "/source": (
+                200,
+                "<html><body>last updated 2026-02-10</body></html>",
+                {},
+            )
+        }
+
+        adapter = LiveSourceAdapter(
+            "TR",
+            "MOH",
+            self.fixture,
+            source_name="MOH",
+            source_url=f"{self.base}/source",
+            source_updated_at="2026-01-01",
+            schedule_feed_url=f"{self.base}/missing.json",
+        )
+        snapshot = adapter.fetch_snapshot()
+
+        self.assertEqual(snapshot.payload["schedule"][0]["vaccine_code"], "HepB")
+        self.assertTrue(snapshot.version.startswith("2026."))
+        self.assertEqual(snapshot.source_updated_at, "2026-02-10")
+
+    def test_parses_json_records_path_with_field_map(self) -> None:
+        _Handler.responses = {
+            "/source": (200, "<html>Updated 2026-03-07</html>", {}),
+            "/feed.json": (
+                200,
+                json.dumps(
+                    {
+                        "version": "2026.03",
+                        "updatedAt": "2026-03-07",
+                        "payload": {
+                            "items": [
+                                {
+                                    "code": "PCV13",
+                                    "dose": "2",
+                                    "ageWindow": "4 months",
+                                    "intervalDays": "28",
+                                    "effectiveFrom": "2026-02-01",
+                                }
+                            ]
+                        },
+                    }
+                ),
+                {},
+            ),
+        }
+
+        adapter = LiveSourceAdapter(
+            "US",
+            "CDC",
+            self.fixture,
+            source_name="CDC",
+            source_url=f"{self.base}/source",
+            source_updated_at="",
+            schedule_feed_url=f"{self.base}/feed.json",
+            schedule_feed_path="payload.items",
+            schedule_field_map={
+                "vaccine_code": "code",
+                "dose_no": "dose",
+                "age_text": "ageWindow",
+                "min_interval_days": "intervalDays",
+                "effective_from": "effectiveFrom",
+            },
+        )
+        snapshot = adapter.fetch_snapshot()
+        row = snapshot.payload["schedule"][0]
+
+        self.assertEqual(snapshot.version, "2026.03")
+        self.assertEqual(row["vaccine_code"], "PCV13")
+        self.assertEqual(row["dose_no"], 2)
+        self.assertEqual(row["min_age_days"], 120)
+        self.assertEqual(row["min_interval_days"], 28)
+        self.assertEqual(row["effective_from"], "2026-02-01")
+
+    def test_parses_html_table_feed(self) -> None:
+        _Handler.responses = {
+            "/source": (200, "<html>Updated 2026-03-08</html>", {}),
+            "/feed.html": (
+                200,
+                """
+                <html><body>
+                  <table>
+                    <tr><th>Vaccine</th><th>Dose</th><th>Age</th></tr>
+                    <tr><td>MMR</td><td>Dose 1</td><td>12 months</td></tr>
+                  </table>
+                </body></html>
+                """,
+                {},
+            ),
+        }
+
+        adapter = LiveSourceAdapter(
+            "GB",
+            "NHS",
+            self.fixture,
+            source_name="NHS",
+            source_url=f"{self.base}/source",
+            source_updated_at="",
+            schedule_feed_url=f"{self.base}/feed.html",
+            schedule_feed_format="html",
+        )
+        snapshot = adapter.fetch_snapshot()
+
+        self.assertEqual(snapshot.payload["schedule"][0]["vaccine_code"], "MMR")
+        self.assertEqual(snapshot.payload["schedule"][0]["dose_no"], 1)
+        self.assertEqual(snapshot.payload["schedule"][0]["min_age_days"], 360)
+
+
+if __name__ == "__main__":
+    unittest.main()

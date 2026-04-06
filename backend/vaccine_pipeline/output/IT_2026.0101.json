@@ -1,0 +1,66 @@
+{
+  "meta": {
+    "country": "IT",
+    "version": "2026.0101",
+    "approved_by": "medical_editor_required",
+    "published_at": "2026-03-05T13:20:47.325834+00:00",
+    "signature": "6d8a86a7ba36a8ce493e31d1e9eac7a9823246d137b49b4e2e66c4d75ccd97bc"
+  },
+  "diff": {
+    "added": [],
+    "removed": [],
+    "changed": []
+  },
+  "payload": {
+    "country": "IT",
+    "authority": "Ministero della Salute",
+    "version": "2026.0101",
+    "source": {
+      "name": "Ministero della Salute Vaccinazioni",
+      "url": "https://www.salute.gov.it/portale/vaccinazioni/homeVaccinazioni.jsp",
+      "source_updated_at": "2026-01-01",
+      "retrieved_at": "2026-03-05T13:20:47.101888+00:00"
+    },
+    "records": [
+      {
+        "country": "IT",
+        "authority": "Ministero della Salute",
+        "version": "2026.0101",
+        "effective_from": "2026-01-01",
+        "effective_to": null,
+        "vaccine_code": "Esavalente",
+        "dose_no": 1,
+        "min_age_days": 60,
+        "max_age_days": 120,
+        "min_interval_days": 28,
+        "catch_up_rule": ""
+      },
+      {
+        "country": "IT",
+        "authority": "Ministero della Salute",
+        "version": "2026.0101",
+        "effective_from": "2026-01-01",
+        "effective_to": null,
+        "vaccine_code": "Pneumococco",
+        "dose_no": 1,
+        "min_age_days": 60,
+        "max_age_days": 150,
+        "min_interval_days": 28,
+        "catch_up_rule": ""
+      },
+      {
+        "country": "IT",
+        "authority": "Ministero della Salute",
+        "version": "2026.0101",
+        "effective_from": "2026-01-01",
+        "effective_to": null,
+        "vaccine_code": "MPR",
+        "dose_no": 1,
+        "min_age_days": 365,
+        "max_age_days": 730,
+        "min_interval_days": 0,
+        "catch_up_rule": ""
+      }
+    ]
+  }
+}

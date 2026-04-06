@@ -1,0 +1,104 @@
+{
+  "version": "1.0.0",
+  "countries": [
+    {
+      "countryCode": "TR",
+      "authority": "T.C. Saglik Bakanligi",
+      "officialSourceUrl": "https://asi.saglik.gov.tr/",
+      "deliveryMode": "pipeline_package",
+      "status": "active",
+      "lastVerifiedAt": "2026-03-01",
+      "evidenceLinks": [
+        "backend/vaccine_pipeline/output/TR_2026.01.json"
+      ]
+    },
+    {
+      "countryCode": "US",
+      "authority": "CDC",
+      "officialSourceUrl": "https://www.cdc.gov/vaccines/schedules/",
+      "deliveryMode": "pipeline_package",
+      "status": "active",
+      "lastVerifiedAt": "2026-03-01",
+      "evidenceLinks": [
+        "backend/vaccine_pipeline/output/US_2026.01.json"
+      ]
+    },
+    {
+      "countryCode": "GB",
+      "authority": "UKHSA/NHS",
+      "officialSourceUrl": "https://www.nhs.uk/vaccinations/nhs-vaccinations-and-when-to-have-them/",
+      "deliveryMode": "pipeline_package",
+      "status": "active",
+      "lastVerifiedAt": "2026-03-01",
+      "evidenceLinks": [
+        "backend/vaccine_pipeline/output/GB_2026.01.json"
+      ]
+    },
+    {
+      "countryCode": "DE",
+      "authority": "RKI/STIKO",
+      "officialSourceUrl": "https://www.rki.de/EN/Content/infections/Vaccination/recommandations/STIKO_recommendations.html",
+      "deliveryMode": "pipeline_package",
+      "status": "active",
+      "lastVerifiedAt": "2026-03-01",
+      "evidenceLinks": [
+        "backend/vaccine_pipeline/output/DE_2026.01.json"
+      ]
+    },
+    {
+      "countryCode": "FR",
+      "authority": "Ministere de la Sante",
+      "officialSourceUrl": "https://sante.gouv.fr/prevention-en-sante/preserver-sa-sante/vaccination/calendrier-vaccinal",
+      "deliveryMode": "pipeline_package",
+      "status": "active",
+      "lastVerifiedAt": "2026-03-01",
+      "evidenceLinks": [
+        "backend/vaccine_pipeline/output/FR_2026.0305.json"
+      ]
+    },
+    {
+      "countryCode": "ES",
+      "authority": "Ministerio de Sanidad",
+      "officialSourceUrl": "https://www.sanidad.gob.es/areas/promocionPrevencion/vacunaciones/home.htm",
+      "deliveryMode": "pipeline_package",
+      "status": "active",
+      "lastVerifiedAt": "2026-03-01",
+      "evidenceLinks": [
+        "backend/vaccine_pipeline/output/ES_2026.0101.json"
+      ]
+    },
+    {
+      "countryCode": "IT",
+      "authority": "Ministero della Salute",
+      "officialSourceUrl": "https://www.salute.gov.it/portale/vaccinazioni/homeVaccinazioni.jsp",
+      "deliveryMode": "pipeline_package",
+      "status": "active",
+      "lastVerifiedAt": "2026-03-01",
+      "evidenceLinks": [
+        "backend/vaccine_pipeline/output/IT_2026.0101.json"
+      ]
+    },
+    {
+      "countryCode": "BR",
+      "authority": "Ministerio da Saude",
+      "officialSourceUrl": "https://www.gov.br/saude/pt-br/assuntos/saude-de-a-a-z/c/calendario-de-vacinacao",
+      "deliveryMode": "pipeline_package",
+      "status": "active",
+      "lastVerifiedAt": "2026-03-01",
+      "evidenceLinks": [
+        "backend/vaccine_pipeline/output/BR_2026.0101.json"
+      ]
+    },
+    {
+      "countryCode": "SA",
+      "authority": "Saudi MOH",
+      "officialSourceUrl": "https://www.moh.gov.sa/en/HealthAwareness/EducationalContent/vaccination/Pages/default.aspx",
+      "deliveryMode": "pipeline_package",
+      "status": "active",
+      "lastVerifiedAt": "2026-03-01",
+      "evidenceLinks": [
+        "backend/vaccine_pipeline/output/SA_2026.0101.json"
+      ]
+    }
+  ]
+}

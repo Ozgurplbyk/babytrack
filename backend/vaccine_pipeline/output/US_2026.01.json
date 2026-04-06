@@ -1,0 +1,66 @@
+{
+  "meta": {
+    "country": "US",
+    "version": "2026.01",
+    "approved_by": "medical_editor_required",
+    "published_at": "2026-03-04T21:56:02.812828+00:00",
+    "signature": "5dbd3f1d213480a25c7fd364a548285b4d6008918b5a3e07ed89e518aeb005e8"
+  },
+  "diff": {
+    "added": [],
+    "removed": [],
+    "changed": []
+  },
+  "payload": {
+    "country": "US",
+    "authority": "CDC",
+    "version": "2026.01",
+    "source": {
+      "name": "CDC Immunization Schedules",
+      "url": "https://www.cdc.gov/vaccines/schedules/index.html",
+      "source_updated_at": "2026-01-01",
+      "retrieved_at": "2026-03-04T21:56:02.812423+00:00"
+    },
+    "records": [
+      {
+        "country": "US",
+        "authority": "CDC",
+        "version": "2026.01",
+        "effective_from": "2026-01-01",
+        "effective_to": null,
+        "vaccine_code": "HepB",
+        "dose_no": 1,
+        "min_age_days": 0,
+        "max_age_days": 30,
+        "min_interval_days": 0,
+        "catch_up_rule": ""
+      },
+      {
+        "country": "US",
+        "authority": "CDC",
+        "version": "2026.01",
+        "effective_from": "2026-01-01",
+        "effective_to": null,
+        "vaccine_code": "DTaP",
+        "dose_no": 1,
+        "min_age_days": 42,
+        "max_age_days": 120,
+        "min_interval_days": 28,
+        "catch_up_rule": ""
+      },
+      {
+        "country": "US",
+        "authority": "CDC",
+        "version": "2026.01",
+        "effective_from": "2026-01-01",
+        "effective_to": null,
+        "vaccine_code": "MMR",
+        "dose_no": 1,
+        "min_age_days": 365,
+        "max_age_days": 730,
+        "min_interval_days": 0,
+        "catch_up_rule": ""
+      }
+    ]
+  }
+}

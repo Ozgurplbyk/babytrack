@@ -1,0 +1,36 @@
+# macOS
+.DS_Store
+
+# Xcode user and build artifacts
+DerivedData/
+app/ios/DerivedData/
+build/
+*.xcresult
+*.xcuserstate
+xcuserdata/
+*.moved-aside
+app/ios/.tools/
+
+# Swift Package Manager
+.build/
+.swiftpm/
+
+# Generated heavy assets
+generated/
+app/ios/BabyTrack/Resources/Generated/
+app/ios/BabyTrack/Resources/Audio/
+
+# Environment and secrets
+.env
+.env.*
+*.p8
+*.pem
+*.key
+app/ios/BabyTrack/Resources/Config/Firebase/GoogleService-Info.plist
+backend/api/data/*.db
+backend/api/data/*.db-shm
+backend/api/data/*.db-wal
+
+# Python cache
+__pycache__/
+*.pyc

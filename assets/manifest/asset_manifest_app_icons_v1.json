@@ -1,0 +1,30 @@
+{
+  "meta": {
+    "version": "1.0.0",
+    "app": "BabyTrack",
+    "scope": "app_icons_light_dark"
+  },
+  "defaults": {
+    "image_model": "gemini-2.5-flash-image",
+    "text_model": "gemini-2.5-flash",
+    "aspect_ratio": "1:1"
+  },
+  "assets": [
+    {
+      "id": "app_icon_light",
+      "kind": "image",
+      "module": "branding",
+      "output_path": "branding/app_icon_light",
+      "aspect_ratio": "1:1",
+      "prompt": "Premium iOS app icon for a baby tracking app, soft clay 3D style, centered baby moon + heart pulse motif, clean bright background, high contrast, minimal detail, no text, no logo marks, icon-safe composition."
+    },
+    {
+      "id": "app_icon_dark",
+      "kind": "image",
+      "module": "branding",
+      "output_path": "branding/app_icon_dark",
+      "aspect_ratio": "1:1",
+      "prompt": "Dark-mode iOS app icon for a baby tracking app, same core motif as light version (baby moon + heart pulse), deep navy background with soft glow accents, premium soft clay 3D style, no text, no logo marks, icon-safe composition."
+    }
+  ]
+}

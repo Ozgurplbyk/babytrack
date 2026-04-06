@@ -1,0 +1,66 @@
+{
+  "meta": {
+    "country": "TR",
+    "version": "2026.01",
+    "approved_by": "medical_editor_required",
+    "published_at": "2026-03-04T21:56:02.811828+00:00",
+    "signature": "5cd48a5b9ae59c8d286840b9bc100835a5203e01fa98db268446d231566da8dd"
+  },
+  "diff": {
+    "added": [],
+    "removed": [],
+    "changed": []
+  },
+  "payload": {
+    "country": "TR",
+    "authority": "T.C. Saglik Bakanligi",
+    "version": "2026.01",
+    "source": {
+      "name": "T.C. Saglik Bakanligi Asi Takvimi",
+      "url": "https://hsgm.saglik.gov.tr/tr/bagisiklama-asi.html",
+      "source_updated_at": "2026-01-01",
+      "retrieved_at": "2026-03-04T21:56:02.811048+00:00"
+    },
+    "records": [
+      {
+        "country": "TR",
+        "authority": "T.C. Saglik Bakanligi",
+        "version": "2026.01",
+        "effective_from": "2026-01-01",
+        "effective_to": null,
+        "vaccine_code": "HB",
+        "dose_no": 1,
+        "min_age_days": 0,
+        "max_age_days": 30,
+        "min_interval_days": 0,
+        "catch_up_rule": ""
+      },
+      {
+        "country": "TR",
+        "authority": "T.C. Saglik Bakanligi",
+        "version": "2026.01",
+        "effective_from": "2026-01-01",
+        "effective_to": null,
+        "vaccine_code": "DTaP-IPV-Hib-HepB",
+        "dose_no": 1,
+        "min_age_days": 60,
+        "max_age_days": 120,
+        "min_interval_days": 56,
+        "catch_up_rule": ""
+      },
+      {
+        "country": "TR",
+        "authority": "T.C. Saglik Bakanligi",
+        "version": "2026.01",
+        "effective_from": "2026-01-01",
+        "effective_to": null,
+        "vaccine_code": "MMR",
+        "dose_no": 1,
+        "min_age_days": 365,
+        "max_age_days": 730,
+        "min_interval_days": 0,
+        "catch_up_rule": ""
+      }
+    ]
+  }
+}

@@ -1,0 +1,80 @@
+{
+  "version": "1.0.0",
+  "fhir_version": "R4",
+  "bundle_type": "collection",
+  "resource_mapping": [
+    {
+      "app_entity": "child_profile",
+      "fhir_resource": "Patient",
+      "fields": {
+        "id": "patient.id",
+        "birth_date": "patient.birthDate",
+        "gender": "patient.gender",
+        "display_name": "patient.name[0].text"
+      }
+    },
+    {
+      "app_entity": "vaccine_event",
+      "fhir_resource": "Immunization",
+      "fields": {
+        "event_id": "immunization.id",
+        "vaccine_code": "immunization.vaccineCode.coding[0].code",
+        "occurrence_datetime": "immunization.occurrenceDateTime",
+        "lot_number": "immunization.lotNumber",
+        "performer_name": "immunization.performer[0].actor.display"
+      }
+    },
+    {
+      "app_entity": "lab_event",
+      "fhir_resource": "Observation",
+      "fields": {
+        "event_id": "observation.id",
+        "test_code": "observation.code.coding[0].code",
+        "value": "observation.valueQuantity.value",
+        "unit": "observation.valueQuantity.unit",
+        "effective_datetime": "observation.effectiveDateTime"
+      }
+    },
+    {
+      "app_entity": "medication_event",
+      "fhir_resource": "MedicationStatement",
+      "fields": {
+        "event_id": "medicationStatement.id",
+        "med_name": "medicationStatement.medicationCodeableConcept.text",
+        "effective_start": "medicationStatement.effectivePeriod.start",
+        "effective_end": "medicationStatement.effectivePeriod.end",
+        "dosage_text": "medicationStatement.dosage[0].text"
+      }
+    },
+    {
+      "app_entity": "allergy_event",
+      "fhir_resource": "AllergyIntolerance",
+      "fields": {
+        "event_id": "allergy.id",
+        "substance": "allergy.code.text",
+        "criticality": "allergy.criticality",
+        "recorded_date": "allergy.recordedDate"
+      }
+    },
+    {
+      "app_entity": "checkup_event",
+      "fhir_resource": "Encounter",
+      "fields": {
+        "event_id": "encounter.id",
+        "date": "encounter.period.start",
+        "provider": "encounter.participant[0].individual.display",
+        "note": "encounter.reasonCode[0].text"
+      }
+    }
+  ],
+  "privacy_rules": [
+    "private visibility records excluded by default export policy",
+    "parents_only visibility records exportable by parent role only"
+  ],
+  "metadata_required": [
+    "export_generated_at",
+    "source_app_version",
+    "guideline_country_context_optional"
+  ]
+}
+

@@ -1,0 +1,73 @@
+{
+  "version": "1.0.0",
+  "package_types": [
+    "link_share",
+    "pdf_summary",
+    "fhir_bundle"
+  ],
+  "security": {
+    "link_ttl_hours_default": 24,
+    "max_ttl_hours": 168,
+    "require_passcode_option": true,
+    "download_audit_log": true,
+    "revoke_anytime": true
+  },
+  "payload_sections": {
+    "header": [
+      "child_display_name",
+      "child_age",
+      "report_generated_at",
+      "report_range_start",
+      "report_range_end"
+    ],
+    "core": [
+      "vaccine_status_summary",
+      "growth_summary",
+      "lab_trend_summary",
+      "medication_and_allergy_summary",
+      "chronic_condition_summary",
+      "latest_triage_events_optional"
+    ],
+    "attachments": [
+      "selected_checkups",
+      "selected_labs",
+      "selected_documents",
+      "selected_memory_entries_optional"
+    ]
+  },
+  "api_contract": {
+    "create_share": {
+      "method": "POST",
+      "path": "/v1/share-links",
+      "request_fields": [
+        "child_id",
+        "record_ids",
+        "ttl_hours",
+        "require_passcode",
+        "note_optional"
+      ],
+      "response_fields": [
+        "share_id",
+        "share_url",
+        "expires_at",
+        "passcode_hint_optional"
+      ]
+    },
+    "revoke_share": {
+      "method": "POST",
+      "path": "/v1/share-links/{share_id}/revoke",
+      "response_fields": ["share_id", "revoked_at"]
+    }
+  },
+  "privacy_levels": [
+    "family",
+    "parents_only",
+    "private"
+  ],
+  "rules": [
+    "private records are excluded by default",
+    "parents_only records require parent role to include",
+    "include source version metadata for medical guidance sections"
+  ]
+}
+

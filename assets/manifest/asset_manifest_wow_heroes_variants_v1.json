@@ -1,0 +1,62 @@
+{
+  "meta": {
+    "version": "1.0.0",
+    "app": "BabyTrack",
+    "scope": "wow_heroes_variants"
+  },
+  "defaults": {
+    "image_model": "gemini-2.5-flash-image",
+    "text_model": "gemini-2.5-flash",
+    "aspect_ratio": "16:9"
+  },
+  "assets": [
+    {
+      "id": "whats_new_wow_hero_a",
+      "kind": "image",
+      "module": "whats_new",
+      "output_path": "whats_new/whats_new_hero_a",
+      "aspect_ratio": "16:9",
+      "prompt": "Cinematic celebration scene for a baby tracking app release, soft-clay 3D, floating sparkles, confetti dust, moon and baby-care icons orbiting around a glowing center, premium polish, no text."
+    },
+    {
+      "id": "whats_new_wow_hero_b",
+      "kind": "image",
+      "module": "whats_new",
+      "output_path": "whats_new/whats_new_hero_b",
+      "aspect_ratio": "16:9",
+      "prompt": "Aurora-style pastel light ribbons over a clean dreamy background, soft-clay 3D baby symbols (bottle, shield, heart, calendar), dynamic depth, elegant and modern, no text, no logos."
+    },
+    {
+      "id": "whats_new_wow_hero_c",
+      "kind": "image",
+      "module": "whats_new",
+      "output_path": "whats_new/whats_new_hero_c",
+      "aspect_ratio": "16:9",
+      "prompt": "High-impact launch hero with radiant sunrise lighting, soft-clay 3D nursery objects and joyful particles, warm emotional atmosphere, luxurious but friendly style, no text."
+    },
+    {
+      "id": "premium_paywall_wow_hero_a",
+      "kind": "image",
+      "module": "premium",
+      "output_path": "premium/paywall_wow_hero_a",
+      "aspect_ratio": "16:9",
+      "prompt": "Premium membership hero in soft-clay 3D: confident parent and baby, floating AI insights card, secure doctor share card, growth trend card, subtle gold accents, premium cinematic lighting, no text."
+    },
+    {
+      "id": "premium_paywall_wow_hero_b",
+      "kind": "image",
+      "module": "premium",
+      "output_path": "premium/paywall_wow_hero_b",
+      "aspect_ratio": "16:9",
+      "prompt": "Futuristic yet warm premium hero with glassy layered cards, baby wellness symbols, soft violet-blue glow, depth and motion feel, trustworthy and elegant, no text, no logos."
+    },
+    {
+      "id": "premium_paywall_wow_hero_c",
+      "kind": "image",
+      "module": "premium",
+      "output_path": "premium/paywall_wow_hero_c",
+      "aspect_ratio": "16:9",
+      "prompt": "Emotional premium family care composition with parent-baby bond, clean clinical trust cues, AI and report-sharing visual metaphors, rich but calm palette, high-detail soft-clay 3D, no text."
+    }
+  ]
+}

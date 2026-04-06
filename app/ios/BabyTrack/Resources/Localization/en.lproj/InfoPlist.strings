@@ -1,0 +1,3 @@
+"CFBundleDisplayName" = "Baby Tracker";
+"NSCameraUsageDescription" = "Capture a photo to save baby memories.";
+"NSPhotoLibraryUsageDescription" = "Add memory photos to your baby timeline.";

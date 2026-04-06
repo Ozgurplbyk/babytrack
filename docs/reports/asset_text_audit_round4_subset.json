@@ -1,0 +1,883 @@
+{
+  "summary": {
+    "total_images": 86,
+    "non_compliant_count": 3,
+    "compliant_count": 83
+  },
+  "non_compliant_output_paths": [
+    "medication/empty_state",
+    "pumping/empty_state",
+    "whats_new/whats_new_hero_c"
+  ],
+  "findings": [
+    {
+      "path": "appointments/empty_state.png",
+      "output_path": "appointments/empty_state",
+      "in_manifest": true,
+      "contains_text": false,
+      "contains_hex_code": false,
+      "detected_strings": [],
+      "reason": "No visible letters, words, numbers, hexadecimal color codes, UI labels, watermarks, or pseudo-text were detected in the image. The image contains only graphical elements.",
+      "non_compliant": false
+    },
+    {
+      "path": "appointments/prep_card.png",
+      "output_path": "appointments/prep_card",
+      "in_manifest": false,
+      "contains_text": false,
+      "contains_hex_code": false,
+      "detected_strings": [],
+      "reason": "No visible letters, words, numbers, hexadecimal color codes, UI labels, watermarks, or pseudo-text were detected in the image.",
+      "non_compliant": false
+    },
+    {
+      "path": "brand/mascot_core.png",
+      "output_path": "brand/mascot_core",
+      "in_manifest": false,
+      "contains_text": false,
+      "contains_hex_code": false,
+      "detected_strings": [],
+      "reason": "The image contains no discernible letters, words, numbers, hexadecimal color codes, UI labels, watermarks, or pseudo-text. It features a cartoon baby figure and abstract shapes.",
+      "non_compliant": false
+    },
+    {
+      "path": "branding/app_icon_dark.png",
+      "output_path": "branding/app_icon_dark",
+      "in_manifest": false,
+      "contains_text": false,
+      "contains_hex_code": false,
+      "detected_strings": [],
+      "reason": "No visible letters, words, numbers, hexadecimal color codes, UI labels, watermarks, or pseudo-text were detected in the image.",
+      "non_compliant": false
+    },
+    {
+      "path": "branding/app_icon_light.png",
+      "output_path": "branding/app_icon_light",
+      "in_manifest": false,
+      "contains_text": false,
+      "contains_hex_code": false,
+      "detected_strings": [],
+      "reason": "No visible letters, words, numbers, hexadecimal color codes, UI labels, watermarks, or pseudo-text were detected in the image.",
+      "non_compliant": false
+    },
+    {
+      "path": "checkup/empty_state.png",
+      "output_path": "checkup/empty_state",
+      "in_manifest": false,
+      "contains_text": false,
+      "contains_hex_code": false,
+      "detected_strings": [],
+      "reason": "No visible letters, words, numbers, hexadecimal color codes, UI labels, watermarks, or pseudo-text were detected in the image. The image contains graphic elements (notebook, checkmark, square, stethoscope, character).",
+      "non_compliant": false
+    },
+    {
+      "path": "chronic/attack_log_hero.png",
+      "output_path": "chronic/attack_log_hero",
+      "in_manifest": false,
+      "contains_text": false,
+      "contains_hex_code": false,
+      "detected_strings": [],
+      "reason": "No visible letters, words, numbers, UI labels, watermarks, pseudo-text, or hexadecimal color codes were detected in the image. The image contains only abstract 3D rendered shapes and icons representing a journey/calendar.",
+      "non_compliant": false
+    },
+    {
+      "path": "chronic/templates/allergy.png",
+      "output_path": "chronic/templates/allergy",
+      "in_manifest": false,
+      "contains_text": false,
+      "contains_hex_code": false,
+      "detected_strings": [],
+      "reason": "No visible letters, words, numbers, hexadecimal color codes, UI labels, watermarks, or pseudo-text were detected in the image. The image consists of abstract 3D shapes.",
+      "non_compliant": false
+    },
+    {
+      "path": "chronic/templates/asthma.png",
+      "output_path": "chronic/templates/asthma",
+      "in_manifest": false,
+      "contains_text": false,
+      "contains_hex_code": false,
+      "detected_strings": [],
+      "reason": "No visible letters, words, numbers, hexadecimal color codes, UI labels, watermarks, or pseudo-text were detected in the image.",
+      "non_compliant": false
+    },
+    {
+      "path": "chronic/templates/epilepsy.png",
+      "output_path": "chronic/templates/epilepsy",
+      "in_manifest": false,
+      "contains_text": false,
+      "contains_hex_code": false,
+      "detected_strings": [],
+      "reason": "No visible letters, words, numbers, hexadecimal color codes, UI labels, watermarks, or pseudo-text were detected in the image.",
+      "non_compliant": false
+    },
+    {
+      "path": "development/task_icons/language_skill.png",
+      "output_path": "development/task_icons/language_skill",
+      "in_manifest": false,
+      "contains_text": false,
+      "contains_hex_code": false,
+      "detected_strings": [],
+      "reason": "No visible letters, words, numbers, hexadecimal color codes, UI labels, watermarks, or pseudo-text were detected in the image. The elements on the speech bubble are abstract wave-like shapes, not text.",
+      "non_compliant": false
+    },
+    {
+      "path": "development/task_icons/motor_skill.png",
+      "output_path": "development/task_icons/motor_skill",
+      "in_manifest": false,
+      "contains_text": false,
+      "contains_hex_code": false,
+      "detected_strings": [],
+      "reason": "No visible letters, words, numbers, hexadecimal color codes, UI labels, watermarks, or pseudo-text were detected in the image.",
+      "non_compliant": false
+    },
+    {
+      "path": "development/task_icons/social_skill.png",
+      "output_path": "development/task_icons/social_skill",
+      "in_manifest": false,
+      "contains_text": false,
+      "contains_hex_code": false,
+      "detected_strings": [],
+      "reason": "No visible letters, words, numbers, hexadecimal color codes, UI labels, watermarks, or pseudo-text were detected in the image.",
+      "non_compliant": false
+    },
+    {
+      "path": "development/tasks_hero.png",
+      "output_path": "development/tasks_hero",
+      "in_manifest": false,
+      "contains_text": false,
+      "contains_hex_code": false,
+      "detected_strings": [],
+      "reason": "No visible letters, words, numbers, hexadecimal color codes, UI labels, watermarks, or pseudo-text were detected in the image. The image contains only graphical elements like puzzle pieces, a plant with leaves, gears, and upward arrows.",
+      "non_compliant": false
+    },
+    {
+      "path": "diaper/empty_state.png",
+      "output_path": "diaper/empty_state",
+      "in_manifest": false,
+      "contains_text": false,
+      "contains_hex_code": false,
+      "detected_strings": [],
+      "reason": "No visible letters, words, numbers, hexadecimal color codes, UI labels, watermarks, or pseudo-text were detected in the image. The image consists solely of abstract graphic shapes.",
+      "non_compliant": false
+    },
+    {
+      "path": "doctor_share/hero.png",
+      "output_path": "doctor_share/hero",
+      "in_manifest": false,
+      "contains_text": false,
+      "contains_hex_code": false,
+      "detected_strings": [],
+      "reason": "No visible letters, words, numbers, hexadecimal color codes, UI labels, watermarks, or pseudo-text were detected. The image contains only graphical icons.",
+      "non_compliant": false
+    },
+    {
+      "path": "doctor_share/link_icon.png",
+      "output_path": "doctor_share/link_icon",
+      "in_manifest": false,
+      "contains_text": false,
+      "contains_hex_code": false,
+      "detected_strings": [],
+      "reason": "No visible letters, words, numbers, hexadecimal color codes, UI labels, watermarks, or pseudo-text detected in the image. The image contains only 3D rendered graphical elements.",
+      "non_compliant": false
+    },
+    {
+      "path": "doctor_share/pdf_icon.png",
+      "output_path": "doctor_share/pdf_icon",
+      "in_manifest": true,
+      "contains_text": false,
+      "contains_hex_code": false,
+      "detected_strings": [],
+      "reason": "No visible letters, words, numbers, hexadecimal color codes, UI labels, watermarks, or pseudo-text were detected in the image.",
+      "non_compliant": false
+    },
+    {
+      "path": "emergency/card_hero.png",
+      "output_path": "emergency/card_hero",
+      "in_manifest": false,
+      "contains_text": false,
+      "contains_hex_code": false,
+      "detected_strings": [],
+      "reason": "No visible letters, words, numbers, hexadecimal color codes, UI labels, watermarks, or pseudo-text detected in the image. All elements are symbolic icons.",
+      "non_compliant": false
+    },
+    {
+      "path": "error/general.png",
+      "output_path": "error/general",
+      "in_manifest": false,
+      "contains_text": false,
+      "contains_hex_code": false,
+      "detected_strings": [],
+      "reason": "No visible letters, words, numbers, hexadecimal color codes, UI labels, watermarks, or pseudo-text were detected in the image.",
+      "non_compliant": false
+    },
+    {
+      "path": "error/network.png",
+      "output_path": "error/network",
+      "in_manifest": false,
+      "contains_text": false,
+      "contains_hex_code": false,
+      "detected_strings": [],
+      "reason": "No visible letters, words, numbers, hexadecimal color codes, UI labels (containing text), watermarks, or pseudo-text were detected. An arrow icon is present but does not contain text.",
+      "non_compliant": false
+    },
+    {
+      "path": "family/roles_hero.png",
+      "output_path": "family/roles_hero",
+      "in_manifest": false,
+      "contains_text": false,
+      "contains_hex_code": false,
+      "detected_strings": [],
+      "reason": "No visible letters, words, numbers, hexadecimal color codes, UI labels, watermarks, or pseudo-text were detected in the image.",
+      "non_compliant": false
+    },
+    {
+      "path": "feeding/empty_state.png",
+      "output_path": "feeding/empty_state",
+      "in_manifest": false,
+      "contains_text": false,
+      "contains_hex_code": false,
+      "detected_strings": [],
+      "reason": "No visible letters, words, numbers, hexadecimal color codes, UI labels, watermarks, or pseudo-text were detected in the image.",
+      "non_compliant": false
+    },
+    {
+      "path": "feeding/success_state.png",
+      "output_path": "feeding/success_state",
+      "in_manifest": false,
+      "contains_text": false,
+      "contains_hex_code": false,
+      "detected_strings": [],
+      "reason": "The image contains only graphical UI elements and icons, with no discernible letters, words, numbers, hexadecimal color codes, or pseudo-text.",
+      "non_compliant": false
+    },
+    {
+      "path": "growth/chart_hero.png",
+      "output_path": "growth/chart_hero",
+      "in_manifest": false,
+      "contains_text": false,
+      "contains_hex_code": false,
+      "detected_strings": [],
+      "reason": "No visible letters, words, numbers, hexadecimal color codes, UI labels, watermarks, or pseudo-text were detected in the image. The markings on the giraffe and the clock-like object are purely decorative or symbolic, not textual or numerical.",
+      "non_compliant": false
+    },
+    {
+      "path": "growth/percentile_alert.png",
+      "output_path": "growth/percentile_alert",
+      "in_manifest": false,
+      "contains_text": false,
+      "contains_hex_code": false,
+      "detected_strings": [],
+      "reason": "No visible letters, words, numbers, hexadecimal color codes, UI labels, watermarks, or pseudo-text were detected in the image.",
+      "non_compliant": false
+    },
+    {
+      "path": "home/cards/daily_diaper.png",
+      "output_path": "home/cards/daily_diaper",
+      "in_manifest": true,
+      "contains_text": false,
+      "contains_hex_code": false,
+      "detected_strings": [],
+      "reason": "No visible letters, words, numbers, hexadecimal color codes, UI labels, watermarks, or pseudo-text were detected in the image.",
+      "non_compliant": false
+    },
+    {
+      "path": "home/cards/daily_feeding.png",
+      "output_path": "home/cards/daily_feeding",
+      "in_manifest": false,
+      "contains_text": false,
+      "contains_hex_code": false,
+      "detected_strings": [],
+      "reason": "No visible letters, words, numbers, hexadecimal color codes, UI labels, watermarks, or pseudo-text were detected in the image. The image is an illustration of a parent feeding a baby.",
+      "non_compliant": false
+    },
+    {
+      "path": "home/cards/daily_medication.png",
+      "output_path": "home/cards/daily_medication",
+      "in_manifest": false,
+      "contains_text": false,
+      "contains_hex_code": false,
+      "detected_strings": [],
+      "reason": "The image features a stylized bottle and dropper with abstract shapes. No visible letters, words, numbers, hexadecimal color codes, UI labels, watermarks, or pseudo-text are present in the image or its crops.",
+      "non_compliant": false
+    },
+    {
+      "path": "home/cards/daily_sleep.png",
+      "output_path": "home/cards/daily_sleep",
+      "in_manifest": false,
+      "contains_text": false,
+      "contains_hex_code": false,
+      "detected_strings": [],
+      "reason": "No visible letters, words, numbers, UI labels, watermarks, pseudo-text, or hexadecimal color codes were detected in the image.",
+      "non_compliant": false
+    },
+    {
+      "path": "home/empty/first_day.png",
+      "output_path": "home/empty/first_day",
+      "in_manifest": false,
+      "contains_text": false,
+      "contains_hex_code": false,
+      "detected_strings": [],
+      "reason": "The image consists solely of graphical UI elements and illustrations without any discernible letters, words, numbers, hexadecimal color codes, UI labels (as text), watermarks, or pseudo-text.",
+      "non_compliant": false
+    },
+    {
+      "path": "labs/empty_state.png",
+      "output_path": "labs/empty_state",
+      "in_manifest": true,
+      "contains_text": false,
+      "contains_hex_code": false,
+      "detected_strings": [],
+      "reason": "No visible letters, words, numbers, hexadecimal color codes, UI labels, watermarks, or pseudo-text were detected in the image. The image contains graphical representations of a test tube with liquids and abstract bar shapes.",
+      "non_compliant": false
+    },
+    {
+      "path": "labs/trend/ferritin.png",
+      "output_path": "labs/trend/ferritin",
+      "in_manifest": false,
+      "contains_text": false,
+      "contains_hex_code": false,
+      "detected_strings": [],
+      "reason": "The image contains 3D rendered abstract shapes and a stylized graph icon, but no visible letters, words, numbers, hexadecimal color codes, UI labels, watermarks, or pseudo-text.",
+      "non_compliant": false
+    },
+    {
+      "path": "labs/trend/lipid.png",
+      "output_path": "labs/trend/lipid",
+      "in_manifest": false,
+      "contains_text": false,
+      "contains_hex_code": false,
+      "detected_strings": [],
+      "reason": "No visible letters, words, numbers, hexadecimal color codes, UI labels, watermarks, or pseudo-text were detected in the image. The image contains only graphical elements such as wavy lines, arrows, and a heart shape.",
+      "non_compliant": false
+    },
+    {
+      "path": "labs/trend/vitamin_d.png",
+      "output_path": "labs/trend/vitamin_d",
+      "in_manifest": false,
+      "contains_text": false,
+      "contains_hex_code": false,
+      "detected_strings": [],
+      "reason": "No visible letters, words, numbers, hexadecimal color codes, UI labels, watermarks, or pseudo-text were detected in the image.",
+      "non_compliant": false
+    },
+    {
+      "path": "medication/empty_state.png",
+      "output_path": "medication/empty_state",
+      "in_manifest": true,
+      "contains_text": true,
+      "contains_hex_code": true,
+      "detected_strings": [
+        "#5B48.FR"
+      ],
+      "reason": "Visible text '#5B48.FR' detected. This string includes a hexadecimal-like code segment '#5B48' and a top-level domain '.FR'.",
+      "non_compliant": true
+    },
+    {
+      "path": "medication/reminder_card.png",
+      "output_path": "medication/reminder_card",
+      "in_manifest": false,
+      "contains_text": false,
+      "contains_hex_code": false,
+      "detected_strings": [],
+      "reason": "No visible letters, words, numbers, hexadecimal color codes, UI labels, watermarks, or pseudo-text were detected in the image. The image contains only graphic elements such as a 3D rendered hand, a plus sign icon, and a notification bell icon.",
+      "non_compliant": false
+    },
+    {
+      "path": "memory/empty_state.png",
+      "output_path": "memory/empty_state",
+      "in_manifest": false,
+      "contains_text": false,
+      "contains_hex_code": false,
+      "detected_strings": [],
+      "reason": "No visible letters, words, numbers, hexadecimal color codes, UI labels, watermarks, or pseudo-text were detected in the image.",
+      "non_compliant": false
+    },
+    {
+      "path": "memory/firsts/first_smile.png",
+      "output_path": "memory/firsts/first_smile",
+      "in_manifest": false,
+      "contains_text": false,
+      "contains_hex_code": false,
+      "detected_strings": [],
+      "reason": "No visible letters, words, numbers, hexadecimal color codes, UI labels, watermarks, or pseudo-text were detected in the image.",
+      "non_compliant": false
+    },
+    {
+      "path": "memory/firsts/first_step.png",
+      "output_path": "memory/firsts/first_step",
+      "in_manifest": false,
+      "contains_text": false,
+      "contains_hex_code": false,
+      "detected_strings": [],
+      "reason": "No visible letters, words, numbers, hexadecimal color codes, UI labels, watermarks, or pseudo-text were detected in the image.",
+      "non_compliant": false
+    },
+    {
+      "path": "memory/firsts/first_word.png",
+      "output_path": "memory/firsts/first_word",
+      "in_manifest": false,
+      "contains_text": false,
+      "contains_hex_code": false,
+      "detected_strings": [],
+      "reason": "No visible letters, words, numbers, hexadecimal color codes, UI labels, watermarks, or pseudo-text were detected in the image. The image contains only graphical elements and shapes.",
+      "non_compliant": false
+    },
+    {
+      "path": "memory/monthly_story/cover.png",
+      "output_path": "memory/monthly_story/cover",
+      "in_manifest": false,
+      "contains_text": false,
+      "contains_hex_code": false,
+      "detected_strings": [],
+      "reason": "No visible letters, words, numbers, hexadecimal color codes, UI labels, watermarks, or pseudo-text were detected in the image.",
+      "non_compliant": false
+    },
+    {
+      "path": "memory/reminders/same_day_last_year.png",
+      "output_path": "memory/reminders/same_day_last_year",
+      "in_manifest": false,
+      "contains_text": false,
+      "contains_hex_code": false,
+      "detected_strings": [],
+      "reason": "No visible letters, words, numbers, hexadecimal color codes, UI labels, watermarks, or pseudo-text were detected in the image. The image consists of 3D rendered graphical elements.",
+      "non_compliant": false
+    },
+    {
+      "path": "notifications/empty_state.png",
+      "output_path": "notifications/empty_state",
+      "in_manifest": false,
+      "contains_text": false,
+      "contains_hex_code": false,
+      "detected_strings": [],
+      "reason": "No visible letters, words, numbers, hexadecimal color codes, UI labels, watermarks, or pseudo-text were detected in the image. The image contains only graphical icons.",
+      "non_compliant": false
+    },
+    {
+      "path": "onboarding/health_tracking_hero.png",
+      "output_path": "onboarding/health_tracking_hero",
+      "in_manifest": false,
+      "contains_text": false,
+      "contains_hex_code": false,
+      "detected_strings": [],
+      "reason": "No visible letters, words, numbers, hexadecimal color codes, UI labels, watermarks, or pseudo-text were detected in the image. The image consists solely of graphical icons and illustrations.",
+      "non_compliant": false
+    },
+    {
+      "path": "onboarding/memory_journal_hero.png",
+      "output_path": "onboarding/memory_journal_hero",
+      "in_manifest": false,
+      "contains_text": false,
+      "contains_hex_code": false,
+      "detected_strings": [],
+      "reason": "The image contains only graphical UI elements and a 3D illustration of a baby. There are no visible letters, words, numbers, hexadecimal color codes, UI labels, watermarks, or pseudo-text present in the image.",
+      "non_compliant": false
+    },
+    {
+      "path": "onboarding/offline_sync_hero.png",
+      "output_path": "onboarding/offline_sync_hero",
+      "in_manifest": false,
+      "contains_text": false,
+      "contains_hex_code": false,
+      "detected_strings": [],
+      "reason": "No visible letters, words, numbers, hexadecimal color codes, UI labels, watermarks, or pseudo-text were detected in the image.",
+      "non_compliant": false
+    },
+    {
+      "path": "onboarding/welcome_hero.png",
+      "output_path": "onboarding/welcome_hero",
+      "in_manifest": false,
+      "contains_text": false,
+      "contains_hex_code": false,
+      "detected_strings": [],
+      "reason": "No visible letters, words, numbers, hexadecimal color codes, UI labels, watermarks, or pseudo-text were detected in the image.",
+      "non_compliant": false
+    },
+    {
+      "path": "premium/features/ai_insights.png",
+      "output_path": "premium/features/ai_insights",
+      "in_manifest": false,
+      "contains_text": false,
+      "contains_hex_code": false,
+      "detected_strings": [],
+      "reason": "No visible letters, words, numbers, hexadecimal color codes, UI labels, watermarks, or pseudo-text were detected in the image. The image consists solely of graphical elements such as a 3D brain, arrows, a star, and abstract shapes.",
+      "non_compliant": false
+    },
+    {
+      "path": "premium/features/doctor_share.png",
+      "output_path": "premium/features/doctor_share",
+      "in_manifest": false,
+      "contains_text": false,
+      "contains_hex_code": false,
+      "detected_strings": [],
+      "reason": "No visible letters, words, numbers, hexadecimal color codes, UI labels, watermarks, or pseudo-text were detected in the image.",
+      "non_compliant": false
+    },
+    {
+      "path": "premium/features/memory_book.png",
+      "output_path": "premium/features/memory_book",
+      "in_manifest": false,
+      "contains_text": false,
+      "contains_hex_code": false,
+      "detected_strings": [],
+      "reason": "No visible letters, words, numbers, hexadecimal color codes, UI labels, watermarks, or pseudo-text were detected in the image.",
+      "non_compliant": false
+    },
+    {
+      "path": "premium/paywall_main_hero.png",
+      "output_path": "premium/paywall_main_hero",
+      "in_manifest": false,
+      "contains_text": false,
+      "contains_hex_code": false,
+      "detected_strings": [],
+      "reason": "The image contains only abstract 3D shapes and patterns. No visible letters, words, numbers, hexadecimal color codes, UI labels, watermarks, or pseudo-text were detected.",
+      "non_compliant": false
+    },
+    {
+      "path": "premium/paywall_wow_hero.png",
+      "output_path": "premium/paywall_wow_hero",
+      "in_manifest": false,
+      "contains_text": false,
+      "contains_hex_code": false,
+      "detected_strings": [],
+      "reason": "No visible letters, words, numbers, hexadecimal color codes, UI labels, watermarks, or pseudo-text were detected in the image.",
+      "non_compliant": false
+    },
+    {
+      "path": "premium/paywall_wow_hero_a.png",
+      "output_path": "premium/paywall_wow_hero_a",
+      "in_manifest": true,
+      "contains_text": false,
+      "contains_hex_code": false,
+      "detected_strings": [],
+      "reason": "No visible letters, words, numbers, hexadecimal color codes, UI labels, watermarks, or pseudo-text were detected in the image.",
+      "non_compliant": false
+    },
+    {
+      "path": "premium/paywall_wow_hero_b.png",
+      "output_path": "premium/paywall_wow_hero_b",
+      "in_manifest": false,
+      "contains_text": false,
+      "contains_hex_code": false,
+      "detected_strings": [],
+      "reason": "No visible letters, words, numbers, hexadecimal color codes, UI labels, watermarks, or pseudo-text were detected in the image. The image contains only graphical icons.",
+      "non_compliant": false
+    },
+    {
+      "path": "premium/paywall_wow_hero_c.png",
+      "output_path": "premium/paywall_wow_hero_c",
+      "in_manifest": false,
+      "contains_text": false,
+      "contains_hex_code": false,
+      "detected_strings": [],
+      "reason": "No visible letters, words, numbers, hexadecimal color codes, UI labels, watermarks, or pseudo-text were detected in the image. All elements are graphical icons or abstract shapes.",
+      "non_compliant": false
+    },
+    {
+      "path": "privacy/visibility/family.png",
+      "output_path": "privacy/visibility/family",
+      "in_manifest": false,
+      "contains_text": false,
+      "contains_hex_code": false,
+      "detected_strings": [],
+      "reason": "No visible letters, words, numbers, hexadecimal color codes, UI labels, watermarks, or pseudo-text were detected in the image.",
+      "non_compliant": false
+    },
+    {
+      "path": "privacy/visibility/parents_only.png",
+      "output_path": "privacy/visibility/parents_only",
+      "in_manifest": false,
+      "contains_text": false,
+      "contains_hex_code": false,
+      "detected_strings": [],
+      "reason": "No visible letters, words, numbers, hexadecimal color codes, UI labels, watermarks, or pseudo-text were detected in the image. The image contains only graphical elements.",
+      "non_compliant": false
+    },
+    {
+      "path": "privacy/visibility/private.png",
+      "output_path": "privacy/visibility/private",
+      "in_manifest": false,
+      "contains_text": false,
+      "contains_hex_code": false,
+      "detected_strings": [],
+      "reason": "The image contains only a symbolic icon (an eye with a slash through it) and abstract shapes. There are no visible letters, words, numbers, hexadecimal color codes, UI labels as text, watermarks, or pseudo-text.",
+      "non_compliant": false
+    },
+    {
+      "path": "pumping/empty_state.png",
+      "output_path": "pumping/empty_state",
+      "in_manifest": true,
+      "contains_text": true,
+      "contains_hex_code": true,
+      "detected_strings": [
+        "55F6773",
+        "65F6773"
+      ],
+      "reason": "Visible hexadecimal color codes '55F6773' and '65F6773' are present at the bottom of the UI frame, below the heart and house icons respectively.",
+      "non_compliant": true
+    },
+    {
+      "path": "quick_add/bottle.png",
+      "output_path": "quick_add/bottle",
+      "in_manifest": false,
+      "contains_text": false,
+      "contains_hex_code": false,
+      "detected_strings": [],
+      "reason": "No visible letters, words, numbers, hexadecimal color codes, UI labels, watermarks, or pseudo-text were detected in the image.",
+      "non_compliant": false
+    },
+    {
+      "path": "quick_add/breast_left.png",
+      "output_path": "quick_add/breast_left",
+      "in_manifest": false,
+      "contains_text": false,
+      "contains_hex_code": false,
+      "detected_strings": [],
+      "reason": "No visible text, numbers, hexadecimal color codes, UI labels, watermarks, or pseudo-text were detected in the image.",
+      "non_compliant": false
+    },
+    {
+      "path": "quick_add/breast_right.png",
+      "output_path": "quick_add/breast_right",
+      "in_manifest": false,
+      "contains_text": false,
+      "contains_hex_code": false,
+      "detected_strings": [],
+      "reason": "No visible letters, words, numbers, hexadecimal color codes, UI labels, watermarks, or pseudo-text were detected in the image.",
+      "non_compliant": false
+    },
+    {
+      "path": "quick_add/diaper.png",
+      "output_path": "quick_add/diaper",
+      "in_manifest": false,
+      "contains_text": false,
+      "contains_hex_code": false,
+      "detected_strings": [],
+      "reason": "No visible letters, words, numbers, hexadecimal color codes, UI labels, watermarks, or pseudo-text were detected in the image.",
+      "non_compliant": false
+    },
+    {
+      "path": "quick_add/fever.png",
+      "output_path": "quick_add/fever",
+      "in_manifest": false,
+      "contains_text": false,
+      "contains_hex_code": false,
+      "detected_strings": [],
+      "reason": "No visible letters, words, numbers, hexadecimal color codes, UI labels, watermarks, or pseudo-text were detected in the image or its crops. The image consists of a 3D rendered object and abstract shapes.",
+      "non_compliant": false
+    },
+    {
+      "path": "quick_add/memory.png",
+      "output_path": "quick_add/memory",
+      "in_manifest": false,
+      "contains_text": false,
+      "contains_hex_code": false,
+      "detected_strings": [],
+      "reason": "No visible letters, words, numbers, hexadecimal color codes, UI labels, watermarks, or pseudo-text were detected in the image. The image contains only 3D rendered graphic elements.",
+      "non_compliant": false
+    },
+    {
+      "path": "quick_add/pumping.png",
+      "output_path": "quick_add/pumping",
+      "in_manifest": false,
+      "contains_text": false,
+      "contains_hex_code": false,
+      "detected_strings": [],
+      "reason": "No visible letters, words, numbers, hexadecimal color codes, UI labels, watermarks, or pseudo-text were detected in the image.",
+      "non_compliant": false
+    },
+    {
+      "path": "quick_add/sleep.png",
+      "output_path": "quick_add/sleep",
+      "in_manifest": false,
+      "contains_text": false,
+      "contains_hex_code": false,
+      "detected_strings": [],
+      "reason": "No visible letters, words, numbers, hexadecimal color codes, UI labels, watermarks, or pseudo-text were detected in the image.",
+      "non_compliant": false
+    },
+    {
+      "path": "quick_add/symptom.png",
+      "output_path": "quick_add/symptom",
+      "in_manifest": false,
+      "contains_text": false,
+      "contains_hex_code": false,
+      "detected_strings": [],
+      "reason": "The image contains a 3D rendering of icons (clipboard, thermometer, water drop) and abstract shapes, but no discernible letters, words, numbers, hexadecimal color codes, UI labels, watermarks, or pseudo-text.",
+      "non_compliant": false
+    },
+    {
+      "path": "search/empty_state.png",
+      "output_path": "search/empty_state",
+      "in_manifest": false,
+      "contains_text": false,
+      "contains_hex_code": false,
+      "detected_strings": [],
+      "reason": "The image consists of a 3D illustration with abstract shapes (magnifying glass, squiggly lines, colored arcs, spheres, and blobs). No visible letters, words, numbers, hexadecimal color codes, UI labels, watermarks, or pseudo-text were detected.",
+      "non_compliant": false
+    },
+    {
+      "path": "sleep/day_night_filter_hero.png",
+      "output_path": "sleep/day_night_filter_hero",
+      "in_manifest": false,
+      "contains_text": false,
+      "contains_hex_code": false,
+      "detected_strings": [],
+      "reason": "No visible letters, words, numbers, hexadecimal color codes, UI labels, watermarks, or pseudo-text were detected in the image.",
+      "non_compliant": false
+    },
+    {
+      "path": "sleep/empty_state.png",
+      "output_path": "sleep/empty_state",
+      "in_manifest": false,
+      "contains_text": false,
+      "contains_hex_code": false,
+      "detected_strings": [],
+      "reason": "No visible letters, words, numbers, hexadecimal color codes, UI labels, watermarks, or pseudo-text were detected in the image.",
+      "non_compliant": false
+    },
+    {
+      "path": "sync/offline_mode_hero.png",
+      "output_path": "sync/offline_mode_hero",
+      "in_manifest": false,
+      "contains_text": false,
+      "contains_hex_code": false,
+      "detected_strings": [],
+      "reason": "No visible letters, words, numbers, hexadecimal color codes, UI labels, watermarks, or pseudo-text were detected in the image.",
+      "non_compliant": false
+    },
+    {
+      "path": "sync/sync_success_hero.png",
+      "output_path": "sync/sync_success_hero",
+      "in_manifest": false,
+      "contains_text": false,
+      "contains_hex_code": false,
+      "detected_strings": [],
+      "reason": "The image contains a 3D illustration of a cloud with a checkmark and arrows, along with abstract shapes. No visible letters, words, numbers, hexadecimal color codes, UI labels, watermarks, or pseudo-text were detected.",
+      "non_compliant": false
+    },
+    {
+      "path": "travel_school/school_pack_hero.png",
+      "output_path": "travel_school/school_pack_hero",
+      "in_manifest": false,
+      "contains_text": false,
+      "contains_hex_code": false,
+      "detected_strings": [],
+      "reason": "No visible letters, words, numbers, hexadecimal color codes, UI labels, watermarks, or pseudo-text were detected in the image. The elements like the thermometer lines, plus sign on the bottle, and lines on the clipboard are graphical representations, not actual text or pseudo-text.",
+      "non_compliant": false
+    },
+    {
+      "path": "travel_school/travel_pack_hero.png",
+      "output_path": "travel_school/travel_pack_hero",
+      "in_manifest": false,
+      "contains_text": false,
+      "contains_hex_code": false,
+      "detected_strings": [],
+      "reason": "The image contains only 3D rendered UI elements and icons (e.g., globe, heart, home, search, shield, suitcase) without any discernible letters, words, numbers, pseudo-text, or hexadecimal color codes.",
+      "non_compliant": false
+    },
+    {
+      "path": "triage/green_state.png",
+      "output_path": "triage/green_state",
+      "in_manifest": false,
+      "contains_text": false,
+      "contains_hex_code": false,
+      "detected_strings": [],
+      "reason": "No visible letters, words, numbers, hexadecimal color codes, UI labels, watermarks, or pseudo-text were detected in the image. The image contains only graphical elements and abstract shapes.",
+      "non_compliant": false
+    },
+    {
+      "path": "triage/red_state.png",
+      "output_path": "triage/red_state",
+      "in_manifest": false,
+      "contains_text": false,
+      "contains_hex_code": false,
+      "detected_strings": [],
+      "reason": "No visible letters, words, numbers, hexadecimal color codes, UI labels, watermarks, or pseudo-text were detected in the image.",
+      "non_compliant": false
+    },
+    {
+      "path": "triage/yellow_state.png",
+      "output_path": "triage/yellow_state",
+      "in_manifest": false,
+      "contains_text": false,
+      "contains_hex_code": false,
+      "detected_strings": [],
+      "reason": "No visible letters, words, numbers, hexadecimal color codes, UI labels, watermarks, or pseudo-text were detected in the image. The image contains only graphical elements.",
+      "non_compliant": false
+    },
+    {
+      "path": "vaccine/badges/due.png",
+      "output_path": "vaccine/badges/due",
+      "in_manifest": false,
+      "contains_text": false,
+      "contains_hex_code": false,
+      "detected_strings": [],
+      "reason": "The image contains only graphical elements and abstract shapes; no visible letters, words, numbers, hexadecimal color codes, UI labels, watermarks, or pseudo-text were detected.",
+      "non_compliant": false
+    },
+    {
+      "path": "vaccine/badges/overdue.png",
+      "output_path": "vaccine/badges/overdue",
+      "in_manifest": false,
+      "contains_text": false,
+      "contains_hex_code": false,
+      "detected_strings": [],
+      "reason": "No visible letters, words, numbers, hexadecimal color codes, UI labels, watermarks, or pseudo-text were detected in the image. The lines on the syringe are graphic elements, not recognizable digits.",
+      "non_compliant": false
+    },
+    {
+      "path": "vaccine/overview_hero.png",
+      "output_path": "vaccine/overview_hero",
+      "in_manifest": false,
+      "contains_text": false,
+      "contains_hex_code": false,
+      "detected_strings": [],
+      "reason": "No visible letters, words, numbers, hexadecimal color codes, UI labels, watermarks, or pseudo-text were detected in the image. The image contains only graphical UI elements and icons.",
+      "non_compliant": false
+    },
+    {
+      "path": "whats_new/whats_new_hero.png",
+      "output_path": "whats_new/whats_new_hero",
+      "in_manifest": false,
+      "contains_text": false,
+      "contains_hex_code": false,
+      "detected_strings": [],
+      "reason": "No visible letters, words, numbers, hexadecimal color codes, UI labels, watermarks, or pseudo-text were detected in the image. The lines on the baby bottle are decorative markings, not recognizable numbers or text.",
+      "non_compliant": false
+    },
+    {
+      "path": "whats_new/whats_new_hero_a.png",
+      "output_path": "whats_new/whats_new_hero_a",
+      "in_manifest": false,
+      "contains_text": false,
+      "contains_hex_code": false,
+      "detected_strings": [],
+      "reason": "The image contains only graphical elements and 3D rendered objects (baby bottle, pacifier, diaper, baby feet, moon, stars, spheres). There are no visible letters, words, numbers, hexadecimal color codes, UI labels, watermarks, or pseudo-text. The lines on the baby bottle are graphical markings, not alphanumeric characters.",
+      "non_compliant": false
+    },
+    {
+      "path": "whats_new/whats_new_hero_b.png",
+      "output_path": "whats_new/whats_new_hero_b",
+      "in_manifest": false,
+      "contains_text": false,
+      "contains_hex_code": false,
+      "detected_strings": [],
+      "reason": "No visible letters, words, numbers, hexadecimal color codes, UI labels, watermarks, or pseudo-text were detected in the image. The markings on the baby bottle are abstract lines representing volume, not identifiable digits.",
+      "non_compliant": false
+    },
+    {
+      "path": "whats_new/whats_new_hero_c.png",
+      "output_path": "whats_new/whats_new_hero_c",
+      "in_manifest": false,
+      "contains_text": true,
+      "contains_hex_code": false,
+      "detected_strings": [
+        "O",
+        "O",
+        "O"
+      ],
+      "reason": "Three circular shapes strongly resembling the uppercase letter 'O' or the number '0' are visible on the sides of the stacking blocks.",
+      "non_compliant": true
+    }
+  ]
+}

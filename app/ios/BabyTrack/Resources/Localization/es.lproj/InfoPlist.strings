@@ -1,0 +1,3 @@
+"CFBundleDisplayName" = "Seguimiento Bebé";
+"NSCameraUsageDescription" = "Toma una foto para guardar recuerdos del bebé.";
+"NSPhotoLibraryUsageDescription" = "Accede a la fototeca para agregar fotos de recuerdos a la cronologia del bebe.";

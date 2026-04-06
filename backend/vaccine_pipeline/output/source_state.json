@@ -1,0 +1,92 @@
+{
+  "TR": {
+    "version": "2026.0101",
+    "payloadSignature": "99b04be2448462aa58f6e213d62a538d1639ea9f49f2b4c75802df370290634e",
+    "sourceUpdatedAt": "2026-01-01",
+    "retrievedAt": "2026-03-05T23:12:18.348136+00:00",
+    "sourceUrl": "https://hsgm.saglik.gov.tr/tr/bagisiklama-asi.html",
+    "sourceName": "T.C. Saglik Bakanligi Asi Takvimi",
+    "publishedFile": "TR_2026.0101.json",
+    "changed": false
+  },
+  "US": {
+    "version": "2026.0101",
+    "payloadSignature": "8935fc8dfaf7c78dd0d63457c24d6a0cd2db5b2ac0d0a91663d25bf43e6c2cce",
+    "sourceUpdatedAt": "2026-01-01",
+    "retrievedAt": "2026-03-05T23:12:18.770123+00:00",
+    "sourceUrl": "https://www.cdc.gov/vaccines/schedules/index.html",
+    "sourceName": "CDC Immunization Schedules",
+    "publishedFile": "US_2026.0101.json",
+    "changed": true
+  },
+  "GB": {
+    "version": "2026.0809",
+    "payloadSignature": "a86206efefc6ccf8462f250b46a2882e9cb2ebfc80b36f53cb2ef1bb2887d04d",
+    "sourceUpdatedAt": "2026-08-09",
+    "retrievedAt": "2026-03-05T23:12:20.296742+00:00",
+    "sourceUrl": "https://www.nhs.uk/vaccinations/nhs-vaccinations-and-when-to-have-them/",
+    "sourceName": "NHS Vaccinations",
+    "publishedFile": "GB_2026.0809.json",
+    "changed": true
+  },
+  "DE": {
+    "version": "2026.01",
+    "payloadSignature": "7008e87e832a2281428ff3ae3006862b257de59c0c031a3ca82967bfe6fc812d",
+    "sourceUpdatedAt": "2026-03-05",
+    "retrievedAt": "2026-03-05T23:12:22.018148+00:00",
+    "sourceUrl": "https://www.rki.de/EN/Content/infections/Vaccination/vaccination_node.html",
+    "sourceName": "RKI STIKO Recommendations",
+    "publishedFile": "DE_2026.01.json",
+    "changed": false
+  },
+  "FR": {
+    "version": "2026.0101",
+    "payloadSignature": "267fb738a653d396d45b13d35eb7d160b9f60b84c03cbdf3144d4c10ac0cb3e8",
+    "sourceUpdatedAt": "2026-01-01",
+    "retrievedAt": "2026-03-05T23:12:26.320908+00:00",
+    "sourceUrl": "https://sante.gouv.fr/prevention-en-sante/preserver-sa-sante/vaccination",
+    "sourceName": "Ministere de la Sante Vaccination",
+    "publishedFile": "FR_2026.0101.json",
+    "changed": false
+  },
+  "ES": {
+    "version": "2026.0101",
+    "payloadSignature": "787bdd8d503499c13c47a0f622de6fc2e0a177c19ab575617bf9cb16994c759b",
+    "sourceUpdatedAt": "2026-01-01",
+    "retrievedAt": "2026-03-05T23:12:26.951961+00:00",
+    "sourceUrl": "https://www.sanidad.gob.es/en/profesionales/saludPublica/prevPromocion/vacunaciones/home.htm",
+    "sourceName": "Ministerio de Sanidad Vacunaciones",
+    "publishedFile": "ES_2026.0101.json",
+    "changed": false
+  },
+  "IT": {
+    "version": "2026.0101",
+    "payloadSignature": "69bba5ecd71d0d834947cab3a99133409a7f00e8554b10d63e946a90d6e2ff9e",
+    "sourceUpdatedAt": "2026-01-01",
+    "retrievedAt": "2026-03-05T23:12:27.707071+00:00",
+    "sourceUrl": "https://www.salute.gov.it/portale/vaccinazioni/homeVaccinazioni.jsp",
+    "sourceName": "Ministero della Salute Vaccinazioni",
+    "publishedFile": "IT_2026.0101.json",
+    "changed": false
+  },
+  "BR": {
+    "version": "2026.0101",
+    "payloadSignature": "6781f9f47d3e2401ad5e83ad7f5116109dbe42567b347c62b54ff7ec7fbbb2e3",
+    "sourceUpdatedAt": "2026-01-01",
+    "retrievedAt": "2026-03-05T23:12:28.238442+00:00",
+    "sourceUrl": "https://www.gov.br/saude/pt-br/assuntos/saude-de-a-a-z/c/calendario-nacional-de-vacinacao",
+    "sourceName": "Calendario Nacional de Vacinacao",
+    "publishedFile": "BR_2026.0101.json",
+    "changed": false
+  },
+  "SA": {
+    "version": "2026.0101",
+    "payloadSignature": "9d961852590a1dbf706e9723ebb7b7daedad12993a679a560c1258ac2c622b40",
+    "sourceUpdatedAt": "2026-01-01",
+    "retrievedAt": "2026-03-05T23:13:03.676343+00:00",
+    "sourceUrl": "https://www.moh.gov.sa/en/HealthAwareness/EducationalContent/vaccination/Pages/default.aspx",
+    "sourceName": "MOH Saudi Vaccination Guidance",
+    "publishedFile": "SA_2026.0101.json",
+    "changed": false
+  }
+}

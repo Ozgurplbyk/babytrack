@@ -1,0 +1,151 @@
+{
+  "meta": {
+    "country": "FR",
+    "version": "2026.0101",
+    "approved_by": "medical_editor_required",
+    "published_at": "2026-03-05T13:20:46.757812+00:00",
+    "signature": "d92fb2a167461c884d3f900cea9205bae88c2f256af83e39f8587928f5e48a0d"
+  },
+  "diff": {
+    "added": [],
+    "removed": [],
+    "changed": [
+      {
+        "before": {
+          "country": "FR",
+          "authority": "Sante Publique France",
+          "version": "2026.0305",
+          "effective_from": "2026-01-01",
+          "effective_to": null,
+          "vaccine_code": "MMR",
+          "dose_no": 1,
+          "min_age_days": 365,
+          "max_age_days": 730,
+          "min_interval_days": 0,
+          "catch_up_rule": ""
+        },
+        "after": {
+          "country": "FR",
+          "authority": "Sante Publique France",
+          "version": "2026.0101",
+          "effective_from": "2026-01-01",
+          "effective_to": null,
+          "vaccine_code": "MMR",
+          "dose_no": 1,
+          "min_age_days": 365,
+          "max_age_days": 730,
+          "min_interval_days": 0,
+          "catch_up_rule": ""
+        }
+      },
+      {
+        "before": {
+          "country": "FR",
+          "authority": "Sante Publique France",
+          "version": "2026.0305",
+          "effective_from": "2026-01-01",
+          "effective_to": null,
+          "vaccine_code": "PCV",
+          "dose_no": 1,
+          "min_age_days": 60,
+          "max_age_days": 150,
+          "min_interval_days": 28,
+          "catch_up_rule": ""
+        },
+        "after": {
+          "country": "FR",
+          "authority": "Sante Publique France",
+          "version": "2026.0101",
+          "effective_from": "2026-01-01",
+          "effective_to": null,
+          "vaccine_code": "PCV",
+          "dose_no": 1,
+          "min_age_days": 60,
+          "max_age_days": 150,
+          "min_interval_days": 28,
+          "catch_up_rule": ""
+        }
+      },
+      {
+        "before": {
+          "country": "FR",
+          "authority": "Sante Publique France",
+          "version": "2026.0305",
+          "effective_from": "2026-01-01",
+          "effective_to": null,
+          "vaccine_code": "Hexavalent",
+          "dose_no": 1,
+          "min_age_days": 60,
+          "max_age_days": 120,
+          "min_interval_days": 28,
+          "catch_up_rule": ""
+        },
+        "after": {
+          "country": "FR",
+          "authority": "Sante Publique France",
+          "version": "2026.0101",
+          "effective_from": "2026-01-01",
+          "effective_to": null,
+          "vaccine_code": "Hexavalent",
+          "dose_no": 1,
+          "min_age_days": 60,
+          "max_age_days": 120,
+          "min_interval_days": 28,
+          "catch_up_rule": ""
+        }
+      }
+    ]
+  },
+  "payload": {
+    "country": "FR",
+    "authority": "Sante Publique France",
+    "version": "2026.0101",
+    "source": {
+      "name": "Ministere de la Sante Vaccination",
+      "url": "https://sante.gouv.fr/prevention-en-sante/preserver-sa-sante/vaccination",
+      "source_updated_at": "2026-01-01",
+      "retrieved_at": "2026-03-05T13:20:46.500552+00:00"
+    },
+    "records": [
+      {
+        "country": "FR",
+        "authority": "Sante Publique France",
+        "version": "2026.0101",
+        "effective_from": "2026-01-01",
+        "effective_to": null,
+        "vaccine_code": "Hexavalent",
+        "dose_no": 1,
+        "min_age_days": 60,
+        "max_age_days": 120,
+        "min_interval_days": 28,
+        "catch_up_rule": ""
+      },
+      {
+        "country": "FR",
+        "authority": "Sante Publique France",
+        "version": "2026.0101",
+        "effective_from": "2026-01-01",
+        "effective_to": null,
+        "vaccine_code": "PCV",
+        "dose_no": 1,
+        "min_age_days": 60,
+        "max_age_days": 150,
+        "min_interval_days": 28,
+        "catch_up_rule": ""
+      },
+      {
+        "country": "FR",
+        "authority": "Sante Publique France",
+        "version": "2026.0101",
+        "effective_from": "2026-01-01",
+        "effective_to": null,
+        "vaccine_code": "MMR",
+        "dose_no": 1,
+        "min_age_days": 365,
+        "max_age_days": 730,
+        "min_interval_days": 0,
+        "catch_up_rule": ""
+      }
+    ]
+  }
+}

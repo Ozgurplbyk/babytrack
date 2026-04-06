@@ -1,0 +1,66 @@
+{
+  "meta": {
+    "country": "ES",
+    "version": "2026.01",
+    "approved_by": "medical_editor_required",
+    "published_at": "2026-03-04T21:56:02.817975+00:00",
+    "signature": "67093f3cbb7db5319ee3c53b9662829086ec64f284f2991aa2cb0a353e2292a9"
+  },
+  "diff": {
+    "added": [],
+    "removed": [],
+    "changed": []
+  },
+  "payload": {
+    "country": "ES",
+    "authority": "Ministerio de Sanidad",
+    "version": "2026.01",
+    "source": {
+      "name": "Ministerio de Sanidad Vacunaciones",
+      "url": "https://www.sanidad.gob.es/en/profesionales/saludPublica/prevPromocion/vacunaciones/home.htm",
+      "source_updated_at": "2026-01-01",
+      "retrieved_at": "2026-03-04T21:56:02.817514+00:00"
+    },
+    "records": [
+      {
+        "country": "ES",
+        "authority": "Ministerio de Sanidad",
+        "version": "2026.01",
+        "effective_from": "2026-01-01",
+        "effective_to": null,
+        "vaccine_code": "Hexavalente",
+        "dose_no": 1,
+        "min_age_days": 60,
+        "max_age_days": 120,
+        "min_interval_days": 28,
+        "catch_up_rule": ""
+      },
+      {
+        "country": "ES",
+        "authority": "Ministerio de Sanidad",
+        "version": "2026.01",
+        "effective_from": "2026-01-01",
+        "effective_to": null,
+        "vaccine_code": "Neumococo",
+        "dose_no": 1,
+        "min_age_days": 60,
+        "max_age_days": 150,
+        "min_interval_days": 28,
+        "catch_up_rule": ""
+      },
+      {
+        "country": "ES",
+        "authority": "Ministerio de Sanidad",
+        "version": "2026.01",
+        "effective_from": "2026-01-01",
+        "effective_to": null,
+        "vaccine_code": "MMR",
+        "dose_no": 1,
+        "min_age_days": 365,
+        "max_age_days": 730,
+        "min_interval_days": 0,
+        "catch_up_rule": ""
+      }
+    ]
+  }
+}

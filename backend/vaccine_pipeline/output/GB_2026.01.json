@@ -1,0 +1,66 @@
+{
+  "meta": {
+    "country": "GB",
+    "version": "2026.01",
+    "approved_by": "medical_editor_required",
+    "published_at": "2026-03-04T21:56:02.814218+00:00",
+    "signature": "b269c33a8ddc2c9c25f726d33856570cf9952535d2b6067354c393a70f09326f"
+  },
+  "diff": {
+    "added": [],
+    "removed": [],
+    "changed": []
+  },
+  "payload": {
+    "country": "GB",
+    "authority": "UKHSA/NHS",
+    "version": "2026.01",
+    "source": {
+      "name": "NHS Vaccinations",
+      "url": "https://www.nhs.uk/vaccinations/nhs-vaccinations-and-when-to-have-them/",
+      "source_updated_at": "2026-01-01",
+      "retrieved_at": "2026-03-04T21:56:02.813540+00:00"
+    },
+    "records": [
+      {
+        "country": "GB",
+        "authority": "UKHSA/NHS",
+        "version": "2026.01",
+        "effective_from": "2026-01-01",
+        "effective_to": null,
+        "vaccine_code": "6in1",
+        "dose_no": 1,
+        "min_age_days": 56,
+        "max_age_days": 120,
+        "min_interval_days": 28,
+        "catch_up_rule": ""
+      },
+      {
+        "country": "GB",
+        "authority": "UKHSA/NHS",
+        "version": "2026.01",
+        "effective_from": "2026-01-01",
+        "effective_to": null,
+        "vaccine_code": "MenB",
+        "dose_no": 1,
+        "min_age_days": 56,
+        "max_age_days": 120,
+        "min_interval_days": 0,
+        "catch_up_rule": ""
+      },
+      {
+        "country": "GB",
+        "authority": "UKHSA/NHS",
+        "version": "2026.01",
+        "effective_from": "2026-01-01",
+        "effective_to": null,
+        "vaccine_code": "MMR",
+        "dose_no": 1,
+        "min_age_days": 365,
+        "max_age_days": 730,
+        "min_interval_days": 0,
+        "catch_up_rule": ""
+      }
+    ]
+  }
+}

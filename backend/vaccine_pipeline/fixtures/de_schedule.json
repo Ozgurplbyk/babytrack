@@ -1,0 +1,8 @@
+{
+  "version": "2026.01",
+  "schedule": [
+    {"vaccine_code": "6-fach", "dose_no": 1, "min_age_days": 56, "max_age_days": 120, "min_interval_days": 28, "effective_from": "2026-01-01", "effective_to": null},
+    {"vaccine_code": "Pneumokokken", "dose_no": 1, "min_age_days": 56, "max_age_days": 120, "min_interval_days": 0, "effective_from": "2026-01-01", "effective_to": null},
+    {"vaccine_code": "MMR", "dose_no": 1, "min_age_days": 335, "max_age_days": 730, "min_interval_days": 0, "effective_from": "2026-01-01", "effective_to": null}
+  ]
+}

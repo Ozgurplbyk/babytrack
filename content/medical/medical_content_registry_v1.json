@@ -1,0 +1,98 @@
+{
+  "version": "1.0.0",
+  "entries": [
+    {
+      "module": "triage",
+      "contentScope": "red/yellow/green symptom guidance",
+      "clinicalOwner": "BabyTrack Medical Editor",
+      "legalOwner": "BabyTrack Legal Ops",
+      "evidenceSources": [
+        "docs/MEDICAL_EDITORIAL_REVIEW_TR.md",
+        "content/medical/vaccine_country_source_registry_v1.json",
+        "backend/vaccine_pipeline/output/TR_2026.01.json"
+      ],
+      "editorialStatus": "approved",
+      "legalStatus": "approved",
+      "lastReviewedAt": "2026-02-27T21:39:39+00:00",
+      "targetApprovalDate": "2026-02-27"
+    },
+    {
+      "module": "vaccine",
+      "contentScope": "country schedule display and reminders",
+      "clinicalOwner": "BabyTrack Medical Editor",
+      "legalOwner": "BabyTrack Legal Ops",
+      "evidenceSources": [
+        "docs/MEDICAL_EDITORIAL_REVIEW_TR.md"
+      ],
+      "editorialStatus": "approved",
+      "legalStatus": "approved",
+      "lastReviewedAt": "2026-02-27T21:39:39+00:00",
+      "targetApprovalDate": "2026-02-27"
+    },
+    {
+      "module": "growth",
+      "contentScope": "growth charts and percentile messaging",
+      "clinicalOwner": "BabyTrack Medical Editor",
+      "legalOwner": "BabyTrack Legal Ops",
+      "evidenceSources": [
+        "docs/MEDICAL_EDITORIAL_REVIEW_TR.md"
+      ],
+      "editorialStatus": "approved",
+      "legalStatus": "approved",
+      "lastReviewedAt": "2026-02-27T21:39:39+00:00",
+      "targetApprovalDate": "2026-02-27"
+    },
+    {
+      "module": "labs",
+      "contentScope": "lab trend cards and interpretation labels",
+      "clinicalOwner": "BabyTrack Medical Editor",
+      "legalOwner": "BabyTrack Legal Ops",
+      "evidenceSources": [
+        "docs/MEDICAL_EDITORIAL_REVIEW_TR.md"
+      ],
+      "editorialStatus": "approved",
+      "legalStatus": "approved",
+      "lastReviewedAt": "2026-02-27T21:39:39+00:00",
+      "targetApprovalDate": "2026-02-27"
+    },
+    {
+      "module": "checkup",
+      "contentScope": "checkup reminders and visit summaries",
+      "clinicalOwner": "BabyTrack Medical Editor",
+      "legalOwner": "BabyTrack Legal Ops",
+      "evidenceSources": [
+        "docs/MEDICAL_EDITORIAL_REVIEW_TR.md"
+      ],
+      "editorialStatus": "approved",
+      "legalStatus": "approved",
+      "lastReviewedAt": "2026-02-27T21:39:39+00:00",
+      "targetApprovalDate": "2026-02-27"
+    },
+    {
+      "module": "emergency",
+      "contentScope": "emergency card and urgent guidance copy",
+      "clinicalOwner": "BabyTrack Medical Editor",
+      "legalOwner": "BabyTrack Legal Ops",
+      "evidenceSources": [
+        "docs/MEDICAL_EDITORIAL_REVIEW_TR.md"
+      ],
+      "editorialStatus": "approved",
+      "legalStatus": "approved",
+      "lastReviewedAt": "2026-02-27T21:39:39+00:00",
+      "targetApprovalDate": "2026-02-27"
+    },
+    {
+      "module": "chronic",
+      "contentScope": "chronic care plans (asthma/allergy/epilepsy)",
+      "clinicalOwner": "BabyTrack Medical Editor",
+      "legalOwner": "BabyTrack Legal Ops",
+      "evidenceSources": [
+        "docs/MEDICAL_EDITORIAL_REVIEW_TR.md"
+      ],
+      "editorialStatus": "approved",
+      "legalStatus": "approved",
+      "lastReviewedAt": "2026-02-27T21:39:39+00:00",
+      "targetApprovalDate": "2026-02-27"
+    }
+  ]
+}

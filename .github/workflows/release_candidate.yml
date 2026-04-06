@@ -1,0 +1,187 @@
+name: Release Candidate
+
+on:
+  workflow_dispatch:
+    inputs:
+      release_tag:
+        description: "Release tag (example: v1.0.0-rc1)"
+        required: true
+        type: string
+      require_approvals:
+        description: "Fail if rights/medical approvals are not completed"
+        required: false
+        default: false
+        type: boolean
+      require_release_ops_complete:
+        description: "Fail if required release ops items are not completed"
+        required: false
+        default: false
+        type: boolean
+      upload_testflight:
+        description: "Run signed archive+upload to TestFlight (requires ASC secrets)"
+        required: false
+        default: false
+        type: boolean
+
+jobs:
+  preflight:
+    name: Preflight Validation
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install Dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r backend/api/requirements.txt
+
+      - name: Validate Catalogs and Config
+        run: |
+          python3 tools/audio/validate_rights_registry.py
+          python3 tools/paywall/validate_paywall_products.py
+          python3 tools/content/validate_medical_registry.py
+          python3 tools/content/validate_vaccine_source_registry.py
+          python3 tools/content/validate_locale_vaccine_requirements.py
+          python3 tools/release/validate_app_store_metadata.py
+          python3 tools/release/validate_release_ops_registry.py
+          python3 scripts/validate_localizations.py
+
+      - name: Validate Approvals (Strict Gate)
+        if: ${{ github.event.inputs.require_approvals == 'true' }}
+        run: |
+          python3 tools/audio/validate_rights_registry.py --require-cleared
+          python3 tools/content/validate_medical_registry.py --require-approved
+
+      - name: Validate Release Ops (Strict Gate)
+        if: ${{ github.event.inputs.require_release_ops_complete == 'true' }}
+        run: |
+          python3 tools/release/validate_release_ops_registry.py --require-complete
+
+      - name: Generate Release Readiness Report
+        run: |
+          python3 tools/release/release_readiness_report.py
+
+      - name: Generate Compliance Action Board
+        run: |
+          python3 tools/compliance/generate_action_board.py
+
+      - name: Generate Release Ops Action Board
+        run: |
+          python3 tools/release/generate_release_ops_board.py
+
+      - name: Generate App Store Localization Upload Sheet
+        run: |
+          python3 tools/release/generate_app_store_localization_sheet.py
+
+      - name: Generate Closure Playbook
+        run: |
+          python3 tools/release/generate_closure_playbook.py
+
+      - name: Build Vaccine Packages
+        run: python3 backend/vaccine_pipeline/run_update_cycle.py
+
+      - name: Upload Backend RC Bundle
+        uses: actions/upload-artifact@v4
+        with:
+          name: backend-rc-${{ github.event.inputs.release_tag }}
+          path: |
+            backend/vaccine_pipeline/output
+            backend/api
+            config/paywall
+            config/app_store/app_store_metadata_localized_v1.json
+            content/lullabies/lullaby_rights_registry_v1.json
+            content/medical/medical_content_registry_v1.json
+            config/release/release_ops_registry_v1.json
+            docs/RELEASE_READINESS_REPORT.md
+            docs/COMPLIANCE_ACTION_BOARD_TR.md
+            docs/RELEASE_OPS_ACTION_BOARD_TR.md
+            docs/APP_STORE_LOCALIZATION_UPLOAD_SHEET_TR.md
+            docs/CLOSURE_PLAYBOOK_TR.md
+
+  ios-rc-build:
+    name: iOS RC Build
+    runs-on: macos-latest
+    needs: preflight
+    timeout-minutes: 45
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install XcodeGen
+        run: brew install xcodegen
+
+      - name: Generate Xcode Project
+        run: |
+          cd app/ios
+          ./generate_xcodeproj.sh
+
+      - name: Build Release (No Codesign)
+        run: |
+          xcodebuild \
+            -project app/ios/BabyTrack.xcodeproj \
+            -scheme BabyTrack \
+            -destination 'generic/platform=iOS' \
+            -configuration Release \
+            CODE_SIGNING_ALLOWED=NO \
+            build
+
+      - name: Archive RC Inputs
+        uses: actions/upload-artifact@v4
+        with:
+          name: ios-rc-inputs-${{ github.event.inputs.release_tag }}
+          path: |
+            app/ios/project.yml
+            app/ios/BabyTrack/Resources/Config
+            app/ios/BabyTrack/Resources/Localization
+
+  ios-testflight-upload:
+    name: iOS TestFlight Upload
+    runs-on: macos-latest
+    needs: ios-rc-build
+    if: ${{ github.event.inputs.upload_testflight == 'true' }}
+    timeout-minutes: 60
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install XcodeGen
+        run: brew install xcodegen
+
+      - name: Validate Required Secrets
+        env:
+          APPLE_TEAM_ID: ${{ secrets.APPLE_TEAM_ID }}
+          ASC_API_KEY_ID: ${{ secrets.ASC_API_KEY_ID }}
+          ASC_API_ISSUER_ID: ${{ secrets.ASC_API_ISSUER_ID }}
+          ASC_API_KEY_P8: ${{ secrets.ASC_API_KEY_P8 }}
+        run: |
+          test -n "$APPLE_TEAM_ID"
+          test -n "$ASC_API_KEY_ID"
+          test -n "$ASC_API_ISSUER_ID"
+          test -n "$ASC_API_KEY_P8"
+
+      - name: Write ASC API Key File
+        env:
+          ASC_API_KEY_ID: ${{ secrets.ASC_API_KEY_ID }}
+          ASC_API_KEY_P8: ${{ secrets.ASC_API_KEY_P8 }}
+        run: |
+          mkdir -p "$RUNNER_TEMP/asc"
+          KEY_PATH="$RUNNER_TEMP/asc/AuthKey_${ASC_API_KEY_ID}.p8"
+          printf '%s' "$ASC_API_KEY_P8" > "$KEY_PATH"
+          chmod 600 "$KEY_PATH"
+          echo "ASC_P8_FILE_PATH=$KEY_PATH" >> "$GITHUB_ENV"
+
+      - name: Archive, Export, Upload TestFlight
+        env:
+          APPLE_TEAM_ID: ${{ secrets.APPLE_TEAM_ID }}
+          ASC_API_KEY_ID: ${{ secrets.ASC_API_KEY_ID }}
+          ASC_API_ISSUER_ID: ${{ secrets.ASC_API_ISSUER_ID }}
+          ASC_P8_FILE_PATH: ${{ env.ASC_P8_FILE_PATH }}
+        run: |
+          cd app/ios
+          ./release_testflight.sh --team-id "$APPLE_TEAM_ID" --clean

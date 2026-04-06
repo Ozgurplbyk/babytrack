@@ -1,0 +1,159 @@
+{
+  "meta": {
+    "country": "US",
+    "version": "2026.0101",
+    "approved_by": "medical_editor_required",
+    "published_at": "2026-03-05T23:12:20.295360+00:00",
+    "signature": "f61a413b8c8b3e938454dc7c0884fc265d6be1e8780dd5deac16a90525005694"
+  },
+  "diff": {
+    "added": [
+      {
+        "country": "US",
+        "authority": "CDC",
+        "version": "2026.0101",
+        "effective_from": null,
+        "effective_to": null,
+        "vaccine_code": "VACCINEANDOTHERIMMUNIZINGAGENTS",
+        "dose_no": 1,
+        "min_age_days": 0,
+        "max_age_days": 30,
+        "min_interval_days": 0,
+        "catch_up_rule": ""
+      },
+      {
+        "country": "US",
+        "authority": "CDC",
+        "version": "2026.0101",
+        "effective_from": null,
+        "effective_to": null,
+        "vaccine_code": "MENINGOCOCCALMENACWY-CRM2MOSMENACWY-TT2YEARS",
+        "dose_no": 1,
+        "min_age_days": 730,
+        "max_age_days": null,
+        "min_interval_days": 0,
+        "catch_up_rule": ""
+      },
+      {
+        "country": "US",
+        "authority": "CDC",
+        "version": "2026.0101",
+        "effective_from": null,
+        "effective_to": null,
+        "vaccine_code": "RESPIRATORYSYNCYTIALVIRUSRSV-MABNIRSEVIMAB",
+        "dose_no": 1,
+        "min_age_days": 570,
+        "max_age_days": null,
+        "min_interval_days": 0,
+        "catch_up_rule": ""
+      }
+    ],
+    "removed": [
+      {
+        "country": "US",
+        "authority": "CDC",
+        "version": "2026.0101",
+        "effective_from": "2026-01-01",
+        "effective_to": null,
+        "vaccine_code": "MMR",
+        "dose_no": 1,
+        "min_age_days": 365,
+        "max_age_days": 730,
+        "min_interval_days": 0,
+        "catch_up_rule": ""
+      },
+      {
+        "country": "US",
+        "authority": "CDC",
+        "version": "2026.0101",
+        "effective_from": "2026-01-01",
+        "effective_to": null,
+        "vaccine_code": "DTaP",
+        "dose_no": 1,
+        "min_age_days": 42,
+        "max_age_days": 120,
+        "min_interval_days": 28,
+        "catch_up_rule": ""
+      },
+      {
+        "country": "US",
+        "authority": "CDC",
+        "version": "2026.0101",
+        "effective_from": "2026-01-01",
+        "effective_to": null,
+        "vaccine_code": "HepB",
+        "dose_no": 1,
+        "min_age_days": 0,
+        "max_age_days": 30,
+        "min_interval_days": 0,
+        "catch_up_rule": ""
+      }
+    ],
+    "changed": []
+  },
+  "payload": {
+    "country": "US",
+    "authority": "CDC",
+    "version": "2026.0101",
+    "source": {
+      "name": "CDC Immunization Schedules",
+      "url": "https://www.cdc.gov/vaccines/schedules/index.html",
+      "source_updated_at": "2026-01-01",
+      "retrieved_at": "2026-03-05T23:12:18.770123+00:00"
+    },
+    "records": [
+      {
+        "country": "US",
+        "authority": "CDC",
+        "version": "2026.0101",
+        "effective_from": null,
+        "effective_to": null,
+        "vaccine_code": "VACCINEANDOTHERIMMUNIZINGAGENTS",
+        "dose_no": 1,
+        "min_age_days": 0,
+        "max_age_days": 30,
+        "min_interval_days": 0,
+        "catch_up_rule": ""
+      },
+      {
+        "country": "US",
+        "authority": "CDC",
+        "version": "2026.0101",
+        "effective_from": null,
+        "effective_to": null,
+        "vaccine_code": "RESPIRATORYSYNCYTIALVIRUSRSV-MABNIRSEVIMAB",
+        "dose_no": 1,
+        "min_age_days": 570,
+        "max_age_days": null,
+        "min_interval_days": 0,
+        "catch_up_rule": ""
+      },
+      {
+        "country": "US",
+        "authority": "CDC",
+        "version": "2026.0101",
+        "effective_from": null,
+        "effective_to": null,
+        "vaccine_code": "RESPIRATORYSYNCYTIALVIRUSRSV-MABNIRSEVIMAB",
+        "dose_no": 1,
+        "min_age_days": 570,
+        "max_age_days": null,
+        "min_interval_days": 0,
+        "catch_up_rule": ""
+      },
+      {
+        "country": "US",
+        "authority": "CDC",
+        "version": "2026.0101",
+        "effective_from": null,
+        "effective_to": null,
+        "vaccine_code": "MENINGOCOCCALMENACWY-CRM2MOSMENACWY-TT2YEARS",
+        "dose_no": 1,
+        "min_age_days": 730,
+        "max_age_days": null,
+        "min_interval_days": 0,
+        "catch_up_rule": ""
+      }
+    ]
+  }
+}

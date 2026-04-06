@@ -1,0 +1,66 @@
+{
+  "meta": {
+    "country": "SA",
+    "version": "2026.01",
+    "approved_by": "medical_editor_required",
+    "published_at": "2026-03-04T21:56:02.821117+00:00",
+    "signature": "7171f3116e5582128d3625d2d04c4be52ef5935dfc9603012d0724566fca7b72"
+  },
+  "diff": {
+    "added": [],
+    "removed": [],
+    "changed": []
+  },
+  "payload": {
+    "country": "SA",
+    "authority": "Saudi Ministry of Health",
+    "version": "2026.01",
+    "source": {
+      "name": "MOH Saudi Vaccination Guidance",
+      "url": "https://www.moh.gov.sa/en/HealthAwareness/EducationalContent/vaccination/Pages/default.aspx",
+      "source_updated_at": "2026-01-01",
+      "retrieved_at": "2026-03-04T21:56:02.820723+00:00"
+    },
+    "records": [
+      {
+        "country": "SA",
+        "authority": "Saudi Ministry of Health",
+        "version": "2026.01",
+        "effective_from": "2026-01-01",
+        "effective_to": null,
+        "vaccine_code": "HepB",
+        "dose_no": 1,
+        "min_age_days": 0,
+        "max_age_days": 30,
+        "min_interval_days": 0,
+        "catch_up_rule": ""
+      },
+      {
+        "country": "SA",
+        "authority": "Saudi Ministry of Health",
+        "version": "2026.01",
+        "effective_from": "2026-01-01",
+        "effective_to": null,
+        "vaccine_code": "Hexavalent",
+        "dose_no": 1,
+        "min_age_days": 60,
+        "max_age_days": 120,
+        "min_interval_days": 28,
+        "catch_up_rule": ""
+      },
+      {
+        "country": "SA",
+        "authority": "Saudi Ministry of Health",
+        "version": "2026.01",
+        "effective_from": "2026-01-01",
+        "effective_to": null,
+        "vaccine_code": "MMR",
+        "dose_no": 1,
+        "min_age_days": 365,
+        "max_age_days": 730,
+        "min_interval_days": 0,
+        "catch_up_rule": ""
+      }
+    ]
+  }
+}

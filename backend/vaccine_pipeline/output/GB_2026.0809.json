@@ -1,0 +1,276 @@
+{
+  "meta": {
+    "country": "GB",
+    "version": "2026.0809",
+    "approved_by": "medical_editor_required",
+    "published_at": "2026-03-05T23:12:22.016707+00:00",
+    "signature": "c7aaa828cb8e09f6ac364aee112b96b54df9a793150dcef0222111fd8992b848"
+  },
+  "diff": {
+    "added": [
+      {
+        "country": "GB",
+        "authority": "UKHSA/NHS",
+        "version": "2026.0809",
+        "effective_from": null,
+        "effective_to": null,
+        "vaccine_code": "65YEARS",
+        "dose_no": 65,
+        "min_age_days": 23725,
+        "max_age_days": null,
+        "min_interval_days": 0,
+        "catch_up_rule": ""
+      },
+      {
+        "country": "GB",
+        "authority": "UKHSA/NHS",
+        "version": "2026.0809",
+        "effective_from": null,
+        "effective_to": null,
+        "vaccine_code": "BABIESBORNTOMOTHERSWHOHAVEHEPATITISB",
+        "dose_no": 4,
+        "min_age_days": 0,
+        "max_age_days": 30,
+        "min_interval_days": 0,
+        "catch_up_rule": ""
+      },
+      {
+        "country": "GB",
+        "authority": "UKHSA/NHS",
+        "version": "2026.0809",
+        "effective_from": null,
+        "effective_to": null,
+        "vaccine_code": "14YEARS",
+        "dose_no": 3,
+        "min_age_days": 5110,
+        "max_age_days": null,
+        "min_interval_days": 0,
+        "catch_up_rule": ""
+      },
+      {
+        "country": "GB",
+        "authority": "UKHSA/NHS",
+        "version": "2026.0809",
+        "effective_from": null,
+        "effective_to": null,
+        "vaccine_code": "2TO15YEARS",
+        "dose_no": 11,
+        "min_age_days": 730,
+        "max_age_days": 5475,
+        "min_interval_days": 0,
+        "catch_up_rule": ""
+      },
+      {
+        "country": "GB",
+        "authority": "UKHSA/NHS",
+        "version": "2026.0809",
+        "effective_from": null,
+        "effective_to": null,
+        "vaccine_code": "75YEARSANDOVER",
+        "dose_no": 19,
+        "min_age_days": 27375,
+        "max_age_days": null,
+        "min_interval_days": 0,
+        "catch_up_rule": ""
+      },
+      {
+        "country": "GB",
+        "authority": "UKHSA/NHS",
+        "version": "2026.0809",
+        "effective_from": null,
+        "effective_to": null,
+        "vaccine_code": "CHILDRENBORNINAREASOFTHECOUNTRYWHERETHEREAREHIGHNUMBERSOFTBCASES",
+        "dose_no": 4,
+        "min_age_days": 28,
+        "max_age_days": null,
+        "min_interval_days": 0,
+        "catch_up_rule": ""
+      },
+      {
+        "country": "GB",
+        "authority": "UKHSA/NHS",
+        "version": "2026.0809",
+        "effective_from": null,
+        "effective_to": null,
+        "vaccine_code": "CHILDREN6MONTHSTO17YEARSOLDWHOHAVEAWEAKENEDIMMUNESYSTEM",
+        "dose_no": 19,
+        "min_age_days": 180,
+        "max_age_days": 6205,
+        "min_interval_days": 0,
+        "catch_up_rule": ""
+      },
+      {
+        "country": "GB",
+        "authority": "UKHSA/NHS",
+        "version": "2026.0809",
+        "effective_from": null,
+        "effective_to": null,
+        "vaccine_code": "CHILDRENWHOSEPARENTSORGRANDPARENTSWEREBORNINACOUNTRYWITHMANYCASESOFTB",
+        "dose_no": 4,
+        "min_age_days": 28,
+        "max_age_days": null,
+        "min_interval_days": 0,
+        "catch_up_rule": ""
+      }
+    ],
+    "removed": [
+      {
+        "country": "GB",
+        "authority": "UKHSA/NHS",
+        "version": "2026.0809",
+        "effective_from": "2026-01-01",
+        "effective_to": null,
+        "vaccine_code": "MMR",
+        "dose_no": 1,
+        "min_age_days": 365,
+        "max_age_days": 730,
+        "min_interval_days": 0,
+        "catch_up_rule": ""
+      },
+      {
+        "country": "GB",
+        "authority": "UKHSA/NHS",
+        "version": "2026.0809",
+        "effective_from": "2026-01-01",
+        "effective_to": null,
+        "vaccine_code": "6in1",
+        "dose_no": 1,
+        "min_age_days": 56,
+        "max_age_days": 120,
+        "min_interval_days": 28,
+        "catch_up_rule": ""
+      },
+      {
+        "country": "GB",
+        "authority": "UKHSA/NHS",
+        "version": "2026.0809",
+        "effective_from": "2026-01-01",
+        "effective_to": null,
+        "vaccine_code": "MenB",
+        "dose_no": 1,
+        "min_age_days": 56,
+        "max_age_days": 120,
+        "min_interval_days": 0,
+        "catch_up_rule": ""
+      }
+    ],
+    "changed": []
+  },
+  "payload": {
+    "country": "GB",
+    "authority": "UKHSA/NHS",
+    "version": "2026.0809",
+    "source": {
+      "name": "NHS Vaccinations",
+      "url": "https://www.nhs.uk/vaccinations/nhs-vaccinations-and-when-to-have-them/",
+      "source_updated_at": "2026-08-09",
+      "retrieved_at": "2026-03-05T23:12:20.296742+00:00"
+    },
+    "records": [
+      {
+        "country": "GB",
+        "authority": "UKHSA/NHS",
+        "version": "2026.0809",
+        "effective_from": null,
+        "effective_to": null,
+        "vaccine_code": "2TO15YEARS",
+        "dose_no": 11,
+        "min_age_days": 730,
+        "max_age_days": 5475,
+        "min_interval_days": 0,
+        "catch_up_rule": ""
+      },
+      {
+        "country": "GB",
+        "authority": "UKHSA/NHS",
+        "version": "2026.0809",
+        "effective_from": null,
+        "effective_to": null,
+        "vaccine_code": "14YEARS",
+        "dose_no": 3,
+        "min_age_days": 5110,
+        "max_age_days": null,
+        "min_interval_days": 0,
+        "catch_up_rule": ""
+      },
+      {
+        "country": "GB",
+        "authority": "UKHSA/NHS",
+        "version": "2026.0809",
+        "effective_from": null,
+        "effective_to": null,
+        "vaccine_code": "65YEARS",
+        "dose_no": 65,
+        "min_age_days": 23725,
+        "max_age_days": null,
+        "min_interval_days": 0,
+        "catch_up_rule": ""
+      },
+      {
+        "country": "GB",
+        "authority": "UKHSA/NHS",
+        "version": "2026.0809",
+        "effective_from": null,
+        "effective_to": null,
+        "vaccine_code": "75YEARSANDOVER",
+        "dose_no": 19,
+        "min_age_days": 27375,
+        "max_age_days": null,
+        "min_interval_days": 0,
+        "catch_up_rule": ""
+      },
+      {
+        "country": "GB",
+        "authority": "UKHSA/NHS",
+        "version": "2026.0809",
+        "effective_from": null,
+        "effective_to": null,
+        "vaccine_code": "BABIESBORNTOMOTHERSWHOHAVEHEPATITISB",
+        "dose_no": 4,
+        "min_age_days": 0,
+        "max_age_days": 30,
+        "min_interval_days": 0,
+        "catch_up_rule": ""
+      },
+      {
+        "country": "GB",
+        "authority": "UKHSA/NHS",
+        "version": "2026.0809",
+        "effective_from": null,
+        "effective_to": null,
+        "vaccine_code": "CHILDRENBORNINAREASOFTHECOUNTRYWHERETHEREAREHIGHNUMBERSOFTBCASES",
+        "dose_no": 4,
+        "min_age_days": 28,
+        "max_age_days": null,
+        "min_interval_days": 0,
+        "catch_up_rule": ""
+      },
+      {
+        "country": "GB",
+        "authority": "UKHSA/NHS",
+        "version": "2026.0809",
+        "effective_from": null,
+        "effective_to": null,
+        "vaccine_code": "CHILDRENWHOSEPARENTSORGRANDPARENTSWEREBORNINACOUNTRYWITHMANYCASESOFTB",
+        "dose_no": 4,
+        "min_age_days": 28,
+        "max_age_days": null,
+        "min_interval_days": 0,
+        "catch_up_rule": ""
+      },
+      {
+        "country": "GB",
+        "authority": "UKHSA/NHS",
+        "version": "2026.0809",
+        "effective_from": null,
+        "effective_to": null,
+        "vaccine_code": "CHILDREN6MONTHSTO17YEARSOLDWHOHAVEAWEAKENEDIMMUNESYSTEM",
+        "dose_no": 19,
+        "min_age_days": 180,
+        "max_age_days": 6205,
+        "min_interval_days": 0,
+        "catch_up_rule": ""
+      }
+    ]
+  }
+}

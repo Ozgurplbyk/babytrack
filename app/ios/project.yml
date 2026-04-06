@@ -1,0 +1,167 @@
+name: BabyTrack
+options:
+  deploymentTarget:
+    iOS: 16.0
+    watchOS: 10.0
+packages:
+  Firebase:
+    url: https://github.com/firebase/firebase-ios-sdk
+    from: 11.0.0
+schemes:
+  BabyTrack:
+    build:
+      targets:
+        BabyTrack: all
+        BabyTrackTests: [test]
+        BabyTrackUITests: [test]
+    test:
+      gatherCoverageData: true
+      targets:
+        - BabyTrackTests
+        - BabyTrackUITests
+    run:
+      config: Debug
+    archive:
+      config: Release
+    profile:
+      config: Release
+    analyze:
+      config: Debug
+  BabyTrackWidget:
+    build:
+      targets:
+        BabyTrackWidget: all
+    run:
+      config: Debug
+  BabyTrackWatch:
+    build:
+      targets:
+        BabyTrackWatch: all
+    run:
+      config: Debug
+targets:
+  BabyTrack:
+    type: application
+    platform: iOS
+    sources:
+      - path: BabyTrack
+        excludes:
+          - Resources/**
+      - path: BabyTrack/Resources/Config
+        buildPhase: resources
+      - path: BabyTrack/Resources/Localization
+        buildPhase: resources
+      - path: BabyTrack/Resources/Audio
+        type: folder
+        buildPhase: resources
+      - path: BabyTrack/Resources/Assets.xcassets
+        buildPhase: resources
+      - path: BabyTrack/Resources/Generated
+        type: folder
+        buildPhase: resources
+    dependencies:
+      - package: Firebase
+        product: FirebaseAnalytics
+      - package: Firebase
+        product: FirebaseMessaging
+      - package: Firebase
+        product: FirebaseRemoteConfig
+      - target: BabyTrackWidget
+    settings:
+      base:
+        GENERATE_INFOPLIST_FILE: YES
+        PRODUCT_BUNDLE_IDENTIFIER: com.babytrack.app
+        INFOPLIST_KEY_CFBundleDisplayName: BabyTrack
+        INFOPLIST_KEY_UILaunchScreen_Generation: YES
+        SWIFT_VERSION: 5.9
+        CURRENT_PROJECT_VERSION: 1
+        MARKETING_VERSION: 1.0.0
+        ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
+        ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME: AccentColor
+        DEVELOPMENT_TEAM: ""
+        INFOPLIST_KEY_NSSupportsLiveActivities: YES
+        INFOPLIST_KEY_BABYTRACK_API_TOKEN: ""
+        INFOPLIST_KEY_UIBackgroundModes:
+          - remote-notification
+        INFOPLIST_KEY_UISupportedInterfaceOrientations:
+          - UIInterfaceOrientationPortrait
+          - UIInterfaceOrientationLandscapeLeft
+          - UIInterfaceOrientationLandscapeRight
+        INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad:
+          - UIInterfaceOrientationPortrait
+          - UIInterfaceOrientationPortraitUpsideDown
+          - UIInterfaceOrientationLandscapeLeft
+          - UIInterfaceOrientationLandscapeRight
+        INFOPLIST_KEY_NSPhotoLibraryUsageDescription: Add memory photos to your baby timeline.
+        INFOPLIST_KEY_NSCameraUsageDescription: Capture a photo to save baby memories.
+
+  BabyTrackWidget:
+    type: app-extension
+    platform: iOS
+    deploymentTarget: "17.0"
+    sources:
+      - path: BabyTrackWidget
+        includes:
+          - "**/*.swift"
+      - path: BabyTrackWidget
+        includes:
+          - "**/InfoPlist.strings"
+          - "**/Localizable.strings"
+        buildPhase: resources
+    settings:
+      base:
+        GENERATE_INFOPLIST_FILE: NO
+        INFOPLIST_FILE: BabyTrackWidget/Info.plist
+        PRODUCT_BUNDLE_IDENTIFIER: com.babytrack.app.widget
+        INFOPLIST_KEY_CFBundleDisplayName: BabyTrack Widget
+        SWIFT_VERSION: 5.9
+        CURRENT_PROJECT_VERSION: 1
+        MARKETING_VERSION: 1.0.0
+
+  BabyTrackWatch:
+    type: application
+    platform: watchOS
+    sources:
+      - path: BabyTrackWatch
+        includes:
+          - "**/*.swift"
+      - path: BabyTrackWatch
+        includes:
+          - "**/InfoPlist.strings"
+          - "**/Localizable.strings"
+        buildPhase: resources
+    settings:
+      base:
+        GENERATE_INFOPLIST_FILE: YES
+        PRODUCT_BUNDLE_IDENTIFIER: com.babytrack.app.watch
+        INFOPLIST_KEY_CFBundleDisplayName: BabyTrack Watch
+        SWIFT_VERSION: 5.9
+
+  BabyTrackTests:
+    type: bundle.unit-test
+    platform: iOS
+    sources:
+      - path: BabyTrackTests
+    dependencies:
+      - target: BabyTrack
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.babytrack.app.tests
+        GENERATE_INFOPLIST_FILE: YES
+        SWIFT_VERSION: 5.9
+        TEST_HOST: "$(BUILT_PRODUCTS_DIR)/BabyTrack.app/BabyTrack"
+        BUNDLE_LOADER: "$(TEST_HOST)"
+
+  BabyTrackUITests:
+    type: bundle.ui-testing
+    platform: iOS
+    sources:
+      - path: BabyTrackUITests
+    dependencies:
+      - target: BabyTrack
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.babytrack.app.uitests
+        GENERATE_INFOPLIST_FILE: YES
+        SWIFT_VERSION: 5.9
+        TEST_TARGET_NAME: BabyTrack
