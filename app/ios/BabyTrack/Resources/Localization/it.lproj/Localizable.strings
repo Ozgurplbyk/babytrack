@@ -802,3 +802,4 @@
 "forum_error_history" = "Impossibile caricare la cronologia del post.";
 "upcoming_reminders_empty_hint" = "Vaccini, farmaci e controlli pianificati appariranno qui.";
 "health_empty_history_hint" = "Cambia il filtro o aggiungi una nuova voce per riempire questa sezione.";
+"sync_conflict_diff_line_format" = "• %@: %@ / %@";

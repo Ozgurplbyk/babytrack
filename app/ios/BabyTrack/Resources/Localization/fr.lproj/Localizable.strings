@@ -802,3 +802,4 @@
 "forum_error_history" = "Impossible de charger l historique de la publication.";
 "upcoming_reminders_empty_hint" = "Les vaccins, medicaments et controles planifies apparaitront ici.";
 "health_empty_history_hint" = "Changez le filtre ou ajoutez une nouvelle entree pour remplir cette section.";
+"sync_conflict_diff_line_format" = "• %@ : %@ / %@";

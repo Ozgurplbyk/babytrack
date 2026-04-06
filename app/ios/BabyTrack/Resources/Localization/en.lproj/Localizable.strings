@@ -805,3 +805,4 @@
 "forum_error_history" = "Post history could not be loaded.";
 "upcoming_reminders_empty_hint" = "Scheduled vaccines, medications, and checkups will appear here.";
 "health_empty_history_hint" = "Change the filter or add a new entry to fill this section.";
+"sync_conflict_diff_line_format" = "• %@: %@ / %@";

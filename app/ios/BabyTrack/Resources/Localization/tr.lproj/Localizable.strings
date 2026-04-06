@@ -805,3 +805,4 @@
 "forum_error_history" = "Gonderi gecmisi yuklenemedi.";
 "upcoming_reminders_empty_hint" = "Planlanan asilar, ilaclar ve kontroller burada gorunecek.";
 "health_empty_history_hint" = "Bu alani doldurmak icin filtreyi degistir veya yeni bir kayit ekle.";
+"sync_conflict_diff_line_format" = "• %@: %@ / %@";

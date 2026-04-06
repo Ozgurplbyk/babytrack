@@ -802,3 +802,4 @@
 "forum_error_history" = "Nao foi possivel carregar o historico da publicacao.";
 "upcoming_reminders_empty_hint" = "Vacinas, medicamentos e consultas agendadas aparecerao aqui.";
 "health_empty_history_hint" = "Altere o filtro ou adicione um novo registro para preencher esta secao.";
+"sync_conflict_diff_line_format" = "• %@: %@ / %@";

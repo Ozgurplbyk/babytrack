@@ -59,7 +59,7 @@ struct SyncConflictCenterSheet: View {
                         if !diffs.isEmpty {
                             VStack(alignment: .leading, spacing: 4) {
                                 ForEach(diffs.prefix(6)) { line in
-                                    Text("• \(line.title): \(line.localValue) / \(line.remoteValue)")
+                                    Text(String(format: L10n.tr("sync_conflict_diff_line_format"), line.title, line.localValue, line.remoteValue))
                                         .font(.caption2)
                                         .foregroundStyle(.secondary)
                                 }

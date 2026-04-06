@@ -802,3 +802,4 @@
 "forum_error_history" = "تعذر تحميل سجل المنشور.";
 "upcoming_reminders_empty_hint" = "ستظهر هنا اللقاحات والادوية والفحوصات المجدولة.";
 "health_empty_history_hint" = "غيّر عامل التصفية او اضف ادخالاً جديداً لملء هذا القسم.";
+"sync_conflict_diff_line_format" = "• %@: %@ / %@";

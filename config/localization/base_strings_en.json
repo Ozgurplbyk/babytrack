@@ -201,5 +201,6 @@
   "forum_admin_post_author": "Author: %@",
   "forum_admin_report_created": "Reported: %@",
   "forum_admin_report_resolved": "Resolved: %@",
-  "forum_admin_report_resolved_by": "Reviewed by: %@"
+  "forum_admin_report_resolved_by": "Reviewed by: %@",
+  "sync_conflict_diff_line_format": "• %@: %@ / %@"
 }

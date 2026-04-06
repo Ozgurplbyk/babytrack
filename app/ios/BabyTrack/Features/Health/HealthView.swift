@@ -1500,8 +1500,8 @@ private struct VaccineScheduleView: View {
                     .font(.caption2)
                     .foregroundStyle(.secondary)
             } else {
-                Text(" ")
-                    .font(.caption2)
+                Spacer(minLength: 0)
+                    .frame(height: 14)
             }
         }
         .frame(maxWidth: .infinity, minHeight: 96, alignment: .topLeading)
