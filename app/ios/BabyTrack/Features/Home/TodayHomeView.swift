@@ -4,14 +4,12 @@ struct TodayHomeView: View {
     @EnvironmentObject private var appState: AppState
     @EnvironmentObject private var store: EventStore
     @EnvironmentObject private var sessionManager: CareSessionManager
+    @EnvironmentObject private var syncConflictStore: SyncConflictStore
     @State private var syncStatus: String = L10n.tr("today_sync_ready")
     @State private var syncing = false
     @State private var animateIn = false
     @State private var heroFloat = false
-    @State private var syncConflicts: [SyncConflict] = []
-    @State private var conflictResolutionBusyId: String?
-    @State private var conflictResolutionError = ""
-    @State private var conflictBackupEvents: [AppEvent] = []
+    @State private var hasShownConflictStatus = false
     private let freeDailyLimit = 1
 
     var body: some View {
@@ -53,45 +51,22 @@ struct TodayHomeView: View {
                 withAnimation(.easeInOut(duration: 2.8).repeatForever(autoreverses: true)) {
                     heroFloat = true
                 }
+                if syncConflictStore.hasConflicts {
+                    hasShownConflictStatus = true
+                    syncStatus = String(format: L10n.tr("today_sync_conflict_format"), syncConflictStore.conflicts.count)
+                }
                 syncUpcomingReminderNotifications()
             }
             .onChange(of: appState.selectedBabyId) { _ in syncUpcomingReminderNotifications() }
             .onReceive(store.$events) { _ in syncUpcomingReminderNotifications() }
-            .sheet(isPresented: Binding(
-                get: { !syncConflicts.isEmpty },
-                set: { if !$0 { syncConflicts = [] } }
-            )) {
-                SyncConflictResolutionSheet(
-                    conflicts: syncConflicts,
-                    resolvingEventId: conflictResolutionBusyId,
-                    localEventResolver: { eventId in
-                        store.event(withIdString: eventId)
-                    },
-                    onResolve: { conflict, strategy in
-                        Task {
-                            await resolveConflict(conflict, strategy: strategy)
-                        }
-                    },
-                    onResolveAll: { strategy in
-                        Task {
-                            await resolveAllConflicts(strategy: strategy)
-                        }
-                    },
-                    onRollback: {
-                        rollbackConflicts()
-                    },
-                    onDismiss: {
-                        syncConflicts = []
-                    }
-                )
-            }
-            .alert(L10n.tr("sync_conflict_error_title"), isPresented: Binding(
-                get: { !conflictResolutionError.isEmpty },
-                set: { if !$0 { conflictResolutionError = "" } }
-            )) {
-                Button(L10n.tr("common_ok"), role: .cancel) {}
-            } message: {
-                Text(conflictResolutionError)
+            .onReceive(syncConflictStore.$conflicts) { conflicts in
+                guard hasShownConflictStatus || !conflicts.isEmpty else { return }
+                hasShownConflictStatus = true
+                if conflicts.isEmpty {
+                    syncStatus = L10n.tr("today_sync_conflicts_resolved")
+                } else {
+                    syncStatus = String(format: L10n.tr("today_sync_conflict_format"), conflicts.count)
+                }
             }
         }
     }
@@ -548,6 +523,27 @@ struct TodayHomeView: View {
             )
             .foregroundStyle(.white)
             .buttonStyle(PressableScaleButtonStyle())
+
+            if syncConflictStore.hasConflicts {
+                Button {
+                    appState.showSyncConflictCenter = true
+                    Haptics.light()
+                } label: {
+                    HStack {
+                        Label(L10n.tr("sync_conflict_title"), systemImage: "arrow.triangle.branch")
+                            .font(.subheadline.weight(.bold))
+                        Spacer()
+                        Text("\(syncConflictStore.conflicts.count)")
+                            .font(.caption.weight(.bold))
+                            .padding(.horizontal, 8)
+                            .padding(.vertical, 4)
+                            .background(Color.orange.opacity(0.15), in: Capsule())
+                            .foregroundStyle(Color.orange)
+                    }
+                    .frame(maxWidth: .infinity)
+                }
+                .buttonStyle(.bordered)
+            }
         }
         .padding(16)
         .background(.ultraThinMaterial, in: RoundedRectangle(cornerRadius: 24, style: .continuous))
@@ -605,8 +601,9 @@ struct TodayHomeView: View {
                 syncStatus = String(format: L10n.tr("today_sync_ok_format"), result.acceptedCount)
                 Haptics.success()
             } else {
-                syncConflicts = result.conflicts
-                conflictBackupEvents = store.recent(limit: 10_000)
+                syncConflictStore.setPendingConflicts(result.conflicts, backupEvents: store.recent(limit: 10_000))
+                appState.showSyncConflictCenter = true
+                hasShownConflictStatus = true
                 syncStatus = String(format: L10n.tr("today_sync_conflict_format"), result.conflicts.count)
                 Haptics.warning()
             }
@@ -619,78 +616,6 @@ struct TodayHomeView: View {
             syncStatus = L10n.tr("today_sync_offline")
             Haptics.warning()
         }
-    }
-
-    private func resolveConflict(_ conflict: SyncConflict, strategy: SyncConflictStrategy) async {
-        guard conflictResolutionBusyId == nil else { return }
-        conflictResolutionBusyId = conflict.eventId
-        defer { conflictResolutionBusyId = nil }
-
-        let local = store.event(withIdString: conflict.eventId)
-        let remote = conflict.remoteEvent
-
-        do {
-            let resolved: ConflictResolveResult
-            switch strategy {
-            case .keepLocal:
-                guard let local else {
-                    throw BackendError.notFound
-                }
-                resolved = try await BackendClient.shared.resolveSyncConflict(
-                    eventId: conflict.eventId,
-                    strategy: .keepLocal,
-                    localEvent: local,
-                    countryCode: appState.countryCode
-                )
-            case .keepRemote:
-                resolved = try await BackendClient.shared.resolveSyncConflict(
-                    eventId: conflict.eventId,
-                    strategy: .keepRemote,
-                    countryCode: appState.countryCode
-                )
-            case .merge:
-                guard let merged = HomeSyncConflictEngine.merge(local: local, remote: remote, eventId: conflict.eventId) else {
-                    throw BackendError.invalidResponse
-                }
-                resolved = try await BackendClient.shared.resolveSyncConflict(
-                    eventId: conflict.eventId,
-                    strategy: .merge,
-                    mergedEvent: merged,
-                    countryCode: appState.countryCode
-                )
-            }
-
-            let finalEvent = resolved.event ?? remote
-            if let finalEvent {
-                store.upsert(finalEvent)
-            }
-            syncConflicts.removeAll(where: { $0.id == conflict.id })
-            if syncConflicts.isEmpty {
-                syncStatus = L10n.tr("today_sync_conflicts_resolved")
-            } else {
-                syncStatus = String(format: L10n.tr("today_sync_conflict_format"), syncConflicts.count)
-            }
-            Haptics.success()
-        } catch {
-            conflictResolutionError = L10n.tr("sync_conflict_error_message")
-            Haptics.warning()
-        }
-    }
-
-    private func resolveAllConflicts(strategy: SyncConflictStrategy) async {
-        guard conflictResolutionBusyId == nil else { return }
-        for conflict in Array(syncConflicts) {
-            await resolveConflict(conflict, strategy: strategy)
-        }
-    }
-
-    private func rollbackConflicts() {
-        guard !conflictBackupEvents.isEmpty else { return }
-        store.replaceAll(with: conflictBackupEvents)
-        syncStatus = L10n.tr("sync_conflict_rollback_done")
-        syncConflicts = []
-        conflictBackupEvents = []
-        Haptics.success()
     }
 
     private func upcomingReminderItems() -> [UpcomingReminderItem] {
@@ -915,211 +840,4 @@ private struct LeapWeekStatus {
 private struct MonthlyDevelopmentMilestone {
     let month: Int
     let detail: String
-}
-
-private struct SyncConflictResolutionSheet: View {
-    let conflicts: [SyncConflict]
-    let resolvingEventId: String?
-    let localEventResolver: (String) -> AppEvent?
-    let onResolve: (SyncConflict, SyncConflictStrategy) -> Void
-    let onResolveAll: (SyncConflictStrategy) -> Void
-    let onRollback: () -> Void
-    let onDismiss: () -> Void
-
-    @Environment(\.dismiss) private var dismiss
-
-    var body: some View {
-        NavigationStack {
-            List {
-                Section {
-                    HStack(spacing: 8) {
-                        Button(L10n.tr("sync_conflict_keep_local_all")) {
-                            onResolveAll(.keepLocal)
-                        }
-                        .buttonStyle(.borderedProminent)
-
-                        Button(L10n.tr("sync_conflict_keep_remote_all")) {
-                            onResolveAll(.keepRemote)
-                        }
-                        .buttonStyle(.bordered)
-
-                        Button(L10n.tr("sync_conflict_merge_all")) {
-                            onResolveAll(.merge)
-                        }
-                        .buttonStyle(.bordered)
-                    }
-
-                    Button(role: .destructive) {
-                        onRollback()
-                    } label: {
-                        Label(L10n.tr("sync_conflict_rollback"), systemImage: "arrow.uturn.backward")
-                    }
-                }
-
-                ForEach(conflicts) { conflict in
-                    VStack(alignment: .leading, spacing: 10) {
-                        Text(String(format: L10n.tr("sync_conflict_item_title_format"), shortEventId(conflict.eventId)))
-                            .font(.subheadline.weight(.bold))
-
-                        if let remote = conflict.remoteEvent {
-                            Text(String(format: L10n.tr("sync_conflict_remote_summary_format"), remote.type.title))
-                                .font(.caption)
-                                .foregroundStyle(.secondary)
-                        } else {
-                            Text(L10n.tr("sync_conflict_remote_missing"))
-                                .font(.caption)
-                                .foregroundStyle(.secondary)
-                        }
-
-                        let diffs = HomeSyncConflictEngine.diff(
-                            local: localEventResolver(conflict.eventId),
-                            remote: conflict.remoteEvent
-                        )
-                        if !diffs.isEmpty {
-                            VStack(alignment: .leading, spacing: 4) {
-                                ForEach(diffs.prefix(4)) { line in
-                                    Text("• \(line.title): \(line.localValue) / \(line.remoteValue)")
-                                        .font(.caption2)
-                                        .foregroundStyle(.secondary)
-                                }
-                            }
-                        }
-
-                        HStack(spacing: 8) {
-                            Button(L10n.tr("sync_conflict_keep_local")) {
-                                onResolve(conflict, .keepLocal)
-                            }
-                            .buttonStyle(.borderedProminent)
-
-                            Button(L10n.tr("sync_conflict_keep_remote")) {
-                                onResolve(conflict, .keepRemote)
-                            }
-                            .buttonStyle(.bordered)
-
-                            Button(L10n.tr("sync_conflict_merge")) {
-                                onResolve(conflict, .merge)
-                            }
-                            .buttonStyle(.bordered)
-                        }
-                        .disabled(resolvingEventId == conflict.id)
-
-                        if resolvingEventId == conflict.id {
-                            ProgressView(L10n.tr("sync_conflict_resolving"))
-                                .font(.caption)
-                        }
-                    }
-                    .padding(.vertical, 4)
-                }
-            }
-            .navigationTitle(L10n.tr("sync_conflict_title"))
-            .toolbar {
-                ToolbarItem(placement: .topBarLeading) {
-                    Button(L10n.tr("common_done")) {
-                        onDismiss()
-                        dismiss()
-                    }
-                }
-            }
-        }
-    }
-
-    private func shortEventId(_ value: String) -> String {
-        let trimmed = value.trimmingCharacters(in: .whitespacesAndNewlines)
-        guard trimmed.count > 8 else { return trimmed }
-        return String(trimmed.prefix(8))
-    }
-}
-
-private struct HomeSyncConflictDiffLine: Identifiable, Equatable {
-    let id: String
-    let title: String
-    let localValue: String
-    let remoteValue: String
-}
-
-private enum HomeSyncConflictEngine {
-    static func merge(local: AppEvent?, remote: AppEvent?, eventId: String) -> AppEvent? {
-        guard let base = local ?? remote else { return nil }
-        let resolvedId = UUID(uuidString: eventId) ?? base.id
-
-        var mergedPayload = remote?.payload ?? [:]
-        for (key, value) in (local?.payload ?? [:]) {
-            mergedPayload[key] = value
-        }
-
-        let localNote = normalized(local?.note ?? "")
-        let remoteNote = normalized(remote?.note ?? "")
-        let mergedNote: String
-        if localNote.isEmpty {
-            mergedNote = remoteNote
-        } else if remoteNote.isEmpty || remoteNote == localNote {
-            mergedNote = localNote
-        } else {
-            mergedNote = localNote + "\n" + remoteNote
-        }
-
-        return AppEvent(
-            id: resolvedId,
-            childId: local?.childId ?? remote?.childId ?? base.childId,
-            type: local?.type ?? remote?.type ?? base.type,
-            timestamp: max(local?.timestamp ?? .distantPast, remote?.timestamp ?? .distantPast),
-            note: mergedNote,
-            payload: mergedPayload,
-            visibility: local?.visibility ?? remote?.visibility ?? base.visibility
-        )
-    }
-
-    static func diff(local: AppEvent?, remote: AppEvent?) -> [HomeSyncConflictDiffLine] {
-        guard local != nil || remote != nil else { return [] }
-        var lines: [HomeSyncConflictDiffLine] = []
-
-        let localType = local?.type.title ?? "-"
-        let remoteType = remote?.type.title ?? "-"
-        if localType != remoteType {
-            lines.append(.init(id: "type", title: L10n.tr("sync_conflict_diff_type"), localValue: localType, remoteValue: remoteType))
-        }
-
-        let localTime = local?.timestamp.formatted(date: .abbreviated, time: .shortened) ?? "-"
-        let remoteTime = remote?.timestamp.formatted(date: .abbreviated, time: .shortened) ?? "-"
-        if localTime != remoteTime {
-            lines.append(.init(id: "time", title: L10n.tr("sync_conflict_diff_time"), localValue: localTime, remoteValue: remoteTime))
-        }
-
-        let localNote = normalized(local?.note ?? "")
-        let remoteNote = normalized(remote?.note ?? "")
-        if localNote != remoteNote {
-            lines.append(
-                .init(
-                    id: "note",
-                    title: L10n.tr("sync_conflict_diff_note"),
-                    localValue: localNote.isEmpty ? "-" : localNote,
-                    remoteValue: remoteNote.isEmpty ? "-" : remoteNote
-                )
-            )
-        }
-
-        let localPayload = local?.payload ?? [:]
-        let remotePayload = remote?.payload ?? [:]
-        let keys = Set(localPayload.keys).union(remotePayload.keys)
-        for key in keys.sorted() {
-            let left = normalized(localPayload[key] ?? "")
-            let right = normalized(remotePayload[key] ?? "")
-            if left != right {
-                lines.append(
-                    .init(
-                        id: "payload_\(key)",
-                        title: String(format: L10n.tr("sync_conflict_diff_payload_format"), key),
-                        localValue: left.isEmpty ? "-" : left,
-                        remoteValue: right.isEmpty ? "-" : right
-                    )
-                )
-            }
-        }
-
-        return lines
-    }
-
-    private static func normalized(_ value: String) -> String {
-        value.trimmingCharacters(in: .whitespacesAndNewlines)
-    }
 }

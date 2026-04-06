@@ -29,6 +29,7 @@ final class AppState: ObservableObject {
     @Published var showWhatsNew: Bool = false
     @Published var showPaywall: Bool = false
     @Published var needsPermissionsConsent: Bool = false
+    @Published var showSyncConflictCenter: Bool = false
 
     @Published var currentRelease: WhatsNewRelease = .placeholder
     @Published var paywallOffers: PaywallOffersResponse = PaywallOffersLoader.loadLocal()

@@ -2,6 +2,12 @@ import XCTest
 @testable import BabyTrack
 
 final class BabyTrackTests: XCTestCase {
+    override func tearDown() {
+        UserDefaults.standard.removeObject(forKey: "sync_conflicts.pending.v1")
+        UserDefaults.standard.removeObject(forKey: "sync_conflicts.backup_events.v1")
+        super.tearDown()
+    }
+
     func testForumModerationRejectsBlockedTerms() {
         let result = ForumModeration.validatePost(
             title: "Question",
@@ -62,5 +68,67 @@ final class BabyTrackTests: XCTestCase {
             XCTAssertTrue(vaccineCountries.contains(defaultCountry), "Default country must be covered for \(language)")
             XCTAssertTrue(Set(vaccineCountries).isSubset(of: supportedCountries), "Unexpected country in \(language) coverage")
         }
+    }
+
+    @MainActor
+    func testSyncConflictStorePersistsPendingConflicts() {
+        let eventId = UUID().uuidString
+        let conflict = SyncConflict(
+            eventId: eventId,
+            reason: "conflict_remote_update",
+            remoteEvent: AppEvent(
+                id: UUID(uuidString: eventId)!,
+                childId: "child-1",
+                type: .sleep,
+                timestamp: Date(timeIntervalSince1970: 2000),
+                note: "remote",
+                payload: ["duration": "20"],
+                visibility: .family
+            )
+        )
+        let backup = AppEvent(
+            id: UUID(),
+            childId: "child-1",
+            type: .memory,
+            timestamp: Date(timeIntervalSince1970: 1000),
+            note: "backup",
+            payload: [:],
+            visibility: .family
+        )
+
+        let store = SyncConflictStore()
+        store.clear()
+        store.setPendingConflicts([conflict], backupEvents: [backup])
+
+        let restored = SyncConflictStore()
+        XCTAssertEqual(restored.conflicts.map(\.eventId), [eventId])
+        XCTAssertEqual(restored.backupEvents.count, 1)
+    }
+
+    @MainActor
+    func testSyncConflictStoreResolveClearsBackupWhenLastConflictRemoved() {
+        let eventId = UUID().uuidString
+        let conflict = SyncConflict(
+            eventId: eventId,
+            reason: "conflict_remote_update",
+            remoteEvent: nil
+        )
+        let backup = AppEvent(
+            id: UUID(),
+            childId: "child-1",
+            type: .sleep,
+            timestamp: Date(),
+            note: "backup",
+            payload: [:],
+            visibility: .family
+        )
+
+        let store = SyncConflictStore()
+        store.clear()
+        store.setPendingConflicts([conflict], backupEvents: [backup])
+        store.resolve(eventId: eventId)
+
+        XCTAssertTrue(store.conflicts.isEmpty)
+        XCTAssertTrue(store.backupEvents.isEmpty)
     }
 }

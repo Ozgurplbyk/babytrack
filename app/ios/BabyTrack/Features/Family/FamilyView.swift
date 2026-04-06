@@ -5,6 +5,7 @@ struct FamilyView: View {
     @EnvironmentObject private var store: EventStore
     @EnvironmentObject private var storeKit: StoreKitManager
     @EnvironmentObject private var authManager: AuthManager
+    @EnvironmentObject private var syncConflictStore: SyncConflictStore
     @State private var showAddProfile = false
     @State private var editingProfile: BabyProfile?
     @State private var pendingDeleteProfile: BabyProfile?
@@ -435,6 +436,12 @@ struct FamilyView: View {
                 accountDetail = .subscription
                 Haptics.light()
             }
+            if syncConflictStore.hasConflicts {
+                accountActionRow(title: L10n.tr("sync_conflict_title"), icon: "arrow.triangle.branch", badgeText: syncConflictBadgeText) {
+                    appState.showSyncConflictCenter = true
+                    Haptics.light()
+                }
+            }
             accountActionRow(title: L10n.tr("family_item_future_look"), icon: "sparkles.rectangle.stack.fill") {
                 accountDetail = .futureLook
                 Haptics.light()
@@ -520,7 +527,12 @@ struct FamilyView: View {
         )
     }
 
-    private func accountRow(title: String, icon: String) -> some View {
+    private var syncConflictBadgeText: String? {
+        guard syncConflictStore.hasConflicts else { return nil }
+        return "\(syncConflictStore.conflicts.count)"
+    }
+
+    private func accountRow(title: String, icon: String, badgeText: String? = nil) -> some View {
         HStack(spacing: 10) {
             Image(systemName: icon)
                 .font(.system(size: 13, weight: .bold))
@@ -533,6 +545,15 @@ struct FamilyView: View {
 
             Spacer()
 
+            if let badgeText {
+                Text(badgeText)
+                    .font(.caption.weight(.bold))
+                    .padding(.horizontal, 8)
+                    .padding(.vertical, 4)
+                    .background(Color.orange.opacity(0.16), in: Capsule())
+                    .foregroundStyle(Color.orange)
+            }
+
             Image(systemName: "chevron.right")
                 .font(.caption.weight(.bold))
                 .foregroundStyle(.secondary)
@@ -540,9 +561,9 @@ struct FamilyView: View {
         .padding(.vertical, 4)
     }
 
-    private func accountActionRow(title: String, icon: String, action: @escaping () -> Void) -> some View {
+    private func accountActionRow(title: String, icon: String, badgeText: String? = nil, action: @escaping () -> Void) -> some View {
         Button(action: action) {
-            accountRow(title: title, icon: icon)
+            accountRow(title: title, icon: icon, badgeText: badgeText)
                 .contentShape(Rectangle())
         }
         .buttonStyle(PressableScaleButtonStyle(scale: 0.99, opacity: 0.96))

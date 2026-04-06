@@ -9,6 +9,7 @@ struct BabyTrackApp: App {
     @StateObject private var storeKit = StoreKitManager()
     @StateObject private var pushManager = PushNotificationManager.shared
     @StateObject private var authManager = AuthManager()
+    @StateObject private var syncConflictStore = SyncConflictStore()
 
     var body: some Scene {
         WindowGroup {
@@ -18,6 +19,7 @@ struct BabyTrackApp: App {
                 .environmentObject(careSessionManager)
                 .environmentObject(storeKit)
                 .environmentObject(authManager)
+                .environmentObject(syncConflictStore)
                 .task {
                     await authManager.bootstrap()
                     await appState.bootstrap(storeKit: storeKit)

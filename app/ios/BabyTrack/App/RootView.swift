@@ -5,6 +5,7 @@ struct RootView: View {
     @EnvironmentObject private var eventStore: EventStore
     @EnvironmentObject private var storeKit: StoreKitManager
     @EnvironmentObject private var authManager: AuthManager
+    @EnvironmentObject private var syncConflictStore: SyncConflictStore
     @State private var showPermissions = false
     @State private var showProfileSetup = false
 
@@ -26,6 +27,12 @@ struct RootView: View {
                 AuthGateView()
             } else {
                 MainTabView()
+                    .sheet(isPresented: Binding(
+                        get: { appState.showSyncConflictCenter && syncConflictStore.hasConflicts },
+                        set: { if !$0 { appState.showSyncConflictCenter = false } }
+                    )) {
+                        SyncConflictCenterSheet()
+                    }
                     .sheet(isPresented: $appState.showWhatsNew) {
                         WhatsNewView(release: appState.currentRelease) {
                             appState.dismissWhatsNew()
